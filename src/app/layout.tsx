@@ -1,6 +1,7 @@
 import type { Metadata } from 'next';
 import { Jua, Rubik } from 'next/font/google';
 import '../styles/globals.scss';
+import '../styles/Home.scss';
 
 const rubik = Rubik({
   variable: '--font-rubik',
