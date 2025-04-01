@@ -1,4 +1,3 @@
-import Link from 'next/link';
 import '../styles/Nav.scss';
 
 interface NavProps {
@@ -8,11 +7,7 @@ export default function Nav({ titles }: NavProps) {
   return (
     <nav>
       {titles.map((title, index) => {
-        return (
-          <Link key={index} href={`/${title}`}>
-            <span>{title}</span>
-          </Link>
-        );
+        return <span key={index}>{title}</span>;
       })}
     </nav>
   );
