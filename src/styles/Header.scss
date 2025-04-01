@@ -4,18 +4,20 @@
   justify-content: space-between;
   padding: 10px 20px;
   z-index: 2;
-  color: #dbdbdb;
+  color: #a7a5a5;
 
   span {
     &:hover {
       color: white;
+      transform: translateY(2px);
       transition: color 0.3s ease;
+      transition: transform 0.3s ease;
     }
   }
 }
 
 .logo {
-  font-family: var(--font-jua);
+  font-weight: bold;
   font-size: 1.5rem;
 
   &:hover {

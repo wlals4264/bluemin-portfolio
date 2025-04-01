@@ -10,21 +10,21 @@ export default function LandingPage() {
   useEffect(() => {
     gsap.to('.wave-one', {
       rotation: 360,
-      duration: 4,
+      duration: 5,
       repeat: -1,
       ease: 'linear',
     });
 
     gsap.to('.wave-two', {
       rotation: 360,
-      duration: 5,
+      duration: 7,
       repeat: -1,
       ease: 'linear',
     });
 
     gsap.to('.wave-three', {
       rotation: 360,
-      duration: 7,
+      duration: 9,
       repeat: -1,
       ease: 'linear',
     });
