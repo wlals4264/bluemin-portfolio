@@ -1,12 +1,7 @@
 import type { Metadata } from 'next';
-import { Jua, Rubik } from 'next/font/google';
+import { Jua } from 'next/font/google';
 import '../styles/globals.scss';
-import '../styles/Home.scss';
-
-const rubik = Rubik({
-  variable: '--font-rubik',
-  // subsets: ['latin'],
-});
+import '../styles/LandingPage.scss';
 
 const jua = Jua({
   variable: '--font-jua',
@@ -26,7 +21,7 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en">
-      <body className={`${rubik.variable} ${jua.variable}`}>{children}</body>
+      <body className={`${jua.variable}`}>{children}</body>
     </html>
   );
 }
