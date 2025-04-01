@@ -1,10 +1,25 @@
 .header-container {
+  position: relative;
   display: flex;
   justify-content: space-between;
   padding: 10px 20px;
+  z-index: 2;
+  color: #dbdbdb;
+
+  span {
+    &:hover {
+      color: white;
+      transition: color 0.3s ease;
+    }
+  }
 }
 
 .logo {
   font-family: var(--font-jua);
   font-size: 1.5rem;
+
+  &:hover {
+    color: white;
+    transition: color 0.3s ease;
+  }
 }

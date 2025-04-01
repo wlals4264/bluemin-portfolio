@@ -26,10 +26,12 @@
   }
 
   .sea {
-    color: rgb(2, 13, 214);
+    color: rgb(5, 9, 98);
 
     &:hover {
       cursor: pointer;
+      color: rgb(0, 10, 205);
+      transition: color 0.3s ease;
     }
   }
 }

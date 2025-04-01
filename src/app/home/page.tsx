@@ -1,10 +1,15 @@
 import Header from '@/components/Header';
-import HomeLayout from './layout';
+import Image from 'next/image';
+import '@/styles/Home.scss';
 
 export default function Home() {
   return (
-    <HomeLayout>
+    <div className="header-box">
       <Header />
-    </HomeLayout>
+      <div className="image-container">
+        <Image src="/main.jpeg" alt="main image" className="main-image" layout="fill" objectFit="cover" />
+        <div className="overlay"></div>
+      </div>
+    </div>
   );
 }
