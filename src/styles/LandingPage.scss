@@ -51,7 +51,8 @@
   left: -1800px;
   border-radius: 45%;
   background: transparent;
-  border: 440px solid rgb(55, 138, 254);
+  // border: 440px solid rgb(55, 138, 254);
+  border: 440px solid rgba(55, 138, 254, 0.8);
   z-index: 50;
 }
 
@@ -63,7 +64,8 @@
   left: -1780px;
   border-radius: 45%;
   background: transparent;
-  border: 300px solid rgb(25, 36, 248);
+  // border: 300px solid rgb(25, 36, 248);
+  border: 300px solid rgba(25, 36, 248, 0.8);
   z-index: 40;
 }
 
@@ -75,7 +77,8 @@
   left: -1800px;
   border-radius: 45%;
   background: transparent;
-  border: 300px solid rgb(2, 13, 214);
+  // border: 300px solid rgb(2, 13, 214);
+  border: 300px solid rgba(2, 13, 214, 0.8);
   z-index: 30;
 }
 

@@ -5,20 +5,12 @@
   padding: 16px 20px;
   z-index: 2;
   color: #c1c1c1;
-
-  span {
-    &:hover {
-      color: white;
-      transform: translateY(2px);
-      transition: color 0.3s ease;
-      transition: transform 0.3s ease;
-    }
-  }
 }
 
 .logo {
-  font-weight: bold;
   font-size: 1.5rem;
+  font-weight: 600;
+  letter-spacing: 0.05em;
 
   &:hover {
     color: white;
