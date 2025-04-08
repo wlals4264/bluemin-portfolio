@@ -1,5 +1,5 @@
 import type { Metadata } from 'next';
-import { Jua } from 'next/font/google';
+import { Jua, Nanum_Gothic_Coding } from 'next/font/google';
 import '../styles/globals.scss';
 import '../styles/LandingPage.scss';
 
@@ -7,6 +7,12 @@ const jua = Jua({
   variable: '--font-jua',
   subsets: ['latin'],
   weight: '400',
+});
+
+const nanumGothicCoding = Nanum_Gothic_Coding({
+  variable: '--font-nanum-gothic-coding',
+  subsets: ['latin'],
+  weight: ['400', '700'],
 });
 
 export const metadata: Metadata = {
@@ -21,7 +27,7 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en">
-      <body className={`${jua.variable}`}>{children}</body>
+      <body className={`${jua.variable} ${nanumGothicCoding.variable}`}>{children}</body>
     </html>
   );
 }
