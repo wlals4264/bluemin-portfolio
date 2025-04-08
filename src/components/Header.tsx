@@ -1,15 +1,22 @@
 import Link from 'next/link';
 import Nav from './Nav';
-import '@/styles/Header.scss';
+import '@/styles/components/Header.scss';
 
 export default function Header() {
-  const titles = ['About me', 'Skills', 'Archiving', 'Projects', 'Activity'];
+  const nav = [
+    { title: 'About me', path: '/about_me' },
+    { title: 'Skills', path: '/skills' },
+    { title: 'Archiving', path: '/archiving' },
+    { title: 'Projects', path: '/projects' },
+    { title: 'Activity', path: '/activity' },
+  ];
+
   return (
     <div className="header-container">
-      <Link href="/home">
-        <span className="logo">Jimin&apos;s Portfolio</span>
+      <Link href="/">
+        <h1 className="logo">Jimin&apos;s Portfolio</h1>
       </Link>
-      <Nav titles={titles} />
+      <Nav nav={nav} />
     </div>
   );
 }
