@@ -1,0 +1,32 @@
+nav {
+  display: flex;
+  align-items: center;
+  gap: 20px;
+  font-size: 16px;
+  font-weight: 500;
+
+  a {
+    display: inline-block;
+    padding: 4px 8px;
+    transition: transform 0.3s ease, color 0.3s ease;
+
+    &:hover {
+      color: #3b82f6;
+      transform: translateY(-1px);
+    }
+
+    &:last-child:hover {
+      transform: none;
+    }
+  }
+
+  button {
+    border: none;
+    background-color: #3b82f6;
+    color: white;
+    font-family: var(--font-poesen-one);
+    border-radius: 20px;
+    padding: 6px 12px;
+    cursor: pointer;
+  }
+}
