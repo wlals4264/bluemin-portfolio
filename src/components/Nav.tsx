@@ -1,29 +1,16 @@
-import Link from 'next/link';
 import '../styles/components/Nav.scss';
 
-interface NavItem {
-  path: string;
-  title: string;
-}
-
 interface NavProps {
-  nav: NavItem[];
+  titles: string[];
 }
 
-export default function Nav({ nav }: NavProps) {
+export default function Nav({ titles }: NavProps) {
   return (
     <nav>
-      {nav.map((navItem) => {
-        return (
-          <Link href={navItem.path} key={navItem.title}>
-            {/* <span></span> */}
-            {navItem.title}
-          </Link>
-        );
+      {titles.map((title) => {
+        return <span key={title}>{title}</span>;
       })}
-      <Link href="/contact">
-        <button>Hire me!</button>
-      </Link>
+      <button>Hire me!</button>
     </nav>
   );
 }
