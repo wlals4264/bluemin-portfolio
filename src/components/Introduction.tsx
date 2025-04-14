@@ -1,6 +1,6 @@
 import Image from 'next/image';
 import '../styles/components/Introduction.scss';
-import IntroductionBtns from './IntroDuctionBtns';
+import IntroductionBtns from './IntroductionBtns';
 
 const Introduction = () => {
   return (
