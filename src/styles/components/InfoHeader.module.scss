@@ -1,0 +1,14 @@
+.infoHeader {
+  display: flex;
+  font-family: var(--font-poesen-one);
+  justify-content: center;
+  align-items: center;
+  margin-bottom: 16px;
+  font-size: 28px;
+
+  h2 {
+    display: block;
+    padding-bottom: 16px;
+    border-bottom: 1px solid #c9c9c9;
+  }
+}
