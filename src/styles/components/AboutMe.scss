@@ -1,21 +1,6 @@
 .about-me-container {
   width: 100%;
 
-  .about-me-header {
-    display: flex;
-    font-family: var(--font-poesen-one);
-    justify-content: center;
-    align-items: center;
-    margin-bottom: 30px;
-    font-size: 28px;
-
-    h2 {
-      display: block;
-      padding-bottom: 16px;
-      border-bottom: 1px solid #c9c9c9;
-    }
-  }
-
   .about-me-info {
     display: grid;
     grid-template-columns: repeat(3, 1fr);
@@ -24,6 +9,7 @@
 
     .about-me-info-item {
       display: flex;
+      align-items: center;
       gap: 20px;
 
       .about-me-info-icon {
@@ -47,6 +33,8 @@
         .about-me-info-content {
           font-size: 14px;
           font-weight: normal;
+          line-height: 140%;
+          min-width: max-content;
         }
       }
     }
