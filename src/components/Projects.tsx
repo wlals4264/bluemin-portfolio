@@ -1,7 +1,12 @@
 import '../styles/components/Projects.scss';
+import InfoHeader from './InfoHeader';
 
 const Projects = () => {
-  return <div>프로젝트들...</div>;
+  return (
+    <div>
+      <InfoHeader title="Projects" className="projects-header" />
+    </div>
+  );
 };
 
 export default Projects;
