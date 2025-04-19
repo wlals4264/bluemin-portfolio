@@ -54,7 +54,7 @@ const ProjectCard: React.FC<ProjectCardProps> = ({
         {projectSkills &&
           projectSkills.map((skill, index) => {
             return (
-              <span key={index} className={`profject-card-skill-${index}`}>
+              <span key={index} className={`project-card-skill-${index}`}>
                 {skill}
               </span>
             );
