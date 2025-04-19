@@ -4,6 +4,7 @@ import AboutMe from '../components/AboutMe';
 import Skills from '@/components/Skills';
 
 import '@/styles/Home.scss';
+import Projects from '@/components/Projects';
 
 export default function Home() {
   return (
@@ -12,6 +13,7 @@ export default function Home() {
       {/* <CodeSnap /> */}
       <AboutMe />
       <Skills />
+      <Projects />
     </div>
   );
 }
