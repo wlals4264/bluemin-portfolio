@@ -14,22 +14,25 @@ const Projects = () => {
   };
 
   return (
-    <div>
+    <div className="projects-container">
       <InfoHeader title="Projects" className="projects-header" />
-      {projects.map((project, index) => {
-        return (
-          <ProjectCard
-            key={index}
-            title={project.title}
-            date={project.date}
-            projectType={project.projectType}
-            projectSkills={project.projectSkills}
-            projectUrl={project.projectUrl}
-            projectFeatures={project.projectFeatures}
-            onClick={handleClickProjectCard}
-          />
-        );
-      })}
+      <div className="projects-cards-container">
+        {projects.map((project, index) => {
+          return (
+            <ProjectCard
+              key={index}
+              title={project.title}
+              date={project.date}
+              projectType={project.projectType}
+              projectTitle={project.projectTitle}
+              projectSkills={project.projectSkills}
+              projectUrl={project.projectUrl}
+              projectFeatures={project.projectFeatures}
+              onClick={handleClickProjectCard}
+            />
+          );
+        })}
+      </div>
     </div>
   );
 };
