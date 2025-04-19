@@ -1,0 +1,115 @@
+.skills-container {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+
+  .skills-list {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+
+    .skill-section {
+      display: flex;
+      gap: 20px;
+      align-items: center;
+
+      .skill-title {
+        min-width: 180px;
+
+        > span {
+          font-family: var(--font-poesen-one);
+          font-weight: bold;
+          font-size: 18px;
+          line-height: 140%;
+        }
+      }
+
+      .skill-item {
+        display: inline-flex;
+        min-width: max-content;
+        align-items: center;
+        gap: 8px;
+        padding: 6px 10px;
+        border-radius: 10px;
+
+        color: #fff;
+        font-size: 14px;
+        font-family: var(--font-poesen-one);
+
+        &.html {
+          background-color: #e34c26;
+        }
+
+        &.css {
+          background-color: #264de4;
+        }
+
+        &.javascript {
+          background-color: #f0db4f;
+          color: #000;
+        }
+
+        &.typescript {
+          background-color: #007acc;
+        }
+
+        &.react {
+          background-color: #61dafb;
+          color: #000;
+        }
+
+        &.next-js {
+          background-color: #000;
+        }
+
+        &.recoil {
+          background-color: #3578e5;
+        }
+
+        &.zustand {
+          background-color: #ffdd57;
+          color: #000;
+        }
+
+        &.tailwind {
+          background-color: #38b2ac;
+        }
+        &.sass {
+          background-color: #cd6799;
+        }
+
+        &.styled-component {
+          background-color: #db7093;
+        }
+
+        &.css-modules {
+          background-color: #6a5acd;
+        }
+
+        &.vercel {
+          background-color: #000;
+        }
+
+        &.zustand {
+          background-color: #ffdd57;
+          color: #000;
+
+          .skill-item-icon {
+            background-image: url('/zustand_logo.svg');
+            background-size: contain;
+            background-repeat: no-repeat;
+            width: 18px;
+            height: 18px;
+            display: inline-block;
+          }
+        }
+
+        .skill-item-icon {
+          display: flex;
+          align-items: center;
+          font-size: 18px;
+        }
+      }
+    }
+  }
+}

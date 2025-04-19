@@ -1,8 +1,9 @@
 // import CodeSnap from '@/components/CodeSnap';
 import Introduction from '@/components/Introduction';
+import AboutMe from '../components/AboutMe';
+import Skills from '@/components/Skills';
 
 import '@/styles/Home.scss';
-import AboutMe from '../components/AboutMe';
 
 export default function Home() {
   return (
@@ -10,6 +11,7 @@ export default function Home() {
       <Introduction />
       {/* <CodeSnap /> */}
       <AboutMe />
+      <Skills />
     </div>
   );
 }
