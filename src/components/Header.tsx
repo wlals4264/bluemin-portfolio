@@ -3,7 +3,7 @@ import Nav from './Nav';
 import '@/styles/components/Header.scss';
 
 export default function Header() {
-  const titles = ['About me', 'Skills', 'Projects', 'Activity'];
+  const titles = ['About me', 'Skills', 'Projects', 'Experiences'];
 
   return (
     <div className="header-container">
