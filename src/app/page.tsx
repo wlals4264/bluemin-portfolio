@@ -5,6 +5,7 @@ import Skills from '@/components/Skills';
 
 import '@/styles/Home.scss';
 import Projects from '@/components/Projects';
+import Experiences from '@/components/Experiences';
 
 export default function Home() {
   return (
@@ -14,6 +15,7 @@ export default function Home() {
       <AboutMe />
       <Skills />
       <Projects />
+      <Experiences />
     </div>
   );
 }
