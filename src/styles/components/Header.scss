@@ -1,11 +1,13 @@
 .header-container {
-  width: 100%;
+  width: 1010px;
+  margin: auto;
   min-height: 62px;
   display: flex;
   justify-content: space-between;
   align-items: center;
   padding: 20px 0px;
   z-index: 2;
+
   font-family: var(--font-poesen-one);
   color: #191919;
 

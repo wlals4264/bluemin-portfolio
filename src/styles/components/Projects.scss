@@ -1,29 +1,38 @@
-.projects-carousel-wrapper {
-  position: relative;
-  margin-bottom: 30px;
-  overflow: visible;
+.projects-container {
+  margin: auto;
+  width: 100%;
 
-  .nav-button {
-    position: absolute;
-    top: 50%;
-    transform: translateY(-50%);
-    z-index: 10;
-    background: rgba(255, 255, 255, 0.8);
-    border: none;
-    padding: 8px;
-    border-radius: 50%;
-    cursor: pointer;
+  .projects-carousel-wrapper {
+    position: relative;
+    margin-bottom: 30px;
+    overflow: visible;
 
-    svg {
-      font-size: 18px;
+    .swiper {
+      width: 1010px;
     }
 
-    &.prev-button {
-      left: -10px;
-    }
+    .nav-button {
+      position: absolute;
+      top: 50%;
+      transform: translateY(-50%);
+      z-index: 10;
+      background: rgba(255, 255, 255, 0.8);
+      border: none;
+      padding: 8px;
+      border-radius: 50%;
+      cursor: pointer;
 
-    &.next-button {
-      right: -10px;
+      svg {
+        font-size: 18px;
+      }
+
+      &.prev-button {
+        left: -10px;
+      }
+
+      &.next-button {
+        right: -10px;
+      }
     }
   }
 }
