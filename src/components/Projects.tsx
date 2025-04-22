@@ -11,6 +11,7 @@ import { FaChevronLeft, FaChevronRight } from 'react-icons/fa';
 import type { Swiper as SwiperType } from 'swiper';
 import 'swiper/css';
 import 'swiper/css/navigation';
+import ReadMe from './ReadMe';
 
 const Projects = forwardRef<HTMLDivElement>((_, ref) => {
   const [isProjectCardClicked, setIsProjectCardClicked] = useState(false);
@@ -82,25 +83,9 @@ const Projects = forwardRef<HTMLDivElement>((_, ref) => {
             <FaChevronRight />
           </button>
         )}
-
-        {/* <div className="projects-cards-container">
-          {projects.map((project, index) => {
-            return (
-              <ProjectCard
-                key={index}
-                title={project.title}
-                date={project.date}
-                projectType={project.projectType}
-                projectTitle={project.projectTitle}
-                projectSkills={project.projectSkills}
-                projectUrl={project.projectUrl}
-                projectFeatures={project.projectFeatures}
-                onClick={handleClickProjectCard}
-              />
-            );
-          })}
-        </div> */}
       </div>
+
+      {isProjectCardClicked && <ReadMe setIsProjectCardClicked={setIsProjectCardClicked} />}
     </div>
   );
 });
