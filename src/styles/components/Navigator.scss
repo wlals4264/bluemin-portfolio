@@ -1,0 +1,36 @@
+.navigator-container {
+  .more-btn-container {
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-bottom: 30px;
+    gap: 20px;
+
+    button {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      gap: 4px;
+      padding: 10px 20px;
+      border: 1px solid #9b9b9b;
+      border-radius: 20px;
+      cursor: pointer;
+      background-color: #fff;
+
+      font-family: var(--font-jua);
+      // font-family: var(--font-nanum-gothic-coding);
+      font-weight: 600;
+      color: #9b9b9b;
+      font-size: 16px;
+
+      &:hover {
+        color: #323232;
+        border: 1px solid #323232;
+
+        transition: color 0.3s ease;
+        transition: border 0.3s ease;
+      }
+    }
+  }
+}
