@@ -9,6 +9,7 @@ import Experiences from '@/components/Experiences';
 import Navigator from '@/components/Navigator';
 import Header from '@/components/Header';
 import { useRef } from 'react';
+import TopBtn from '@/components/TopBtn';
 
 export default function Home() {
   const aboutMeRef = useRef<HTMLDivElement>(null);
@@ -33,6 +34,7 @@ export default function Home() {
         <Skills ref={skillsRef} />
         <Projects ref={projectsRef} />
         <Experiences ref={experiencesRef} />
+        <TopBtn />
       </div>
     </>
   );
