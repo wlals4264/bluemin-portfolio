@@ -7,9 +7,8 @@ import '../styles/components/CodeSnap.scss';
 const commands: Record<string, string> = {
   about: 'about-me',
   skills: 'skills',
-  archiving: 'archiving',
   projects: 'projects',
-  activity: 'activity',
+  experiences: 'experiences',
 };
 
 const CodeSnap = () => {
@@ -28,7 +27,7 @@ const CodeSnap = () => {
       const targetId = commands[trimmed];
       document.getElementById(targetId)?.scrollIntoView({ behavior: 'smooth' });
 
-      setHistory((prev) => [...prev, `> ${trimmed}`, `Navigating to ${trimmed}...`]);
+      setHistory((prev) => [...prev, `Navigating to ${trimmed}...`]);
     } else {
       setHistory((prev) => [...prev, `> ${trimmed}`, `Unknown command: ${trimmed}`]);
     }
@@ -43,20 +42,25 @@ const CodeSnap = () => {
         <span className={`dot yellow`} />
         <span className={`dot green`} />
       </div>
+
       <div className="body">
-        {history.map((line, i) => (
-          <div key={i}>{line}</div>
-        ))}
+        <div className="main">
+          {/* <div> 'What are you curious about? [about, skills, archiving, projects, activity]'</div> */}
+          {history.map((line, i) => (
+            <div key={i}>{line}</div>
+          ))}
+        </div>
+
+        <form className="inputLine" onSubmit={handleCommand}>
+          <span>&gt;</span>
+          <input
+            type="text"
+            value={input}
+            onChange={(e) => setInput(e.target.value)}
+            placeholder="Type your command..."
+          />
+        </form>
       </div>
-      <form className="inputLine" onSubmit={handleCommand}>
-        <span>&gt;</span>
-        <input
-          type="text"
-          value={input}
-          onChange={(e) => setInput(e.target.value)}
-          placeholder="Type your command..."
-        />
-      </form>
     </div>
   );
 };

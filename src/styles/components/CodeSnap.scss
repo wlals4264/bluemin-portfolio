@@ -1,68 +1,81 @@
 .terminal {
-  background-color: #1e1e1e;
-  color: #00ff88;
-  font-family: 'Courier New', monospace;
-  padding: 1rem;
+  background-color: #ffffff;
   border-radius: 10px;
+  border: 1px solid #c4c4c4;
   max-width: 600px;
   margin: 0 auto;
-  box-shadow: 0 0 15px rgba(0, 255, 136, 0.2);
+  box-shadow: 0 0 15px rgba(192, 192, 192, 0.2);
   display: flex;
   flex-direction: column;
-}
 
-.header {
-  display: flex;
-  gap: 0.5rem;
-  margin-bottom: 1rem;
-}
+  color: #00ff88;
+  font-family: 'Courier New', monospace;
 
-.dot {
-  width: 12px;
-  height: 12px;
-  border-radius: 50%;
-  display: inline-block;
-}
-
-.red {
-  background-color: #ff5f56;
-}
-.yellow {
-  background-color: #ffbd2e;
-}
-.green {
-  background-color: #27c93f;
-}
-
-.body {
-  flex-grow: 1;
-  max-height: 250px;
-  overflow-y: auto;
-  margin-bottom: 1rem;
-  white-space: pre-wrap;
-  font-size: 0.9rem;
-}
-
-.inputLine {
-  display: flex;
-  align-items: center;
-  gap: 0.5rem;
-
-  span {
-    color: #00ff88;
+  .header {
+    padding: 10px;
+    display: flex;
+    gap: 0.5rem;
   }
 
-  input {
-    flex: 1;
-    background: transparent;
-    border: none;
-    outline: none;
-    color: #00ff88;
-    font-family: inherit;
-    font-size: 0.9rem;
+  .dot {
+    width: 12px;
+    height: 12px;
+    border-radius: 50%;
+    display: inline-block;
 
-    &::placeholder {
-      color: #00ff8855;
+    &.red {
+      background-color: #ff5f56;
+    }
+
+    &.yellow {
+      background-color: #ffbd2e;
+    }
+
+    &.green {
+      background-color: #27c93f;
+    }
+  }
+
+  .body {
+    background-color: #191919;
+    padding: 10px;
+    border-radius: 0 0 10px 10px;
+
+    .main {
+      flex-grow: 1;
+      max-height: 250px;
+      overflow-y: auto;
+      // margin-bottom: 20px;
+      white-space: pre-wrap;
+      font-size: 15px;
+
+      > div {
+        line-height: 150%;
+      }
+    }
+
+    .inputLine {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+
+      span {
+        color: #00ff88;
+      }
+
+      input {
+        flex: 1;
+        background: transparent;
+        border: none;
+        outline: none;
+        color: #00ff88;
+        font-family: inherit;
+        font-size: 15px;
+
+        &::placeholder {
+          color: #00ff8855;
+        }
+      }
     }
   }
 }
