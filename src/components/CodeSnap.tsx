@@ -1,7 +1,7 @@
 'use client';
 
 import '../styles/components/CodeSnap.scss';
-import { RefObject, useState } from 'react';
+import { RefObject, useEffect, useRef, useState } from 'react';
 
 type SectionName = 'about' | 'skills' | 'projects' | 'experiences';
 
@@ -16,6 +16,14 @@ const CodeSnap = ({ sectionRefs }: CodeSnapProps) => {
   const [history, setHistory] = useState([defaultPrompt]);
   const [error, setError] = useState('');
 
+  const mainRef = useRef<HTMLDivElement>(null);
+
+  useEffect(() => {
+    if (mainRef.current) {
+      mainRef.current.scrollTop = mainRef.current.scrollHeight;
+    }
+  }, [history]);
+
   const handleCommand = (e: React.FormEvent) => {
     e.preventDefault();
     const trimmed = input.trim().toLowerCase();
@@ -27,18 +35,10 @@ const CodeSnap = ({ sectionRefs }: CodeSnapProps) => {
     if (sectionRefs[sectionName]) {
       sectionRefs[sectionName]?.current?.scrollIntoView({ behavior: 'smooth' });
 
-      setHistory((prevHistory) => [
-        ...prevHistory, // 기존 히스토리 유지
-        `> ${sectionName}`,
-        `Navigating to ${sectionName}...`,
-      ]);
+      setHistory((prevHistory) => [...prevHistory, `> ${sectionName}`, `Navigating to ${sectionName}...`]);
       setError('');
     } else {
-      setHistory((prevHistory) => [
-        ...prevHistory, // 기존 히스토리 유지
-        `> ${trimmed}`,
-        `Unknown command: "${trimmed}"`, // 오류 메시지를 history에 포함
-      ]);
+      setHistory((prevHistory) => [...prevHistory, `> ${trimmed}`, `Unknown command: "${trimmed}"`]);
     }
 
     setInput('');
@@ -53,8 +53,7 @@ const CodeSnap = ({ sectionRefs }: CodeSnapProps) => {
       </div>
 
       <div className="body">
-        <div className="main">
-          {/* <div> 'What are you curious about? [about, skills, archiving, projects, activity]'</div> */}
+        <div ref={mainRef} className="main">
           {history.map((line, i) => (
             <div key={i}>{line}</div>
           ))}
