@@ -1,12 +1,12 @@
 'use client';
 
-import { MouseEvent, useEffect, useState } from 'react';
 import '../styles/components/Experiences.scss';
+import { forwardRef, MouseEvent, useEffect, useState } from 'react';
 import InfoHeader from './InfoHeader';
 import ExperienceList from './ExperienceList';
 import { experienceData } from '../mocks/experienceData';
 
-const Experiences = () => {
+const Experiences = forwardRef<HTMLDivElement>((_, ref) => {
   const [activeName, setActiveName] = useState<'education' | 'careerPath' | 'team'>('education');
   const [activeIndex, setActiveIndex] = useState(0);
 
@@ -20,7 +20,7 @@ const Experiences = () => {
   };
 
   return (
-    <div className="experiences-wrapper">
+    <div ref={ref} className="experiences-wrapper">
       <InfoHeader title="Experiences" className="experiences-header" />
       <div className="experiences-container">
         <div className="experiences-nav-btn-box">
@@ -42,6 +42,8 @@ const Experiences = () => {
       </div>
     </div>
   );
-};
+});
+
+Experiences.displayName = 'Experiences';
 
 export default Experiences;

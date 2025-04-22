@@ -1,15 +1,25 @@
 import '../styles/components/Nav.scss';
 
-interface NavProps {
+type NavProps = {
   titles: string[];
-}
+  sectionRefs: {
+    [key: string]: React.RefObject<HTMLDivElement>;
+  };
+};
 
-export default function Nav({ titles }: NavProps) {
+export default function Nav({ titles, sectionRefs }: NavProps) {
+  const handleClick = (title: string) => {
+    const targetRef = sectionRefs[title];
+    targetRef?.current?.scrollIntoView({ behavior: 'smooth' });
+  };
+
   return (
-    <nav>
-      {titles.map((title) => {
-        return <span key={title}>{title}</span>;
-      })}
+    <nav className="nav-container">
+      {titles.map((title) => (
+        <span key={title} onClick={() => handleClick(title)}>
+          {title}
+        </span>
+      ))}
       <button>Hire me!</button>
     </nav>
   );

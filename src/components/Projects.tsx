@@ -1,9 +1,10 @@
 'use client';
 
+import '../styles/components/Projects.scss';
 import { projects } from '@/mocks/projects';
 import InfoHeader from './InfoHeader';
 import ProjectCard from './ProjectCard';
-import { useState } from 'react';
+import { forwardRef, useState } from 'react';
 import { Swiper, SwiperSlide } from 'swiper/react';
 import { Navigation } from 'swiper/modules';
 import { FaChevronLeft, FaChevronRight } from 'react-icons/fa';
@@ -11,9 +12,7 @@ import type { Swiper as SwiperType } from 'swiper';
 import 'swiper/css';
 import 'swiper/css/navigation';
 
-import '../styles/components/Projects.scss';
-
-const Projects = () => {
+const Projects = forwardRef<HTMLDivElement>((_, ref) => {
   const [isProjectCardClicked, setIsProjectCardClicked] = useState(false);
   const [swiperInstance, setSwiperInstance] = useState<SwiperType | null>(null);
   const [currentIndex, setCurrentIndex] = useState(0);
@@ -27,7 +26,7 @@ const Projects = () => {
   };
 
   return (
-    <div className="projects-container">
+    <div ref={ref} className="projects-container">
       <InfoHeader title="Projects" className="projects-header" />
 
       <div className="projects-carousel-wrapper">
@@ -104,6 +103,8 @@ const Projects = () => {
       </div>
     </div>
   );
-};
+});
+
+Projects.displayName = 'Projects';
 
 export default Projects;

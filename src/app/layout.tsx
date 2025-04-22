@@ -2,7 +2,6 @@ import type { Metadata } from 'next';
 import { Jua, Nanum_Gothic_Coding, Poetsen_One } from 'next/font/google';
 import '../styles/globals.scss';
 import '../styles/Home.scss';
-import Header from '@/components/Header';
 
 const jua = Jua({
   variable: '--font-jua',
@@ -33,10 +32,7 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="ko">
-      <body className={`${jua.variable} ${nanumGothicCoding.variable} ${poesenOne.variable}`}>
-        <Header />
-        {children}
-      </body>
+      <body className={`${jua.variable} ${nanumGothicCoding.variable} ${poesenOne.variable}`}>{children}</body>
     </html>
   );
 }

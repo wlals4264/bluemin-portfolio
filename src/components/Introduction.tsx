@@ -1,5 +1,5 @@
-import Image from 'next/image';
 import '../styles/components/Introduction.scss';
+import Image from 'next/image';
 import IntroductionBtns from './IntroductionBtns';
 
 const Introduction = () => {

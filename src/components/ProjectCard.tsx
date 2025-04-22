@@ -1,6 +1,5 @@
-import { GoLink } from 'react-icons/go';
-
 import '../styles/components/ProjectCard.scss';
+import { GoLink } from 'react-icons/go';
 
 interface ProjectCardProps {
   title: string;

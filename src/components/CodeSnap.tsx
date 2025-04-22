@@ -1,8 +1,7 @@
 'use client';
 
-import { useState } from 'react';
-
 import '../styles/components/CodeSnap.scss';
+import { useState } from 'react';
 
 const commands: Record<string, string> = {
   about: 'about-me',
