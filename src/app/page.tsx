@@ -17,17 +17,17 @@ export default function Home() {
   const experiencesRef = useRef<HTMLDivElement>(null);
 
   const sectionRefs = {
-    'About me': aboutMeRef,
-    Skills: skillsRef,
-    Projects: projectsRef,
-    Experiences: experiencesRef,
+    about: aboutMeRef,
+    skills: skillsRef,
+    projects: projectsRef,
+    experiences: experiencesRef,
   };
 
   return (
     <div className="home-wrapper">
       <Header sectionRefs={sectionRefs} />
       <Introduction />
-      <Navigator />
+      <Navigator sectionRefs={sectionRefs} />
       <AboutMe ref={aboutMeRef} />
       <Skills ref={skillsRef} />
       <Projects ref={projectsRef} />

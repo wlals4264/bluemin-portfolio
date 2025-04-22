@@ -1,9 +1,14 @@
 import '../styles/components/Nav.scss';
 
+type TitleItem = {
+  label: string;
+  key: string;
+};
+
 type NavProps = {
-  titles: string[];
+  titles: TitleItem[];
   sectionRefs: {
-    [key: string]: React.RefObject<HTMLDivElement>;
+    [key: string]: React.RefObject<HTMLDivElement | null>;
   };
 };
 
@@ -15,9 +20,9 @@ export default function Nav({ titles, sectionRefs }: NavProps) {
 
   return (
     <nav className="nav-container">
-      {titles.map((title) => (
-        <span key={title} onClick={() => handleClick(title)}>
-          {title}
+      {titles.map(({ label, key }) => (
+        <span key={key} onClick={() => handleClick(key)}>
+          {label}
         </span>
       ))}
       <button>Hire me!</button>

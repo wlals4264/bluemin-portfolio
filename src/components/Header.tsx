@@ -1,14 +1,22 @@
 import '@/styles/components/Header.scss';
 import Link from 'next/link';
 import Nav from './Nav';
+import { RefObject } from 'react';
+
+type SectionName = 'about' | 'skills' | 'projects' | 'experiences';
 
 type HeaderProps = {
   sectionRefs: {
-    [key: string]: React.RefObject<HTMLDivElement>;
+    [key in SectionName]: RefObject<HTMLDivElement | null>;
   };
 };
 export default function Header({ sectionRefs }: HeaderProps) {
-  const titles = ['About me', 'Skills', 'Projects', 'Experiences'];
+  const titles = [
+    { label: 'About me', key: 'about' },
+    { label: 'Skills', key: 'skills' },
+    { label: 'Projects', key: 'projects' },
+    { label: 'Experiences', key: 'experiences' },
+  ];
 
   return (
     <div className="header-container">

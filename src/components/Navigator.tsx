@@ -4,9 +4,16 @@ import '../styles/components/Navigator.scss';
 import { IoArrowDown } from 'react-icons/io5';
 import { FaLaptopCode } from 'react-icons/fa';
 import CodeSnap from './CodeSnap';
-import { useState } from 'react';
+import { RefObject, useState } from 'react';
 
-const Navigator = () => {
+type SectionName = 'about' | 'skills' | 'projects' | 'experiences';
+
+interface NavigatorProps {
+  sectionRefs: {
+    [key in SectionName]: RefObject<HTMLDivElement | null>;
+  };
+}
+const Navigator = ({ sectionRefs }: NavigatorProps) => {
   const [isCodeSnapOpen, setIsCodeSnapOpen] = useState<boolean>(false);
 
   return (
@@ -21,7 +28,7 @@ const Navigator = () => {
           <span>{isCodeSnapOpen ? 'close terminal' : 'use terminal'}</span>
         </button>
       </div>
-      {isCodeSnapOpen && <CodeSnap />}
+      {isCodeSnapOpen && <CodeSnap sectionRefs={sectionRefs} />}
     </div>
   );
 };
