@@ -24,14 +24,16 @@ export default function Home() {
   };
 
   return (
-    <div className="home-wrapper">
-      <Header sectionRefs={sectionRefs} />
-      <Introduction />
-      <Navigator sectionRefs={sectionRefs} />
-      <AboutMe ref={aboutMeRef} />
-      <Skills ref={skillsRef} />
-      <Projects ref={projectsRef} />
-      <Experiences ref={experiencesRef} />
-    </div>
+    <>
+      <div className="home-wrapper">
+        <Header sectionRefs={sectionRefs} />
+        <Introduction />
+        <Navigator sectionRefs={sectionRefs} />
+        <AboutMe ref={aboutMeRef} />
+        <Skills ref={skillsRef} />
+        <Projects ref={projectsRef} />
+        <Experiences ref={experiencesRef} />
+      </div>
+    </>
   );
 }
