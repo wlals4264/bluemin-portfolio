@@ -16,10 +16,14 @@ interface NavigatorProps {
 const Navigator = ({ sectionRefs }: NavigatorProps) => {
   const [isCodeSnapOpen, setIsCodeSnapOpen] = useState<boolean>(false);
 
+  const handleMoreClick = () => {
+    sectionRefs['about']?.current?.scrollIntoView({ behavior: 'smooth' });
+  };
+
   return (
     <div className="navigator-container">
       <div className="more-btn-container">
-        <button type="button">
+        <button type="button" onClick={handleMoreClick}>
           <IoArrowDown />
           <span>more</span>
         </button>
