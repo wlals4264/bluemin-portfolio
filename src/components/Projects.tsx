@@ -16,9 +16,11 @@ import ReadMe from './ReadMe';
 const Projects = forwardRef<HTMLDivElement>((_, ref) => {
   const [isProjectCardClicked, setIsProjectCardClicked] = useState(false);
   const [swiperInstance, setSwiperInstance] = useState<SwiperType | null>(null);
-  const [currentIndex, setCurrentIndex] = useState(0);
+  const [currentIndex, setCurrentIndex] = useState<number>(0);
+  const [selectedCardIndex, setSelectedCardIndex] = useState<number>(0);
 
-  const handleClickProjectCard = () => {
+  const handleClickProjectCard = (index: number) => {
+    setSelectedCardIndex(index);
     setIsProjectCardClicked(true);
   };
 
@@ -55,7 +57,7 @@ const Projects = forwardRef<HTMLDivElement>((_, ref) => {
                 projectSkills={project.projectSkills}
                 projectUrl={project.projectUrl}
                 projectFeatures={project.projectFeatures}
-                onClick={handleClickProjectCard}
+                onClick={() => handleClickProjectCard(index)}
               />
             </SwiperSlide>
           ))}
@@ -85,7 +87,9 @@ const Projects = forwardRef<HTMLDivElement>((_, ref) => {
         )}
       </div>
 
-      {isProjectCardClicked && <ReadMe setIsProjectCardClicked={setIsProjectCardClicked} />}
+      {isProjectCardClicked && (
+        <ReadMe setIsProjectCardClicked={setIsProjectCardClicked} project={projects[selectedCardIndex]} />
+      )}
     </div>
   );
 });

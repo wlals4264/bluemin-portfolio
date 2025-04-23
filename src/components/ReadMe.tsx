@@ -1,12 +1,15 @@
 'use client';
 
+import { ProjectCard } from '@/mocks/projects';
 import '../styles/components/ReadMe.scss';
 import { useState } from 'react';
+import { IoIosClose } from 'react-icons/io';
 
 interface ReadMeProps {
   setIsProjectCardClicked: (value: boolean) => void;
+  project: ProjectCard;
 }
-const ReadMe = ({ setIsProjectCardClicked }: ReadMeProps) => {
+const ReadMe = ({ setIsProjectCardClicked, project }: ReadMeProps) => {
   const [isOpen, setIsOpen] = useState(true);
 
   const handleClose = () => {
@@ -20,7 +23,11 @@ const ReadMe = ({ setIsProjectCardClicked }: ReadMeProps) => {
     <div className="read-me-modal-wrapper">
       <div className="overlay" onClick={handleClose}></div>
       <div className="read-me-container" onClick={(e) => e.stopPropagation()}>
-        모달입니다.
+        <header className="modal-header">
+          <span>readme.md</span>
+          <IoIosClose />
+        </header>
+        <div className="content-box">{project.title}</div>
       </div>
     </div>
   );
