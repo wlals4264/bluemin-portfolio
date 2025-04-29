@@ -17,6 +17,7 @@ const nanumGothicCoding = Nanum_Gothic_Coding({
 
 const poesenOne = Poetsen_One({
   variable: '--font-poesen-one',
+  subsets: ['latin'],
   weight: '400',
 });
 
