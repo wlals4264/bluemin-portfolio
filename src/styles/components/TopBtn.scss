@@ -4,6 +4,7 @@
   right: 100px;
   visibility: hidden;
   opacity: 0;
+  z-index: 5000;
 
   &.show {
     visibility: visible;
