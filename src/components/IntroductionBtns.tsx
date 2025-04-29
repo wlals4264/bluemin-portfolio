@@ -6,8 +6,7 @@ import '../styles/components/IntroductionBtns.scss';
 const IntroductionBtns = () => {
   return (
     <div className="introduction-btns-container">
-      {/* TODO: 이력서 파일 public 폴더에 넣고 속성값 변경하기 */}
-      <a href="/" download className="download-btn">
+      <a href="/frontend_jimin_resume.pdf" download className="download-btn">
         Download CV
         <FiDownload />
       </a>
