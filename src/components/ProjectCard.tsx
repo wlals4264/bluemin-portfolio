@@ -42,14 +42,15 @@ const ProjectCard: React.FC<ProjectCardProps> = ({
             );
           })}
       </ul>
+
       <div className="project-card-link-container">
         <GoLink />
         <a href={projectUrl} target="_blank">
           {projectUrl}
         </a>
       </div>
+
       <div className="project-card-skills-container">
-        {/* map 돌기 */}
         {projectSkills &&
           projectSkills.map((skill, index) => {
             return (
@@ -59,6 +60,7 @@ const ProjectCard: React.FC<ProjectCardProps> = ({
             );
           })}
       </div>
+
       {/* 모달 열어주기 */}
       <div className="read-me-btn" onClick={onClick}>
         README

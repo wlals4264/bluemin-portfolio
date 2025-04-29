@@ -6,6 +6,8 @@ export interface ProjectCard {
   projectFeatures: string[];
   projectUrl: string;
   projectSkills: string[];
+  background?: string;
+  meaning?: string;
 }
 
 const project1: ProjectCard = {
@@ -30,6 +32,8 @@ const project1: ProjectCard = {
     'Firebase Authentication',
     'IndexedDB',
   ],
+  background: '배경',
+  meaning: '의미',
 };
 
 const project2: ProjectCard = {
@@ -54,6 +58,8 @@ const project2: ProjectCard = {
     'Firebase Authentication',
     'IndexedDB',
   ],
+  background: '배경',
+  meaning: '의미',
 };
 
 const project3: ProjectCard = {
@@ -78,6 +84,8 @@ const project3: ProjectCard = {
     'Firebase Authentication',
     'IndexedDB',
   ],
+  background: '배경',
+  meaning: '의미',
 };
 
 export const projects: ProjectCard[] = [project1, project2, project3];
