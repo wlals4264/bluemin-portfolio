@@ -57,6 +57,7 @@ const Projects = forwardRef<HTMLDivElement>((_, ref) => {
                 projectSkills={project.projectSkills}
                 projectUrl={project.projectUrl}
                 projectFeatures={project.projectFeatures}
+                projectVideoLink={project.projectVideoLink}
                 onClick={() => handleClickProjectCard(index)}
               />
             </SwiperSlide>
@@ -73,6 +74,7 @@ const Projects = forwardRef<HTMLDivElement>((_, ref) => {
                   projectSkills={[]}
                   projectUrl=""
                   projectFeatures={[]}
+                  projectVideoLink=""
                   onClick={() => {}}
                 />
               </div>

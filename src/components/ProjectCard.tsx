@@ -1,5 +1,8 @@
 import '../styles/components/ProjectCard.scss';
 import { GoLink } from 'react-icons/go';
+import { FaBook } from 'react-icons/fa';
+import { FaYoutube } from 'react-icons/fa';
+import Link from 'next/link';
 
 interface ProjectCardProps {
   title: string;
@@ -9,6 +12,7 @@ interface ProjectCardProps {
   projectFeatures: string[];
   projectUrl: string;
   projectSkills: string[];
+  projectVideoLink?: string;
   onClick: () => void;
 }
 
@@ -20,6 +24,7 @@ const ProjectCard: React.FC<ProjectCardProps> = ({
   projectSkills,
   projectUrl,
   projectFeatures,
+  projectVideoLink,
   onClick,
 }) => {
   return (
@@ -43,12 +48,14 @@ const ProjectCard: React.FC<ProjectCardProps> = ({
           })}
       </ul>
 
-      <div className="project-card-link-container">
-        <GoLink />
-        <a href={projectUrl} target="_blank">
-          {projectUrl}
-        </a>
-      </div>
+      {projectUrl && (
+        <div className="project-card-link-container">
+          <GoLink />
+          <a href={projectUrl} target="_blank">
+            {projectUrl}
+          </a>
+        </div>
+      )}
 
       <div className="project-card-skills-container">
         {projectSkills &&
@@ -62,8 +69,17 @@ const ProjectCard: React.FC<ProjectCardProps> = ({
       </div>
 
       {/* 모달 열어주기 */}
-      <div className="read-me-btn" onClick={onClick}>
-        README
+      <div className="project-card-btn-container">
+        <div className="read-me-btn" onClick={onClick}>
+          <FaBook />
+          README
+        </div>
+        {projectVideoLink && (
+          <Link className="video-btn" href={projectVideoLink} target="blank">
+            <FaYoutube />
+            영상
+          </Link>
+        )}
       </div>
     </div>
   );

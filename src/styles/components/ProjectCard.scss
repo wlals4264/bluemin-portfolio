@@ -1,3 +1,25 @@
+@mixin project-card-btn {
+  display: flex;
+  align-items: center;
+  gap: 4px;
+  background-color: #fff;
+  padding: 6px 10px;
+  border-radius: 10px;
+  border: 1px solid #3b82f6;
+  width: fit-content;
+
+  font-size: 14px;
+  font-weight: bold;
+  color: #3b82f6;
+  transition: all 0.3s ease;
+
+  &:hover {
+    background-color: #3b82f6;
+    color: #fff;
+    cursor: pointer;
+  }
+}
+
 .project-card-item-container {
   border-radius: 20px;
   background-color: #f1f6ff;
@@ -5,6 +27,7 @@
   padding: 24px 24px;
   box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
   min-width: 430px;
+  min-height: 440px;
   margin: 10px;
 
   font-family: var(--font-nanum-gothic-coding);
@@ -43,7 +66,8 @@
 
   .project-card-info-project-title {
     font-weight: bold;
-    font-size: 14px;
+    font-size: 16px;
+    line-height: 140%;
   }
 
   .project-card-features {
@@ -89,21 +113,16 @@
     }
   }
 
-  .read-me-btn {
-    background-color: #fff;
-    padding: 6px 10px;
-    border-radius: 10px;
-    border: 1px solid #3b82f6;
-    width: fit-content;
+  .project-card-btn-container {
+    display: flex;
+    gap: 10px;
 
-    font-size: 14px;
-    font-weight: bold;
-    color: #3b82f6;
+    .read-me-btn {
+      @include project-card-btn;
+    }
 
-    &:hover {
-      background-color: #3b82f6;
-      color: #fff;
-      cursor: pointer;
+    .video-btn {
+      @include project-card-btn;
     }
   }
 }
