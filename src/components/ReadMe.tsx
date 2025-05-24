@@ -1,7 +1,7 @@
 'use client';
 
-import { ProjectCard } from '@/mocks/projects';
 import '../styles/components/ReadMe.scss';
+import { ProjectCard } from '@/mocks/projects';
 import { useEffect, useState } from 'react';
 import { IoIosClose } from 'react-icons/io';
 
@@ -73,6 +73,7 @@ const ReadMe = ({ setIsProjectCardClicked, project }: ReadMeProps) => {
                         </li>
                       );
                     })}
+                  <span className="project-card-main-features">{project.mainFeatures}</span>
                 </ul>
               </div>
             </div>
@@ -80,14 +81,30 @@ const ReadMe = ({ setIsProjectCardClicked, project }: ReadMeProps) => {
             <div className="background-box">
               <span className="background-title">🤔 Background</span>
               <div className="background-content">
-                <span className="background-text">{project.background}</span>
+                <div className="background-text">
+                  {project.background?.map((background, index) => {
+                    return (
+                      <span key={index} className="background-row">
+                        {background}
+                      </span>
+                    );
+                  })}
+                </div>
               </div>
             </div>
 
             <div className="meaning-box">
               <span className="meaning-title">🔍 Meaning</span>
               <div className="meaning-content">
-                <span className="meaning-text">{project.meaning}</span>
+                <div className="meaning-text">
+                  {project.meaning?.map((meaning, index) => {
+                    return (
+                      <span key={index} className="meaning-row">
+                        {meaning}
+                      </span>
+                    );
+                  })}
+                </div>
               </div>
             </div>
 
@@ -105,9 +122,9 @@ const ReadMe = ({ setIsProjectCardClicked, project }: ReadMeProps) => {
               </div>
             </div>
 
-            <div className="setup-usage-box">
+            {/* <div className="setup-usage-box">
               <span className="setup-usage-title">⚙️ Setup & Usage</span>
-            </div>
+            </div> */}
           </div>
         </main>
       </div>
