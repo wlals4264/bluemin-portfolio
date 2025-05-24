@@ -10,7 +10,7 @@ interface ProjectCardProps {
   projectType: string;
   projectTitle: string;
   projectFeatures: string[];
-  projectUrl: string;
+  projectUrl?: string;
   projectSkills: string[];
   projectVideoLink?: string;
   onClick: () => void;
