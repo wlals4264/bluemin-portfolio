@@ -10,6 +10,9 @@ export interface ProjectCard {
   meaning?: string[];
   projectVideoLink?: string;
   mainFeatures?: string;
+  notionUrl?: string;
+  githubUrl?: string;
+  velogUrl?: string;
 }
 
 const project1: ProjectCard = {
@@ -47,6 +50,8 @@ const project1: ProjectCard = {
     '또한, Firebase를 활용해 이메일 로그인과 구글 소셜 로그인 기능을 구현하였고, 카카오 지도 API에 키워드 검색을 커스터마이징하여 클라이밍 암장만 검색될 수 있도록 설정함으로써, 단순한 API 연동을 넘어 사용자 경험을 고려한 기능 구현까지 신경썼습니다.',
     '이외에도 캐러셀, 스크롤 스냅 등 다양한 프론트엔드 기술을 적용해보았고, 댓글, 좋아요 기능을 직접 구현하며 커뮤니티 서비스의 핵심 기능들이 어떻게 동작하는지 실제로 경험할 수 있었던 프로젝트입니다.',
   ],
+  notionUrl: 'https://platinum-literature-af9.notion.site/OlaOla-13b9b3c1166f816ab8c1ef869977bfce?pvs=74',
+  githubUrl: 'https://github.com/wlals4264/olaola',
 };
 
 const project2: ProjectCard = {
@@ -78,6 +83,8 @@ const project2: ProjectCard = {
   ],
   mainFeatures:
     '디자인 시스템(Figma 기반)과 서버 상태 관리(Tanstack Query)을 통해 UI/UX 일관성과 상태 흐름을 최적화. isPending, isSuccess 상태를 버튼 및 모달과 연동하여 사용자 행동에 따른 피드백을 명확히 제공.',
+  notionUrl: 'https://skitter-chord-6cc.notion.site/836b52c3253b4803974d1d6b42d99338?pvs=74',
+  githubUrl: 'https://github.com/Team-momo-front/momo-front',
 };
 
 const project3: ProjectCard = {
@@ -100,20 +107,22 @@ const project3: ProjectCard = {
     '프론트엔드 개발자 입장에서 실시간 통신 기능의 구조적 흐름과 네트워크 기반 기술에 대한 이해도를 높일 수 있었던 유의미한 프로젝트였습니다.',
   ],
   mainFeatures: 'STOMP 없이 순수 웹소켓 API를 활용한 실시간 채팅 기능 구현 및 소켓 컨트롤러 구조 설계',
+  velogUrl:
+    'https://velog.io/@wlals4264/series/%ED%86%A0%EC%9D%B4%ED%94%84%EB%A1%9C%EC%A0%9D%ED%8A%B8-MBTI-%EB%9E%9C%EB%8D%A4%EC%B1%84%ED%8C%85',
 };
 
 const project4: ProjectCard = {
   title: 'Flobby',
   date: '2025.04 ~ present',
   projectType: 'team',
-  projectTitle: '기존 소모임 앱들의 불편함을 개선한 소모임 플랫폼 개발',
+  projectTitle: '기존 소모임 앱들의 불편함을 개선한 소모임 플랫폼 개발(MVP 진행중)',
   projectFeatures: [
     'MVC 패턴을 도입하여 구조화된 아키텍처를 구현하고, 메인 페이지의 핵심 기능인 지역 변경 기능 개발을 담당',
     '로딩 속도 최적화를 위해 불필요한 비동기 코드를 제거하고 렌더링 성능을 개선',
     'Drag & Drop 기능과 파일 업로더 유틸 클래스를 직접 구현하여 프로젝트 전반에서 재사용 가능하도록 기여',
     '디자이너, 기획자, 앱 및 웹 개발자들과의 유기적인 협업을 통해 기능 개발을 원활히 진행',
   ],
-  projectUrl: 'https://www.flobby.co.kr',
+  // projectUrl: '',
   projectSkills: ['React', 'TypeScript', 'Zustand', 'Scss', 'Vite'],
   background: ['기획 및 디자인팀과의 협업 경험을 쌓고, 실무 중심의 팀 프로젝트를 경험하고자 참여한 프로젝트'],
   meaning: [

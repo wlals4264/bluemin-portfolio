@@ -1,7 +1,8 @@
 import '../styles/components/ProjectCard.scss';
 import { GoLink } from 'react-icons/go';
-import { FaBook } from 'react-icons/fa';
-import { FaYoutube } from 'react-icons/fa';
+import { FaBook, FaYoutube, FaGithub } from 'react-icons/fa';
+import { RxNotionLogo } from 'react-icons/rx';
+import { SiVelog } from 'react-icons/si';
 import Link from 'next/link';
 
 interface ProjectCardProps {
@@ -13,6 +14,9 @@ interface ProjectCardProps {
   projectUrl?: string;
   projectSkills: string[];
   projectVideoLink?: string;
+  projectNotionUrl?: string;
+  projectGithubUrl?: string;
+  projectVelogUrl?: string;
   onClick: () => void;
 }
 
@@ -25,6 +29,9 @@ const ProjectCard: React.FC<ProjectCardProps> = ({
   projectUrl,
   projectFeatures,
   projectVideoLink,
+  projectNotionUrl,
+  projectGithubUrl,
+  projectVelogUrl,
   onClick,
 }) => {
   return (
@@ -77,7 +84,25 @@ const ProjectCard: React.FC<ProjectCardProps> = ({
         {projectVideoLink && (
           <Link className="video-btn" href={projectVideoLink} target="blank">
             <FaYoutube />
-            영상
+            Video
+          </Link>
+        )}
+        {projectNotionUrl && (
+          <Link className="video-btn" href={projectNotionUrl} target="blank">
+            <RxNotionLogo />
+            Notion
+          </Link>
+        )}
+        {projectGithubUrl && (
+          <Link className="video-btn" href={projectGithubUrl} target="blank">
+            <FaGithub />
+            Github
+          </Link>
+        )}
+        {projectVelogUrl && (
+          <Link className="video-btn" href={projectVelogUrl} target="blank">
+            <SiVelog />
+            Velog Series
           </Link>
         )}
       </div>

@@ -58,6 +58,9 @@ const Projects = forwardRef<HTMLDivElement>((_, ref) => {
                 projectUrl={project.projectUrl}
                 projectFeatures={project.projectFeatures}
                 projectVideoLink={project.projectVideoLink}
+                projectNotionUrl={project.notionUrl}
+                projectGithubUrl={project.githubUrl}
+                projectVelogUrl={project.velogUrl}
                 onClick={() => handleClickProjectCard(index)}
               />
             </SwiperSlide>
