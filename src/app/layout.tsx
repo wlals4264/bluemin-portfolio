@@ -7,18 +7,21 @@ const jua = Jua({
   variable: '--font-jua',
   subsets: ['latin'],
   weight: '400',
+  display: 'swap',
 });
 
 const nanumGothicCoding = Nanum_Gothic_Coding({
   variable: '--font-nanum-gothic-coding',
   subsets: ['latin'],
   weight: ['400', '700'],
+  display: 'swap',
 });
 
 const poesenOne = Poetsen_One({
   variable: '--font-poesen-one',
   subsets: ['latin'],
   weight: '400',
+  display: 'swap',
 });
 
 export const metadata: Metadata = {
