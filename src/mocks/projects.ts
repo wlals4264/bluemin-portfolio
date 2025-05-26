@@ -97,7 +97,7 @@ const project3: ProjectCard = {
     '유지보수를 위해 웹소켓 컨트롤러를 만들어 관련 비즈니스 로직을 한 곳에서 관리',
     '간단한 백엔드 소켓 서버 코드 구현',
   ],
-  // projectUrl:''
+  projectUrl: 'mbti-chat-gamma.vercel.app',
   projectSkills: ['React', 'TypeScript', 'Recoil', 'Tailwind', 'Vite', 'Node.js', 'Web Socket'],
   background: ['순수 웹소켓을 사용하여 채팅 기능을 구현해 본 토이 프로젝트'],
   meaning: [
