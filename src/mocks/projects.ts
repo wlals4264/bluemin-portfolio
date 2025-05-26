@@ -133,4 +133,27 @@ const project4: ProjectCard = {
   mainFeatures: 'MVC 아키텍처 기반의 구조화된 메인 페이지 개발에 기여, 지역 기반 데이터 처리',
 };
 
-export const projects: ProjectCard[] = [project1, project2, project3, project4];
+const project5: ProjectCard = {
+  title: 'Portfolio Web Site',
+  date: '2025.03 ~ 05',
+  projectType: 'personal',
+  projectTitle: '포트폴리오 웹사이트 구축',
+  projectFeatures: [
+    'Next.js 13의 App Router 기능을 활용하여 최신 라우팅 방식 적용',
+    '컴포넌트 단위로 구조화하여 재사용성과 유지보수성 향상',
+  ],
+  projectUrl: 'https://bluemin-portfolio.vercel.app/',
+  projectSkills: ['Next.js', 'TypeScript', 'Scss', 'Vite', 'Swipe'],
+  background: [
+    '포트폴리오 웹사이트 구축을 통해 최신 프레임워크의 기능을 학습하고 적용하고자 하였으며, App Router 중심의 구조를 사용하여 동적 라우팅과 레이아웃 관리에 대한 이해를 높였다.',
+    '컴포넌트 단위 설계와 재사용 가능한 UI 구성으로 유지보수성과 확장성을 고려하여 설계하였다.',
+  ],
+  meaning: [
+    'Next.js 13의 App Router와 파일 기반 라우팅 구조에 익숙해질 수 있었고, 서버 컴포넌트와 클라이언트 컴포넌트의 분리 개념을 이해하는 계기가 되었다.',
+    '초기 개발 속도를 높이기 위해 Swiper.js 등 UI 라이브러리를 적극 활용하였다.',
+    'SEO는 완전히 구현하지는 못했지만, 서버 컴포넌트 기반 구조에서 어떻게 확장할 수 있을지에 대한 방향을 잡을 수 있었고 관련해서 리팩토링 예정이다.',
+  ],
+  mainFeatures: 'Next.js를 통해 App Router 기반의 폴더 구조로 설계된 포트폴리오 사이트 구현',
+};
+
+export const projects: ProjectCard[] = [project1, project2, project3, project4, project5];
