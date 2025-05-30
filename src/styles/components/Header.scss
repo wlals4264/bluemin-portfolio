@@ -1,7 +1,6 @@
 .header-container {
   width: 80vw;
   margin: auto;
-  min-height: 62px;
   display: flex;
   justify-content: space-between;
   align-items: center;
@@ -33,7 +32,6 @@
 @media (max-width: 1024px) {
   .header-container {
     width: 85vw;
-    position: relative;
   }
 }
 
