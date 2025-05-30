@@ -1,6 +1,27 @@
 .home-wrapper {
-  width: 1010px;
+  width: 80vw;
   margin: auto;
   min-height: 100vh;
   padding-bottom: 30px;
+}
+
+// 노트북 (769px ~ 1024px)
+@media (max-width: 1024px) {
+  .home-wrapper {
+    width: 85vw;
+  }
+}
+
+// 태블릿 (481px ~ 768px)
+@media (max-width: 768px) {
+  .home-wrapper {
+    width: 90vw;
+  }
+}
+
+// 모바일 (480px 이하)
+@media (max-width: 480px) {
+  .home-wrapper {
+    width: 95vw;
+  }
 }

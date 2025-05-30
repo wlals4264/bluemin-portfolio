@@ -1,5 +1,5 @@
 .header-container {
-  width: 1010px;
+  width: 80vw;
   margin: auto;
   min-height: 62px;
   display: flex;
@@ -26,5 +26,27 @@
       color: #3b82f6;
       transition: color 0.3s ease;
     }
+  }
+}
+
+// 노트북 (769px ~ 1024px)
+@media (max-width: 1024px) {
+  .header-container {
+    width: 85vw;
+    position: relative;
+  }
+}
+
+// 태블릿 (481px ~ 768px)
+@media (max-width: 768px) {
+  .header-container {
+    width: 90vw;
+  }
+}
+
+// 모바일 (480px 이하)
+@media (max-width: 480px) {
+  .header-container {
+    width: 95vw;
   }
 }
