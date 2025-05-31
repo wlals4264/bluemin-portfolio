@@ -27,9 +27,9 @@ const TopBtn = () => {
 
   return (
     <div className={`top-btn-container ${showBtn ? 'show' : ''}`}>
-      <button className="top-btn" onClick={scrollToTop}>
+      <div className="top-btn" onClick={scrollToTop}>
         <FaArrowUp />
-      </button>
+      </div>
     </div>
   );
 };
