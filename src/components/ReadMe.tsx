@@ -53,12 +53,14 @@ const ReadMe = ({ setIsProjectCardClicked, project }: ReadMeProps) => {
           </div>
 
           <div className="read-me-content-box">
-            <div className="deployment-url-box">
-              <span className="deployment-url-title">🔗 Deployment URL</span>
-              <a href={project?.projectUrl} target="_blank">
-                {project?.projectUrl}
-              </a>
-            </div>
+            {project?.projectUrl && (
+              <div className="deployment-url-box">
+                <span className="deployment-url-title">🔗 Deployment URL</span>
+                <a href={project?.projectUrl} target="_blank">
+                  {project?.projectUrl}
+                </a>
+              </div>
+            )}
 
             <div className="summary-box">
               <span className="summary-title">📌 Summary</span>
