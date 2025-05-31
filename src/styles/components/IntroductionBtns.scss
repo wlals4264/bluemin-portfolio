@@ -43,3 +43,10 @@
     }
   }
 }
+
+// 태블릿 (481px ~ 768px)
+@media (max-width: 768px) {
+  .introduction-btns-container {
+    justify-content: center;
+  }
+}
