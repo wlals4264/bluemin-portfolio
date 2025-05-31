@@ -13,12 +13,14 @@ const Skills = forwardRef<HTMLDivElement>((_, ref) => {
             <div className="skill-title">
               <span>{info.title}</span>
             </div>
-            {info.contents.map((content, idx) => (
-              <span className={`skill-item ${content.describe.toLocaleLowerCase().replace(/[\s.]/g, '-')}`} key={idx}>
-                <span className="skill-item-icon">{content.icon}</span>
-                <span>{content.describe}</span>
-              </span>
-            ))}
+            <div className="skill-content-box">
+              {info.contents.map((content, idx) => (
+                <span className={`skill-item ${content.describe.toLocaleLowerCase().replace(/[\s.]/g, '-')}`} key={idx}>
+                  <span className="skill-item-icon">{content.icon}</span>
+                  <span>{content.describe}</span>
+                </span>
+              ))}
+            </div>
           </div>
         ))}
       </div>

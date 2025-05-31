@@ -26,90 +26,113 @@
         }
       }
 
-      .skill-item {
-        display: inline-flex;
-        min-width: max-content;
-        align-items: center;
+      .skill-content-box {
+        display: flex;
         gap: 8px;
-        padding: 6px 10px;
-        border-radius: 10px;
 
-        color: #fff;
-        font-size: 14px;
-        font-family: var(--font-poesen-one);
+        .skill-item {
+          display: inline-flex;
+          min-width: max-content;
+          align-items: center;
+          gap: 8px;
+          padding: 6px 10px;
+          border-radius: 10px;
 
-        &.html {
-          background-color: #e34c26;
-        }
+          color: #fff;
+          font-size: 14px;
+          font-family: var(--font-poesen-one);
 
-        &.css {
-          background-color: #264de4;
-        }
+          &.html {
+            background-color: #e34c26;
+          }
 
-        &.javascript {
-          background-color: #f0db4f;
-          color: #000;
-        }
+          &.css {
+            background-color: #264de4;
+          }
 
-        &.typescript {
-          background-color: #007acc;
-        }
+          &.javascript {
+            background-color: #f0db4f;
+            color: #000;
+          }
 
-        &.react {
-          background-color: #61dafb;
-          color: #000;
-        }
+          &.typescript {
+            background-color: #007acc;
+          }
 
-        &.next-js {
-          background-color: #000;
-        }
+          &.react {
+            background-color: #61dafb;
+            color: #000;
+          }
 
-        &.recoil {
-          background-color: #3578e5;
-        }
+          &.next-js {
+            background-color: #000;
+          }
 
-        &.zustand {
-          background-color: #ffdd57;
-          color: #000;
-        }
+          &.recoil {
+            background-color: #3578e5;
+          }
 
-        &.tailwind {
-          background-color: #38b2ac;
-        }
-        &.sass {
-          background-color: #cd6799;
-        }
+          &.zustand {
+            background-color: #ffdd57;
+            color: #000;
+          }
 
-        &.styled-component {
-          background-color: #db7093;
-        }
+          &.tailwind {
+            background-color: #38b2ac;
+          }
+          &.sass {
+            background-color: #cd6799;
+          }
 
-        &.css-modules {
-          background-color: #6a5acd;
-        }
+          &.styled-component {
+            background-color: #db7093;
+          }
 
-        &.vercel {
-          background-color: #000;
-        }
+          &.css-modules {
+            background-color: #6a5acd;
+          }
 
-        &.zustand {
-          background-color: #ffdd57;
-          color: #000;
+          &.vercel {
+            background-color: #000;
+          }
+
+          &.zustand {
+            background-color: #ffdd57;
+            color: #000;
+
+            .skill-item-icon {
+              background-image: url('/zustand_logo.svg');
+              background-size: contain;
+              background-repeat: no-repeat;
+              width: 18px;
+              height: 18px;
+              display: inline-block;
+            }
+          }
 
           .skill-item-icon {
-            background-image: url('/zustand_logo.svg');
-            background-size: contain;
-            background-repeat: no-repeat;
-            width: 18px;
-            height: 18px;
-            display: inline-block;
+            display: flex;
+            align-items: center;
+            font-size: 18px;
           }
         }
+      }
+    }
+  }
+}
 
-        .skill-item-icon {
-          display: flex;
-          align-items: center;
-          font-size: 18px;
+// 태블릿 (481px ~ 768px)
+@media (max-width: 768px) {
+  .skills-container {
+    padding: 0 30px;
+
+    .skills-list {
+      .skill-section {
+        flex-direction: column;
+        align-items: flex-start;
+
+        .skill-content-box {
+          flex-wrap: wrap;
         }
       }
     }
