@@ -270,8 +270,32 @@
 
 // 태블릿 (481px ~ 768px)
 @media (max-width: 768px) {
+  .read-me-modal-wrapper {
+    .read-me-container {
+      .info-box {
+        .read-me-title-box {
+          flex-direction: column;
+          .read-me-title-info-data {
+            flex-shrink: 0;
+          }
+        }
+      }
+    }
+  }
 }
 
 // 모바일 (480px 이하)
 @media (max-width: 480px) {
+  .read-me-modal-wrapper {
+    .read-me-container {
+      .info-box {
+        .read-me-title-box {
+          flex-direction: column;
+          .read-me-title-info-data {
+            flex-direction: column;
+          }
+        }
+      }
+    }
+  }
 }

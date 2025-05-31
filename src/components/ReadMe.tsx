@@ -34,12 +34,12 @@ const ReadMe = ({ setIsProjectCardClicked, project }: ReadMeProps) => {
   return (
     <div className="read-me-modal-wrapper" onClick={handleCloseModal}>
       <div className="read-me-container" onClick={(e) => e.stopPropagation()}>
-        <header className="read-me-header">
+        <div className="read-me-header">
           <span>readme.md</span>
-          <button className="close-modal-btn" onClick={handleCloseModal}>
+          <div className="close-modal-btn" onClick={handleCloseModal}>
             <IoIosClose />
-          </button>
-        </header>
+          </div>
+        </div>
 
         <main className="info-box">
           <div className="read-me-title-box">
