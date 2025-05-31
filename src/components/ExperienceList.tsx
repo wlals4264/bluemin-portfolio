@@ -12,8 +12,6 @@ type ExperienceListProps = {
 };
 
 const ExperienceList = ({ data, activeIndex, setActiveIndex }: ExperienceListProps) => {
-  const baseLeft = 550;
-  const gap = 40;
   const tagCount = data.length;
 
   return (
@@ -37,13 +35,14 @@ const ExperienceList = ({ data, activeIndex, setActiveIndex }: ExperienceListPro
       {/* 인덱스 태그 */}
       <div className="experiences-index-tags">
         {data.map((_, idx) => {
-          const left = baseLeft - gap * (tagCount - 1 - idx);
+          const offset = (idx - (tagCount - 1) / 2) * 40;
+
           return (
             <div
               key={idx}
               className={`tag-box ${idx === activeIndex ? 'active' : ''}`}
               onClick={() => setActiveIndex(idx)}
-              style={{ left: `${left}px` }}
+              style={{ transform: `translateX(${offset}px)` }}
             />
           );
         })}
