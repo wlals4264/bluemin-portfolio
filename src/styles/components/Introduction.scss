@@ -1,5 +1,4 @@
 .introduction-container {
-  // min-width: max-content
   width: 100%;
   height: 380px;
   margin-top: 130px;
@@ -83,7 +82,7 @@
   }
 }
 
-// 태블릿 (481px ~ 768px)
+// 태블릿 (~ 768px)
 @media (max-width: 768px) {
   .introduction-container {
     justify-content: center;
