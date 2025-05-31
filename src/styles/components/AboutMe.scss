@@ -46,9 +46,35 @@
 @media (max-width: 768px) {
   .about-me-container {
     padding: 10px 30px;
+
     .about-me-info {
       grid-template-columns: repeat(2, 1fr);
       grid-template-rows: repeat(3, 1fr);
+    }
+  }
+}
+
+// 모바일 (480px 이하)
+@media (max-width: 480px) {
+  .about-me-container {
+    .about-me-info {
+      .about-me-info-item {
+        .about-me-info-icon {
+          font-size: 20px;
+        }
+
+        .about-me-info-text-container {
+          gap: 6px;
+
+          .about-me-info-title {
+            font-size: 14px;
+          }
+
+          .about-me-info-content {
+            font-size: 12px;
+          }
+        }
+      }
     }
   }
 }
