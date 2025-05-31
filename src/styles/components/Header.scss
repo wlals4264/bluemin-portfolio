@@ -38,15 +38,19 @@
 // 태블릿 (481px ~ 768px)
 @media (max-width: 768px) {
   .header-container {
-    width: 90vw;
-    padding: 10px 10px;
+    width: 100vw;
+    padding: 10px 35px;
+    margin: 0;
+    box-sizing: border-box;
   }
 }
 
 // 모바일 (480px 이하)
 @media (max-width: 480px) {
   .header-container {
-    width: 95vw;
+    width: 100vw;
     padding: 10px 10px;
+    margin: 0;
+    box-sizing: border-box;
   }
 }

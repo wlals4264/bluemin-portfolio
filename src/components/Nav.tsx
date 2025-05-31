@@ -34,9 +34,9 @@ export default function Nav({ titles, sectionRefs }: NavProps) {
         <button className="hire-me-btn">Hire me!</button>
       </nav>
 
-      <button className="nav-toggle" onClick={() => setIsNavOpen((prev) => !prev)} aria-label="toggle nav">
+      <div className="nav-toggle" onClick={() => setIsNavOpen((prev) => !prev)} aria-label="toggle nav">
         <GiHamburgerMenu size={24} />
-      </button>
+      </div>
     </>
   );
 }
