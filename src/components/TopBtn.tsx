@@ -2,7 +2,7 @@
 
 import { useEffect, useState } from 'react';
 import '../styles/components/TopBtn.scss';
-import { FaArrowUp } from 'react-icons/fa';
+import { FaArrowUp } from 'react-icons/fa6';
 
 const TopBtn = () => {
   const [showBtn, setShowBtn] = useState(false);
@@ -27,7 +27,7 @@ const TopBtn = () => {
 
   return (
     <div className={`top-btn-container ${showBtn ? 'show' : ''}`}>
-      <button onClick={scrollToTop}>
+      <button className="top-btn" onClick={scrollToTop}>
         <FaArrowUp />
       </button>
     </div>
