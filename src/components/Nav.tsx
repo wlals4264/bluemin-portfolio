@@ -21,6 +21,7 @@ export default function Nav({ titles, sectionRefs }: NavProps) {
   const handleClick = (title: string) => {
     const targetRef = sectionRefs[title];
     targetRef?.current?.scrollIntoView({ behavior: 'smooth' });
+    setIsNavOpen(false);
   };
 
   return (
