@@ -43,10 +43,19 @@ const Projects = forwardRef<HTMLDivElement>((_, ref) => {
           onSwiper={handleSwiper}
           onSlideChange={(swiper) => setCurrentIndex(swiper.activeIndex)}
           modules={[Navigation]}
-          spaceBetween={20}
-          slidesPerView={2}
-          slidesPerGroup={2}
-          allowTouchMove={true}>
+          allowTouchMove={true}
+          breakpoints={{
+            0: {
+              slidesPerView: 1,
+              spaceBetween: 10,
+              slidesPerGroup: 1,
+            },
+            1028: {
+              slidesPerView: 2,
+              spaceBetween: 20,
+              slidesPerGroup: 2,
+            },
+          }}>
           {projects.map((project, index) => (
             <SwiperSlide key={index} className="swiper-slide">
               <ProjectCard

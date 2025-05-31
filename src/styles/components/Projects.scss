@@ -9,7 +9,7 @@
     overflow: visible;
 
     .swiper {
-      width: 1010px;
+      width: 100%;
     }
 
     .nav-button {
@@ -36,4 +36,16 @@
       }
     }
   }
+}
+
+// 노트북 (769px ~ 1024px)
+@media (max-width: 1024px) {
+}
+
+// 태블릿 (481px ~ 768px)
+@media (max-width: 768px) {
+}
+
+// 모바일 (480px 이하)
+@media (max-width: 480px) {
 }

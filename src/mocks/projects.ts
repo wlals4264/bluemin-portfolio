@@ -19,7 +19,7 @@ const project1: ProjectCard = {
   title: 'OlaOla',
   date: '2024.11.18 ~ 2024.12.12',
   projectType: 'personal',
-  projectTitle: '클라이머들을 위한 영상 및 사진 기록 SNS 및 정보 공유 커뮤니티 플랫폼',
+  projectTitle: '클라이머들을 위한 영상 및 사진 기록 커뮤니티 플랫폼',
   projectFeatures: [
     '서버 없이 영상 및 이미지 업로드 기능을 구현하기 위해 브라우저 저장소인 IndexedDB 사용',
     '텍스트 에디터의 이미지 업로드 기능을 input을 이용해 커스텀하여 구현',
