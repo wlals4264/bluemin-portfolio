@@ -32,7 +32,7 @@ export default function Nav({ titles, sectionRefs }: NavProps) {
             {label}
           </span>
         ))}
-        <button className="hire-me-btn">Hire me!</button>
+        {/* <button className="hire-me-btn">Hire me!</button> */}
       </nav>
 
       <div className="nav-toggle" onClick={() => setIsNavOpen((prev) => !prev)} aria-label="toggle nav">
