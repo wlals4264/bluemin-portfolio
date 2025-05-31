@@ -2,7 +2,7 @@
 
 import { useEffect, useState } from 'react';
 import '../styles/components/TopBtn.scss';
-import { IoMdArrowRoundUp } from 'react-icons/io';
+import { FaArrowUp } from 'react-icons/fa';
 
 const TopBtn = () => {
   const [showBtn, setShowBtn] = useState(false);
@@ -28,7 +28,7 @@ const TopBtn = () => {
   return (
     <div className={`top-btn-container ${showBtn ? 'show' : ''}`}>
       <button onClick={scrollToTop}>
-        <IoMdArrowRoundUp />
+        <FaArrowUp />
       </button>
     </div>
   );
