@@ -4,7 +4,7 @@ import '../styles/components/Projects.scss';
 import { projects } from '@/mocks/projects';
 import InfoHeader from './InfoHeader';
 import ProjectCard from './ProjectCard';
-import { forwardRef, useState } from 'react';
+import { forwardRef, useEffect, useState } from 'react';
 import { Swiper, SwiperSlide } from 'swiper/react';
 import { Navigation } from 'swiper/modules';
 import { FaChevronLeft, FaChevronRight } from 'react-icons/fa';
@@ -27,6 +27,21 @@ const Projects = forwardRef<HTMLDivElement>((_, ref) => {
   const handleSwiper = (swiper: SwiperType) => {
     setSwiperInstance(swiper);
   };
+
+  const [slidesPerView, setSlidesPerView] = useState(1);
+
+  useEffect(() => {
+    const updateSlidesPerView = () => {
+      setSlidesPerView(window.innerWidth >= 1028 ? 2 : 1);
+    };
+
+    updateSlidesPerView();
+    window.addEventListener('resize', updateSlidesPerView);
+
+    return () => {
+      window.removeEventListener('resize', updateSlidesPerView);
+    };
+  }, []);
 
   return (
     <div ref={ref} className="projects-container">
@@ -94,7 +109,7 @@ const Projects = forwardRef<HTMLDivElement>((_, ref) => {
           )}
         </Swiper>
 
-        {swiperInstance && currentIndex + 2 < projects.length && (
+        {swiperInstance && currentIndex + slidesPerView < projects.length && (
           <button className="nav-button next-button" onClick={() => swiperInstance.slideNext()}>
             <FaChevronRight />
           </button>
