@@ -33,3 +33,14 @@
     }
   }
 }
+
+// 모바일 (480px 이하)
+@media (max-width: 480px) {
+  .navigator-container {
+    .more-btn-container {
+      button:last-of-type {
+        display: none;
+      }
+    }
+  }
+}
