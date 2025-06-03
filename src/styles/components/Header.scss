@@ -1,10 +1,6 @@
-.header-container {
-  width: 80vw;
+.header-wrapper {
+  width: 100vw;
   margin: auto;
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  padding: 10px 0px;
   position: fixed;
   top: 0;
   left: 0;
@@ -15,42 +11,59 @@
   font-family: var(--font-poesen-one);
   color: #191919;
 
-  .logo {
-    font-size: 1.5rem;
-    font-weight: 600;
-    letter-spacing: 0.05em;
-    min-width: max-content;
+  box-shadow: 0px 4px 8px 0px rgba(0, 0, 0, 0.04);
 
-    &:hover {
-      color: #3b82f6;
-      transition: color 0.3s ease;
+  .header-container {
+    width: 80%;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 10px 0px;
+    margin: auto;
+
+    .logo {
+      font-size: 1.5rem;
+      font-weight: 600;
+      letter-spacing: 0.05em;
+      min-width: max-content;
+
+      &:hover {
+        color: #3b82f6;
+        transition: color 0.3s ease;
+      }
     }
   }
 }
 
 // 노트북 (769px ~ 1024px)
 @media (max-width: 1024px) {
-  .header-container {
-    width: 85vw;
+  .header-wrapper {
+    .header-container {
+      width: 85%;
+    }
   }
 }
 
 // 태블릿 (481px ~ 768px)
 @media (max-width: 768px) {
-  .header-container {
-    width: 100vw;
-    padding: 10px 35px;
-    margin: 0;
-    box-sizing: border-box;
+  .header-wrapper {
+    .header-container {
+      width: 100%;
+      padding: 10px 35px;
+      margin: 0;
+      box-sizing: border-box;
+    }
   }
 }
 
 // 모바일 (480px 이하)
 @media (max-width: 480px) {
-  .header-container {
-    width: 100vw;
-    padding: 10px 10px;
-    margin: 0;
-    box-sizing: border-box;
+  .header-wrapper {
+    .header-container {
+      width: 100%;
+      padding: 10px 10px;
+      margin: 0;
+      box-sizing: border-box;
+    }
   }
 }

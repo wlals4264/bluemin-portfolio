@@ -19,11 +19,13 @@ export default function Header({ sectionRefs }: HeaderProps) {
   ];
 
   return (
-    <div className="header-container">
-      <Link href="/">
-        <h1 className="logo">Jimin&apos;s Portfolio</h1>
-      </Link>
-      <Nav titles={titles} sectionRefs={sectionRefs} />
+    <div className="header-wrapper">
+      <div className="header-container">
+        <Link href="/">
+          <h1 className="logo">Jimin&apos;s Portfolio</h1>
+        </Link>
+        <Nav titles={titles} sectionRefs={sectionRefs} />
+      </div>
     </div>
   );
 }
