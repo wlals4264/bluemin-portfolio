@@ -15,6 +15,11 @@
     background-color: #424242;
     transition: background-color 0.3s ease;
   }
+
+  &.active {
+    color: #fff;
+    background-color: #424242;
+  }
 }
 
 .filtered-buttons-container {
