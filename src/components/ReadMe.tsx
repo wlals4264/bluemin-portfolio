@@ -1,13 +1,13 @@
 'use client';
 
 import '../styles/components/ReadMe.scss';
-import { ProjectCard } from '@/mocks/projects';
+import { ProjectCardData } from '@/mocks/projects';
 import { useEffect, useState } from 'react';
 import { IoIosClose } from 'react-icons/io';
 
 interface ReadMeProps {
   setIsProjectCardClicked: (value: boolean) => void;
-  project: ProjectCard;
+  project: ProjectCardData;
 }
 const ReadMe = ({ setIsProjectCardClicked, project }: ReadMeProps) => {
   const [isOpen, setIsOpen] = useState(true);
