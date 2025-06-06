@@ -127,7 +127,7 @@ const Projects = forwardRef<HTMLDivElement>((_, ref) => {
           )}
         </Swiper>
 
-        {swiperInstance && currentIndex + slidesPerView < projects.length && (
+        {swiperInstance && currentIndex + slidesPerView < filteredProjects.length && (
           <button className="nav-button next-button" onClick={() => swiperInstance.slideNext()}>
             <FaChevronRight />
           </button>
@@ -135,7 +135,7 @@ const Projects = forwardRef<HTMLDivElement>((_, ref) => {
       </div>
 
       {isProjectCardClicked && (
-        <ReadMe setIsProjectCardClicked={setIsProjectCardClicked} project={projects[selectedCardIndex]} />
+        <ReadMe setIsProjectCardClicked={setIsProjectCardClicked} project={filteredProjects[selectedCardIndex]} />
       )}
     </div>
   );
