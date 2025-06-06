@@ -117,11 +117,11 @@
     gap: 10px;
     flex-wrap: wrap;
 
-    .read-me-btn {
-      @include project-card-btn;
-    }
-
-    .video-btn {
+    .read-me-btn,
+    .video-btn,
+    .notion-btn,
+    .github-btn,
+    .velog-btn {
       @include project-card-btn;
     }
   }

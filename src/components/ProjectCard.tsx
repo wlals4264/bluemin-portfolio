@@ -88,19 +88,19 @@ const ProjectCard: React.FC<ProjectCardProps> = ({
           </Link>
         )}
         {projectNotionUrl && (
-          <Link className="video-btn" href={projectNotionUrl} target="blank">
+          <Link className="notion-btn" href={projectNotionUrl} target="blank">
             <RxNotionLogo />
             Notion
           </Link>
         )}
         {projectGithubUrl && (
-          <Link className="video-btn" href={projectGithubUrl} target="blank">
+          <Link className="github-btn" href={projectGithubUrl} target="blank">
             <FaGithub />
             Github
           </Link>
         )}
         {projectVelogUrl && (
-          <Link className="video-btn" href={projectVelogUrl} target="blank">
+          <Link className="velog-btn" href={projectVelogUrl} target="blank">
             <SiVelog />
             Velog Series
           </Link>
