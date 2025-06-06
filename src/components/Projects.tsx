@@ -21,7 +21,8 @@ const Projects = forwardRef<HTMLDivElement>((_, ref) => {
   const [swiperInstance, setSwiperInstance] = useState<SwiperType | null>(null);
   const [currentIndex, setCurrentIndex] = useState<number>(0);
   const [selectedCardIndex, setSelectedCardIndex] = useState<number>(0);
-  const [filteredProjects, setFilteredProjects] = useState<ProjectCardData[]>(projects);
+  const [filteredProjects, setFilteredProjects] =
+    useState<ProjectCardData[]>(projects);
 
   const handleClickProjectCard = (index: number) => {
     setSelectedCardIndex(index);
@@ -63,11 +64,17 @@ const Projects = forwardRef<HTMLDivElement>((_, ref) => {
     <div ref={ref} className="projects-container">
       <InfoHeader title="Projects" className="projects-header" />
 
-      <FilteringButton setFilteredProjects={setFilteredProjects} projects={projects} />
+      <FilteringButton
+        setFilteredProjects={setFilteredProjects}
+        projects={projects}
+      />
 
       <div className="projects-carousel-wrapper">
         {currentIndex > 0 && (
-          <button className="nav-button prev-button" onClick={() => swiperInstance?.slidePrev()}>
+          <button
+            className="nav-button prev-button"
+            onClick={() => swiperInstance?.slidePrev()}
+          >
             <FaChevronLeft />
           </button>
         )}
@@ -88,7 +95,13 @@ const Projects = forwardRef<HTMLDivElement>((_, ref) => {
               spaceBetween: 20,
               slidesPerGroup: 2,
             },
-          }}>
+            1440: {
+              slidesPerView: 2,
+              spaceBetween: 30,
+              slidesPerGroup: 2,
+            },
+          }}
+        >
           {filteredProjects.map((project, index) => (
             <SwiperSlide key={index} className="swiper-slide">
               <ProjectCard
@@ -127,15 +140,22 @@ const Projects = forwardRef<HTMLDivElement>((_, ref) => {
           )}
         </Swiper>
 
-        {swiperInstance && currentIndex + slidesPerView < filteredProjects.length && (
-          <button className="nav-button next-button" onClick={() => swiperInstance.slideNext()}>
-            <FaChevronRight />
-          </button>
-        )}
+        {swiperInstance &&
+          currentIndex + slidesPerView < filteredProjects.length && (
+            <button
+              className="nav-button next-button"
+              onClick={() => swiperInstance.slideNext()}
+            >
+              <FaChevronRight />
+            </button>
+          )}
       </div>
 
       {isProjectCardClicked && (
-        <ReadMe setIsProjectCardClicked={setIsProjectCardClicked} project={filteredProjects[selectedCardIndex]} />
+        <ReadMe
+          setIsProjectCardClicked={setIsProjectCardClicked}
+          project={filteredProjects[selectedCardIndex]}
+        />
       )}
     </div>
   );

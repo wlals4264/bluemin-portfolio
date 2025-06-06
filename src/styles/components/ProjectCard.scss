@@ -25,7 +25,7 @@
   border-radius: 20px;
   padding: 24px 24px;
   box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
-  min-height: 430px;
+  min-height: 480px;
   margin: 10px;
 
   font-family: var(--font-nanum-gothic-coding);
@@ -127,6 +127,23 @@
   }
 }
 
+// 중형 모니터(1080px ~ 1439px)
+@media (max-width: 1439px) {
+  .project-card-item-container {
+    min-height: 530px;
+
+    .project-card-link-container {
+      font-size: 12px;
+    }
+
+    .project-card-skills-container {
+      span {
+        font-size: 14px;
+      }
+    }
+  }
+}
+
 // 노트북 (769px ~ 1024px)
 @media (max-width: 1024px) {
   .project-card-item-container {
@@ -138,7 +155,7 @@
 
     .project-card-skills-container {
       span {
-        font-size: 12px;
+        font-size: 10px;
       }
     }
   }

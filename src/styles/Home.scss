@@ -1,8 +1,15 @@
 .home-wrapper {
-  width: 80vw;
+  width: 70vw;
   margin: auto;
   min-height: 100vh;
   padding-bottom: 30px;
+}
+
+// 중형 모니터(1080px ~ 1439px)
+@media (max-width: 1439px) {
+  .home-wrapper {
+    width: 80vw;
+  }
 }
 
 // 노트북 (769px ~ 1024px)
