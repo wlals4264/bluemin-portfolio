@@ -1,4 +1,4 @@
-export interface ProjectCard {
+export interface ProjectCardData {
   title: string;
   date: string;
   projectType: string;
@@ -15,7 +15,7 @@ export interface ProjectCard {
   velogUrl?: string;
 }
 
-const project1: ProjectCard = {
+const project1: ProjectCardData = {
   title: 'OlaOla',
   date: '2024.11.18 ~ 2024.12.12',
   projectType: 'personal',
@@ -54,7 +54,7 @@ const project1: ProjectCard = {
   githubUrl: 'https://github.com/wlals4264/olaola',
 };
 
-const project2: ProjectCard = {
+const project2: ProjectCardData = {
   title: 'momo',
   date: '2024.12 ~ 2025.02',
   projectType: 'team',
@@ -89,7 +89,7 @@ const project2: ProjectCard = {
   githubUrl: 'https://github.com/Team-momo-front/momo-front',
 };
 
-const project3: ProjectCard = {
+const project3: ProjectCardData = {
   title: 'MBTI Chat',
   date: '2025.03',
   projectType: 'personal',
@@ -113,7 +113,7 @@ const project3: ProjectCard = {
     'https://velog.io/@wlals4264/series/%ED%86%A0%EC%9D%B4%ED%94%84%EB%A1%9C%EC%A0%9D%ED%8A%B8-MBTI-%EB%9E%9C%EB%8D%A4%EC%B1%84%ED%8C%85',
 };
 
-const project4: ProjectCard = {
+const project4: ProjectCardData = {
   title: 'Flobby',
   date: '2025.04 ~ 7월 중 1차 MVP 완료 예정',
   projectType: 'team',
@@ -140,9 +140,9 @@ const project4: ProjectCard = {
   mainFeatures: 'MVC 아키텍처 기반의 구조화된 메인 페이지 개발에 기여, 지역 기반 데이터 처리',
 };
 
-const project5: ProjectCard = {
+const project5: ProjectCardData = {
   title: 'Portfolio Web Site',
-  date: '2025.03 ~ 05',
+  date: '2025.03 ~ 2025.05',
   projectType: 'personal',
   projectTitle: '포트폴리오 웹사이트 구축',
   projectFeatures: [
@@ -163,4 +163,4 @@ const project5: ProjectCard = {
   mainFeatures: 'Next.js를 통해 App Router 기반의 폴더 구조로 설계된 포트폴리오 사이트 구현',
 };
 
-export const projects: ProjectCard[] = [project1, project2, project3, project4, project5];
+export const projects: ProjectCardData[] = [project1, project2, project3, project4, project5];
