@@ -1,0 +1,31 @@
+@mixin filtered-button-style {
+  //   border: # 1px solid;
+  border: none;
+  background-color: #dbdbdb;
+  border-radius: 14px;
+  padding: 6px 10px;
+  color: #191919;
+  font-family: var(--font-nanum-gothic-coding);
+  font-size: 12px;
+  font-weight: bold;
+  cursor: pointer;
+
+  &:hover {
+    color: #fff;
+    background-color: #424242;
+    transition: background-color 0.3s ease;
+  }
+}
+
+.filtered-buttons-container {
+  display: flex;
+  width: 100%;
+  justify-content: center;
+  align-items: center;
+  gap: 10px;
+  margin-bottom: 50px;
+
+  > button {
+    @include filtered-button-style();
+  }
+}
