@@ -22,6 +22,8 @@ const Projects = forwardRef<HTMLDivElement>((_, ref) => {
   const handleClickProjectCard = (index: number) => {
     setSelectedCardIndex(index);
     setIsProjectCardClicked(true);
+
+    window.history.pushState(null, '', window.location.href);
   };
 
   const handleSwiper = (swiper: SwiperType) => {
@@ -41,6 +43,16 @@ const Projects = forwardRef<HTMLDivElement>((_, ref) => {
     return () => {
       window.removeEventListener('resize', updateSlidesPerView);
     };
+  }, []);
+
+  // 뒤로가기 누르면 모달 닫히기
+  useEffect(() => {
+    const handlePopState = () => {
+      setIsProjectCardClicked(false);
+    };
+
+    window.addEventListener('popstate', handlePopState);
+    return () => window.removeEventListener('popstate', handlePopState);
   }, []);
 
   return (

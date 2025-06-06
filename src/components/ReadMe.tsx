@@ -15,6 +15,8 @@ const ReadMe = ({ setIsProjectCardClicked, project }: ReadMeProps) => {
   const handleCloseModal = () => {
     setIsOpen(false);
     setIsProjectCardClicked(false);
+
+    window.history.back();
   };
 
   useEffect(() => {
