@@ -7,6 +7,7 @@ import {
   SiStyledcomponents,
   SiCssmodules,
   SiVercel,
+  SiReactquery,
 } from 'react-icons/si';
 import { RiNextjsFill } from 'react-icons/ri';
 
@@ -32,6 +33,7 @@ export const skillsInfo = [
     contents: [
       { icon: <SiRecoil />, describe: 'Recoil' },
       { icon: null, describe: 'Zustand' },
+      { icon: <SiReactquery />, describe: 'React Query' },
     ],
   },
   {
