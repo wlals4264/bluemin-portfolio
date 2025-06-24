@@ -72,6 +72,7 @@ const Introduction = () => {
           className="profile-image"
           width={300}
           height={300}
+          priority
         />
       </div>
     </div>
