@@ -1,15 +1,17 @@
 'use client';
 
 import '@/styles/Home.scss';
-import Introduction from '@/components/Introduction';
-import AboutMe from '../components/AboutMe';
-import Skills from '@/components/Skills';
-import Projects from '@/components/Projects';
-import Experiences from '@/components/Experiences';
-import Navigator from '@/components/Navigator';
-import Header from '@/components/Header';
+
 import { useRef } from 'react';
-import TopBtn from '@/components/TopBtn';
+
+import Introduction from '@/components/introduction/Introduction';
+import AboutMe from '@/components/about-me/AboutMe';
+import Skills from '@/components/skills/Skills';
+import Projects from '@/components/projects/Projects';
+import Experiences from '@/components/experience/Experiences';
+import Navigator from '@/components/nav/Navigator';
+import Header from '@/components/header/Header';
+import TopBtn from '@/components/common/buttons/TopBtn';
 
 export default function Home() {
   const aboutMeRef = useRef<HTMLDivElement>(null);

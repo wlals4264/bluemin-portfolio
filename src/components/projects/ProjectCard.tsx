@@ -1,4 +1,5 @@
-import '../styles/components/ProjectCard.scss';
+import '@/styles/components/ProjectCard.scss';
+
 import { GoLink } from 'react-icons/go';
 import { FaBook, FaYoutube, FaGithub } from 'react-icons/fa';
 import { RxNotionLogo } from 'react-icons/rx';

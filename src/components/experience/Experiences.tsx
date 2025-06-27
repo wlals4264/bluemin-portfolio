@@ -1,10 +1,13 @@
 'use client';
 
-import '../styles/components/Experiences.scss';
+import '@/styles/components/Experiences.scss';
+
+import { experienceData } from '@/mocks/experienceData';
+
 import { forwardRef, MouseEvent, useEffect, useState } from 'react';
-import InfoHeader from './InfoHeader';
+
+import InfoHeader from '../header/InfoHeader';
 import ExperienceList from './ExperienceList';
-import { experienceData } from '../mocks/experienceData';
 
 const Experiences = forwardRef<HTMLDivElement>((_, ref) => {
   const [activeName, setActiveName] = useState<'education' | 'careerPath' | 'team'>('education');

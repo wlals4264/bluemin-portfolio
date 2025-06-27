@@ -1,6 +1,7 @@
 'use client';
 
-import '../styles/components/Nav.scss';
+import '@/styles/components/Nav.scss';
+
 import { useState } from 'react';
 import { GiHamburgerMenu } from 'react-icons/gi';
 

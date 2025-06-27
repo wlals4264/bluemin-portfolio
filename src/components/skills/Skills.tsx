@@ -1,7 +1,10 @@
-import '../styles/components/Skills.scss';
+import '@/styles/components/Skills.scss';
+
 import { skillsInfo } from '@/mocks/skillsInfo';
-import InfoHeader from './InfoHeader';
+
 import { forwardRef } from 'react';
+
+import InfoHeader from '../header/InfoHeader';
 
 const Skills = forwardRef<HTMLDivElement>((_, ref) => {
   return (

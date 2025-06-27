@@ -1,7 +1,8 @@
 'use client';
 
+import '@/styles/components/TopBtn.scss';
+
 import { useEffect, useState } from 'react';
-import '../styles/components/TopBtn.scss';
 import { FaArrowUp } from 'react-icons/fa6';
 
 const TopBtn = () => {

@@ -2,7 +2,7 @@ import { FiDownload } from 'react-icons/fi';
 import { FaGithub } from 'react-icons/fa';
 import { SiVelog } from 'react-icons/si';
 
-import '../styles/components/IntroductionBtns.scss';
+import '@/styles/components/IntroductionBtns.scss';
 const IntroductionBtns = () => {
   return (
     <div className="introduction-btns-container">

@@ -1,10 +1,12 @@
 'use client';
 
-import '../styles/components/Navigator.scss';
+import '@/styles/components/Navigator.scss';
+
 import { IoArrowDown } from 'react-icons/io5';
 import { FaLaptopCode } from 'react-icons/fa';
-import CodeSnap from './CodeSnap';
 import { RefObject, useState } from 'react';
+
+import CodeSnap from './CodeSnap';
 
 type SectionName = 'about' | 'skills' | 'projects' | 'experiences';
 

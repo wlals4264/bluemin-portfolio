@@ -1,7 +1,9 @@
 'use client';
 
-import '../styles/components/ReadMe.scss';
+import '@/styles/components/ReadMe.scss';
+
 import { ProjectCardData } from '@/mocks/projects';
+
 import { useEffect, useState } from 'react';
 import { IoIosClose } from 'react-icons/io';
 

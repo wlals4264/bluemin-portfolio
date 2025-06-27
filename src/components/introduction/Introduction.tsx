@@ -1,6 +1,6 @@
 'use client';
 
-import '../styles/components/Introduction.scss';
+import '@/styles/components/Introduction.scss';
 import Image from 'next/image';
 import IntroductionBtns from './IntroductionBtns';
 import { useEffect, useRef, useState } from 'react';
@@ -30,13 +30,11 @@ const Introduction = () => {
 
   useEffect(() => {
     const interval = setInterval(() => {
-      // 슬라이드 업 아웃
       gsap.to(textRef.current, {
         y: -20,
         opacity: 0,
         duration: 0.5,
         onComplete: () => {
-          // 문장 바꾸고 슬라이드 인
           setCurrentIndex((prev) => (prev + 1) % sentences.length);
           gsap.fromTo(textRef.current, { y: 20, opacity: 0 }, { y: 0, opacity: 1, duration: 0.3 });
         },
@@ -44,7 +42,7 @@ const Introduction = () => {
     }, 4000);
 
     return () => clearInterval(interval);
-  }, [sentences.length]);
+  }, []);
 
   return (
     <div className="introduction-container">

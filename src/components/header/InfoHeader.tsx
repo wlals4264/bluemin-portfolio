@@ -1,4 +1,4 @@
-import styles from '../styles/components/InfoHeader.module.scss';
+import styles from '@/styles/components/InfoHeader.module.scss';
 
 interface InfoHeaderProps {
   title: string;

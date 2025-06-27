@@ -1,7 +1,9 @@
 import '@/styles/components/Header.scss';
+
 import Link from 'next/link';
-import Nav from './Nav';
 import { RefObject } from 'react';
+
+import Nav from '@/components/nav/Nav';
 
 type SectionName = 'about' | 'skills' | 'projects' | 'experiences';
 

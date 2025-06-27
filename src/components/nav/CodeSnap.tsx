@@ -1,6 +1,7 @@
 'use client';
 
-import '../styles/components/CodeSnap.scss';
+import '@/styles/components/CodeSnap.scss';
+
 import { RefObject, useEffect, useRef, useState } from 'react';
 
 type SectionName = 'about' | 'skills' | 'projects' | 'experiences';

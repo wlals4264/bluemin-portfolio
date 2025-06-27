@@ -1,9 +1,12 @@
 'use client';
 
-import '../styles/components/AboutMe.scss';
+import '@/styles/components/AboutMe.scss';
+
 import { myInfoData } from '@/mocks/myInfoData';
-import InfoHeader from './InfoHeader';
+
 import { forwardRef } from 'react';
+
+import InfoHeader from '../header/InfoHeader';
 
 const AboutMe = forwardRef<HTMLDivElement>((_, ref) => {
   return (

@@ -1,7 +1,9 @@
 'use client';
 
-import '../styles/components/FilteringButton.scss';
+import '@/styles/components/FilteringButton.scss';
+
 import { ProjectCardData } from '@/mocks/projects';
+
 import React, { useState } from 'react';
 
 interface FilteringButtonProps {
