@@ -94,6 +94,21 @@
     }
   }
 
+  .project-card-trouble-shooting-container {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    margin-bottom: 15px;
+    font-size: 12px;
+    font-weight: bold;
+
+    a {
+      &:hover {
+        color: rgb(253, 82, 82);
+      }
+    }
+  }
+
   .project-card-skills-container {
     display: flex;
     flex-wrap: wrap;

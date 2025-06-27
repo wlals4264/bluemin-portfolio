@@ -13,6 +13,7 @@ export interface ProjectCardData {
   notionUrl?: string;
   githubUrl?: string;
   velogUrl?: string;
+  troubleShootingNotionUrl?: string;
 }
 
 const project1: ProjectCardData = {
@@ -52,6 +53,8 @@ const project1: ProjectCardData = {
   ],
   notionUrl: 'https://platinum-literature-af9.notion.site/OlaOla-13b9b3c1166f816ab8c1ef869977bfce?pvs=74',
   githubUrl: 'https://github.com/wlals4264/olaola',
+  troubleShootingNotionUrl:
+    'https://platinum-literature-af9.notion.site/OlaOla-Trouble-Shooting-21f9b3c1166f80ec8ce5f0ecb613910e',
 };
 
 const project2: ProjectCardData = {
@@ -87,6 +90,8 @@ const project2: ProjectCardData = {
     '디자인 시스템(Figma 기반)과 서버 상태 관리(Tanstack Query)을 통해 UI/UX 일관성과 상태 흐름을 최적화. isPending, isSuccess 상태를 버튼 및 모달과 연동하여 사용자 행동에 따른 피드백을 명확히 제공.',
   notionUrl: 'https://skitter-chord-6cc.notion.site/836b52c3253b4803974d1d6b42d99338?pvs=74',
   githubUrl: 'https://github.com/Team-momo-front/momo-front',
+  troubleShootingNotionUrl:
+    'https://platinum-literature-af9.notion.site/momo-Trouble-Shooting-21f9b3c1166f8092a39bc4cc2c3e44ea?pvs=73',
 };
 
 const project3: ProjectCardData = {
@@ -110,6 +115,8 @@ const project3: ProjectCardData = {
   ],
   mainFeatures: '라이브러리 없이 순수 웹소켓 API를 활용한 실시간 채팅 기능 구현 및 소켓 컨트롤러 구조 설계',
   velogUrl:
+    'https://velog.io/@wlals4264/series/%ED%86%A0%EC%9D%B4%ED%94%84%EB%A1%9C%EC%A0%9D%ED%8A%B8-MBTI-%EB%9E%9C%EB%8D%A4%EC%B1%84%ED%8C%85',
+  troubleShootingNotionUrl:
     'https://velog.io/@wlals4264/series/%ED%86%A0%EC%9D%B4%ED%94%84%EB%A1%9C%EC%A0%9D%ED%8A%B8-MBTI-%EB%9E%9C%EB%8D%A4%EC%B1%84%ED%8C%85',
 };
 

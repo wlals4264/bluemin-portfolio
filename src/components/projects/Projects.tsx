@@ -109,6 +109,7 @@ const Projects = forwardRef<HTMLDivElement>((_, ref) => {
                 projectNotionUrl={project.notionUrl}
                 projectGithubUrl={project.githubUrl}
                 projectVelogUrl={project.velogUrl}
+                troubleShootingNotionUrl={project.troubleShootingNotionUrl}
                 onClick={() => handleClickProjectCard(index)}
               />
             </SwiperSlide>

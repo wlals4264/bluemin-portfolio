@@ -4,6 +4,7 @@ import { GoLink } from 'react-icons/go';
 import { FaBook, FaYoutube, FaGithub } from 'react-icons/fa';
 import { RxNotionLogo } from 'react-icons/rx';
 import { SiVelog } from 'react-icons/si';
+import { IoIosRocket } from 'react-icons/io';
 import Link from 'next/link';
 
 interface ProjectCardProps {
@@ -18,6 +19,7 @@ interface ProjectCardProps {
   projectNotionUrl?: string;
   projectGithubUrl?: string;
   projectVelogUrl?: string;
+  troubleShootingNotionUrl?: string;
   onClick: () => void;
 }
 
@@ -33,6 +35,7 @@ const ProjectCard: React.FC<ProjectCardProps> = ({
   projectNotionUrl,
   projectGithubUrl,
   projectVelogUrl,
+  troubleShootingNotionUrl,
   onClick,
 }) => {
   return (
@@ -61,6 +64,15 @@ const ProjectCard: React.FC<ProjectCardProps> = ({
           <GoLink />
           <a href={projectUrl} target="_blank">
             {projectUrl}
+          </a>
+        </div>
+      )}
+
+      {troubleShootingNotionUrl && (
+        <div className="project-card-trouble-shooting-container">
+          <IoIosRocket className="rocket-icon" />
+          <a href={troubleShootingNotionUrl} target="_blank">
+            Trouble Shooting!!
           </a>
         </div>
       )}
