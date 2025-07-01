@@ -127,10 +127,6 @@ const ReadMe = ({ setIsProjectCardClicked, project }: ReadMeProps) => {
                   })}
               </div>
             </div>
-
-            {/* <div className="setup-usage-box">
-              <span className="setup-usage-title">⚙️ Setup & Usage</span>
-            </div> */}
           </div>
         </main>
       </div>
