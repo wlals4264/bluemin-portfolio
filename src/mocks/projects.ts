@@ -105,7 +105,7 @@ const project3: ProjectCardData = {
     '간단한 백엔드 소켓 서버 코드 구현',
   ],
   projectUrl: 'https://mbti-chat-gamma.vercel.app/',
-  projectSkills: ['React', 'TypeScript', 'Recoil', 'Tailwind', 'Vite', 'Node.js', 'Web Socket'],
+  projectSkills: ['React', 'TypeScript', 'Recoil', 'Scss', 'Vite', 'Node.js', 'Web Socket'],
   background: ['순수 웹소켓을 사용하여 채팅 기능을 구현해 본 토이 프로젝트'],
   meaning: [
     '웹소켓을 활용하기 위해 시작한 토이 프로젝트로, Polling, SSE, WebSocket과 같은 웹 통신 방식의 차이점을 정리하고, WebSocket이 실시간 채팅에 적합한 이유를 정의할 수 있었습니다.',
