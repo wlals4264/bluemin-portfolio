@@ -2,7 +2,7 @@
 
 import '@/styles/components/ReadMe.scss';
 
-import { ProjectCardData } from '@/mocks/projects';
+import { ProjectCardData, projectTypeLabel } from '@/mocks/projects';
 
 import { useEffect, useState } from 'react';
 import { IoIosClose } from 'react-icons/io';
@@ -51,7 +51,7 @@ const ReadMe = ({ setIsProjectCardClicked, project }: ReadMeProps) => {
             <div className="read-me-title-info-data">
               <span className="read-me-date">{project.date}</span>
               <span className={`read-me-project-type ${project.projectType}`}>
-                {project.projectType === 'team' ? '(팀 프로젝트)' : '(개인 프로젝트)'}
+                ({projectTypeLabel(project.projectType)})
               </span>
             </div>
           </div>
@@ -75,12 +75,14 @@ const ReadMe = ({ setIsProjectCardClicked, project }: ReadMeProps) => {
                     project.projectFeatures.map((feature, index) => {
                       return (
                         <li key={index} className={`project-card-feature-${index}`}>
-                          - {feature}
+                          {feature}
                         </li>
                       );
                     })}
-                  <span className="project-card-main-features">{project.mainFeatures}</span>
                 </ul>
+                {project.mainFeatures && (
+                  <p className="project-card-main-features">{project.mainFeatures}</p>
+                )}
               </div>
             </div>
 

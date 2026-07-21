@@ -10,7 +10,7 @@ import InfoHeader from '../header/InfoHeader';
 import ExperienceList from './ExperienceList';
 
 const Experiences = forwardRef<HTMLDivElement>((_, ref) => {
-  const [activeName, setActiveName] = useState<'education' | 'careerPath' | 'team'>('education');
+  const [activeName, setActiveName] = useState<'education' | 'team'>('education');
   const [activeIndex, setActiveIndex] = useState(0);
 
   useEffect(() => {
@@ -18,7 +18,7 @@ const Experiences = forwardRef<HTMLDivElement>((_, ref) => {
   }, [activeName]);
 
   const handleClickBtn = (e: MouseEvent<HTMLButtonElement>) => {
-    const name = e.currentTarget.name as 'education' | 'careerPath' | 'team';
+    const name = e.currentTarget.name as 'education' | 'team';
     setActiveName(name);
   };
 
@@ -27,14 +27,14 @@ const Experiences = forwardRef<HTMLDivElement>((_, ref) => {
       <InfoHeader title="Experiences" className="experiences-header" />
       <div className="experiences-container">
         <div className="experiences-nav-btn-box">
-          {['education', 'careerPath', 'team'].map((key) => (
+          {(['education', 'team'] as const).map((key) => (
             <button
               key={key}
               type="button"
               name={key}
               onClick={handleClickBtn}
               className={activeName === key ? 'active' : ''}>
-              {key === 'education' ? 'Education' : key === 'careerPath' ? 'Career Path' : 'Team'}
+              {key === 'education' ? 'Education' : 'Team'}
             </button>
           ))}
         </div>

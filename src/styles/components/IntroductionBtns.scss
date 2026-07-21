@@ -1,50 +1,61 @@
 @mixin Button {
   border: none;
   outline: none;
-  background-color: white;
-  //   border: 1px solid #3b82f6;
-  background-color: #3b82f6;
+  background-color: var(--accent);
   cursor: pointer;
 
-  font-family: var(--font-poesen-one);
-  color: white;
+  font-family: var(--font-body), sans-serif;
+  font-weight: 600;
+  color: var(--accent-contrast);
+
+  &:hover {
+    background-color: var(--accent-hover);
+  }
 }
 
 .introduction-btns-container {
   display: flex;
-  gap: 14px;
+  align-items: center;
+  gap: 12px;
 
   .download-btn {
     @include Button;
 
-    border-radius: 20px;
-    padding: 10px 14px;
+    height: 44px;
+    border-radius: 999px;
+    padding: 0 18px;
 
-    display: flex;
+    display: inline-flex;
     align-items: center;
-    gap: 4px;
-    min-width: fit-content;
+    justify-content: center;
+    gap: 8px;
+    line-height: 1;
+    box-sizing: border-box;
   }
 
   .social-btns {
     display: flex;
-    gap: 14px;
+    align-items: center;
+    gap: 12px;
 
     > a {
       @include Button;
 
-      width: 38px;
-      height: 38px;
+      width: 44px;
+      height: 44px;
       border-radius: 50%;
+      flex-shrink: 0;
 
-      display: flex;
+      display: inline-flex;
       align-items: center;
       justify-content: center;
+      font-size: 18px;
+      line-height: 1;
+      box-sizing: border-box;
     }
   }
 }
 
-// 태블릿 (481px ~ 768px)
 @media (max-width: 768px) {
   .introduction-btns-container {
     justify-content: center;

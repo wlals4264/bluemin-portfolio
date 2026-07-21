@@ -1,14 +1,16 @@
 .infoHeader {
   display: flex;
-  font-family: var(--font-poesen-one);
+  font-family: var(--font-display), sans-serif;
   justify-content: center;
   align-items: center;
   margin-bottom: 30px;
   font-size: 28px;
+  color: var(--text);
 
   h2 {
     display: block;
+    margin: 0;
     padding-bottom: 16px;
-    border-bottom: 1px solid #c9c9c9;
+    border-bottom: 1px solid var(--border);
   }
 }

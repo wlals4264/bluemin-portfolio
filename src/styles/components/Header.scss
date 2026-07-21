@@ -5,13 +5,14 @@
   top: 0;
   left: 0;
   right: 0;
-  background-color: #fff;
+  background-color: var(--header-bg);
+  backdrop-filter: blur(10px);
   z-index: 1000;
 
-  font-family: var(--font-poesen-one);
-  color: #191919;
+  font-family: var(--font-display), var(--font-body), sans-serif;
+  color: var(--text);
 
-  box-shadow: 0px 4px 8px 0px rgba(0, 0, 0, 0.04);
+  box-shadow: 0px 4px 8px 0px var(--shadow);
 
   .header-container {
     width: 70%;
@@ -26,16 +27,22 @@
       font-weight: 600;
       letter-spacing: 0.05em;
       min-width: max-content;
+      margin: 0;
 
       &:hover {
-        color: #3b82f6;
+        color: var(--accent);
         transition: color 0.3s ease;
       }
+    }
+
+    .header-actions {
+      display: flex;
+      align-items: center;
+      gap: 12px;
     }
   }
 }
 
-// 중형 모니터(1025px ~ 1439px)
 @media (max-width: 1439px) {
   .header-wrapper {
     .header-container {
@@ -44,7 +51,6 @@
   }
 }
 
-// 노트북 (769px ~ 1024px)
 @media (max-width: 1024px) {
   .header-wrapper {
     .header-container {
@@ -53,7 +59,6 @@
   }
 }
 
-// 태블릿 (481px ~ 768px)
 @media (max-width: 768px) {
   .header-wrapper {
     .header-container {
@@ -65,7 +70,6 @@
   }
 }
 
-// 모바일 (480px 이하)
 @media (max-width: 480px) {
   .header-wrapper {
     .header-container {

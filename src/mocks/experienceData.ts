@@ -18,15 +18,16 @@ export const experienceData = {
       description: ['자바스크립트의 기초 개념부터 동작 방식까지 깊게 공부하며 자바스크립트에 대한 깊이를 넓힘'],
     },
   ],
-  careerPath: [
-    {
-      title: 'Music Instructor',
-      date: '2021.04 ~ 2024.08.31',
-      subTitle: '은강 음악학원',
-      description: ['초등부 피아노 학원 전임 강사', '중,고등부 작곡 입시 레슨 강사'],
-    },
-  ],
   team: [
+    {
+      title: 'Team OOOTTT',
+      date: '2026.01 ~',
+      subTitle: 'OTT 구독 가치 기록·취향 시각화 Flutter 앱',
+      description: [
+        '홈·취향·영화관 등 핵심 UI 및 CustomPainter 차트·애니메이션 구현',
+        '기획 단계 기능 구현 가능성 검수 및 TMDB·백엔드 데이터 누적 구조 협의',
+      ],
+    },
     {
       title: 'Team Momo',
       date: '2024.11 ~ 2025.02',
@@ -36,17 +37,6 @@ export const experienceData = {
         'MVP 개발 완료 (밥친구 모집, 모임 채팅, 알림기능)',
         '첫 백엔드, 프론트엔드의 협업 프로세스 경험',
         'Tanstack Query와 같은 새로운 기술을 실전을 통해 경험',
-      ],
-    },
-    {
-      title: 'Team Flobby',
-      date: '2025.04 ~ ',
-      subTitle: '기존 소모임 어플의 불편함을 해소하고자 개발중인 동호회 & 원데이 클래스 플랫폼',
-      description: [
-        '6월 MVP 개발 완료를 위해 중간 투입',
-        'MVP 주요 기능인 지역 기반 데이터 렌더링 부분 담당',
-        'MVC 패턴을 도입해 기존 코드 리팩토링 및 코드 재사용성 및 유지 보수성 향상',
-        '기획자, 디자이너, 백엔드 개발자와 긴밀한 소통을 통한 효율적인 협업 진행',
       ],
     },
   ],

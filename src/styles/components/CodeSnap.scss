@@ -1,10 +1,10 @@
 .terminal {
-  background-color: #ffffff;
+  background-color: var(--card);
   border-radius: 10px;
-  border: 1px solid #c4c4c4;
+  border: 1px solid var(--border);
   max-width: 600px;
   margin: 0 auto;
-  box-shadow: 0 0 15px rgba(192, 192, 192, 0.2);
+  box-shadow: 0 0 15px var(--shadow);
   display: flex;
   flex-direction: column;
 

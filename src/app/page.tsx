@@ -6,6 +6,7 @@ import { useRef } from 'react';
 
 import Introduction from '@/components/introduction/Introduction';
 import AboutMe from '@/components/about-me/AboutMe';
+import Career from '@/components/career/Career';
 import Skills from '@/components/skills/Skills';
 import Projects from '@/components/projects/Projects';
 import Experiences from '@/components/experience/Experiences';
@@ -15,12 +16,14 @@ import TopBtn from '@/components/common/buttons/TopBtn';
 
 export default function Home() {
   const aboutMeRef = useRef<HTMLDivElement>(null);
+  const careerRef = useRef<HTMLDivElement>(null);
   const skillsRef = useRef<HTMLDivElement>(null);
   const projectsRef = useRef<HTMLDivElement>(null);
   const experiencesRef = useRef<HTMLDivElement>(null);
 
   const sectionRefs = {
     about: aboutMeRef,
+    career: careerRef,
     skills: skillsRef,
     projects: projectsRef,
     experiences: experiencesRef,
@@ -33,6 +36,7 @@ export default function Home() {
         <Introduction />
         <Navigator sectionRefs={sectionRefs} />
         <AboutMe ref={aboutMeRef} />
+        <Career ref={careerRef} />
         <Skills ref={skillsRef} />
         <Projects ref={projectsRef} />
         <Experiences ref={experiencesRef} />

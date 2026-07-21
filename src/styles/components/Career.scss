@@ -1,0 +1,106 @@
+.career-container {
+  margin: 72px 0;
+  scroll-margin-top: 72px;
+
+  .career-list {
+    display: flex;
+    flex-direction: column;
+    gap: 24px;
+  }
+
+  .career-item {
+    font-family: var(--font-body), sans-serif;
+    padding: 8px 0 24px;
+    border-bottom: 1px solid var(--border);
+
+    &:last-child {
+      border-bottom: none;
+      padding-bottom: 0;
+    }
+
+    .career-item-meta {
+      display: flex;
+      align-items: baseline;
+      justify-content: space-between;
+      gap: 16px;
+      margin-bottom: 6px;
+    }
+
+    .career-company {
+      margin: 0;
+      font-size: 22px;
+      font-weight: 700;
+      font-family: var(--font-display), sans-serif;
+      line-height: 140%;
+      color: var(--text);
+    }
+
+    .career-date {
+      flex-shrink: 0;
+      font-size: 14px;
+      color: var(--text-muted);
+    }
+
+    .career-role {
+      margin: 0 0 8px;
+      font-size: 15px;
+      font-weight: 600;
+      color: var(--company);
+    }
+
+    .career-summary {
+      margin: 0 0 12px;
+      font-size: 15px;
+      line-height: 160%;
+      color: var(--text-soft);
+    }
+
+    .career-highlights {
+      margin: 0;
+      padding-left: 18px;
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+
+      li {
+        font-size: 14px;
+        line-height: 160%;
+        color: var(--text);
+      }
+    }
+  }
+}
+
+@media (max-width: 768px) {
+  .career-container {
+    padding: 10px 30px;
+
+    .career-item {
+      .career-item-meta {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 4px;
+      }
+
+      .career-company {
+        font-size: 18px;
+      }
+    }
+  }
+}
+
+@media (max-width: 480px) {
+  .career-container {
+    .career-item {
+      .career-company {
+        font-size: 16px;
+      }
+
+      .career-role,
+      .career-summary,
+      .career-highlights li {
+        font-size: 13px;
+      }
+    }
+  }
+}

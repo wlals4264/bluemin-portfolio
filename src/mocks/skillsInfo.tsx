@@ -8,8 +8,13 @@ import {
   SiCssmodules,
   SiVercel,
   SiReactquery,
+  SiFlutter,
+  SiDart,
+  SiFirebase,
+  SiGoogleanalytics,
 } from 'react-icons/si';
 import { RiNextjsFill } from 'react-icons/ri';
+import { TbBrandReactNative } from 'react-icons/tb';
 
 export const skillsInfo = [
   {
@@ -19,6 +24,7 @@ export const skillsInfo = [
       { icon: <FaCss3 />, describe: 'CSS' },
       { icon: <SiJavascript />, describe: 'JavaScript' },
       { icon: <SiTypescript />, describe: 'TypeScript' },
+      { icon: <SiDart />, describe: 'Dart' },
     ],
   },
   {
@@ -26,6 +32,10 @@ export const skillsInfo = [
     contents: [
       { icon: <FaReact />, describe: 'React' },
       { icon: <RiNextjsFill />, describe: 'Next.js' },
+      { icon: <TbBrandReactNative />, describe: 'React Native' },
+      { icon: <SiFlutter />, describe: 'Flutter' },
+      { icon: null, describe: 'Expo' },
+      { icon: null, describe: 'Vite' },
     ],
   },
   {
@@ -34,6 +44,8 @@ export const skillsInfo = [
       { icon: <SiRecoil />, describe: 'Recoil' },
       { icon: null, describe: 'Zustand' },
       { icon: <SiReactquery />, describe: 'React Query' },
+      { icon: null, describe: 'BLoC' },
+      { icon: null, describe: 'Provider' },
     ],
   },
   {
@@ -45,5 +57,17 @@ export const skillsInfo = [
       { icon: <SiStyledcomponents />, describe: 'Styled Component' },
     ],
   },
-  { title: 'Deployment', contents: [{ icon: <SiVercel />, describe: 'Vercel' }] },
+  {
+    title: 'Tools',
+    contents: [
+      { icon: <SiGoogleanalytics />, describe: 'GA' },
+      { icon: <SiFirebase />, describe: 'Firebase' },
+      { icon: null, describe: 'Playwright' },
+      { icon: null, describe: 'Cursor' },
+    ],
+  },
+  {
+    title: 'Deployment',
+    contents: [{ icon: <SiVercel />, describe: 'Vercel' }],
+  },
 ];

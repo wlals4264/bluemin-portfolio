@@ -1,9 +1,9 @@
 .skills-container {
   width: 100%;
-  margin: 30px 0;
+  margin: 72px 0;
   display: flex;
   flex-direction: column;
-  scroll-margin-top: 62px;
+  scroll-margin-top: 72px;
   box-sizing: border-box;
 
   .skills-list {
@@ -20,10 +20,11 @@
         min-width: 180px;
 
         > span {
-          font-family: var(--font-poesen-one);
+          font-family: var(--font-display), sans-serif;
           font-weight: bold;
           font-size: 18px;
           line-height: 140%;
+          color: var(--text);
         }
       }
 
@@ -113,6 +114,53 @@
 
           &.react-query {
             background-color: #ff4154;
+          }
+
+          &.dart {
+            background-color: #0175c2;
+          }
+
+          &.react-native {
+            background-color: #61dafb;
+            color: #000;
+          }
+
+          &.flutter {
+            background-color: #02569b;
+          }
+
+          &.expo {
+            background-color: #000;
+          }
+
+          &.vite {
+            background-color: #646cff;
+          }
+
+          &.bloc {
+            background-color: #1483d3;
+          }
+
+          &.provider {
+            background-color: #024d84;
+          }
+
+          &.ga {
+            background-color: #f9ab00;
+            color: #000;
+          }
+
+          &.firebase {
+            background-color: #ffca28;
+            color: #000;
+          }
+
+          &.playwright {
+            background-color: #2ead33;
+          }
+
+          &.cursor {
+            background-color: #111827;
           }
 
           .skill-item-icon {

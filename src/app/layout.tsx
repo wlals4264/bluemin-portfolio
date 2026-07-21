@@ -1,31 +1,18 @@
 import type { Metadata } from 'next';
-import { Jua, Nanum_Gothic_Coding, Poetsen_One, Dongle } from 'next/font/google';
+import { Noto_Sans_KR, Poetsen_One } from 'next/font/google';
 import '../styles/globals.scss';
 import '../styles/Home.scss';
+import { ThemeProvider } from '@/components/theme/ThemeProvider';
 
-const jua = Jua({
-  variable: '--font-jua',
+const notoSansKr = Noto_Sans_KR({
+  variable: '--font-body',
   subsets: ['latin'],
-  weight: '400',
+  weight: ['400', '500', '600', '700'],
   display: 'swap',
 });
 
-const nanumGothicCoding = Nanum_Gothic_Coding({
-  variable: '--font-nanum-gothic-coding',
-  subsets: ['latin'],
-  weight: ['400', '700'],
-  display: 'swap',
-});
-
-const poesenOne = Poetsen_One({
-  variable: '--font-poesen-one',
-  subsets: ['latin'],
-  weight: '400',
-  display: 'swap',
-});
-
-const dongle = Dongle({
-  variable: '--font-poesen-one',
+const poetsenOne = Poetsen_One({
+  variable: '--font-display',
   subsets: ['latin'],
   weight: '400',
   display: 'swap',
@@ -39,15 +26,32 @@ export const metadata: Metadata = {
   },
 };
 
+const themeInitScript = `
+(function() {
+  try {
+    var stored = localStorage.getItem('theme');
+    var theme = stored === 'light' || stored === 'dark'
+      ? stored
+      : (window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light');
+    document.documentElement.setAttribute('data-theme', theme);
+  } catch (e) {
+    document.documentElement.setAttribute('data-theme', 'light');
+  }
+})();
+`;
+
 export default function RootLayout({
   children,
 }: Readonly<{
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="ko">
-      <body className={`${jua.variable} ${nanumGothicCoding.variable} ${poesenOne.variable} ${dongle}`}>
-        {children}
+    <html lang="ko" suppressHydrationWarning>
+      <head>
+        <script dangerouslySetInnerHTML={{ __html: themeInitScript }} />
+      </head>
+      <body className={`${notoSansKr.variable} ${poetsenOne.variable} ${notoSansKr.className}`}>
+        <ThemeProvider>{children}</ThemeProvider>
       </body>
     </html>
   );

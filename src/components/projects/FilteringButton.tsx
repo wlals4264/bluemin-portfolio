@@ -34,6 +34,12 @@ const FilteringButton = ({ projects, setFilteredProjects }: FilteringButtonProps
     setActiveButton('latest');
   };
 
+  const clickCompanyButton = () => {
+    const companyProjects = [...projects].filter((project) => project.projectType === 'company');
+    setFilteredProjects(companyProjects);
+    setActiveButton('company');
+  };
+
   const clickTeamButton = () => {
     const teamProjects = [...projects].filter((project) => project.projectType === 'team');
     setFilteredProjects(teamProjects);
@@ -59,6 +65,12 @@ const FilteringButton = ({ projects, setFilteredProjects }: FilteringButtonProps
         type="button"
         onClick={clickLatestButton}>
         최신순
+      </button>
+      <button
+        className={`team-button ${activeButton === 'company' ? 'active' : ''}`}
+        type="button"
+        onClick={clickCompanyButton}>
+        회사 프로젝트
       </button>
       <button
         className={`team-button ${activeButton === 'team' ? 'active' : ''}`}

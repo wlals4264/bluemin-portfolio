@@ -8,31 +8,32 @@
   padding: 80px 0;
   box-sizing: border-box;
   z-index: 10000;
-  background-color: rgba(0, 0, 0, 0.3);
+  background-color: var(--modal-overlay);
   overflow-y: auto;
 
   .read-me-container {
     position: relative;
     max-width: 720px;
     min-height: max-content;
-    background-color: #fff;
+    background-color: var(--card);
     z-index: 10000;
     border-radius: 12px;
-    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+    box-shadow: 0 10px 30px var(--shadow);
     margin: auto;
+    color: var(--text);
 
     .read-me-header {
       display: flex;
       justify-content: space-between;
       align-items: center;
-      background-color: #191919;
+      background-color: var(--text);
       padding: 6px 14px;
       border-radius: 12px 12px 0 0;
       flex: 1;
 
-      font-family: var(--font-poesen-one);
+      font-family: var(--font-display), sans-serif;
       font-size: 18px;
-      color: #fff;
+      color: var(--bg);
 
       .close-modal-btn {
         border: none;
@@ -43,7 +44,7 @@
         align-items: center;
 
         font-size: 40px;
-        color: #fff;
+        color: var(--bg);
       }
     }
 
@@ -51,17 +52,17 @@
       display: flex;
       flex-direction: column;
       margin: 20px;
-      font-family: var(--font-nanum-gothic-coding);
+      font-family: var(--font-body), sans-serif;
 
       .read-me-title-box {
         display: flex;
         align-items: first baseline;
         padding-bottom: 20px;
-        border-bottom: 1px solid #c9c9c9;
+        border-bottom: 1px solid var(--border);
         gap: 12px;
 
         .read-me-title {
-          font-family: var(--font-poesen-one);
+          font-family: var(--font-display), sans-serif;
           font-size: 28px;
         }
 
@@ -69,7 +70,8 @@
           display: flex;
           gap: 8px;
 
-          font-size: 12px;
+          font-size: 13px;
+          color: var(--text-muted);
         }
       }
 
@@ -85,13 +87,13 @@
           gap: 20px;
 
           .deployment-url-title {
-            font-family: var(--font-poesen-one);
+            font-family: var(--font-display), sans-serif;
             font-size: 18px;
           }
 
           > a {
             &:hover {
-              color: #3b82f6;
+              color: var(--accent);
             }
           }
         }
@@ -102,7 +104,7 @@
           gap: 20px;
 
           .summary-title {
-            font-family: var(--font-poesen-one);
+            font-family: var(--font-display), sans-serif;
             font-size: 18px;
           }
 
@@ -119,36 +121,46 @@
             .project-card-features {
               list-style: none;
               padding: 0;
+              margin: 0;
               display: flex;
               flex-direction: column;
-              gap: 4px;
+              gap: 6px;
               font-size: 14px;
               line-height: 150%;
-              width: 95%;
+              width: 100%;
+              color: var(--text-soft);
 
-              .project-card-main-features {
-                height: 30px;
-                margin-top: 10px;
-                padding-left: 16px;
+              li {
                 position: relative;
-                display: flex;
-                align-items: center;
-
-                height: 100%;
-                font-size: 14px;
-                line-height: 150%;
-                color: #7d7d7d;
-                font-weight: bold;
+                padding-left: 14px;
 
                 &::before {
-                  content: '';
+                  content: '–';
                   position: absolute;
-                  top: 0;
                   left: 0;
-                  width: 4px;
-                  height: 100%;
-                  background-color: #7d7d7d;
+                  color: var(--text-muted);
                 }
+              }
+            }
+
+            .project-card-main-features {
+              margin: 12px 0 0;
+              padding: 0 0 0 14px;
+              position: relative;
+              font-size: 14px;
+              line-height: 150%;
+              color: var(--text-muted);
+              font-weight: 700;
+
+              &::before {
+                content: '';
+                position: absolute;
+                top: 0;
+                left: 0;
+                width: 3px;
+                height: 100%;
+                border-radius: 2px;
+                background-color: var(--accent);
               }
             }
           }
@@ -160,7 +172,7 @@
           gap: 20px;
 
           .background-title {
-            font-family: var(--font-poesen-one);
+            font-family: var(--font-display), sans-serif;
             font-size: 18px;
           }
 
@@ -179,6 +191,7 @@
               .background-row {
                 font-size: 14px;
                 line-height: 150%;
+                color: var(--text-soft);
               }
             }
           }
@@ -190,7 +203,7 @@
           gap: 20px;
 
           .meaning-title {
-            font-family: var(--font-poesen-one);
+            font-family: var(--font-display), sans-serif;
             font-size: 18px;
           }
 
@@ -209,6 +222,7 @@
               .meaning-row {
                 font-size: 14px;
                 line-height: 150%;
+                color: var(--text-soft);
               }
             }
           }
@@ -220,7 +234,7 @@
           gap: 20px;
 
           .skills-title {
-            font-family: var(--font-poesen-one);
+            font-family: var(--font-display), sans-serif;
             font-size: 18px;
           }
 
@@ -231,13 +245,13 @@
             margin-bottom: 15px;
 
             > span {
-              background-color: #fff;
+              background-color: var(--bg-muted);
               padding: 6px 10px;
               border-radius: 10px;
               min-width: max-content;
-              border: 1px solid #c9c9c9;
+              border: 1px solid var(--border);
 
-              font-size: 12px;
+              font-size: 13px;
               font-weight: bold;
               cursor: default;
             }
@@ -250,7 +264,7 @@
           gap: 20px;
 
           .setup-usage-title {
-            font-family: var(--font-poesen-one);
+            font-family: var(--font-display), sans-serif;
             font-size: 18px;
           }
         }

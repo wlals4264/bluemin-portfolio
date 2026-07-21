@@ -1,12 +1,85 @@
+:root {
+  color-scheme: light;
+
+  /* typography aliases (기존 SCSS 호환) */
+  --font-sans: var(--font-body);
+  --font-nanum-gothic-coding: var(--font-body);
+  --font-poesen-one: var(--font-display);
+  --font-jua: var(--font-body);
+
+  /* colors — cool blue brand, not purple */
+  --bg: #ffffff;
+  --bg-elevated: #f8fafc;
+  --bg-muted: #f1f6ff;
+  --text: #111827;
+  --text-muted: #6b7280;
+  --text-soft: #374151;
+  --border: #e5e7eb;
+  --accent: #2563eb;
+  --accent-hover: #1d4ed8;
+  --accent-soft: #dbeafe;
+  --accent-contrast: #ffffff;
+  --card: #ffffff;
+  --shadow: rgba(15, 23, 42, 0.08);
+  --header-bg: rgba(255, 255, 255, 0.92);
+  --modal-overlay: rgba(15, 23, 42, 0.45);
+  --success: #16a34a;
+  --company: #0f766e;
+}
+
+[data-theme='dark'] {
+  color-scheme: dark;
+
+  --bg: #0b1220;
+  --bg-elevated: #111827;
+  --bg-muted: #152033;
+  --text: #e8edf5;
+  --text-muted: #9aa4b2;
+  --text-soft: #c5ced9;
+  --border: #243044;
+  --accent: #60a5fa;
+  --accent-hover: #93c5fd;
+  --accent-soft: #1e3a5f;
+  --accent-contrast: #0b1220;
+  --card: #111827;
+  --shadow: rgba(0, 0, 0, 0.45);
+  --header-bg: rgba(11, 18, 32, 0.92);
+  --modal-overlay: rgba(0, 0, 0, 0.65);
+  --success: #4ade80;
+  --company: #2dd4bf;
+}
+
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
 html,
 body {
   margin: 0;
   padding: 0;
   width: 100%;
   overflow-x: hidden;
+  background-color: var(--bg);
+  color: var(--text);
+  font-family: var(--font-body), 'Apple SD Gothic Neo', 'Noto Sans KR', sans-serif;
+  font-size: 16px;
+  line-height: 1.6;
+  letter-spacing: -0.01em;
+  -webkit-font-smoothing: antialiased;
+  transition: background-color 0.25s ease, color 0.25s ease;
 
   a {
     text-decoration: none;
     color: inherit;
   }
+}
+
+h1,
+h2,
+h3,
+h4 {
+  line-height: 1.35;
+  letter-spacing: -0.02em;
 }

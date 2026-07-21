@@ -1,5 +1,7 @@
 import '@/styles/components/ProjectCard.scss';
 
+import { projectTypeLabel } from '@/mocks/projects';
+
 import { GoLink } from 'react-icons/go';
 import { FaBook, FaYoutube, FaGithub } from 'react-icons/fa';
 import { RxNotionLogo } from 'react-icons/rx';
@@ -44,7 +46,7 @@ const ProjectCard: React.FC<ProjectCardProps> = ({
       <div className="project-card-info">
         <span className="project-card-info-date">{date}</span>
         <span className={`project-card-info-project-type ${projectType}`}>
-          {projectType === 'team' ? '팀 프로젝트' : '개인 프로젝트'}
+          {projectTypeLabel(projectType)}
         </span>
       </div>
       <span className="project-card-info-project-title">{projectTitle}</span>
@@ -53,7 +55,7 @@ const ProjectCard: React.FC<ProjectCardProps> = ({
           projectFeatures.map((feature, index) => {
             return (
               <li key={index} className={`project-card-feature-${index}`}>
-                - {feature}
+                {feature}
               </li>
             );
           })}

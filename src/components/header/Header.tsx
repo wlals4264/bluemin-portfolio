@@ -4,8 +4,9 @@ import Link from 'next/link';
 import { RefObject } from 'react';
 
 import Nav from '@/components/nav/Nav';
+import ThemeToggle from '@/components/theme/ThemeToggle';
 
-type SectionName = 'about' | 'skills' | 'projects' | 'experiences';
+type SectionName = 'about' | 'career' | 'skills' | 'projects' | 'experiences';
 
 type HeaderProps = {
   sectionRefs: {
@@ -15,6 +16,7 @@ type HeaderProps = {
 export default function Header({ sectionRefs }: HeaderProps) {
   const titles = [
     { label: 'About me', key: 'about' },
+    { label: 'Career', key: 'career' },
     { label: 'Skills', key: 'skills' },
     { label: 'Projects', key: 'projects' },
     { label: 'Experiences', key: 'experiences' },
@@ -26,7 +28,10 @@ export default function Header({ sectionRefs }: HeaderProps) {
         <Link href="/">
           <h1 className="logo">Jimin&apos;s Portfolio</h1>
         </Link>
-        <Nav titles={titles} sectionRefs={sectionRefs} />
+        <div className="header-actions">
+          <Nav titles={titles} sectionRefs={sectionRefs} />
+          <ThemeToggle />
+        </div>
       </div>
     </div>
   );

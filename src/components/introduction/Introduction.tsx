@@ -49,7 +49,7 @@ const Introduction = () => {
       <div className="introduction-text-box">
         <span>Front-end Developer</span>
         <h1>
-          Hello I&apos;m <br /> <span>Kim Jimin</span>
+          Hello I&apos;m <br /> <span>Jimin Kim</span>
         </h1>
         <div className="sentences-box">
           <p ref={textRef} className="fade-in">
