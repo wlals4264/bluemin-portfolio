@@ -73,7 +73,7 @@
 
 @media (max-width: 768px) {
   .career-container {
-    padding: 10px 30px;
+    padding: 10px 0;
 
     .career-item {
       .career-item-meta {
@@ -84,6 +84,13 @@
 
       .career-company {
         font-size: 18px;
+        word-break: keep-all;
+      }
+
+      .career-summary,
+      .career-highlights li {
+        word-break: keep-all;
+        overflow-wrap: break-word;
       }
     }
   }

@@ -2,17 +2,27 @@
 
 import '@/styles/components/Highlights.scss';
 
-import { highlightsData, type HighlightCase } from '@/mocks/highlightsData';
+import type { HighlightCase } from '@/mocks/highlightsData';
 
-import { forwardRef, useState } from 'react';
+import { useState } from 'react';
 
-import InfoHeader from '../header/InfoHeader';
+type HighlightCaseCardProps = {
+  item: HighlightCase;
+  /** README 등 좁은 영역에서 기본 접힘 */
+  defaultExpanded?: boolean;
+  compact?: boolean;
+};
 
-function HighlightCaseCard({ item }: { item: HighlightCase }) {
-  const [expanded, setExpanded] = useState(false);
+export function HighlightCaseCard({
+  item,
+  defaultExpanded = false,
+  compact = false,
+}: HighlightCaseCardProps) {
+  const [expanded, setExpanded] = useState(defaultExpanded);
 
   return (
-    <article className={`highlight-case${expanded ? ' is-expanded' : ''}`}>
+    <article
+      className={`highlight-case${expanded ? ' is-expanded' : ''}${compact ? ' is-compact' : ''}`}>
       <header className="highlight-case-header">
         <div className="highlight-case-title-row">
           <h3 className="highlight-case-title">{item.title}</h3>
@@ -24,6 +34,9 @@ function HighlightCaseCard({ item }: { item: HighlightCase }) {
             <span key={tag}>{tag}</span>
           ))}
         </div>
+        {!expanded && item.outcomes[0] && (
+          <p className="highlight-case-outcome-preview">{item.outcomes[0]}</p>
+        )}
       </header>
 
       {expanded && (
@@ -89,21 +102,3 @@ function HighlightCaseCard({ item }: { item: HighlightCase }) {
     </article>
   );
 }
-
-const Highlights = forwardRef<HTMLDivElement>((_, ref) => {
-  return (
-    <div ref={ref} className="highlights-container">
-      <InfoHeader title="Highlights" className="highlights-header" />
-
-      <div className="highlights-list">
-        {highlightsData.map((item) => (
-          <HighlightCaseCard key={item.id} item={item} />
-        ))}
-      </div>
-    </div>
-  );
-});
-
-Highlights.displayName = 'Highlights';
-
-export default Highlights;

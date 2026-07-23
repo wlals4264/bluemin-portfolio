@@ -4,18 +4,11 @@
   max-width: 640px;
   margin: 0 auto 28px;
   aspect-ratio: 560 / 260;
-  border-radius: 0;
   overflow: visible;
   background: transparent;
   display: flex;
   align-items: center;
   justify-content: center;
-
-  svg {
-    width: 100%;
-    height: 100%;
-    overflow: visible;
-  }
 
   &.is-loading,
   &.is-empty {
@@ -24,6 +17,14 @@
     font-size: 14px;
     font-weight: 600;
   }
+}
+
+.keyword-bubble-stage {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  /* GPU 합성 레이어 — SVG 애니메이션 대비 끊김 감소 */
+  transform: translateZ(0);
 }
 
 .keyword-bubble-skeleton {
@@ -35,61 +36,75 @@
 }
 
 .keyword-bubble {
+  position: absolute;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 1px;
+  margin: 0;
+  padding: 0;
+  border: 0;
+  border-radius: 50%;
+  color: #fff;
   cursor: pointer;
-  outline: none;
-  animation: keyword-pop 0.45s ease both;
+  /* 레이아웃은 left/top %, 움직임은 transform만 — 합성 비용 최소화 */
+  transform: translate3d(-50%, -50%, 0) scale(0.92);
+  opacity: 0;
+  will-change: transform, opacity;
+  backface-visibility: hidden;
+  -webkit-font-smoothing: antialiased;
+  box-shadow: 0 6px 16px color-mix(in srgb, #000 12%, transparent);
+  animation:
+    keyword-pop 0.5s cubic-bezier(0.22, 1, 0.36, 1) both,
+    keyword-float-a var(--float-duration, 5.5s) ease-in-out 0.5s infinite;
 
-  .keyword-bubble-circle {
-    transition: opacity 0.2s ease, filter 0.2s ease;
+  &.float-b {
+    animation:
+      keyword-pop 0.5s cubic-bezier(0.22, 1, 0.36, 1) both,
+      keyword-float-b var(--float-duration, 6.2s) ease-in-out 0.5s infinite;
   }
 
   .keyword-bubble-label,
   .keyword-bubble-percent {
-    fill: #fff;
     font-family: var(--font-body), sans-serif;
     font-weight: 700;
+    line-height: 1.15;
     pointer-events: none;
-    paint-order: stroke fill;
-    stroke: rgba(0, 0, 0, 0.22);
-    stroke-width: 2px;
+    text-shadow: 0 1px 2px rgba(0, 0, 0, 0.25);
   }
 
   .keyword-bubble-percent {
     font-weight: 600;
+    font-size: 11px;
     opacity: 0.95;
   }
 
   &.is-dark-text {
+    color: #111;
+
     .keyword-bubble-label,
     .keyword-bubble-percent {
-      fill: #111;
-      stroke: rgba(255, 255, 255, 0.35);
+      text-shadow: 0 1px 0 rgba(255, 255, 255, 0.35);
     }
   }
 
-  &:hover .keyword-bubble-circle,
-  &:focus-visible .keyword-bubble-circle,
-  &.is-active .keyword-bubble-circle {
-    opacity: 1;
-    filter: brightness(1.06);
+  &:hover,
+  &:focus-visible,
+  &.is-active {
+    z-index: 2;
+    box-shadow: 0 10px 22px color-mix(in srgb, #000 16%, transparent);
   }
 
-  &:nth-child(odd) {
-    animation:
-      keyword-pop 0.45s ease both,
-      keyword-float 5.5s ease-in-out 0.45s infinite;
-  }
-
-  &:nth-child(even) {
-    animation:
-      keyword-pop 0.45s ease both,
-      keyword-float-alt 6.5s ease-in-out 0.45s infinite;
+  &:focus-visible {
+    outline: 2px solid var(--accent);
+    outline-offset: 3px;
   }
 }
 
 .keyword-bubble-tooltip {
   position: absolute;
-  transform: translate(-50%, calc(-100% - 10px));
+  transform: translate3d(-50%, calc(-100% - 10px), 0);
   display: flex;
   align-items: center;
   gap: 8px;
@@ -117,31 +132,32 @@
 @keyframes keyword-pop {
   from {
     opacity: 0;
-    transform: scale(0.7);
+    transform: translate3d(-50%, -50%, 0) scale(0.72);
   }
   to {
     opacity: 1;
-    transform: scale(1);
+    transform: translate3d(-50%, -50%, 0) scale(1);
   }
 }
 
-@keyframes keyword-float {
+/* 진폭을 작게 + ease-in-out으로 지지직거림 완화 */
+@keyframes keyword-float-a {
   0%,
   100% {
-    transform: translateY(0);
+    transform: translate3d(-50%, -50%, 0) translate3d(0, 0, 0) scale(1);
   }
   50% {
-    transform: translateY(-3px);
+    transform: translate3d(-50%, -50%, 0) translate3d(0, -5px, 0) scale(1);
   }
 }
 
-@keyframes keyword-float-alt {
+@keyframes keyword-float-b {
   0%,
   100% {
-    transform: translateY(0);
+    transform: translate3d(-50%, -50%, 0) translate3d(0, 0, 0) scale(1);
   }
   50% {
-    transform: translateY(3px);
+    transform: translate3d(-50%, -50%, 0) translate3d(0, 5px, 0) scale(1);
   }
 }
 
@@ -155,8 +171,14 @@
   }
 }
 
+@media (prefers-reduced-motion: reduce) {
+  .keyword-bubble {
+    animation: keyword-pop 0.35s ease both !important;
+  }
+}
+
 @media (max-width: 768px) {
   .keyword-bubble-chart {
-    margin-bottom: 20px;
+    display: none;
   }
 }

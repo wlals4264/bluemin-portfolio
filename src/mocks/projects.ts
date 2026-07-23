@@ -1,3 +1,5 @@
+import type { ProjectHighlightId } from '@/mocks/highlightsData';
+
 export interface ProjectCardData {
   title: string;
   date: string;
@@ -14,6 +16,8 @@ export interface ProjectCardData {
   githubUrl?: string;
   velogUrl?: string;
   troubleShootingNotionUrl?: string;
+  /** Highlights에 연결되는 제품 id (회사 카드만) */
+  highlightProjectId?: ProjectHighlightId;
 }
 
 /** 프로젝트 타입 라벨 (카드·모달·필터 공통) */
@@ -27,25 +31,35 @@ const kkuljamV3: ProjectCardData = {
   title: '꿀잠닥터 V3',
   date: '2026.01 ~',
   projectType: 'company',
-  projectTitle: '슬립포레스트 — RN → Flutter 마이그레이션 · 수면 측정/루틴 고도화',
+  highlightProjectId: 'kkuljam-v3',
+  projectTitle: '슬립포레스트 — RN → Flutter 마이그레이션 · 수면 측정/루틴·온보딩 고도화',
   projectFeatures: [
-    'Flutter 앱 메인 기여자로 RN → Flutter 재구축에 참여해 크로스플랫폼 UI·네이티브 연동을 담당',
-    'Asleep 수면 측정 세션 종료/백그라운드 복구·환경 가이드를 다듬어 측정이 끊기거나 유실되는 실패를 줄임',
-    '루틴·수면 측정 중 iOS 오디오 세션 정리로 재생/녹음 충돌·끊김을 완화',
-    '알람 → 루틴 → 수면 음악 → 측정 → 일기 자동 작성 플로우와 걸음수 싱크/누락 보정을 구현',
-    'V3부터 Cursor 기반 AI 개발 플로우·Playwright E2E 자동화를 도입·정착 (별도 카드 참고)',
+    'RN → Flutter 앱 셸 재구축으로 알람·수면 측정·오디오 등 네이티브 경로 안정화',
+    'IosUnifiedAudioSession으로 루틴 재생·수면 녹음·웹(유튜브) 세션 충돌을 ownership 단위로 정리',
+    '소셜 약관 중복 제거·온보딩 간소화, AppsFlyer 딥링크·OG 공유·디자인 토큰·Sentry까지 운영 품질 보강',
   ],
-  projectSkills: ['Flutter', 'Dart', 'BLoC', 'Provider', 'Dio', 'Firebase', 'Health'],
+  projectSkills: [
+    'Flutter',
+    'Dart',
+    'BLoC',
+    'Provider',
+    'Next.js',
+    'AppsFlyer',
+    'Sentry',
+    'Health',
+  ],
   mainFeatures:
-    'Flutter 마이그레이션 + 수면 측정 안정화 (AI·E2E 자동화는 별도 카드)',
+    'Flutter 마이그레이션 · 오디오 세션 · 취침 자동화 · 온보딩/딥링크/공유 · 홈 세션 안정화',
   background: [
-    '제품 고도화를 위해 기존 React Native 앱을 Flutter로 이전하는 V3가 시작되었습니다.',
-    '단순 화면 이식이 아니라, 수면 측정·루틴·알람처럼 실패 비용이 큰 네이티브 플로우를 안정화하는 것이 핵심이었습니다.',
+    '제품 고도화로 알람·측정·백그라운드 오디오 등 네이티브 비중이 커지며 RN 셸의 일정·안정성 리스크가 커졌습니다.',
+    'V2에서 불안정했던 홈 세션·서비스 중 이슈 응대 경험을 바탕으로, V3에서는 앱 셸과 취침 플로우를 한 번에 안정화하는 것이 목표였습니다.',
   ],
   meaning: [
-    'Flutter 레포에서 최다 커밋 기여자로 UI뿐 아니라 Asleep 측정, 오디오 세션, 알람, Health 연동까지 담당했습니다.',
-    '측정 종료 누락·백그라운드 재진입·iOS 오디오 충돌처럼 사용자에게 바로 체감되는 장애를 커밋 단위로 잡고 수정했습니다.',
-    '웹 FE(Next.js)와 병행하며 루틴 CTA/설문, 권한·스토어 심사 대응 등 웹·앱 경계를 넘나드는 이슈도 처리했습니다.',
+    'Flutter 메인 기여자로 UI뿐 아니라 Asleep 측정, 오디오 세션, 알람, 권한·배포 이슈까지 담당했습니다.',
+    '재생·녹음이 서로 세션을 덮지 않도록 playAndRecord를 앱에서만 구성하고, 웹 유튜브 등 외부 세션과는 handoff 경계를 뒀습니다. 녹음 중 타 세션 개입·권한 거부 스낵바는 Figma 문구와 맞춰 제품에 반영했습니다.',
+    'SNS 약관 중복 노출을 앱·웹 동의 흐름으로 제거하고, 프리필·권한 순서·Android 14 부분 미디어 권한 오인 등 엣지를 Jira·디자인과 함께 정리했습니다.',
+    'AppsFlyer OneLink 딥링크, 서버 기반 OG/공유 이미지, 웹과 동일한 Flutter 디자인 토큰, Flutter Sentry로 진입·공유·UI 일관·장애 감지를 보강했습니다.',
+    '홈 layout/page 세션 중복 해석을 React cache로 1회화해 V2에서 불안정했던 홈 진입을 V3에서 정리했습니다.',
   ],
 };
 
@@ -53,23 +67,33 @@ const kkuljamAdmin: ProjectCardData = {
   title: '꿀잠닥터 Admin',
   date: '2025.09 ~',
   projectType: 'company',
-  projectTitle: '슬립포레스트 — 운영·분석용 어드민 기획 및 구축',
+  highlightProjectId: 'kkuljam-admin',
+  projectTitle: '슬립포레스트 — 운영·분석 어드민 · AARRR 퍼널 · GA4·카카오 픽셀',
   projectFeatures: [
-    '어드민 기획부터 화면 구축까지 담당해 운영·마케팅이 데이터를 스스로 볼 수 있는 기반을 마련',
-    '퍼널 전환 차트·DAU 리포트·증감률 시각화로 가입/활성 구간을 정량적으로 추적',
-    '유저·오류·행동·콘텐츠 로그 조회와 필터/페이지네이션으로 장애·행동 분석 속도를 높임',
-    '공지·팝업 CRUD·노출 스위치, 사용 가이드 작성으로 비개발 직군 운영을 지원',
+    'React·Vite·ECharts로 퍼널·DAU·유저/오류 로그 어드민을 기획부터 구축',
+    'GA4 이벤트·user_properties와 카카오 픽셀(페이지뷰·가입완료)로 제품·광고 전환 기준 통일',
+    'AARRR 관점 가입→온보딩→활성 퍼널을 대시보드·가이드로 정량화',
   ],
-  projectSkills: ['React', 'TypeScript', 'Vite', 'TanStack Query', 'ECharts', 'Tailwind'],
-  mainFeatures: '퍼널·DAU·오류 로그 중심의 운영 어드민 — 기획부터 구축까지 소유',
+  projectSkills: [
+    'React',
+    'TypeScript',
+    'Vite',
+    'TanStack Query',
+    'ECharts',
+    'GA4',
+    'Kakao Pixel',
+    'Tailwind',
+  ],
+  mainFeatures: '퍼널·DAU 어드민 + GA4·카카오 픽셀 + AARRR 분석 기반 — 기획부터 구축',
   background: [
-    '앱 성장을 위해 가입·온보딩 등 핵심 퍼널을 숫자로 보고 빠르게 의사결정할 내부 도구가 필요했습니다.',
-    '데이터 확인이 개발·분석에 묶여 있어, 비개발 직군이 직접 현황을 볼 수 있는 어드민이 요구되었습니다.',
+    '가입·온보딩·활성을 숫자로 보지 못하면 운영·마케팅 의사결정이 느려지고, 데이터 확인이 개발에 묶여 있었습니다.',
+    '제품 지표(GA4)와 광고 전환(카카오 픽셀)이 어긋나면 성과를 같은 언어로 말하기 어려웠습니다.',
   ],
   meaning: [
-    '어드민 레포의 주 작성자로 퍼널·DAU·유저/오류 로그·공지 기능을 구현했습니다.',
-    '“무엇을 보여줄지”와 “어떻게 조회할지”를 기획 단계부터 정의하며, FE가 제품·운영 입력값을 만드는 역할을 경험했습니다.',
-    '사용 가이드까지 작성해 도구가 실제로 쓰이도록 전달 범위까지 챙겼습니다.',
+    '어드민 레포 주 작성자로 퍼널·DAU·로그·공지와 ECharts 대시보드를 구현했습니다.',
+    'GA4에 성별·나이대·login_type·목표 수면/기상·키워드 등 user_properties와 app_open 등 행동을 정의하고, 카카오 픽셀 가입완료와 맞춰 광고↔서비스 퍼널을 정렬했습니다.',
+    'AARRR(Acquisition·Activation·Retention 등)을 서비스 구간에 맞게 자르고, BigQuery·코호트 한계를 문서화해 이후 리텐션 확장 비용을 낮췄습니다.',
+    '사용 가이드까지 작성해 비개발 직군이 직접 현황을 보게 했습니다.',
   ],
 };
 
@@ -77,25 +101,35 @@ const kkuljamV2: ProjectCardData = {
   title: '꿀잠닥터 V2',
   date: '2025.08 ~',
   projectType: 'company',
-  projectTitle: '슬립포레스트 — 수면 케어 웹/앱 유지보수 및 기능 고도화',
+  highlightProjectId: 'kkuljam-v2',
+  projectTitle: '슬립포레스트 — 서비스 중 유지보수·이슈 응대 · UX 고도화',
   projectFeatures: [
-    '낮잠·수면 기록 UX를 사용자 관점에서 단순화하고, 낮/밤 리포트·통계(무한 스크롤·그래프)로 과거 기록을 끊김 없이 탐색할 수 있게 함',
-    '수면 통계 API 연동과 Chart 기반 시각화로 “내 수면이 어떤지”를 한눈에 이해하도록 개선',
-    '온보딩·권한 요청 플로우를 정리해 첫 진입 장벽을 낮춤',
-    'HealthKit/Health Connect로 걸음·수면(TIB/TOB/WASO) 데이터를 불러와 앱·웹이 같은 맥락을 쓰도록 연동',
-    '홈 진입 시 auth() 세션 중복 해석을 React cache로 1회화해 불필요한 세션 갱신을 줄임',
+    '서비스 중 웹/앱 버그픽스·이슈 응대와 낮잠 기록·리포트 UX 개선을 병행',
+    'HealthKit/Health Connect로 워치 수면 데이터 기반 일기 자동 채움 UX 구현',
+    '회원가입 마법사 플로우·카카오톡 플친 연동·Sentry로 온보딩·상담·장애 대응 강화',
   ],
-  projectSkills: ['Next.js', 'TypeScript', 'Zustand', 'TanStack Query', 'React Native', 'Expo'],
-  mainFeatures:
-    '기록·리포트 UX 고도화 + Health 연동 + 홈 세션 중복 갱신 제거 (Next.js FE / RN 셸)',
+  projectSkills: [
+    'Next.js',
+    'TypeScript',
+    'Zustand',
+    'TanStack Query',
+    'React Native',
+    'Expo',
+    'HealthKit',
+    'Sentry',
+    'Kakao Channel',
+  ],
+  mainFeatures: '유지보수·버그픽스 + 기록/리포트 UX + Health 자동 일기 + 마법사 가입',
   background: [
-    '입사 이후 이미 서비스 중인 꿀잠닥터 V2(Next.js 웹 FE + Expo/RN 셸)의 유지보수·고도화를 담당했습니다.',
-    '사용자가 매일 쓰는 기록·리포트·온보딩이 불편하면 이탈로 이어지므로, 사용성과 데이터 신뢰도를 같이 올리는 것이 목표였습니다.',
+    '입사 이후 이미 서비스 중인 V2(Next.js + Expo/RN)의 유지보수와 사용자 이슈 응대가 최우선이었습니다.',
+    '매일 쓰는 기록·리포트·온보딩이 불편하거나 깨지면 바로 이탈로 이어지므로, 안정성과 사용성을 같이 올리는 것이 목표였습니다.',
   ],
   meaning: [
-    'Next.js FE에서 낮잠 기록·리포트 무한 스크롤·통계 그래프 등 핵심 사용 경로를 구현·개선했습니다.',
-    'RN 셸에서는 HealthKit/Health Connect 수면·걸음 연동, 흔들기 오류 보고 등 네이티브 접점을 맡았습니다.',
-    '홈 경로의 세션(auth) 중복 호출을 cache로 정리한 뒤, 이후 세션 동기화 레이어는 팀에서 확장·보완되었습니다. 포트폴리오에는 제가 커밋한 중복 제거 범위를 기준으로 적었습니다.',
+    '낮잠/리포트/온보딩 경로의 반복 버그를 우선 수정하며 서비스 중 제품의 이슈 응대를 담당했습니다.',
+    '기록·수정 UI 단순화, 리포트 무한 스크롤·통계 그래프, 회원가입 마법사로 핵심 경로 마찰을 줄였습니다.',
+    '워치 수면 데이터가 있으면 일기를 자동 채우고 스낵바로 안내하고, 없으면 수동 기입을 유지하는 UX를 구현했습니다.',
+    '웹 카카오톡 채널(플친) 연동과 앱·웹 Sentry로 상담 진입·장애 조기 감지를 보강했습니다.',
+    '홈 세션 중복 해석 문제는 이후 V3에서 cache로 안정화했으며, V2 시점의 문제 인식과 초기 정리가 그 출발점이었습니다.',
   ],
 };
 
@@ -103,27 +137,26 @@ const cursorAiWorkflow: ProjectCardData = {
   title: 'AI · E2E 자동화',
   date: '2025.12 ~ (V3~)',
   projectType: 'company',
-  projectTitle: '슬립포레스트 — Cursor 기반 개발 플로우 · Playwright E2E 자동화',
+  highlightProjectId: 'ai-e2e',
+  projectTitle: '슬립포레스트 — Cursor 워크플로 · Playwright E2E · Closeout 품질 게이트',
   projectFeatures: [
-    'Playwright E2E 도입·가이드 문서화 — POM·API Mock·storageState 구조로 온보딩/홈/MY/리포트/일기/챗/루틴/HFF 등 ~290개 시나리오 자동화',
-    'Jira 티켓 + Notion Test Scenario ID → Playwright 작성 → Notion「작성중/통과」까지 이어지는 e2e-scenario 스킬로 AI가 E2E를 끝까지 수행',
-    '「작업 끝」Closeout 플로우 구성: 영향도 검증 → DoD(typecheck/lint/unit) → E2E → 커밋 컨벤션 → Notion 업무일지 → Jira 상태 전환',
-    'Cursor에 Figma·Jira·Notion MCP를 연동해 디자인·이슈·코드·문서를 한 환경에서 처리',
-    'Jira 스프린트 → Notion 업무일지 자동 생성, AI 업무 활용 보고서 초안 자동 생성으로 기록 공수 절감',
-    'PRD·Figma·코드를 교차 검수해 스펙 누락·API 불일치를 구현 전에 식별하고, 생성 코드는 빌드·실기기/E2E로 검증',
+    'PRD→Plan→구현을 Cursor·MCP로 자동화하고, 프로덕트·디자인 시나리오를 검수해 Notion 테스트 시트를 개선',
+    'Playwright ~290 시나리오와 e2e-scenario 스킬로 작성→통과 상태까지 연결',
+    'MCP 교차 검증으로 누락 페이지를 발견해 출시 에픽에 이슈 자동 등록, Closeout으로 E2E·커밋·MR까지 묶음',
   ],
   projectSkills: ['Cursor', 'Playwright', 'MCP', 'Jira', 'Notion', 'Figma'],
   mainFeatures:
-    'AI Native 개발 OS — MCP 연동 · Closeout/E2E 스킬 · Playwright ~290 시나리오 · 업무일지/보고서 자동화',
+    'AI Native 품질 게이트 — MCP · E2E ~290 · 에픽 자동 등록 · Closeout(커밋·MR)',
   background: [
-    'V3부터 Cursor를 도입해, 요구사항·디자인·구현·테스트·문서화가 사람 기억에 의존하지 않도록 자동화 플로우를 짰습니다.',
-    '동시에 웹 FE에 Playwright를 도입해 Stage/로컬에서 사용자 플로우를 결과 기반으로 검증하는 E2E 레이어를 구축했습니다.',
+    'V3에서 화면이 늘수록 수동 회귀와 사람 기억에만 의존하는 완료 정의로는 품질을 지키기 어려웠습니다.',
+    'AI로 구현만 빨라지면 검증·티켓화가 따라가지 못하는 문제를, 검증까지 닫히는 워크플로로 풀고자 했습니다.',
   ],
   meaning: [
-    'E2E는 “실제 인증 재현”이 아니라 API Mock 가정 하에 UI 플로우가 이어지는지 검증하는 방향으로 설계했고, 가이드 문서와 fixtures/mocks/pages 구조를 팀에 남겼습니다.',
-    '시나리오 ID(ONB/HOME/MY/RPT 등)를 Jira·Notion·spec title과 맞춰, AI가 티켓만 받아도 범위 검증 → 코드 → Notion 상태 갱신까지 반복 가능하게 만들었습니다.',
-    'work-done-closeout 스킬로 「작업 끝」한 번에 품질 게이트·커밋·일지·Jira까지 묶여, 기능 단위 완료 정의(DoD)를 습관화했습니다.',
-    '환각·미확정 API 가정을 막기 위해 Jira/코드/스펙으로 확인된 사실만 반영하도록 스킬·프롬프트 규칙을 두었습니다.',
+    'Figma·Jira·Notion MCP로 디자인·이슈·문서를 한 환경에서 다루며 PRD→Plan→구현을 반복 가능하게 만들었습니다.',
+    '프로덕트·디자이너 시나리오를 검수하고 Notion 시트를 개선한 뒤, 스킬이 시나리오 ID 기준으로 Playwright 코드와 상태 갱신까지 수행하게 했습니다.',
+    'POM·API Mock·storageState 구조로 온보딩~HFF 등 ~290 시나리오를 쌓고 가이드를 팀에 남겼습니다.',
+    'MCP로 스펙·화면 갭을 찾아 8월 출시 에픽에 이슈가 자동 등록되게 해, 누락을 출시 전에 드러냈습니다.',
+    '기능 완료에 E2E를 포함하고 typecheck/lint/test→커밋→MR까지 Closeout으로 묶어 DoD를 습관화했습니다.',
   ],
 };
 

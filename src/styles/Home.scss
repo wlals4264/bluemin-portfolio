@@ -3,6 +3,7 @@
   margin: auto;
   min-height: 100vh;
   padding-bottom: 64px;
+  box-sizing: border-box;
 }
 
 // 중형 모니터(1025px ~ 1439px)
@@ -22,13 +23,19 @@
 // 태블릿 (481px ~ 768px)
 @media (max-width: 768px) {
   .home-wrapper {
-    width: 90vw;
+    width: 100%;
+    max-width: 100%;
+    padding-left: 16px;
+    padding-right: 16px;
   }
 }
 
 // 모바일 (480px 이하)
 @media (max-width: 480px) {
   .home-wrapper {
-    width: 100vw;
+    width: 100%;
+    padding-left: 14px;
+    padding-right: 14px;
+    padding-bottom: 80px;
   }
 }

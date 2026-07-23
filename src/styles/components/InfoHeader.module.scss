@@ -14,3 +14,20 @@
     border-bottom: 1px solid var(--border);
   }
 }
+
+@media (max-width: 768px) {
+  .infoHeader {
+    margin-bottom: 20px;
+    font-size: 24px;
+
+    h2 {
+      padding-bottom: 12px;
+    }
+  }
+}
+
+@media (max-width: 480px) {
+  .infoHeader {
+    font-size: 22px;
+  }
+}

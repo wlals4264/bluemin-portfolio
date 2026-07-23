@@ -15,14 +15,16 @@ import 'swiper/css/navigation';
 import InfoHeader from '../header/InfoHeader';
 import ProjectCard from './ProjectCard';
 import ReadMe from './ReadMe';
-import FilteringButton from './FilteringButton';
+import FilteringButton, { getLatestProjects } from './FilteringButton';
 
 const Projects = forwardRef<HTMLDivElement>((_, ref) => {
   const [isProjectCardClicked, setIsProjectCardClicked] = useState(false);
   const [swiperInstance, setSwiperInstance] = useState<SwiperType | null>(null);
   const [currentIndex, setCurrentIndex] = useState(0);
   const [selectedCardIndex, setSelectedCardIndex] = useState(0);
-  const [filteredProjects, setFilteredProjects] = useState<ProjectCardData[]>(projects);
+  const [filteredProjects, setFilteredProjects] = useState<ProjectCardData[]>(() =>
+    getLatestProjects(projects),
+  );
 
   const handleClickProjectCard = (index: number) => {
     setSelectedCardIndex(index);

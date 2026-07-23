@@ -7,6 +7,8 @@ import { ProjectCardData, projectTypeLabel } from '@/mocks/projects';
 import { useEffect, useState } from 'react';
 import { IoIosClose } from 'react-icons/io';
 
+import ProjectHighlights from '@/components/highlights/ProjectHighlights';
+
 interface ReadMeProps {
   setIsProjectCardClicked: (value: boolean) => void;
   project: ProjectCardData;
@@ -118,6 +120,10 @@ const ReadMe = ({ setIsProjectCardClicked, project }: ReadMeProps) => {
                   ))}
                 </ul>
               </section>
+            )}
+
+            {project.highlightProjectId && (
+              <ProjectHighlights projectId={project.highlightProjectId} />
             )}
 
             {project.projectSkills && project.projectSkills.length > 0 && (

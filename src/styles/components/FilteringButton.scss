@@ -1,23 +1,31 @@
 @mixin filtered-button-style {
-  border: none;
+  flex: 0 0 auto;
+  border: 1px solid var(--border);
   background-color: var(--bg-muted);
-  border-radius: 14px;
-  padding: 6px 10px;
+  border-radius: 999px;
+  padding: 8px 14px;
   color: var(--text);
   font-family: var(--font-body), sans-serif;
   font-size: 13px;
-  font-weight: bold;
+  font-weight: 700;
+  line-height: 1.2;
+  white-space: nowrap;
   cursor: pointer;
+  transition:
+    background-color 0.2s ease,
+    color 0.2s ease,
+    border-color 0.2s ease;
 
   &:hover {
-    color: var(--bg);
+    color: var(--accent-contrast);
     background-color: var(--text);
-    transition: background-color 0.3s ease;
+    border-color: var(--text);
   }
 
   &.active {
-    color: var(--bg);
+    color: var(--accent-contrast);
     background-color: var(--text);
+    border-color: var(--text);
   }
 }
 
@@ -26,10 +34,35 @@
   width: 100%;
   justify-content: center;
   align-items: center;
-  gap: 10px;
-  margin-bottom: 50px;
+  flex-wrap: wrap;
+  gap: 8px;
+  margin-bottom: 40px;
+  box-sizing: border-box;
 
   > button {
     @include filtered-button-style();
+  }
+}
+
+@media (max-width: 768px) {
+  .filtered-buttons-container {
+    justify-content: flex-start;
+    flex-wrap: nowrap;
+    gap: 8px;
+    margin-bottom: 28px;
+    padding: 2px 4px 10px;
+    overflow-x: auto;
+    overflow-y: hidden;
+    -webkit-overflow-scrolling: touch;
+    scrollbar-width: none;
+
+    &::-webkit-scrollbar {
+      display: none;
+    }
+
+    > button {
+      padding: 7px 12px;
+      font-size: 12px;
+    }
   }
 }

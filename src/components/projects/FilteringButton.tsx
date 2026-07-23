@@ -4,84 +4,64 @@ import '@/styles/components/FilteringButton.scss';
 
 import { ProjectCardData } from '@/mocks/projects';
 
-import React, { useState } from 'react';
+import { useState } from 'react';
 
 interface FilteringButtonProps {
   setFilteredProjects: (projects: ProjectCardData[]) => void;
   projects: ProjectCardData[];
 }
 
+function sortByLatest(list: ProjectCardData[]) {
+  return [...list].sort((a, b) => {
+    const getStartDate = (dateStr: string) => {
+      const startDate = dateStr.split('~')[0].trim().replace(/\./g, '-');
+      return new Date(startDate).getTime();
+    };
+    return getStartDate(b.date) - getStartDate(a.date);
+  });
+}
+
+export function getLatestProjects(projects: ProjectCardData[]) {
+  return sortByLatest(projects);
+}
+
 const FilteringButton = ({ projects, setFilteredProjects }: FilteringButtonProps) => {
-  const [activeButton, setActiveButton] = useState<string>('default');
+  const [activeButton, setActiveButton] = useState<string>('all');
 
-  const clickDefaultButton = () => {
-    setFilteredProjects([...projects]);
-    setActiveButton('default');
+  const showAll = () => {
+    setFilteredProjects(sortByLatest(projects));
+    setActiveButton('all');
   };
 
-  const clickLatestButton = () => {
-    const sortedProjects = [...projects].sort((a, b) => {
-      const getStartDate = (dateStr: string) => {
-        const startDate = dateStr.split('~')[0].trim().replace(/\./g, '-');
-        return new Date(startDate).getTime();
-      };
-
-      // 내림차순 정렬
-      return getStartDate(b.date) - getStartDate(a.date);
-    });
-
-    setFilteredProjects(sortedProjects);
-    setActiveButton('latest');
-  };
-
-  const clickCompanyButton = () => {
-    const companyProjects = [...projects].filter((project) => project.projectType === 'company');
-    setFilteredProjects(companyProjects);
-    setActiveButton('company');
-  };
-
-  const clickTeamButton = () => {
-    const teamProjects = [...projects].filter((project) => project.projectType === 'team');
-    setFilteredProjects(teamProjects);
-    setActiveButton('team');
-  };
-
-  const clickPersonalButton = () => {
-    const personalProjects = [...projects].filter((project) => project.projectType === 'personal');
-    setFilteredProjects(personalProjects);
-    setActiveButton('personal');
+  const filterByType = (type: 'company' | 'team' | 'personal') => {
+    setFilteredProjects(sortByLatest(projects.filter((project) => project.projectType === type)));
+    setActiveButton(type);
   };
 
   return (
     <div className="filtered-buttons-container">
       <button
-        className={`default-button ${activeButton === 'default' ? 'active' : ''}`}
+        className={`all-button ${activeButton === 'all' ? 'active' : ''}`}
         type="button"
-        onClick={clickDefaultButton}>
-        기본순
-      </button>
-      <button
-        className={`latest-button ${activeButton === 'latest' ? 'active' : ''}`}
-        type="button"
-        onClick={clickLatestButton}>
+        onClick={showAll}>
         최신순
       </button>
       <button
-        className={`team-button ${activeButton === 'company' ? 'active' : ''}`}
+        className={`company-button ${activeButton === 'company' ? 'active' : ''}`}
         type="button"
-        onClick={clickCompanyButton}>
+        onClick={() => filterByType('company')}>
         회사 프로젝트
       </button>
       <button
         className={`team-button ${activeButton === 'team' ? 'active' : ''}`}
         type="button"
-        onClick={clickTeamButton}>
+        onClick={() => filterByType('team')}>
         팀 프로젝트
       </button>
       <button
         className={`personal-button ${activeButton === 'personal' ? 'active' : ''}`}
         type="button"
-        onClick={clickPersonalButton}>
+        onClick={() => filterByType('personal')}>
         개인 프로젝트
       </button>
     </div>

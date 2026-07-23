@@ -49,16 +49,21 @@
 @media (max-width: 1024px) {
 }
 
-// 태블릿 (481px ~ 768px)
 @media (max-width: 768px) {
   .top-btn-container {
-    right: 80px;
+    right: 16px;
+    bottom: 20px;
   }
 }
 
-// 모바일 (480px 이하)
 @media (max-width: 480px) {
   .top-btn-container {
-    right: 30px;
+    right: 12px;
+    bottom: 16px;
+
+    .top-btn {
+      width: 44px;
+      height: 44px;
+    }
   }
 }

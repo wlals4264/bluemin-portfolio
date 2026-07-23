@@ -137,24 +137,37 @@
 
 @media (max-width: 768px) {
   .projects-container {
+    margin: 48px 0;
+
     .projects-carousel-wrapper {
+      padding: 8px 0 20px;
+
       &::before,
       &::after {
-        width: 20px;
+        width: 16px;
       }
 
-      .projects-peek-carousel .swiper-slide {
-        width: min(440px, 88%);
+      .projects-peek-carousel {
+        padding: 4px 0 12px;
+
+        .swiper-slide {
+          width: min(100%, 92%);
+        }
       }
 
+      /* 모바일은 스와이프로 충분 — 가장자리 잘리는 화살표 숨김 */
       .nav-button {
-        &.prev-button {
-          left: 4px;
-        }
+        display: none;
+      }
+    }
+  }
+}
 
-        &.next-button {
-          right: 4px;
-        }
+@media (max-width: 480px) {
+  .projects-container {
+    .projects-carousel-wrapper {
+      .projects-peek-carousel .swiper-slide {
+        width: 94%;
       }
     }
   }

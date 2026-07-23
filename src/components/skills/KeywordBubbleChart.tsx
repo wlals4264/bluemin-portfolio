@@ -172,54 +172,46 @@ export default function KeywordBubbleChart() {
 
   return (
     <div className="keyword-bubble-chart in-skills">
-      <svg
-        viewBox={`0 0 ${WIDTH} ${HEIGHT}`}
+      <div
+        className="keyword-bubble-stage"
         role="img"
         aria-label="기술 키워드 비중 버블 차트">
-        <title>기술 키워드 비중</title>
         {bubbles.map((b, index) => {
           const shortLabel =
-            b.label.length > 10 && b.r < 32 ? b.label.slice(0, 8) + '…' : b.label;
+            b.label.length > 10 && b.r < 32 ? `${b.label.slice(0, 8)}…` : b.label;
           const darkText = KEYWORD_LABEL_ON_DARK[b.id];
+          const size = b.r * 2;
+          const floatClass = index % 2 === 0 ? 'float-a' : 'float-b';
+
           return (
-            <g key={b.id} transform={`translate(${b.x}, ${b.y})`}>
-              <g
-                className={`keyword-bubble${activeId === b.id ? ' is-active' : ''}${darkText ? ' is-dark-text' : ''}`}
-                style={{ animationDelay: `${index * 0.06}s` }}
-                onMouseEnter={() => setActiveId(b.id)}
-                onMouseLeave={() => setActiveId(null)}
-                onFocus={() => setActiveId(b.id)}
-                onBlur={() => setActiveId(null)}
-                tabIndex={0}>
-                <circle
-                  className="keyword-bubble-circle"
-                  r={b.r}
-                  fill={b.color}
-                  opacity={0.95}
-                />
-                <text
-                  className="keyword-bubble-label"
-                  textAnchor="middle"
-                  dominantBaseline="central"
-                  fontSize={fontSizeForRadius(b.r)}
-                  y={b.r >= 30 ? -4 : 0}>
-                  {shortLabel}
-                </text>
-                {b.r >= 30 && (
-                  <text
-                    className="keyword-bubble-percent"
-                    textAnchor="middle"
-                    dominantBaseline="central"
-                    fontSize={11}
-                    y={11}>
-                    {b.percent}%
-                  </text>
-                )}
-              </g>
-            </g>
+            <button
+              key={b.id}
+              type="button"
+              className={`keyword-bubble ${floatClass}${activeId === b.id ? ' is-active' : ''}${darkText ? ' is-dark-text' : ''}`}
+              style={{
+                width: size,
+                height: size,
+                left: `${(b.x / WIDTH) * 100}%`,
+                top: `${(b.y / HEIGHT) * 100}%`,
+                backgroundColor: b.color,
+                animationDelay: `${0.04 * index}s, ${0.5 + index * 0.12}s`,
+                ['--float-duration' as string]: `${5.2 + (index % 4) * 0.55}s`,
+              }}
+              onMouseEnter={() => setActiveId(b.id)}
+              onMouseLeave={() => setActiveId(null)}
+              onFocus={() => setActiveId(b.id)}
+              onBlur={() => setActiveId(null)}
+              aria-label={`${b.label} ${b.percent}%`}>
+              <span
+                className="keyword-bubble-label"
+                style={{ fontSize: fontSizeForRadius(b.r) }}>
+                {shortLabel}
+              </span>
+              {b.r >= 30 && <span className="keyword-bubble-percent">{b.percent}%</span>}
+            </button>
           );
         })}
-      </svg>
+      </div>
 
       {active && (
         <div

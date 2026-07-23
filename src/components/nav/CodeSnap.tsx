@@ -4,7 +4,7 @@ import '@/styles/components/CodeSnap.scss';
 
 import { RefObject, useEffect, useRef, useState } from 'react';
 
-type SectionName = 'about' | 'career' | 'skills' | 'projects' | 'highlights' | 'experiences';
+type SectionName = 'about' | 'career' | 'skills' | 'projects' | 'experiences';
 
 interface CodeSnapProps {
   sectionRefs: {
@@ -13,7 +13,7 @@ interface CodeSnapProps {
 }
 const CodeSnap = ({ sectionRefs }: CodeSnapProps) => {
   const defaultPrompt =
-    'What are you curious about? [about, career, skills, projects, highlights, experiences]';
+    'What are you curious about? [about, career, skills, projects, experiences]';
   const [input, setInput] = useState('');
   const [history, setHistory] = useState([defaultPrompt]);
   const [error, setError] = useState('');
