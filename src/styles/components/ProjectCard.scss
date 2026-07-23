@@ -1,143 +1,241 @@
 @mixin project-card-btn {
-  display: flex;
+  display: inline-flex;
   align-items: center;
-  gap: 4px;
-  background-color: var(--card);
-  padding: 6px 10px;
-  border-radius: 10px;
-  border: 1px solid var(--accent);
-
-  font-size: 13px;
-  font-weight: bold;
+  gap: 6px;
+  padding: 8px 12px;
+  border-radius: 999px;
+  border: 1px solid color-mix(in srgb, var(--accent) 35%, var(--border));
+  background: var(--card);
+  font-size: 12px;
+  font-weight: 700;
   color: var(--accent);
-  transition: all 0.3s ease;
+  text-decoration: none;
+  transition:
+    background-color 0.15s ease,
+    border-color 0.15s ease,
+    color 0.15s ease,
+    transform 0.15s ease;
 
   &:hover {
     background-color: var(--accent);
+    border-color: var(--accent);
     color: var(--accent-contrast);
     cursor: pointer;
+    transform: translateY(-1px);
   }
 }
 
 .project-card-item-container {
-  border-radius: 20px;
-  background-color: var(--bg-muted);
-  border-radius: 20px;
-  padding: 24px 24px;
-  box-shadow: 0 4px 12px var(--shadow);
-  min-height: 480px;
-  margin: 10px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  gap: 20px;
+  height: 100%;
+  min-height: 0;
+  margin: 4px;
+  padding: 22px 22px 24px;
+  border: 1px solid var(--border);
+  border-radius: 18px;
+  background:
+    linear-gradient(
+      165deg,
+      color-mix(in srgb, var(--card) 88%, var(--accent-soft)) 0%,
+      var(--card) 42%,
+      var(--bg-elevated) 100%
+    );
+  box-shadow: 0 1px 2px var(--shadow);
   color: var(--text);
-
   font-family: var(--font-body), sans-serif;
+  transition:
+    border-color 0.2s ease,
+    box-shadow 0.2s ease;
+
+  &:hover {
+    border-color: color-mix(in srgb, var(--accent) 35%, var(--border));
+    box-shadow: 0 12px 28px color-mix(in srgb, var(--accent) 12%, var(--shadow));
+  }
+
+  .project-card-top {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+    min-width: 0;
+  }
+
+  .project-card-header {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    padding-bottom: 14px;
+    border-bottom: 1px solid var(--border);
+  }
 
   .project-card-title {
+    margin: 0;
     font-family: var(--font-display), sans-serif;
-    font-size: 24px;
-    margin-bottom: 6px;
-    margin-top: 0;
+    font-size: clamp(22px, 2.4vw, 26px);
+    line-height: 1.2;
+    letter-spacing: -0.02em;
   }
 
   .project-card-info {
     display: flex;
+    flex-wrap: wrap;
     align-items: center;
-    gap: 10px;
-    margin-bottom: 20px;
-    padding-bottom: 12px;
-    border-bottom: 1px solid var(--border);
+    gap: 8px;
+  }
 
-    font-size: 13px;
+  .project-card-info-date {
+    font-size: 12px;
     color: var(--text-muted);
+  }
 
-    .project-card-info-project-type {
-      background-color: var(--accent);
-      padding: 6px 10px;
-      border-radius: 10px;
+  .project-card-info-project-type {
+    display: inline-flex;
+    align-items: center;
+    padding: 4px 10px;
+    border-radius: 999px;
+    border: 1px solid var(--border);
+    background: var(--bg-muted);
+    font-size: 11px;
+    font-weight: 700;
+    color: var(--text-soft);
 
-      font-size: 13px;
-      font-weight: bold;
-      color: var(--accent-contrast);
+    &.company {
+      border-color: color-mix(in srgb, var(--company) 35%, var(--border));
+      background: color-mix(in srgb, var(--company) 12%, var(--card));
+      color: var(--company);
+    }
 
-      &.team {
-        background-color: var(--success);
-      }
+    &.team {
+      border-color: color-mix(in srgb, var(--success) 35%, var(--border));
+      background: color-mix(in srgb, var(--success) 12%, var(--card));
+      color: var(--success);
+    }
 
-      &.company {
-        background-color: var(--company);
-      }
+    &.personal {
+      border-color: color-mix(in srgb, var(--accent) 28%, var(--border));
+      background: var(--accent-soft);
+      color: var(--accent);
     }
   }
 
   .project-card-info-project-title {
-    font-weight: bold;
+    margin: 0;
     font-size: 14px;
-    line-height: 140%;
+    font-weight: 600;
+    line-height: 1.55;
+    color: var(--text-soft);
   }
 
   .project-card-features {
     list-style: none;
+    margin: 0;
     padding: 0;
     display: flex;
     flex-direction: column;
-    gap: 2px;
-    font-size: 13px;
-    line-height: 150%;
-    width: 95%;
-    color: var(--text-soft);
-  }
+    gap: 8px;
 
-  .project-card-link-container {
-    display: flex;
-    align-items: center;
-    gap: 6px;
-    margin-bottom: 15px;
-    font-size: 13px;
-    font-weight: bold;
+    li {
+      position: relative;
+      padding: 10px 12px 10px 26px;
+      border-radius: 12px;
+      border: 1px solid var(--border);
+      background: color-mix(in srgb, var(--card) 82%, transparent);
+      font-size: 13px;
+      line-height: 1.55;
+      color: var(--text-soft);
 
-    a {
-      &:hover {
-        color: var(--accent);
+      &::before {
+        content: '';
+        position: absolute;
+        left: 12px;
+        top: 1.05em;
+        width: 5px;
+        height: 5px;
+        border-radius: 50%;
+        background: var(--accent);
       }
     }
   }
 
-  .project-card-trouble-shooting-container {
-    display: flex;
+  .project-card-more {
+    align-self: flex-start;
+    margin: 0;
+    padding: 0;
+    border: 0;
+    background: transparent;
+    color: var(--accent);
+    font-size: 12px;
+    font-weight: 700;
+    cursor: pointer;
+
+    &:hover {
+      text-decoration: underline;
+    }
+  }
+
+  .project-card-link,
+  .project-card-trouble {
+    display: inline-flex;
     align-items: center;
     gap: 6px;
-    margin-bottom: 15px;
-    font-size: 13px;
-    font-weight: bold;
+    max-width: 100%;
+    font-size: 12px;
+    font-weight: 600;
+    color: var(--accent);
+    text-decoration: none;
 
-    a {
-      &:hover {
-        color: rgb(253, 82, 82);
-      }
+    span {
+      overflow: hidden;
+      text-overflow: ellipsis;
+      white-space: nowrap;
     }
+
+    &:hover {
+      text-decoration: underline;
+    }
+  }
+
+  .project-card-trouble {
+    color: #dc2626;
+  }
+
+  .project-card-bottom {
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+    margin-top: auto;
+    padding-top: 8px;
   }
 
   .project-card-skills-container {
     display: flex;
     flex-wrap: wrap;
     gap: 6px;
-    margin-bottom: 15px;
 
     span {
-      background-color: var(--card);
-      padding: 6px 10px;
-      border-radius: 10px;
-      min-width: max-content;
+      padding: 5px 10px;
+      border-radius: 999px;
+      border: 1px solid color-mix(in srgb, var(--accent) 18%, var(--border));
+      background: color-mix(in srgb, var(--accent-soft) 45%, var(--card));
+      color: var(--accent);
+      font-size: 11px;
+      font-weight: 700;
+      white-space: nowrap;
+    }
 
-      font-size: 13px;
-      font-weight: bold;
-      cursor: default;
+    .project-card-skill-more {
+      background: var(--bg-muted);
+      border-color: var(--border);
+      color: var(--text-muted);
     }
   }
 
   .project-card-btn-container {
     display: flex;
-    gap: 10px;
     flex-wrap: wrap;
+    gap: 8px;
 
     .read-me-btn,
     .video-btn,
@@ -146,53 +244,34 @@
     .velog-btn {
       @include project-card-btn;
     }
+
+    .read-me-btn {
+      background: var(--accent);
+      border-color: var(--accent);
+      color: var(--accent-contrast);
+
+      &:hover {
+        background: var(--accent-hover);
+        border-color: var(--accent-hover);
+      }
+    }
   }
 }
 
-// 중형 모니터(1250px ~ 1439px)
 @media (max-width: 1439px) {
   .project-card-item-container {
-    min-height: 530px;
-
-    .project-card-link-container {
-      font-size: 13px;
-    }
-
-    .project-card-skills-container {
-      span {
-        font-size: 14px;
-      }
-    }
+    min-height: 0;
   }
 }
 
-// 노트북 (769px ~ 1024px)
 @media (max-width: 1024px) {
   .project-card-item-container {
-    min-height: 358px;
-
-    .project-card-link-container {
-      font-size: 14px;
-    }
-
-    .project-card-skills-container {
-      span {
-        font-size: 13px;
-      }
-    }
+    min-height: 0;
   }
 }
 
-// 태블릿 (481px ~ 768px)
 @media (max-width: 768px) {
   .project-card-item-container {
-    min-height: 430px;
-  }
-}
-
-// 모바일 (480px 이하)
-@media (max-width: 480px) {
-  .project-card-item-container {
-    min-height: 450px;
+    min-height: 0;
   }
 }

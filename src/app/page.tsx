@@ -9,6 +9,7 @@ import AboutMe from '@/components/about-me/AboutMe';
 import Career from '@/components/career/Career';
 import Skills from '@/components/skills/Skills';
 import Projects from '@/components/projects/Projects';
+import Highlights from '@/components/highlights/Highlights';
 import Experiences from '@/components/experience/Experiences';
 import Navigator from '@/components/nav/Navigator';
 import Header from '@/components/header/Header';
@@ -19,6 +20,7 @@ export default function Home() {
   const careerRef = useRef<HTMLDivElement>(null);
   const skillsRef = useRef<HTMLDivElement>(null);
   const projectsRef = useRef<HTMLDivElement>(null);
+  const highlightsRef = useRef<HTMLDivElement>(null);
   const experiencesRef = useRef<HTMLDivElement>(null);
 
   const sectionRefs = {
@@ -26,6 +28,7 @@ export default function Home() {
     career: careerRef,
     skills: skillsRef,
     projects: projectsRef,
+    highlights: highlightsRef,
     experiences: experiencesRef,
   };
 
@@ -39,6 +42,7 @@ export default function Home() {
         <Career ref={careerRef} />
         <Skills ref={skillsRef} />
         <Projects ref={projectsRef} />
+        <Highlights ref={highlightsRef} />
         <Experiences ref={experiencesRef} />
         <TopBtn />
       </div>

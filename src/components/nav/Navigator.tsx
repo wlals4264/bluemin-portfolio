@@ -8,7 +8,7 @@ import { RefObject, useState } from 'react';
 
 import CodeSnap from './CodeSnap';
 
-type SectionName = 'about' | 'career' | 'skills' | 'projects' | 'experiences';
+type SectionName = 'about' | 'career' | 'skills' | 'projects' | 'highlights' | 'experiences';
 
 interface NavigatorProps {
   sectionRefs: {

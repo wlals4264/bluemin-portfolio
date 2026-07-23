@@ -1,4 +1,16 @@
-export const experienceData = {
+export type ExperienceItemData = {
+  title: string;
+  date: string;
+  subTitle: string;
+  description: string[];
+  linkUrl?: string;
+  linkLabel?: string;
+};
+
+export const experienceData: {
+  education: ExperienceItemData[];
+  team: ExperienceItemData[];
+} = {
   education: [
     {
       title: 'Zerobase Front-end School',
@@ -15,7 +27,12 @@ export const experienceData = {
       title: 'Modern JavaScript Deep Dive Study',
       date: '2024.09 ~ 2025.02',
       subTitle: '모던 자바스크립트 Deep Dive 책을 통해 자바스크립트 기본 개념 Study',
-      description: ['자바스크립트의 기초 개념부터 동작 방식까지 깊게 공부하며 자바스크립트에 대한 깊이를 넓힘'],
+      description: [
+        '자바스크립트의 기초 개념부터 동작 방식까지 깊게 공부하며 자바스크립트에 대한 깊이를 넓힘',
+      ],
+      linkUrl:
+        'https://velog.io/@wlals4264/series/%EB%94%A5%EB%8B%A4%EC%9D%B4%EB%B8%8C-%EC%8A%A4%ED%84%B0%EB%94%94',
+      linkLabel: '딥다이브 스터디 시리즈 보기',
     },
   ],
   team: [

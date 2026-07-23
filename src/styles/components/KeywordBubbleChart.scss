@@ -1,0 +1,162 @@
+.keyword-bubble-chart {
+  position: relative;
+  width: 100%;
+  max-width: 640px;
+  margin: 0 auto 28px;
+  aspect-ratio: 560 / 260;
+  border-radius: 0;
+  overflow: visible;
+  background: transparent;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  svg {
+    width: 100%;
+    height: 100%;
+    overflow: visible;
+  }
+
+  &.is-loading,
+  &.is-empty {
+    min-height: 180px;
+    color: var(--text-muted);
+    font-size: 14px;
+    font-weight: 600;
+  }
+}
+
+.keyword-bubble-skeleton {
+  width: 120px;
+  height: 120px;
+  border-radius: 50%;
+  background: var(--border);
+  animation: keyword-pulse 1.2s ease-in-out infinite;
+}
+
+.keyword-bubble {
+  cursor: pointer;
+  outline: none;
+  animation: keyword-pop 0.45s ease both;
+
+  .keyword-bubble-circle {
+    transition: opacity 0.2s ease, filter 0.2s ease;
+  }
+
+  .keyword-bubble-label,
+  .keyword-bubble-percent {
+    fill: #fff;
+    font-family: var(--font-body), sans-serif;
+    font-weight: 700;
+    pointer-events: none;
+    paint-order: stroke fill;
+    stroke: rgba(0, 0, 0, 0.22);
+    stroke-width: 2px;
+  }
+
+  .keyword-bubble-percent {
+    font-weight: 600;
+    opacity: 0.95;
+  }
+
+  &.is-dark-text {
+    .keyword-bubble-label,
+    .keyword-bubble-percent {
+      fill: #111;
+      stroke: rgba(255, 255, 255, 0.35);
+    }
+  }
+
+  &:hover .keyword-bubble-circle,
+  &:focus-visible .keyword-bubble-circle,
+  &.is-active .keyword-bubble-circle {
+    opacity: 1;
+    filter: brightness(1.06);
+  }
+
+  &:nth-child(odd) {
+    animation:
+      keyword-pop 0.45s ease both,
+      keyword-float 5.5s ease-in-out 0.45s infinite;
+  }
+
+  &:nth-child(even) {
+    animation:
+      keyword-pop 0.45s ease both,
+      keyword-float-alt 6.5s ease-in-out 0.45s infinite;
+  }
+}
+
+.keyword-bubble-tooltip {
+  position: absolute;
+  transform: translate(-50%, calc(-100% - 10px));
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 6px 12px;
+  border-radius: 999px;
+  background: var(--card);
+  border: 1px solid var(--border);
+  box-shadow: 0 6px 18px var(--shadow);
+  font-size: 13px;
+  color: var(--text);
+  pointer-events: none;
+  z-index: 3;
+  white-space: nowrap;
+
+  strong {
+    font-weight: 700;
+  }
+
+  span {
+    color: var(--accent);
+    font-weight: 700;
+  }
+}
+
+@keyframes keyword-pop {
+  from {
+    opacity: 0;
+    transform: scale(0.7);
+  }
+  to {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+
+@keyframes keyword-float {
+  0%,
+  100% {
+    transform: translateY(0);
+  }
+  50% {
+    transform: translateY(-3px);
+  }
+}
+
+@keyframes keyword-float-alt {
+  0%,
+  100% {
+    transform: translateY(0);
+  }
+  50% {
+    transform: translateY(3px);
+  }
+}
+
+@keyframes keyword-pulse {
+  0%,
+  100% {
+    opacity: 0.45;
+  }
+  50% {
+    opacity: 0.85;
+  }
+}
+
+@media (max-width: 768px) {
+  .keyword-bubble-chart {
+    margin-bottom: 20px;
+  }
+}

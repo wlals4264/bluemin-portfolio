@@ -7,7 +7,7 @@ import { projects, ProjectCardData } from '@/mocks/projects';
 import { forwardRef, useEffect, useState } from 'react';
 import { Swiper, SwiperSlide } from 'swiper/react';
 import { Navigation } from 'swiper/modules';
-import { FaChevronLeft, FaChevronRight } from 'react-icons/fa';
+import { HiChevronLeft, HiChevronRight } from 'react-icons/hi2';
 import type { Swiper as SwiperType } from 'swiper';
 import 'swiper/css';
 import 'swiper/css/navigation';
@@ -20,37 +20,16 @@ import FilteringButton from './FilteringButton';
 const Projects = forwardRef<HTMLDivElement>((_, ref) => {
   const [isProjectCardClicked, setIsProjectCardClicked] = useState(false);
   const [swiperInstance, setSwiperInstance] = useState<SwiperType | null>(null);
-  const [currentIndex, setCurrentIndex] = useState<number>(0);
-  const [selectedCardIndex, setSelectedCardIndex] = useState<number>(0);
+  const [currentIndex, setCurrentIndex] = useState(0);
+  const [selectedCardIndex, setSelectedCardIndex] = useState(0);
   const [filteredProjects, setFilteredProjects] = useState<ProjectCardData[]>(projects);
 
   const handleClickProjectCard = (index: number) => {
     setSelectedCardIndex(index);
     setIsProjectCardClicked(true);
-
     window.history.pushState(null, '', window.location.href);
   };
 
-  const handleSwiper = (swiper: SwiperType) => {
-    setSwiperInstance(swiper);
-  };
-
-  const [slidesPerView, setSlidesPerView] = useState(1);
-
-  useEffect(() => {
-    const updateSlidesPerView = () => {
-      setSlidesPerView(window.innerWidth >= 1028 ? 2 : 1);
-    };
-
-    updateSlidesPerView();
-    window.addEventListener('resize', updateSlidesPerView);
-
-    return () => {
-      window.removeEventListener('resize', updateSlidesPerView);
-    };
-  }, []);
-
-  // 뒤로가기 누르면 모달 닫히기
   useEffect(() => {
     const handlePopState = () => {
       setIsProjectCardClicked(false);
@@ -60,6 +39,14 @@ const Projects = forwardRef<HTMLDivElement>((_, ref) => {
     return () => window.removeEventListener('popstate', handlePopState);
   }, []);
 
+  useEffect(() => {
+    swiperInstance?.slideTo(0, 0);
+    setCurrentIndex(0);
+  }, [filteredProjects, swiperInstance]);
+
+  const canGoPrev = currentIndex > 0;
+  const canGoNext = currentIndex < filteredProjects.length - 1;
+
   return (
     <div ref={ref} className="projects-container">
       <InfoHeader title="Projects" className="projects-header" />
@@ -67,36 +54,36 @@ const Projects = forwardRef<HTMLDivElement>((_, ref) => {
       <FilteringButton setFilteredProjects={setFilteredProjects} projects={projects} />
 
       <div className="projects-carousel-wrapper">
-        {currentIndex > 0 && (
-          <button className="nav-button prev-button" onClick={() => swiperInstance?.slidePrev()}>
-            <FaChevronLeft />
+        {canGoPrev && (
+          <button
+            type="button"
+            className="nav-button prev-button"
+            aria-label="이전 프로젝트"
+            onClick={() => swiperInstance?.slidePrev()}>
+            <HiChevronLeft />
           </button>
         )}
 
         <Swiper
-          onSwiper={handleSwiper}
+          className="projects-peek-carousel"
+          onSwiper={setSwiperInstance}
           onSlideChange={(swiper) => setCurrentIndex(swiper.activeIndex)}
           modules={[Navigation]}
-          allowTouchMove={true}
+          grabCursor
+          centeredSlides
+          slidesPerView="auto"
+          spaceBetween={20}
+          speed={420}
+          watchSlidesProgress
           breakpoints={{
-            0: {
-              slidesPerView: 1,
-              spaceBetween: 10,
-              slidesPerGroup: 1,
-            },
-            1028: {
-              slidesPerView: 2,
-              spaceBetween: 20,
-              slidesPerGroup: 2,
-            },
-            1440: {
-              slidesPerView: 2,
-              spaceBetween: 30,
-              slidesPerGroup: 2,
-            },
-          }}>
+            0: { spaceBetween: 12 },
+            768: { spaceBetween: 18 },
+            1200: { spaceBetween: 24 },
+          }}
+          observer
+          observeParents>
           {filteredProjects.map((project, index) => (
-            <SwiperSlide key={index} className="swiper-slide">
+            <SwiperSlide key={`${project.title}-${index}`}>
               <ProjectCard
                 title={project.title}
                 date={project.date}
@@ -114,35 +101,24 @@ const Projects = forwardRef<HTMLDivElement>((_, ref) => {
               />
             </SwiperSlide>
           ))}
-
-          {filteredProjects.length % 2 !== 0 && (
-            <SwiperSlide key="empty">
-              <div style={{ visibility: 'hidden' }}>
-                <ProjectCard
-                  title=""
-                  date=""
-                  projectType="personal"
-                  projectTitle=""
-                  projectSkills={[]}
-                  projectUrl=""
-                  projectFeatures={[]}
-                  projectVideoLink=""
-                  onClick={() => {}}
-                />
-              </div>
-            </SwiperSlide>
-          )}
         </Swiper>
 
-        {swiperInstance && currentIndex + slidesPerView < filteredProjects.length && (
-          <button className="nav-button next-button" onClick={() => swiperInstance.slideNext()}>
-            <FaChevronRight />
+        {canGoNext && (
+          <button
+            type="button"
+            className="nav-button next-button"
+            aria-label="다음 프로젝트"
+            onClick={() => swiperInstance?.slideNext()}>
+            <HiChevronRight />
           </button>
         )}
       </div>
 
       {isProjectCardClicked && (
-        <ReadMe setIsProjectCardClicked={setIsProjectCardClicked} project={filteredProjects[selectedCardIndex]} />
+        <ReadMe
+          setIsProjectCardClicked={setIsProjectCardClicked}
+          project={filteredProjects[selectedCardIndex]}
+        />
       )}
     </div>
   );

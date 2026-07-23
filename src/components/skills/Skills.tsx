@@ -5,11 +5,13 @@ import { skillsInfo } from '@/mocks/skillsInfo';
 import { forwardRef } from 'react';
 
 import InfoHeader from '../header/InfoHeader';
+import KeywordBubbleChart from './KeywordBubbleChart';
 
 const Skills = forwardRef<HTMLDivElement>((_, ref) => {
   return (
     <div ref={ref} className="skills-container">
       <InfoHeader title="Skills" className="skills-header" />
+      <KeywordBubbleChart />
       <div className="skills-list">
         {skillsInfo.map((info, index) => (
           <div className="skill-section" key={index}>
@@ -18,7 +20,9 @@ const Skills = forwardRef<HTMLDivElement>((_, ref) => {
             </div>
             <div className="skill-content-box">
               {info.contents.map((content, idx) => (
-                <span className={`skill-item ${content.describe.toLocaleLowerCase().replace(/[\s.]/g, '-')}`} key={idx}>
+                <span
+                  className={`skill-item ${content.describe.toLocaleLowerCase().replace(/[\s.]/g, '-')}`}
+                  key={idx}>
                   <span className="skill-item-icon">{content.icon}</span>
                   <span>{content.describe}</span>
                 </span>

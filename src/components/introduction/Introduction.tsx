@@ -22,6 +22,11 @@ const sentences = [
     <br />
     클린 코드와 성능 최적화에 집중하고 있습니다.
   </span>,
+  <span className="korean" key={3}>
+    AI로 워크플로우를 자동화하고,
+    <br />
+    Plan → Build → Review → Test로 품질을 검증합니다.
+  </span>,
 ];
 
 const Introduction = () => {

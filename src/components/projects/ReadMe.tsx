@@ -11,13 +11,13 @@ interface ReadMeProps {
   setIsProjectCardClicked: (value: boolean) => void;
   project: ProjectCardData;
 }
+
 const ReadMe = ({ setIsProjectCardClicked, project }: ReadMeProps) => {
   const [isOpen, setIsOpen] = useState(true);
 
   const handleCloseModal = () => {
     setIsOpen(false);
     setIsProjectCardClicked(false);
-
     window.history.back();
   };
 
@@ -37,98 +37,99 @@ const ReadMe = ({ setIsProjectCardClicked, project }: ReadMeProps) => {
 
   return (
     <div className="read-me-modal-wrapper" onClick={handleCloseModal}>
-      <div className="read-me-container" onClick={(e) => e.stopPropagation()}>
-        <div className="read-me-header">
-          <span>readme.md</span>
-          <div className="close-modal-btn" onClick={handleCloseModal}>
+      <div
+        className="read-me-container"
+        onClick={(e) => e.stopPropagation()}
+        role="dialog"
+        aria-modal="true"
+        aria-labelledby="readme-project-title">
+        <header className="read-me-header">
+          <span className="read-me-header-label">Project detail</span>
+          <button
+            type="button"
+            className="close-modal-btn"
+            onClick={handleCloseModal}
+            aria-label="닫기">
             <IoIosClose />
-          </div>
-        </div>
+          </button>
+        </header>
 
         <main className="info-box">
           <div className="read-me-title-box">
-            <span className="read-me-title">{project.title}</span>
+            <h2 id="readme-project-title" className="read-me-title">
+              {project.title}
+            </h2>
             <div className="read-me-title-info-data">
               <span className="read-me-date">{project.date}</span>
               <span className={`read-me-project-type ${project.projectType}`}>
-                ({projectTypeLabel(project.projectType)})
+                {projectTypeLabel(project.projectType)}
               </span>
             </div>
+            {project.projectTitle && (
+              <p className="read-me-subtitle">{project.projectTitle}</p>
+            )}
           </div>
 
           <div className="read-me-content-box">
-            {project?.projectUrl && (
-              <div className="deployment-url-box">
-                <span className="deployment-url-title">🔗 Deployment URL</span>
-                <a href={project?.projectUrl} target="_blank">
-                  {project?.projectUrl}
+            {project.projectUrl && (
+              <section className="readme-section deployment-url-box">
+                <h3 className="readme-section-title">링크</h3>
+                <a
+                  className="readme-link"
+                  href={project.projectUrl}
+                  target="_blank"
+                  rel="noreferrer">
+                  {project.projectUrl}
                 </a>
-              </div>
+              </section>
             )}
 
-            <div className="summary-box">
-              <span className="summary-title">📌 Summary</span>
-              <div className="summary-content">
-                <span className="project-title">{project.projectTitle}</span>
+            <section className="readme-section summary-box">
+              <h3 className="readme-section-title">요약</h3>
+              {project.projectFeatures && project.projectFeatures.length > 0 && (
                 <ul className="project-card-features">
-                  {project.projectFeatures &&
-                    project.projectFeatures.map((feature, index) => {
-                      return (
-                        <li key={index} className={`project-card-feature-${index}`}>
-                          {feature}
-                        </li>
-                      );
-                    })}
+                  {project.projectFeatures.map((feature) => (
+                    <li key={feature}>{feature}</li>
+                  ))}
                 </ul>
-                {project.mainFeatures && (
-                  <p className="project-card-main-features">{project.mainFeatures}</p>
-                )}
-              </div>
-            </div>
+              )}
+              {project.mainFeatures && (
+                <p className="project-card-main-features">{project.mainFeatures}</p>
+              )}
+            </section>
 
-            <div className="background-box">
-              <span className="background-title">🤔 Background</span>
-              <div className="background-content">
-                <div className="background-text">
-                  {project.background?.map((background, index) => {
-                    return (
-                      <span key={index} className="background-row">
-                        {background}
-                      </span>
-                    );
-                  })}
+            {project.background && project.background.length > 0 && (
+              <section className="readme-section background-box">
+                <h3 className="readme-section-title">배경</h3>
+                <div className="readme-prose">
+                  {project.background.map((background) => (
+                    <p key={background}>{background}</p>
+                  ))}
                 </div>
-              </div>
-            </div>
+              </section>
+            )}
 
-            <div className="meaning-box">
-              <span className="meaning-title">🔍 Meaning</span>
-              <div className="meaning-content">
-                <div className="meaning-text">
-                  {project.meaning?.map((meaning, index) => {
-                    return (
-                      <span key={index} className="meaning-row">
-                        {meaning}
-                      </span>
-                    );
-                  })}
+            {project.meaning && project.meaning.length > 0 && (
+              <section className="readme-section meaning-box">
+                <h3 className="readme-section-title">역할 · 기여</h3>
+                <ul className="readme-contrib-list">
+                  {project.meaning.map((meaning) => (
+                    <li key={meaning}>{meaning}</li>
+                  ))}
+                </ul>
+              </section>
+            )}
+
+            {project.projectSkills && project.projectSkills.length > 0 && (
+              <section className="readme-section skills-box">
+                <h3 className="readme-section-title">기술 스택</h3>
+                <div className="skills-content-box">
+                  {project.projectSkills.map((skill) => (
+                    <span key={skill}>{skill}</span>
+                  ))}
                 </div>
-              </div>
-            </div>
-
-            <div className="skills-box">
-              <span className="skills-title">🔨 Technology Stack(s)</span>
-              <div className="skills-content-box">
-                {project.projectSkills &&
-                  project.projectSkills.map((skill, index) => {
-                    return (
-                      <span key={index} className={`skill-${index}`}>
-                        {skill}
-                      </span>
-                    );
-                  })}
-              </div>
-            </div>
+              </section>
+            )}
           </div>
         </main>
       </div>
