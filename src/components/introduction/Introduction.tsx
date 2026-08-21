@@ -7,25 +7,25 @@ import { useEffect, useRef, useState } from 'react';
 import gsap from 'gsap';
 
 const sentences = [
-  <span key={0}>
-    I&apos;m a frontend developer constantly learning,
+  <span className="korean" key={0}>
+    Next.js 웹과 Flutter 하이브리드에서
     <br />
-    creating, and exploring the endless ocean of the web
+    WebView·Native 브릿지까지 다루는 프론트엔드 개발자입니다.
   </span>,
   <span className="korean" key={1}>
-    넓고 깊은 웹이라는 바다를 끊임없이 배우고,
+    수면 헬스케어에서 기능 개발부터
     <br />
-    창조하고, 탐험하는 프런트엔드 개발자입니다.
+    Playwright E2E·GA4·Admin까지 운영 사이클을 닫습니다.
   </span>,
   <span className="korean" key={2}>
-    사용자 경험을 향상시키는 UI 설계를 지향하며,
+    Web–Native 경계의 navigation·권한·데이터 정합을
     <br />
-    클린 코드와 성능 최적화에 집중하고 있습니다.
+    원인부터 잡고 구조로 풉니다.
   </span>,
   <span className="korean" key={3}>
-    AI로 워크플로우를 자동화하고,
+    Cursor Rules/Skills와 E2E로
     <br />
-    Plan → Build → Review → Test로 품질을 검증합니다.
+    AI 작업도 같은 검증 게이트를 거치게 합니다.
   </span>,
 ];
 

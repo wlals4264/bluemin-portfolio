@@ -112,8 +112,28 @@
             }
           }
 
-          &.react-query {
+          &.react-query,
+          &.tanstack-query {
             background-color: #ff4154;
+          }
+
+          &.ga,
+          &.ga4 {
+            background-color: #f9ab00;
+            color: #000;
+          }
+
+          &.sentry {
+            background-color: #362d59;
+          }
+
+          &.echarts {
+            background-color: #5470c6;
+          }
+
+          &.styled-component,
+          &.styled-components {
+            background-color: #db7093;
           }
 
           &.dart {

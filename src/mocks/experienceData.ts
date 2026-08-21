@@ -14,7 +14,7 @@ export const experienceData: {
   education: [
     {
       title: 'Zerobase Front-end School',
-      date: '2024.03 ~ 2025.01.25',
+      date: '2024.08 ~ 2025.02',
       subTitle: '제로베이스에서 진행하는 프론트엔드 개발자 양성 교육 과정 수료',
       description: [
         'HTML·CSS·JavaScript로 반응형 UI·DOM 인터랙션 기반 웹 페이지 구현',
@@ -34,11 +34,17 @@ export const experienceData: {
         'https://velog.io/@wlals4264/series/%EB%94%A5%EB%8B%A4%EC%9D%B4%EB%B8%8C-%EC%8A%A4%ED%84%B0%EB%94%94',
       linkLabel: '딥다이브 스터디 시리즈 보기',
     },
+    {
+      title: '숙명여자대학교',
+      date: '2014.03 ~ 2019.02',
+      subTitle: '작곡과 학사 · 복수전공 문화예술기획 · GPA 3.99 / 4.5',
+      description: [],
+    },
   ],
   team: [
     {
       title: 'Team OOOTTT',
-      date: '2026.01 ~',
+      date: '2026.03 ~ 2026.08',
       subTitle: 'OTT 구독 가치 기록·취향 시각화 Flutter 앱',
       description: [
         'Flutter·CustomPainter로 홈·취향·영화관 핵심 UI·차트·애니메이션 구현',
@@ -47,7 +53,7 @@ export const experienceData: {
     },
     {
       title: 'Team Momo',
-      date: '2024.11 ~ 2025.02',
+      date: '2024.12 ~ 2025.02',
       subTitle: '제로베이스에서 진행하는 프론트엔드 & 백엔드 협업 프로젝트',
       description: [
         '데모 이후 React·Stomp 기반 채팅·알림 MVP를 완료할 때까지 스프린트 연장·출시 범위 확정',

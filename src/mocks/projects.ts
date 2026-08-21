@@ -34,9 +34,9 @@ const kkuljamV3: ProjectCardData = {
   highlightProjectId: 'kkuljam-v3',
   projectTitle: '슬립포레스트 — RN → Flutter 마이그레이션 · 수면 측정/루틴·온보딩 고도화',
   projectFeatures: [
-    'RN → Flutter 앱 셸 재구축으로 알람·수면 측정·오디오 등 네이티브 경로 안정화',
-    'IosUnifiedAudioSession으로 루틴 재생·수면 녹음·웹(유튜브) 세션 충돌을 ownership 단위로 정리',
-    '소셜 약관 중복 제거·온보딩 간소화, AppsFlyer 딥링크·OG 공유·디자인 토큰·Sentry까지 운영 품질 보강',
+    'WebView↔Native race: pending queue로 측정 종료 후 화면 전환 유실을 제거',
+    '걸음수 15분 버킷 누락 방지, 화면(기기 총합)과 서버(버킷 raw) 책임 분리',
+    'RN → Flutter 앱 셸 재구축으로 알람·수면 측정·오디오 네이티브 경로 안정화',
   ],
   projectSkills: [
     'Flutter',
@@ -49,15 +49,17 @@ const kkuljamV3: ProjectCardData = {
     'Health',
   ],
   mainFeatures:
-    'Flutter 마이그레이션 · 오디오 세션 · 취침 자동화 · 온보딩/딥링크/공유 · 홈 세션 안정화',
+    'race queue · 걸음수 정합 · Flutter 마이그레이션 · 오디오 세션 · 온보딩/딥링크',
   background: [
     '제품 고도화로 알람·측정·백그라운드 오디오 등 네이티브 비중이 커지며 RN 셸의 일정·안정성 리스크가 커졌습니다.',
     'V2에서 불안정했던 홈 세션·서비스 중 이슈 응대 경험을 바탕으로, V3에서는 앱 셸과 취침 플로우를 한 번에 안정화하는 것이 목표였습니다.',
   ],
   meaning: [
-    'Flutter 메인 기여자로 UI뿐 아니라 Asleep 측정, 오디오 세션, 알람, 권한·배포 이슈까지 담당했습니다.',
+    'Flutter 메인 기여자로 UI뿐 아니라 수면 측정, 오디오 세션, 알람, 권한·배포 이슈까지 담당했습니다.',
+    'Native 측정 종료 신호가 React 리스너보다 먼저 오면 pending queue에 쌓아 flush하고, router.replace로 리포트에 진입하게 했습니다.',
+    '걸음수는 15분 버킷을 보정 없이 서버에 저장하고, 화면에 보이는 총합은 기기 집계를 쓰도록 책임을 나눴습니다.',
     '재생·녹음이 서로 세션을 덮지 않도록 playAndRecord를 앱에서만 구성하고, 웹 유튜브 등 외부 세션과는 handoff 경계를 뒀습니다. 녹음 중 타 세션 개입·권한 거부 스낵바는 Figma 문구와 맞춰 제품에 반영했습니다.',
-    'SNS 약관 중복 노출을 앱·웹 동의 흐름으로 제거하고, 프리필·권한 순서·Android 14 부분 미디어 권한 오인 등 엣지를 Jira·디자인과 함께 정리했습니다.',
+    'SNS 약관 중복 노출을 앱·웹 동의 흐름으로 제거하고, Play 심사 이후 Android는 MediaStore 저장(권한 없음)·iOS는 Add Only로 사진 권한 범위를 재설계했습니다.',
     'AppsFlyer OneLink 딥링크, 서버 기반 OG/공유 이미지, 웹과 동일한 Flutter 디자인 토큰, Flutter Sentry로 진입·공유·UI 일관·장애 감지를 보강했습니다.',
     '홈 layout/page 세션 중복 해석을 React cache로 1회화해 V2에서 불안정했던 홈 진입을 V3에서 정리했습니다.',
   ],
@@ -70,9 +72,9 @@ const kkuljamAdmin: ProjectCardData = {
   highlightProjectId: 'kkuljam-admin',
   projectTitle: '슬립포레스트 — 운영·분석 어드민 · AARRR 퍼널 · GA4·카카오 픽셀',
   projectFeatures: [
-    'React·Vite·ECharts로 퍼널·DAU·유저/오류 로그 어드민을 기획부터 구축',
-    'GA4 이벤트·user_properties와 카카오 픽셀(페이지뷰·가입완료)로 제품·광고 전환 기준 통일',
-    'AARRR 관점 가입→온보딩→활성 퍼널을 대시보드·가이드로 정량화',
+    '공통 fetch + TanStack Query로 10개 도메인 서버 상태·에러·인증을 표준화',
+    'access token 갱신 시 refreshPromise를 공유해 병렬 요청의 중복 refresh 방지',
+    'React·Vite·ECharts 퍼널·DAU 어드민과 GA4·카카오 픽셀 전환 추적',
   ],
   projectSkills: [
     'React',
@@ -84,13 +86,14 @@ const kkuljamAdmin: ProjectCardData = {
     'Kakao Pixel',
     'Tailwind',
   ],
-  mainFeatures: '퍼널·DAU 어드민 + GA4·카카오 픽셀 + AARRR 분석 기반 — 기획부터 구축',
+  mainFeatures: 'Query 10도메인 표준화 · refresh 공유 · 퍼널/GA4/픽셀 대시보드',
   background: [
     '가입·온보딩·활성을 숫자로 보지 못하면 운영·마케팅 의사결정이 느려지고, 데이터 확인이 개발에 묶여 있었습니다.',
     '제품 지표(GA4)와 광고 전환(카카오 픽셀)이 어긋나면 성과를 같은 언어로 말하기 어려웠습니다.',
   ],
   meaning: [
     '어드민 레포 주 작성자로 퍼널·DAU·로그·공지와 ECharts 대시보드를 구현했습니다.',
+    '공통 fetch + TanStack Query + query-key factory로 10개 Query 도메인을 표준화하고, refreshPromise 공유로 중복 토큰 갱신을 막았습니다.',
     'GA4에 성별·나이대·login_type·목표 수면/기상·키워드 등 user_properties와 app_open 등 행동을 정의하고, 카카오 픽셀 가입완료와 맞춰 광고↔서비스 퍼널을 정렬했습니다.',
     'AARRR(Acquisition·Activation·Retention 등)을 서비스 구간에 맞게 자르고, BigQuery·코호트 한계를 문서화해 이후 리텐션 확장 비용을 낮췄습니다.',
     '사용 가이드까지 작성해 비개발 직군이 직접 현황을 보게 했습니다.',
@@ -135,18 +138,18 @@ const kkuljamV2: ProjectCardData = {
 
 const cursorAiWorkflow: ProjectCardData = {
   title: 'AI · E2E 자동화',
-  date: '2025.12 ~ (V3~)',
+  date: '2026.02 ~',
   projectType: 'company',
   highlightProjectId: 'ai-e2e',
   projectTitle: '슬립포레스트 — Cursor 워크플로 · Playwright E2E · Closeout 품질 게이트',
   projectFeatures: [
-    'PRD→Plan→구현을 Cursor·MCP로 자동화하고, 프로덕트·디자인 시나리오를 검수해 Notion 테스트 시트를 개선',
-    'Playwright ~290 시나리오와 e2e-scenario 스킬로 작성→통과 상태까지 연결',
-    'MCP 교차 검증으로 누락 페이지를 발견해 출시 에픽에 이슈 자동 등록, Closeout으로 E2E·커밋·MR까지 묶음',
+    '2026.02 팀 Cursor 도입 후 PRD→Plan→구현을 MCP로 자동화하고, 프로덕트·디자인 시나리오를 검수해 Notion 테스트 시트를 개선',
+    'Playwright 19개 spec · 303개 케이스와 e2e-scenario 스킬로 작성→통과 상태까지 연결',
+    'MCP 교차 검증으로 누락 페이지를 발견해 출시 백로그에 이슈 자동 등록, Closeout으로 E2E·커밋·MR까지 묶음',
   ],
   projectSkills: ['Cursor', 'Playwright', 'MCP', 'Jira', 'Notion', 'Figma'],
   mainFeatures:
-    'AI Native 품질 게이트 — MCP · E2E ~290 · 에픽 자동 등록 · Closeout(커밋·MR)',
+    'AI Native 품질 게이트 — MCP · E2E 19 spec·303 케이스 · 누락 이슈 자동 등록 · Closeout(커밋·MR)',
   background: [
     'V3에서 화면이 늘수록 수동 회귀와 사람 기억에만 의존하는 완료 정의로는 품질을 지키기 어려웠습니다.',
     'AI로 구현만 빨라지면 검증·티켓화가 따라가지 못하는 문제를, 검증까지 닫히는 워크플로로 풀고자 했습니다.',
@@ -154,15 +157,15 @@ const cursorAiWorkflow: ProjectCardData = {
   meaning: [
     'Figma·Jira·Notion MCP로 디자인·이슈·문서를 한 환경에서 다루며 PRD→Plan→구현을 반복 가능하게 만들었습니다.',
     '프로덕트·디자이너 시나리오를 검수하고 Notion 시트를 개선한 뒤, 스킬이 시나리오 ID 기준으로 Playwright 코드와 상태 갱신까지 수행하게 했습니다.',
-    'POM·API Mock·storageState 구조로 온보딩~HFF 등 ~290 시나리오를 쌓고 가이드를 팀에 남겼습니다.',
-    'MCP로 스펙·화면 갭을 찾아 8월 출시 에픽에 이슈가 자동 등록되게 해, 누락을 출시 전에 드러냈습니다.',
+    'POM·API Mock·storageState 구조로 온보딩~HFF 등 19개 spec · 303개 케이스를 쌓고 가이드를 팀에 남겼습니다.',
+    'MCP로 스펙·화면 갭을 찾아 출시 전 백로그에 이슈가 자동 등록되게 해, 누락을 구현·검증 루프 안에서 드러냈습니다.',
     '기능 완료에 E2E를 포함하고 typecheck/lint/test→커밋→MR까지 Closeout으로 묶어 DoD를 습관화했습니다.',
   ],
 };
 
 const ooottt: ProjectCardData = {
   title: 'OOOTTT',
-  date: '2026.01 ~',
+  date: '2026.03 ~ 2026.08',
   projectType: 'team',
   projectTitle: 'OTT 구독 가치를 기록·시각화하는 Flutter 앱',
   projectFeatures: [
@@ -178,7 +181,7 @@ const ooottt: ProjectCardData = {
   githubUrl: 'https://github.com/OOOTTT-dev/app',
   background: [
     '매달 나가는 OTT 구독료를 “매몰 비용”이 아니라 기록·취향 데이터로 관리할 수 있게 돕는 서비스입니다.',
-    'iOS App Store 배포 완료, Android는 심사 중. Flobby 종료 후 일부 팀원이 재결성한 팀 프로젝트로, 배포·전체 기획 오너는 아니며 Flutter 화면·차트와 데이터 흐름 협의에 집중했습니다.',
+    'iOS App Store · Google Play 배포 완료. Flobby 종료 후 일부 팀원이 재결성한 팀 프로젝트로, 배포·전체 기획 오너는 아니며 Flutter 화면·차트와 데이터 흐름 협의에 집중했습니다.',
   ],
   meaning: [
     '취향 탭의 자주 보는 OTT 도넛, 월별 히스토리, 기록 그래프 등을 라이브러리 의존 없이 CustomPainter와 애니메이션으로 구현했습니다.',
@@ -194,7 +197,7 @@ const momo: ProjectCardData = {
   projectType: 'team',
   projectTitle: '간편히 밥친구를 구할 수 있는 밥친구 구하기 사이트',
   projectFeatures: [
-    '회원·마이페이지·채팅 등 핵심 기능 구현 (프론트 기능 개발 약 60% 기여)',
+    '회원가입·소셜 로그인, 마이페이지, 채팅 등 핵심 사용자 흐름을 담당',
     'TanStack Query로 서버 상태 캐싱 및 로딩/성공 UI 피드백 연동',
     '디자인 시스템·공통 컴포넌트로 팀 협업 효율 향상',
     '백엔드와 API·OAuth·이미지 업로드 구조를 함께 점검하며 이슈 해결',
@@ -207,7 +210,7 @@ const momo: ProjectCardData = {
   ],
   meaning: [
     '처음으로 백엔드와 협업한 팀 프로젝트로, CORS·배포·Git Flow·직군 간 소통을 실전에서 배웠습니다.',
-    '회원 기능, 역할별 마이페이지, 웹소켓 채팅 등을 담당하며 MVP·리팩토링 기간 동안 프론트 핵심 기능의 상당 부분을 구현했습니다.',
+    '회원 기능, 역할별 마이페이지, 웹소켓 채팅을 담당해 핵심 흐름 5개 중 3개(회원가입·소셜 로그인, 마이페이지, 채팅)를 완성했고, 나머지 2개(디자인 시스템, 프로필)도 함께 만들었습니다.',
     'Recoil과 React Query로 클라이언트/서버 상태를 분리하고, isPending·isSuccess를 UI에 연결해 사용자 피드백을 명확히 했습니다.',
     '이미지 업로드·소셜 로그인 등 API 설계 이슈를 백엔드와 함께 풀어 가며 전체 시스템 관점을 넓힌 프로젝트입니다.',
   ],

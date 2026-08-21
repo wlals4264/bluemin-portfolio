@@ -58,6 +58,75 @@ export const highlightsData: HighlightCase[] = [
     ],
   },
   {
+    id: 'webview-native-race',
+    projectId: 'kkuljam-v3',
+    title: 'WebView ↔ Native navigation race 해소',
+    subtitle: '측정 종료 신호가 리스너보다 먼저 와도 화면 전환이 유실되지 않게',
+    period: '2026.01 ~',
+    tags: ['Next.js', 'WebView', 'Bridge', 'Navigation'],
+    context: [
+      '수면 측정이 끝나면 Native가 WebView로 결과를 보내고, 웹이 리포트 화면으로 넘어가는 흐름이었습니다.',
+      'React 리스너가 붙기 전에 신호가 오면 이벤트가 사라져, 측정은 끝났는데 화면이 멈추는 경우가 있었습니다.',
+    ],
+    decision: [
+      '화면 mount 여부와 상관없이 이벤트를 받아 두는 early listener와 pending queue를 앞단에 두었습니다.',
+      '실제 화면 리스너가 준비되면 큐를 flush하고, 페이지 새로고침 대신 App Router의 router.replace로 SPA 전환했습니다.',
+    ],
+    issues: [
+      {
+        problem: 'useEffect에서 리스너를 등록하면, 그보다 먼저 도착한 Native 이벤트는 복구할 수 없었습니다.',
+        action: '앱 기동 직후 등록되는 early listener가 이벤트를 큐에 쌓고, 화면 리스너가 붙으면 한 번에 처리하게 했습니다.',
+        result: '리스너 준비 전 도착 신호도 리포트 전환으로 이어지게 됐습니다.',
+      },
+      {
+        problem: '전환이 페이지 전체를 다시 불러오는 방식에 가까워 상태 유지와 속도가 불안정했습니다.',
+        action: 'router.replace로 새로고침 없이 리포트 화면으로 바꾸었습니다.',
+        result: 'full reload 없이 SPA navigation으로 화면 이동 유실이 재발하지 않았습니다.',
+      },
+    ],
+    outcomes: [
+      'Native → Web 이벤트 유실 없이 측정 종료 후 리포트로 안정 전환',
+      'WebView 경계 이벤트는 pending queue를 기본 패턴으로 재사용',
+    ],
+  },
+  {
+    id: 'health-steps-sync',
+    projectId: 'kkuljam-v3',
+    title: '걸음 수 동기화 정합성 · 표시/저장 분리',
+    subtitle: '15분 버킷 누락을 막고, 기기 총합과 서버 raw의 책임을 나눔',
+    period: '2026.01 ~',
+    tags: ['Flutter', 'HealthKit', 'Health Connect', 'Sync'],
+    context: [
+      'RN에서 Flutter로 옮기며 Native Health 걸음 수 연동을 다시 맞춰야 했습니다.',
+      'Android에 있던 15분 구간 저장을 iOS에도 동일하게 적용하는 과정에서 누락·권한·합계 불일치가 이어졌습니다.',
+    ],
+    decision: [
+      'Android 버킷 라벨 규칙을 iOS에도 같은 알고리즘으로 옮겨 자투리 구간이 빠지지 않게 했습니다.',
+      '표시(오늘/어제 총 걸음)는 기기 집계, 서버 저장은 15분 구간 raw로 책임을 나누고 임시 보정 로직은 제거했습니다.',
+    ],
+    issues: [
+      {
+        problem: '끝 시각이 15분 격자에 안 맞으면 마지막 자투리 구간 라벨이 없어 걸음이 빠졌습니다.',
+        action: '격자 시각 외에 실제 끝 시각을 라벨로 한 번 더 넣고, 이전 라벨~현재 라벨 범위를 빠짐없이 조회했습니다.',
+        result: '부분 구간이 별도 버킷으로 잡혀 iOS·Android 모두 누락 없이 동기화됩니다.',
+      },
+      {
+        problem: 'HealthKit은 걸음 READ 허용 여부를 앱에 공개하지 않아, 거부인지 데이터 없음인지 구분할 수 없었습니다.',
+        action: '최근 7일 중 걸음이 하루라도 있으면 허용으로 보고, 7일 모두 0이면서 요청 이력이 있을 때만 거부로 추론했습니다.',
+        result: '권한 모달이 과도하게 뜨지 않으면서도 거부 상태를 나눠 처리할 수 있게 됐습니다.',
+      },
+      {
+        problem: '기기 하루 총합과 서버 15분 합이 달라, 차이를 마지막 구간에 더 넣는 보정을 넣었다가 책임이 섞였습니다.',
+        action: '같은 날 보정과 전용 테스트를 걷어내고, 불일치는 버그가 아니라 의도된 분리라고 팀 계약으로 명시했습니다.',
+        result: '기상 알람 시 최대 13일 백필이 안정적으로 돌고, 정합성을 숫자 맞추기가 아니라 구조로 풀게 됐습니다.',
+      },
+    ],
+    outcomes: [
+      'iOS·Android 걸음 수가 버킷 누락 없이 동기화',
+      '표시는 기기 총합, 저장은 15분 raw라는 계약을 운영 기준으로 고정',
+    ],
+  },
+  {
     id: 'ios-audio-session',
     projectId: 'kkuljam-v3',
     title: 'iOS 오디오 세션 통합 · 외부 세션 충돌 대응',
@@ -70,7 +139,7 @@ export const highlightsData: HighlightCase[] = [
       '웹뷰 유튜브·낮 루틴 비디오 등 외부 세션이 잡히면 Flutter 재설정과 싸움을 만듭니다.',
     ],
     decision: [
-      'IosUnifiedAudioSession으로 playAndRecord를 앱 기동 시 한 곳에서만 구성하고, 플레이어는 세션을 덮지 않게 했습니다.',
+      '앱 기동 시 통합 오디오 세션으로 playAndRecord를 한 곳에서만 구성하고, 플레이어는 세션을 덮지 않게 했습니다.',
       '루틴→측정 전환에서는 cleanup과 세션 다운시프트를 분리해 플로우 중 세션을 유지했습니다.',
       '취침 전=앱 오디오 / 낮 루틴=웹 비디오로 책임을 나누고, 외부 세션과는 ownership·handoff 경계를 명시했습니다.',
       '자러가기 경로는 오디오 권한 → 수면 음악 → 수면 분석 순서로 고정했습니다.',
@@ -94,7 +163,7 @@ export const highlightsData: HighlightCase[] = [
     ],
     outcomes: [
       'playAndRecord 통합과 ownership 경계로 재생·녹음·외부(유튜브) 세션 충돌을 완화',
-      '취침 자동화 플로우의 끊김·무음 장애를 줄이고 QA 재현 가능한 엣지 케이스를 문서화',
+      'TestFlight 내부 테스트 기준으로 재현·수정. 정식 스토어 배포 전 단계',
     ],
   },
   {
@@ -138,6 +207,7 @@ export const highlightsData: HighlightCase[] = [
       '앱에 마케팅 동의 상태를 저장하고 웹 온보딩에 전달해 중복 약관 바텀시트를 제거했습니다.',
       'SNS 기본 정보 허용 사용자는 온보딩 데이터를 프리필해 입력 단계를 줄였습니다.',
       '권한 요청 순서를 조정하고, OS별 권한 안내·거부 스낵바를 디자인 스펙과 맞춰 요구·반영했습니다.',
+      'Play 심사에서 사진 읽기 권한이 거부된 뒤에는 Android는 MediaStore 저장으로 권한을 없애고, iOS는 추가 전용(Add Only)으로 범위를 좁혔습니다.',
     ],
     issues: [
       {
@@ -146,9 +216,9 @@ export const highlightsData: HighlightCase[] = [
         result: '소셜 가입 온보딩 진입 마찰을 줄였습니다.',
       },
       {
-        problem: 'Android 14 부분 미디어 권한이 DENIED로 오인되어 공유 권한 시트가 반복됐습니다.',
-        action: 'OS STATUS를 분석해 “오류가 아닌 정책”으로 정리하고 OS별 안내 문구를 제안했습니다.',
-        result: '권한 UX를 제품·디자인과 함께 바로잡았습니다.',
+        problem: 'Android 14 부분 미디어 권한이 DENIED로 오인되어 공유 권한 시트가 반복됐고, 이후 Play 심사에서 사진 읽기 권한 자체가 거부됐습니다.',
+        action: '처음엔 OS 정책으로 재분류해 안내 문구를 나눴고, 심사 거부 후에는 Android 권한 요청을 제거하고 MediaStore로 저장하도록 재설계했습니다. iOS는 Add Only로 범위를 좁혔습니다.',
+        result: 'Android는 권한 요청 없이 저장하고, iOS만 추가 전용 바텀시트가 남은 구조로 운영 중입니다.',
       },
       {
         problem: '오디오 권한 거부 사용자가 루틴·측정으로 들어가면 실패만 겪었습니다.',
@@ -158,7 +228,7 @@ export const highlightsData: HighlightCase[] = [
     ],
     outcomes: [
       '소셜 약관 중복 제거·프리필로 온보딩 단계를 간소화',
-      '권한·UI 엣지를 Jira·Figma와 맞춰 기획·꼼꼼함 기반으로 해소',
+      '사진 권한을 OS 정책·스토어 심사에 맞춰 MediaStore / Add Only로 재설계',
     ],
   },
   {
@@ -230,32 +300,65 @@ export const highlightsData: HighlightCase[] = [
     ],
   },
   {
+    id: 'admin-query-standard',
+    projectId: 'kkuljam-admin',
+    title: 'Admin API · 서버 상태 관리 표준화',
+    subtitle: '10개 Query 도메인에 공통 fetch·키·인증 갱신을 적용',
+    period: '2025.09 ~',
+    tags: ['TanStack Query', 'Vite', 'Auth', 'Admin'],
+    context: [
+      '도메인마다 fetch·인증·에러 처리와 query key 규칙이 달라 화면을 추가할 때마다 같은 실수를 반복했습니다.',
+      '토큰 만료 시 여러 요청이 동시에 refresh를 치면 인증이 더 불안정해졌습니다.',
+    ],
+    decision: [
+      '공통 fetch 레이어와 TanStack Query, query-key factory로 서버 상태 패턴을 한 구조로 모았습니다.',
+      'access token 갱신은 refreshPromise를 공유해, 동시에 실패한 요청이 갱신을 한 번만 타게 했습니다.',
+    ],
+    issues: [
+      {
+        problem: '화면마다 에러·로딩·키 네이밍이 제각각이라 캐시 무효화와 재사용이 어려웠습니다.',
+        action: '10개 Query 도메인에 같은 fetch·query key 규칙을 적용하고 목록·상세·뮤테이션 패턴을 맞췄습니다.',
+        result: '새 관리 화면을 같은 골격으로 붙일 수 있게 됐습니다.',
+      },
+      {
+        problem: '만료된 access token으로 병렬 요청이 나가면 refresh가 중복 호출됐습니다.',
+        action: '진행 중인 refresh Promise를 공유해 첫 갱신이 끝나기를 나머지 요청이 기다리게 했습니다.',
+        result: '중복 갱신 없이 인증 처리가 안정화됐습니다.',
+      },
+    ],
+    outcomes: [
+      'Admin 10개 Query 도메인을 공통 서버 상태 구조로 표준화',
+      '병렬 요청의 중복 refresh를 막아 인증 실패 재발을 줄임',
+    ],
+  },
+  {
     id: 'ai-e2e-automation',
     projectId: 'ai-e2e',
     title: 'Cursor 워크플로 · Playwright E2E · Closeout 자동화',
     subtitle: 'PRD→구현→시나리오 검수→E2E→이슈 등록·MR까지 품질 게이트',
-    period: '2025.12 ~',
+    period: '2026.02 ~',
     tags: ['Cursor', 'Playwright', 'MCP', 'E2E', 'DoD'],
     context: [
+      '2026.02.04 팀 전체가 Cursor를 도입한 뒤, FE·Flutter 레포에서 Agent 작업량이 늘었습니다.',
       '화면·플로우가 늘수록 수동 회귀만으로는 품질을 지키기 어려웠습니다.',
       'AI로 구현만 빨라지면 검증·티켓화가 따라가지 못하는 문제가 있었습니다.',
     ],
     decision: [
       'Cursor + Figma·Jira·Notion MCP로 PRD→Plan→구현 워크플로를 자동화했습니다.',
       '프로덕트·디자이너 시나리오를 검수하고 Notion 테스트 시트를 개선한 뒤, e2e-scenario 스킬로 코드·상태 갱신까지 연결했습니다.',
-      'Playwright ~290 시나리오(온보딩/홈/MY/리포트/일기/챗/루틴/HFF 등)를 구축했습니다.',
-      'MCP 교차 검증으로 누락 페이지를 발견하면 출시 에픽에 이슈가 자동 등록되게 했습니다.',
+      'Playwright 19개 spec · 303개 케이스(온보딩/홈/MY/리포트/일기/챗/루틴/HFF 등)를 구축했습니다.',
+      'MCP 교차 검증으로 누락 페이지를 발견하면 출시 백로그에 이슈가 자동 등록되게 했습니다.',
       '기능 완료에 E2E를 포함하고 typecheck/lint/test→커밋→MR까지 Closeout으로 묶었습니다.',
     ],
     issues: [
       {
         problem: '시나리오가 문서·티켓·코드에 흩어지면 자동화 범위가 불명확합니다.',
         action: '시나리오 ID를 Jira·Notion·스펙 제목과 맞추고 스킬이 범위→작성→상태까지 반복하게 했습니다.',
-        result: '수백 개 E2E를 체계적으로 쌓을 수 있었습니다.',
+        result: '19개 spec · 303개 케이스를 시나리오 ID 기준으로 쌓을 수 있었습니다.',
       },
       {
         problem: '스펙·화면 누락이 출시 직전에야 발견됐습니다.',
-        action: 'Figma·Notion·Jira MCP로 시나리오를 교차 검증하고 갭을 에픽 이슈로 자동 등록했습니다.',
+        action: 'Figma·Notion·Jira MCP로 시나리오를 교차 검증하고 갭을 출시 백로그 이슈로 자동 등록했습니다.',
         result: '누락을 구현·검증 루프 안에서 조기에 드러냈습니다.',
       },
       {
@@ -265,8 +368,9 @@ export const highlightsData: HighlightCase[] = [
       },
     ],
     outcomes: [
-      'Playwright ~290 시나리오로 핵심 플로우 회귀 기반 마련',
-      'AI 구현 + MCP 검수 + 에픽 자동 등록 + Closeout으로 완료 정의를 자동화',
+      'Playwright 19개 spec · 303개 케이스로 핵심 플로우 회귀 기반 마련',
+      '팀 Cursor 도입(2026.02.04) 후 MR/주(FE·Flutter·Admin) 1.2건 → 14건대, 이후 12~18건대 유지',
+      'GitLab MR 국면(2026.07.23–08.20) 4레포 합산 티켓키 71%·AI 완결률 87%. FE 80%/91%, Flutter 75%/85% (도입 전 티켓키 9%)',
     ],
   },
   {
@@ -384,3 +488,17 @@ export const highlightsData: HighlightCase[] = [
 export function getHighlightsByProjectId(projectId: ProjectHighlightId): HighlightCase[] {
   return highlightsData.filter((h) => h.projectId === projectId);
 }
+
+export const highlightProjectOrder: ProjectHighlightId[] = [
+  'kkuljam-v3',
+  'kkuljam-admin',
+  'ai-e2e',
+  'kkuljam-v2',
+];
+
+export const highlightProjectLabel: Record<ProjectHighlightId, string> = {
+  'kkuljam-v3': '꿀잠닥터 V3',
+  'kkuljam-admin': '꿀잠닥터 Admin',
+  'ai-e2e': 'AI · E2E',
+  'kkuljam-v2': '꿀잠닥터 V2',
+};

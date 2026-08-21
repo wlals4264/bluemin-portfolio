@@ -9,7 +9,7 @@ const IntroductionBtns = () => {
   return (
     <div className="introduction-btns-container">
       <a href="/frontend_jimin_resume.pdf" download className="download-btn">
-        Download CV
+        Download Resume
         <FiDownload />
       </a>
       <div className="social-btns">

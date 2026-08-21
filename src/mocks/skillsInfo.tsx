@@ -14,9 +14,10 @@ import {
   SiGoogleanalytics,
   SiExpo,
   SiVite,
+  SiSentry,
 } from 'react-icons/si';
 import { RiNextjsFill } from 'react-icons/ri';
-import { TbBrandReactNative, TbCube, TbPackage } from 'react-icons/tb';
+import { TbBrandReactNative, TbCube, TbPackage, TbChartHistogram } from 'react-icons/tb';
 
 /** react-icons에 없는 브랜드용 인라인 SVG */
 const PlaywrightIcon = () => (
@@ -35,32 +36,39 @@ export const skillsInfo = [
   {
     title: 'Language',
     contents: [
+      { icon: <SiTypescript />, describe: 'TypeScript' },
+      { icon: <SiJavascript />, describe: 'JavaScript' },
+      { icon: <SiDart />, describe: 'Dart' },
       { icon: <FaHtml5 />, describe: 'HTML' },
       { icon: <FaCss3 />, describe: 'CSS' },
-      { icon: <SiJavascript />, describe: 'JavaScript' },
-      { icon: <SiTypescript />, describe: 'TypeScript' },
-      { icon: <SiDart />, describe: 'Dart' },
     ],
   },
   {
     title: 'Frameworks',
     contents: [
-      { icon: <FaReact />, describe: 'React' },
       { icon: <RiNextjsFill />, describe: 'Next.js' },
-      { icon: <TbBrandReactNative />, describe: 'React Native' },
+      { icon: <FaReact />, describe: 'React' },
       { icon: <SiFlutter />, describe: 'Flutter' },
-      { icon: <SiExpo />, describe: 'Expo' },
+      { icon: <TbBrandReactNative />, describe: 'React Native' },
       { icon: <SiVite />, describe: 'Vite' },
     ],
   },
   {
-    title: 'State Management',
+    title: 'State / Data',
     contents: [
-      { icon: <SiRecoil />, describe: 'Recoil' },
-      { icon: null, describe: 'Zustand' }, // /zustand_logo.svg (Skills.scss)
-      { icon: <SiReactquery />, describe: 'React Query' },
+      { icon: <SiReactquery />, describe: 'TanStack Query' },
+      { icon: null, describe: 'Zustand' },
       { icon: <TbCube />, describe: 'BLoC' },
-      { icon: <TbPackage />, describe: 'Provider' },
+    ],
+  },
+  {
+    title: 'Quality / Analytics',
+    contents: [
+      { icon: <PlaywrightIcon />, describe: 'Playwright' },
+      { icon: <SiSentry />, describe: 'Sentry' },
+      { icon: <SiGoogleanalytics />, describe: 'GA4' },
+      { icon: <TbChartHistogram />, describe: 'ECharts' },
+      { icon: <CursorIcon />, describe: 'Cursor' },
     ],
   },
   {
@@ -68,21 +76,21 @@ export const skillsInfo = [
     contents: [
       { icon: <SiTailwindcss />, describe: 'Tailwind' },
       { icon: <FaSass />, describe: 'Sass' },
-      { icon: <SiCssmodules />, describe: 'CSS Modules' },
-      { icon: <SiStyledcomponents />, describe: 'Styled Component' },
-    ],
-  },
-  {
-    title: 'Tools',
-    contents: [
-      { icon: <SiGoogleanalytics />, describe: 'GA' },
-      { icon: <SiFirebase />, describe: 'Firebase' },
-      { icon: <PlaywrightIcon />, describe: 'Playwright' },
-      { icon: <CursorIcon />, describe: 'Cursor' },
+      { icon: <SiStyledcomponents />, describe: 'Styled Components' },
     ],
   },
   {
     title: 'Deployment',
     contents: [{ icon: <SiVercel />, describe: 'Vercel' }],
+  },
+  {
+    title: 'Also used',
+    contents: [
+      { icon: <SiRecoil />, describe: 'Recoil' },
+      { icon: <TbPackage />, describe: 'Provider' },
+      { icon: <SiExpo />, describe: 'Expo' },
+      { icon: <SiCssmodules />, describe: 'CSS Modules' },
+      { icon: <SiFirebase />, describe: 'Firebase' },
+    ],
   },
 ];
