@@ -8,24 +8,24 @@ import gsap from 'gsap';
 
 const sentences = [
   <span className="korean" key={0}>
-    Next.js 웹과 Flutter 하이브리드에서
+    사용자 입장에서 제품을 개발합니다.
     <br />
-    WebView·Native 브릿지까지 다루는 프론트엔드 개발자입니다.
+    화면만이 아니라 쓰는 사람의 맥락까지 봅니다.
   </span>,
   <span className="korean" key={1}>
-    수면 헬스케어에서 기능 개발부터
+    기능을 만드는 데서 그치지 않고
     <br />
-    Playwright E2E·GA4·Admin까지 운영 사이클을 닫습니다.
+    앱 전반의 운영까지 경험했습니다.
   </span>,
   <span className="korean" key={2}>
-    Web–Native 경계의 navigation·권한·데이터 정합을
+    문제가 생기면 증상만 가리지 않고
     <br />
-    원인부터 잡고 구조로 풉니다.
+    원인부터 잡아 구조로 풉니다.
   </span>,
   <span className="korean" key={3}>
-    Cursor Rules/Skills와 E2E로
+    빠르게 만들더라도
     <br />
-    AI 작업도 같은 검증 게이트를 거치게 합니다.
+    같은 기준으로 품질을 검증합니다.
   </span>,
 ];
 

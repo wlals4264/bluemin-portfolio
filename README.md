@@ -11,7 +11,7 @@
 
 <b>🔗 배포 주소</b>
 
-https://ola-ola-nine.vercel.app/
+https://bluemin-portfolio.vercel.app/
 
 <b>기술 스택</b>
 
