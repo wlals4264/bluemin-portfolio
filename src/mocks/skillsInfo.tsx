@@ -59,6 +59,7 @@ export const skillsInfo = [
       { icon: <SiReactquery />, describe: 'TanStack Query' },
       { icon: null, describe: 'Zustand' },
       { icon: <TbCube />, describe: 'BLoC' },
+      { icon: <SiRecoil />, describe: 'Recoil' },
     ],
   },
   {
@@ -77,6 +78,7 @@ export const skillsInfo = [
       { icon: <SiTailwindcss />, describe: 'Tailwind' },
       { icon: <FaSass />, describe: 'Sass' },
       { icon: <SiStyledcomponents />, describe: 'Styled Components' },
+      { icon: <SiCssmodules />, describe: 'CSS Modules' },
     ],
   },
   {
@@ -86,10 +88,8 @@ export const skillsInfo = [
   {
     title: 'Also used',
     contents: [
-      { icon: <SiRecoil />, describe: 'Recoil' },
       { icon: <TbPackage />, describe: 'Provider' },
       { icon: <SiExpo />, describe: 'Expo' },
-      { icon: <SiCssmodules />, describe: 'CSS Modules' },
       { icon: <SiFirebase />, describe: 'Firebase' },
     ],
   },

@@ -19,7 +19,7 @@ const Highlights = forwardRef<HTMLDivElement>((_, ref) => {
       <InfoHeader title="Highlights" className="highlights-page-header" />
       <p className="highlights-page-lead">
         면접에서 먼저 보는 기술·제품 결정입니다. 더보기로 배경·이슈·성과를 펼칠 수 있고, 프로젝트
-        README에도 같은 내용이 있습니다.
+        &gt; README에서도 같은 내용을 확인할 수 있습니다.
       </p>
 
       {highlightProjectOrder.map((projectId) => {

@@ -2,7 +2,7 @@
 
 import '@/styles/components/AboutMe.scss';
 
-import { myInfoData, aboutMeNote } from '@/mocks/myInfoData';
+import { myInfoData } from '@/mocks/myInfoData';
 
 import { forwardRef } from 'react';
 
@@ -23,7 +23,6 @@ const AboutMe = forwardRef<HTMLDivElement>((_, ref) => {
           </div>
         ))}
       </div>
-      <p className="about-me-note">{aboutMeNote}</p>
     </div>
   );
 });
