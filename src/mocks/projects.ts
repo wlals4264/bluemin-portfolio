@@ -1,5 +1,10 @@
 import type { ProjectHighlightId } from '@/mocks/highlightsData';
 
+export type ProjectLink = {
+  label: string;
+  url: string;
+};
+
 export interface ProjectCardData {
   title: string;
   date: string;
@@ -7,6 +12,7 @@ export interface ProjectCardData {
   projectTitle: string;
   projectFeatures: string[];
   projectUrl?: string;
+  projectLinks?: ProjectLink[];
   projectSkills: string[];
   background?: string[];
   meaning?: string[];
@@ -25,6 +31,16 @@ export const projectTypeLabel = (projectType: string) => {
   if (projectType === 'company') return '회사 프로젝트';
   if (projectType === 'team') return '팀 프로젝트';
   return '개인 프로젝트';
+};
+
+export const getProjectLinks = (project: Pick<ProjectCardData, 'projectUrl' | 'projectLinks'>): ProjectLink[] => {
+  if (project.projectLinks && project.projectLinks.length > 0) {
+    return project.projectLinks;
+  }
+  if (project.projectUrl) {
+    return [{ label: project.projectUrl.replace(/^https?:\/\//, ''), url: project.projectUrl }];
+  }
+  return [];
 };
 
 const kkuljamV3: ProjectCardData = {
@@ -174,7 +190,13 @@ const ooottt: ProjectCardData = {
     '기획 단계에서 기능 구현 가능성을 개발자 관점으로 검수',
     'TMDB 의존도를 줄이기 위해 클라이언트 검색 API 호출 + 백엔드 데이터 누적 구조를 백엔드와 협의·반영',
   ],
-  projectUrl: 'https://apps.apple.com/kr/app/ooottt/id6774486889',
+  projectLinks: [
+    { label: 'App Store', url: 'https://apps.apple.com/kr/app/ooottt/id6774486889' },
+    {
+      label: 'Google Play',
+      url: 'https://play.google.com/store/apps/details?id=com.ooottt.app',
+    },
+  ],
   projectSkills: ['Flutter', 'Dart', 'BLoC', 'CustomPainter', 'TMDB', 'Dio'],
   mainFeatures:
     'Flutter UI·차트/모션 구현과 TMDB 검색·서버 누적 데이터 흐름에 대한 개발 관점 협의',

@@ -2,7 +2,7 @@
 
 import '@/styles/components/ReadMe.scss';
 
-import { ProjectCardData, projectTypeLabel } from '@/mocks/projects';
+import { ProjectCardData, projectTypeLabel, getProjectLinks } from '@/mocks/projects';
 
 import { useEffect, useState } from 'react';
 import { IoIosClose } from 'react-icons/io';
@@ -34,6 +34,8 @@ const ReadMe = ({ setIsProjectCardClicked, project }: ReadMeProps) => {
       document.body.style.overflow = 'auto';
     };
   }, [isOpen]);
+
+  const links = getProjectLinks(project);
 
   if (!isOpen) return null;
 
@@ -73,16 +75,21 @@ const ReadMe = ({ setIsProjectCardClicked, project }: ReadMeProps) => {
           </div>
 
           <div className="read-me-content-box">
-            {project.projectUrl && (
+            {links.length > 0 && (
               <section className="readme-section deployment-url-box">
                 <h3 className="readme-section-title">링크</h3>
-                <a
-                  className="readme-link"
-                  href={project.projectUrl}
-                  target="_blank"
-                  rel="noreferrer">
-                  {project.projectUrl}
-                </a>
+                <div className="readme-link-list">
+                  {links.map((link) => (
+                    <a
+                      className="readme-link"
+                      href={link.url}
+                      target="_blank"
+                      rel="noreferrer"
+                      key={link.url}>
+                      {link.label}
+                    </a>
+                  ))}
+                </div>
               </section>
             )}
 

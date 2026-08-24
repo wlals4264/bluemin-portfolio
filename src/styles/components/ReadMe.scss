@@ -160,6 +160,12 @@
           color: var(--accent);
         }
 
+        .readme-link-list {
+          display: flex;
+          flex-wrap: wrap;
+          gap: 8px;
+        }
+
         .readme-link {
           display: inline-flex;
           max-width: 100%;

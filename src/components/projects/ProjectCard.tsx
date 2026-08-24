@@ -1,6 +1,6 @@
 import '@/styles/components/ProjectCard.scss';
 
-import { projectTypeLabel } from '@/mocks/projects';
+import { projectTypeLabel, getProjectLinks } from '@/mocks/projects';
 
 import { FaBook, FaYoutube, FaGithub } from 'react-icons/fa';
 import { RxNotionLogo } from 'react-icons/rx';
@@ -17,6 +17,7 @@ interface ProjectCardProps {
   projectTitle: string;
   projectFeatures: string[];
   projectUrl?: string;
+  projectLinks?: { label: string; url: string }[];
   projectSkills: string[];
   projectVideoLink?: string;
   projectNotionUrl?: string;
@@ -33,6 +34,7 @@ const ProjectCard: React.FC<ProjectCardProps> = ({
   projectTitle,
   projectSkills,
   projectUrl,
+  projectLinks,
   projectFeatures,
   projectVideoLink,
   projectNotionUrl,
@@ -46,6 +48,7 @@ const ProjectCard: React.FC<ProjectCardProps> = ({
   const hiddenFeatureCount = Math.max(0, features.length - MAX_VISIBLE_FEATURES);
   const visibleSkills = (projectSkills ?? []).slice(0, 8);
   const hiddenSkillCount = Math.max(0, (projectSkills?.length ?? 0) - visibleSkills.length);
+  const links = getProjectLinks({ projectUrl, projectLinks });
 
   return (
     <article className="project-card-item-container">
@@ -76,11 +79,20 @@ const ProjectCard: React.FC<ProjectCardProps> = ({
           </button>
         )}
 
-        {projectUrl && (
-          <a className="project-card-link" href={projectUrl} target="_blank" rel="noreferrer">
-            <GoLink aria-hidden />
-            <span>{projectUrl.replace(/^https?:\/\//, '')}</span>
-          </a>
+        {links.length > 0 && (
+          <div className="project-card-links">
+            {links.map((link) => (
+              <a
+                className="project-card-link"
+                href={link.url}
+                target="_blank"
+                rel="noreferrer"
+                key={link.url}>
+                <GoLink aria-hidden />
+                <span>{link.label}</span>
+              </a>
+            ))}
+          </div>
         )}
 
         {troubleShootingNotionUrl && (

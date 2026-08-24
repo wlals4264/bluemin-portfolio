@@ -175,6 +175,12 @@
     }
   }
 
+  .project-card-links {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px 14px;
+  }
+
   .project-card-link,
   .project-card-trouble {
     display: inline-flex;

@@ -93,6 +93,7 @@ const Projects = forwardRef<HTMLDivElement>((_, ref) => {
                 projectTitle={project.projectTitle}
                 projectSkills={project.projectSkills}
                 projectUrl={project.projectUrl}
+                projectLinks={project.projectLinks}
                 projectFeatures={project.projectFeatures}
                 projectVideoLink={project.projectVideoLink}
                 projectNotionUrl={project.notionUrl}

@@ -14,8 +14,8 @@ export const experienceData: {
   education: [
     {
       title: 'Zerobase Front-end School',
-      date: '2024.08 ~ 2025.02',
-      subTitle: '제로베이스에서 진행하는 프론트엔드 개발자 양성 교육 과정 수료',
+      date: '2024.03 ~ 2024.12',
+      subTitle: '2024.03 기수 시작, 과정 중 유예 후 2024.12 수료',
       description: [
         'HTML·CSS·JavaScript로 반응형 UI·DOM 인터랙션 기반 웹 페이지 구현',
         '자료구조·알고리즘·CS 기초를 문제 풀이로 학습해 FE 구현 판단 근거 강화',
@@ -54,9 +54,9 @@ export const experienceData: {
     {
       title: 'Team Momo',
       date: '2024.12 ~ 2025.02',
-      subTitle: '제로베이스에서 진행하는 프론트엔드 & 백엔드 협업 프로젝트',
+      subTitle: '제로베이스 수료 후 해당 팀과 2025.02까지 연장한 FE·BE 협업 프로젝트',
       description: [
-        '데모 이후 React·Stomp 기반 채팅·알림 MVP를 완료할 때까지 스프린트 연장·출시 범위 확정',
+        '과정 수료(2024.12) 이후 채팅·알림 MVP를 마칠 때까지 같은 팀과 스프린트를 연장하고 출시 범위를 확정',
         'React·TypeScript로 밥친구 모집·모임 채팅·알림 등 MVP 핵심 FE 구현',
         'Git Flow·CORS·배포 이슈를 백엔드와 함께 풀어 FE/BE 협업·배포 프로세스 정착',
         'TanStack Query로 서버 상태 캐싱·로딩/성공 UI를 연동해 회원·채팅 비동기 UX 개선',
