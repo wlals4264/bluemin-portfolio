@@ -6,7 +6,7 @@ import { RiGraduationCapFill } from 'react-icons/ri';
 export const myInfoData = [
   { title: '이름', content: '김지민', icon: <IoPersonSharp /> },
   { title: '위치', content: '서울', icon: <MdPlace /> },
-  { title: '이메일', content: 'zeem_m2@naver.com', icon: <IoIosMail /> },
+  { title: '이메일', content: 'jimin2eezz@gmail.com', icon: <IoIosMail /> },
   {
     title: '학력',
     content: (
