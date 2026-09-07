@@ -2,6 +2,7 @@ import '@/styles/components/ProjectCard.scss';
 
 import { projectTypeLabel, getProjectLinks } from '@/mocks/projects';
 
+import { motion, useReducedMotion } from 'framer-motion';
 import { FaBook, FaYoutube, FaGithub } from 'react-icons/fa';
 import { RxNotionLogo } from 'react-icons/rx';
 import { SiVelog } from 'react-icons/si';
@@ -49,9 +50,16 @@ const ProjectCard: React.FC<ProjectCardProps> = ({
   const visibleSkills = (projectSkills ?? []).slice(0, 8);
   const hiddenSkillCount = Math.max(0, (projectSkills?.length ?? 0) - visibleSkills.length);
   const links = getProjectLinks({ projectUrl, projectLinks });
+  const shouldReduceMotion = useReducedMotion();
 
   return (
-    <article className="project-card-item-container">
+    <motion.article
+      className="project-card-item-container"
+      whileHover={
+        shouldReduceMotion ? undefined : { y: -10, scale: 1.02 }
+      }
+      whileTap={shouldReduceMotion ? undefined : { scale: 0.99 }}
+      transition={{ type: 'spring', stiffness: 300, damping: 20, mass: 0.6 }}>
       <div className="project-card-top">
         <div className="project-card-header">
           <h2 className="project-card-title">{title}</h2>
@@ -149,7 +157,7 @@ const ProjectCard: React.FC<ProjectCardProps> = ({
           )}
         </div>
       </div>
-    </article>
+    </motion.article>
   );
 };
 
