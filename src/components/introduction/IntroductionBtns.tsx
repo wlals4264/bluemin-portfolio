@@ -8,7 +8,11 @@ import '@/styles/components/IntroductionBtns.scss';
 const IntroductionBtns = () => {
   return (
     <div className="introduction-btns-container">
-      <a href="/frontend_jimin_resume.pdf" download="resume_FE_김지민.pdf" className="download-btn">
+      <a
+        href="https://resume-ashen-mu.vercel.app/api/pdf"
+        target="_blank"
+        rel="noopener noreferrer"
+        className="download-btn">
         Download Resume
         <FiDownload />
       </a>
