@@ -5,6 +5,7 @@ import '@/styles/components/ReadMe.scss';
 import { ProjectCardData, projectTypeLabel, getProjectLinks } from '@/mocks/projects';
 
 import { useEffect, useState } from 'react';
+import { createPortal } from 'react-dom';
 import { AnimatePresence, motion, useReducedMotion, type Variants } from 'framer-motion';
 import { IoIosClose } from 'react-icons/io';
 
@@ -71,7 +72,10 @@ const ReadMe = ({ setIsProjectCardClicked, project }: ReadMeProps) => {
 
   const links = getProjectLinks(project);
 
-  return (
+  // 스크롤 리빌 애니메이션이 조상 요소에 transform을 남기면 position:fixed의 기준점이
+  // 뷰포트가 아닌 그 조상으로 바뀌어 버리므로(딤 처리가 컴포넌트 영역에만 걸리는 원인),
+  // body에 직접 포탈로 렌더링해 항상 전체 화면을 기준으로 뜨도록 한다.
+  return createPortal(
     <AnimatePresence onExitComplete={handleExitComplete}>
       {isOpen && (
         <motion.div
@@ -190,7 +194,8 @@ const ReadMe = ({ setIsProjectCardClicked, project }: ReadMeProps) => {
           </motion.div>
         </motion.div>
       )}
-    </AnimatePresence>
+    </AnimatePresence>,
+    document.body,
   );
 };
 

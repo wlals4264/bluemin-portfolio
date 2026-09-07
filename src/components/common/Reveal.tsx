@@ -6,7 +6,7 @@ import { motion, useReducedMotion, type HTMLMotionProps, type Variants } from 'f
 const SPRING_TOSS = { type: 'spring', stiffness: 180, damping: 20, mass: 0.9 } as const;
 
 const sectionVariants: Variants = {
-  hidden: { opacity: 0, y: 72, scale: 0.94, filter: 'blur(10px)' },
+  hidden: { opacity: 0, y: 72, scale: 0.98, filter: 'blur(10px)' },
   visible: {
     opacity: 1,
     y: 0,
@@ -33,7 +33,7 @@ const groupVariants: Variants = {
 };
 
 const itemVariants: Variants = {
-  hidden: { opacity: 0, y: 32, scale: 0.92, filter: 'blur(6px)' },
+  hidden: { opacity: 0, y: 32, scale: 0.97, filter: 'blur(6px)' },
   visible: {
     opacity: 1,
     y: 0,
