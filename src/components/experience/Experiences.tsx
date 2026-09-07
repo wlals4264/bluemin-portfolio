@@ -8,6 +8,7 @@ import { forwardRef, MouseEvent, useEffect, useState } from 'react';
 
 import InfoHeader from '../header/InfoHeader';
 import ExperienceList from './ExperienceList';
+import { RevealSection } from '../common/Reveal';
 
 const Experiences = forwardRef<HTMLDivElement>((_, ref) => {
   const [activeName, setActiveName] = useState<'education' | 'team'>('education');
@@ -23,7 +24,7 @@ const Experiences = forwardRef<HTMLDivElement>((_, ref) => {
   };
 
   return (
-    <div ref={ref} className="experiences-wrapper">
+    <RevealSection ref={ref} className="experiences-wrapper">
       <InfoHeader title="Experiences" className="experiences-header" />
       <div className="experiences-container">
         <div className="experiences-nav-btn-box">
@@ -43,7 +44,7 @@ const Experiences = forwardRef<HTMLDivElement>((_, ref) => {
           <ExperienceList data={experienceData[activeName]} activeIndex={activeIndex} setActiveIndex={setActiveIndex} />
         </div>
       </div>
-    </div>
+    </RevealSection>
   );
 });
 

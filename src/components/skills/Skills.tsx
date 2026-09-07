@@ -6,15 +6,16 @@ import { forwardRef } from 'react';
 
 import InfoHeader from '../header/InfoHeader';
 import KeywordBubbleChart from './KeywordBubbleChart';
+import { RevealGroup, RevealItem, RevealSection } from '../common/Reveal';
 
 const Skills = forwardRef<HTMLDivElement>((_, ref) => {
   return (
-    <div ref={ref} className="skills-container">
+    <RevealSection ref={ref} className="skills-container">
       <InfoHeader title="Skills" className="skills-header" />
       <KeywordBubbleChart />
-      <div className="skills-list">
+      <RevealGroup className="skills-list">
         {skillsInfo.map((info, index) => (
-          <div className="skill-section" key={index}>
+          <RevealItem className="skill-section" key={index}>
             <div className="skill-title">
               <span>{info.title}</span>
             </div>
@@ -28,10 +29,10 @@ const Skills = forwardRef<HTMLDivElement>((_, ref) => {
                 </span>
               ))}
             </div>
-          </div>
+          </RevealItem>
         ))}
-      </div>
-    </div>
+      </RevealGroup>
+    </RevealSection>
   );
 });
 

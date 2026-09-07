@@ -16,6 +16,7 @@ import InfoHeader from '../header/InfoHeader';
 import ProjectCard from './ProjectCard';
 import ReadMe from './ReadMe';
 import FilteringButton, { getLatestProjects } from './FilteringButton';
+import { RevealSection } from '../common/Reveal';
 
 const Projects = forwardRef<HTMLDivElement>((_, ref) => {
   const [isProjectCardClicked, setIsProjectCardClicked] = useState(false);
@@ -50,7 +51,7 @@ const Projects = forwardRef<HTMLDivElement>((_, ref) => {
   const canGoNext = currentIndex < filteredProjects.length - 1;
 
   return (
-    <div ref={ref} className="projects-container">
+    <RevealSection ref={ref} className="projects-container">
       <InfoHeader title="Projects" className="projects-header" />
 
       <FilteringButton setFilteredProjects={setFilteredProjects} projects={projects} />
@@ -123,7 +124,7 @@ const Projects = forwardRef<HTMLDivElement>((_, ref) => {
           project={filteredProjects[selectedCardIndex]}
         />
       )}
-    </div>
+    </RevealSection>
   );
 });
 

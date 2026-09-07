@@ -7,14 +7,15 @@ import { careerData } from '@/mocks/careerData';
 import { forwardRef } from 'react';
 
 import InfoHeader from '../header/InfoHeader';
+import { RevealGroup, RevealItem, RevealSection } from '../common/Reveal';
 
 const Career = forwardRef<HTMLDivElement>((_, ref) => {
   return (
-    <div ref={ref} className="career-container">
+    <RevealSection ref={ref} className="career-container">
       <InfoHeader title="Career" className="career-header" />
-      <div className="career-list">
+      <RevealGroup className="career-list">
         {careerData.map((item, idx) => (
-          <article className="career-item" key={idx}>
+          <RevealItem className="career-item" key={idx}>
             <div className="career-item-meta">
               <h3 className="career-company">{item.company}</h3>
               <span className="career-date">{item.date}</span>
@@ -26,10 +27,10 @@ const Career = forwardRef<HTMLDivElement>((_, ref) => {
                 <li key={i}>{line}</li>
               ))}
             </ul>
-          </article>
+          </RevealItem>
         ))}
-      </div>
-    </div>
+      </RevealGroup>
+    </RevealSection>
   );
 });
 
