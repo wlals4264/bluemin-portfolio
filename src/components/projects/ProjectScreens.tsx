@@ -1,6 +1,12 @@
+'use client';
+
 import '@/styles/components/ProjectScreens.scss';
 
+import { useEffect, useState } from 'react';
+import { createPortal } from 'react-dom';
 import Image from 'next/image';
+import { IoIosClose } from 'react-icons/io';
+import { IoChevronBack, IoChevronForward } from 'react-icons/io5';
 
 interface ProjectScreensProps {
   /** public/ 기준 경로 (예: /images/portfolio/kkuljam) */
@@ -12,29 +18,100 @@ interface ProjectScreensProps {
   orientation?: 'portrait' | 'landscape';
 }
 
-/** README 모달에서 실제 앱 스크린샷을 가로 스크롤 갤러리로 보여준다. gif는 애니메이션 유지를 위해 next/image를 거치지 않는다. */
+/** README 모달에서 실제 앱 스크린샷을 가로 스크롤 갤러리로 보여준다. 클릭하면 크게 볼 수 있다. gif는 애니메이션 유지를 위해 next/image를 거치지 않는다. */
 const ProjectScreens = ({ basePath, files, alt, orientation = 'portrait' }: ProjectScreensProps) => {
+  const [openIndex, setOpenIndex] = useState<number | null>(null);
+
+  useEffect(() => {
+    if (openIndex === null) return;
+
+    const handleKeyDown = (e: KeyboardEvent) => {
+      if (e.key === 'Escape') setOpenIndex(null);
+      if (e.key === 'ArrowRight') setOpenIndex((i) => (i === null ? i : (i + 1) % files.length));
+      if (e.key === 'ArrowLeft') setOpenIndex((i) => (i === null ? i : (i - 1 + files.length) % files.length));
+    };
+
+    window.addEventListener('keydown', handleKeyDown);
+    return () => window.removeEventListener('keydown', handleKeyDown);
+  }, [openIndex, files.length]);
+
   return (
-    <div className={`project-screens${orientation === 'landscape' ? ' is-landscape' : ''}`}>
-      {files.map((file, i) => {
-        const isGif = file.toLowerCase().endsWith('.gif');
-        return (
-          <div className="project-screens-item" key={file}>
-            {isGif ? (
-              // eslint-disable-next-line @next/next/no-img-element -- next/image strips gif animation
-              <img src={`${basePath}/${file}`} alt={`${alt} ${i + 1}`} loading="lazy" />
-            ) : (
-              <Image
-                src={`${basePath}/${file}`}
-                alt={`${alt} ${i + 1}`}
-                fill
-                sizes="(max-width: 768px) 130px, 160px"
-              />
+    <>
+      <div className={`project-screens${orientation === 'landscape' ? ' is-landscape' : ''}`}>
+        {files.map((file, i) => {
+          const isGif = file.toLowerCase().endsWith('.gif');
+          return (
+            <button
+              type="button"
+              className="project-screens-item"
+              key={file}
+              onClick={() => setOpenIndex(i)}
+              aria-label={`${alt} ${i + 1} 크게 보기`}>
+              {isGif ? (
+                // eslint-disable-next-line @next/next/no-img-element -- next/image strips gif animation
+                <img src={`${basePath}/${file}`} alt={`${alt} ${i + 1}`} loading="lazy" />
+              ) : (
+                <Image
+                  src={`${basePath}/${file}`}
+                  alt={`${alt} ${i + 1}`}
+                  fill
+                  sizes="(max-width: 768px) 130px, 160px"
+                />
+              )}
+            </button>
+          );
+        })}
+      </div>
+
+      {openIndex !== null &&
+        createPortal(
+          <div className="project-screens-lightbox" onClick={() => setOpenIndex(null)}>
+            <button
+              type="button"
+              className="project-screens-lightbox-close"
+              onClick={() => setOpenIndex(null)}
+              aria-label="닫기">
+              <IoIosClose />
+            </button>
+
+            {files.length > 1 && (
+              <>
+                <button
+                  type="button"
+                  className="project-screens-lightbox-nav prev"
+                  onClick={(e) => {
+                    e.stopPropagation();
+                    setOpenIndex((openIndex - 1 + files.length) % files.length);
+                  }}
+                  aria-label="이전 화면">
+                  <IoChevronBack />
+                </button>
+                <button
+                  type="button"
+                  className="project-screens-lightbox-nav next"
+                  onClick={(e) => {
+                    e.stopPropagation();
+                    setOpenIndex((openIndex + 1) % files.length);
+                  }}
+                  aria-label="다음 화면">
+                  <IoChevronForward />
+                </button>
+              </>
             )}
-          </div>
-        );
-      })}
-    </div>
+
+            {/* gif·정적 이미지 모두 next/image 최적화 없이 원본으로 보여준다 (다양한 비율에 그대로 대응) */}
+            <div className="project-screens-lightbox-frame" onClick={(e) => e.stopPropagation()}>
+              {/* eslint-disable-next-line @next/next/no-img-element */}
+              <img
+                className="project-screens-lightbox-media"
+                src={`${basePath}/${files[openIndex]}`}
+                alt={`${alt} ${openIndex + 1}`}
+              />
+            </div>
+          </div>,
+          document.body,
+        )}
+    </>
   );
 };
 
