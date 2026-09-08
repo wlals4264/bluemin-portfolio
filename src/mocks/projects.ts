@@ -5,6 +5,14 @@ export type ProjectLink = {
   url: string;
 };
 
+export type ProjectScreenshots = {
+  /** public/ 기준 경로 (예: /images/portfolio/kkuljam) */
+  basePath: string;
+  count: number;
+  ext?: string;
+  alt: string;
+};
+
 export interface ProjectCardData {
   title: string;
   date: string;
@@ -24,6 +32,8 @@ export interface ProjectCardData {
   troubleShootingNotionUrl?: string;
   /** Highlights에 연결되는 제품 id (회사 카드만) */
   highlightProjectId?: ProjectHighlightId;
+  /** README 모달에 보여줄 실제 앱 스크린샷 */
+  screenshots?: ProjectScreenshots;
 }
 
 /** 프로젝트 타입 라벨 (카드·모달·필터 공통) */
@@ -60,12 +70,20 @@ const kkuljamV3: ProjectCardData = {
     'BLoC',
     'Provider',
     'Next.js',
+    'Figma',
+    'Storybook',
     'AppsFlyer',
     'Sentry',
     'Health',
   ],
   mainFeatures:
     'race queue · 걸음수 정합 · Flutter 마이그레이션 · 오디오 세션 · 온보딩/딥링크',
+  screenshots: {
+    basePath: '/images/portfolio/kkuljam',
+    count: 5,
+    ext: 'jpg',
+    alt: '꿀잠닥터 앱 화면',
+  },
   background: [
     '제품 고도화로 알람·측정·백그라운드 오디오 등 네이티브 비중이 커지며 RN 셸의 일정·안정성 리스크가 커졌습니다.',
     'V2에서 불안정했던 홈 세션·서비스 중 이슈 응대 경험을 바탕으로, V3에서는 앱 셸과 취침 플로우를 한 번에 안정화하는 것이 목표였습니다.',
@@ -100,6 +118,7 @@ const kkuljamAdmin: ProjectCardData = {
     'ECharts',
     'GA4',
     'Kakao Pixel',
+    'Jira',
     'Tailwind',
   ],
   mainFeatures: 'Query 10도메인 표준화 · refresh 공유 · 퍼널/GA4/픽셀 대시보드',
@@ -201,6 +220,12 @@ const ooottt: ProjectCardData = {
   mainFeatures:
     'Flutter UI·차트/모션 구현과 TMDB 검색·서버 누적 데이터 흐름에 대한 개발 관점 협의',
   githubUrl: 'https://github.com/OOOTTT-dev/app',
+  screenshots: {
+    basePath: '/images/portfolio/ooottt',
+    count: 5,
+    ext: 'png',
+    alt: 'OOOTTT 앱 화면',
+  },
   background: [
     '매달 나가는 OTT 구독료를 “매몰 비용”이 아니라 기록·취향 데이터로 관리할 수 있게 돕는 서비스입니다.',
     'iOS App Store · Google Play 배포 완료. Flobby 종료 후 일부 팀원이 재결성한 팀 프로젝트로, 배포·전체 기획 오너는 아니며 Flutter 화면·차트와 데이터 흐름 협의에 집중했습니다.',

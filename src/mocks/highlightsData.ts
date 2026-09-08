@@ -58,6 +58,45 @@ export const highlightsData: HighlightCase[] = [
     ],
   },
   {
+    id: 'design-system-storybook',
+    projectId: 'kkuljam-v3',
+    title: '디자인 시스템 · Storybook·Vitest 검증 체계 구축',
+    subtitle: 'Figma AI 퍼블리싱 자동화부터 컴포넌트 문서화·유닛 테스트까지',
+    period: '2025.08 ~',
+    tags: ['Figma', 'Storybook', 'Vitest', 'Design System'],
+    context: [
+      '신규 프로젝트를 기획 단계부터 새로 만드는 과정이라, 반복되는 Figma 퍼블리싱 작업과 컴포넌트 재사용 기준·검증 체계가 없었습니다.',
+      '체계 없이 쌓이면 개발 속도 저하와 UI 불일치가 누적될 위험이 컸습니다.',
+    ],
+    decision: [
+      '기획 단계부터 참여해 Figma 디자인을 AI로 퍼블리싱 자동화했습니다.',
+      '재사용성을 기준으로 컴포넌트를 설계해 디자인 시스템을 구축하고, Storybook으로 전체 컴포넌트를 문서화했습니다.',
+      'Vitest 기반 유닛 테스트를 붙여 컴포넌트 검증 체계를 함께 마련했습니다.',
+    ],
+    issues: [
+      {
+        problem: '디자인이 바뀔 때마다 반복되는 퍼블리싱 공수가 개발 속도를 깎았습니다.',
+        action: 'Figma 디자인을 AI로 퍼블리싱 자동화해 반복 작업을 줄였습니다.',
+        result: '디자인 변경 대응 공수를 줄이고 반영 속도를 높였습니다.',
+      },
+      {
+        problem: '디자이너·개발자가 컴포넌트 상태를 각자 다르게 참조해 UI가 어긋났습니다.',
+        action: 'Storybook으로 전체 컴포넌트를 문서화해 공통 참조점으로 삼았습니다.',
+        result: '디자이너·개발자 간 협업 효율이 올라갔습니다.',
+      },
+      {
+        problem: '컴포넌트가 늘어날수록 회귀 여부를 눈으로만 확인하기 어려웠습니다.',
+        action: 'Vitest 기반 유닛 테스트를 붙여 검증 체계를 마련했습니다.',
+        result: '컴포넌트 회귀 안정성을 확보했습니다.',
+      },
+    ],
+    outcomes: [
+      'Figma→코드 퍼블리싱을 AI로 자동화해 반복 공수 절감',
+      'Storybook을 디자이너·개발자 공통 참조점으로 활용',
+      'Vitest 유닛 테스트로 컴포넌트 회귀 안정성 확보',
+    ],
+  },
+  {
     id: 'webview-native-race',
     projectId: 'kkuljam-v3',
     title: 'WebView ↔ Native navigation race 해소',
@@ -329,6 +368,32 @@ export const highlightsData: HighlightCase[] = [
     outcomes: [
       'Admin 10개 Query 도메인을 공통 서버 상태 구조로 표준화',
       '병렬 요청의 중복 refresh를 막아 인증 실패 재발을 줄임',
+    ],
+  },
+  {
+    id: 'jira-sprint-dashboard',
+    projectId: 'kkuljam-admin',
+    title: 'Jira 스프린트 대시보드로 팀 보고 자동화',
+    subtitle: '전체 회의마다 반복되던 진행 상황 정리를 Admin 대시보드로 대체',
+    period: '2025.09 ~',
+    tags: ['Jira', 'Admin', 'Reporting'],
+    context: [
+      '전체 회의마다 프로젝트 진행 상황을 매번 별도로 정리해 보고해야 해서, 반복되는 보고 준비가 팀 회의 부담으로 누적됐습니다.',
+    ],
+    decision: [
+      'Admin 재구축 과정에서 GA4 이벤트 대시보드와 함께 Jira Sprint API를 연동했습니다.',
+      '개발팀 스프린트 티켓 진행 현황을 Admin에서 바로 조회할 수 있도록 구성했습니다.',
+    ],
+    issues: [
+      {
+        problem: '회의 때마다 진행 상황 보고 자료를 별도로 만들어야 해 준비 부담이 컸습니다.',
+        action: 'Jira Sprint API를 연동해 티켓 진행 현황을 Admin 화면에서 바로 보여주도록 구성했습니다.',
+        result: '별도 보고 자료 없이 대시보드 화면을 함께 보며 논의할 수 있게 됐습니다.',
+      },
+    ],
+    outcomes: [
+      '전체 회의 시 별도 보고 자료 준비 없이 대시보드로 진행 상황 공유',
+      '반복되는 보고 준비 부담을 줄여 회의 효율을 높임',
     ],
   },
   {

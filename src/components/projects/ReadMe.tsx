@@ -10,6 +10,7 @@ import { AnimatePresence, motion, useReducedMotion, type Variants } from 'framer
 import { IoIosClose } from 'react-icons/io';
 
 import ProjectHighlights from '@/components/highlights/ProjectHighlights';
+import ProjectScreens from '@/components/projects/ProjectScreens';
 
 interface ReadMeProps {
   setIsProjectCardClicked: (value: boolean) => void;
@@ -121,6 +122,18 @@ const ReadMe = ({ setIsProjectCardClicked, project }: ReadMeProps) => {
               </div>
 
               <div className="read-me-content-box">
+                {project.screenshots && (
+                  <section className="readme-section screens-box">
+                    <h3 className="readme-section-title">화면</h3>
+                    <ProjectScreens
+                      basePath={project.screenshots.basePath}
+                      count={project.screenshots.count}
+                      ext={project.screenshots.ext}
+                      alt={project.screenshots.alt}
+                    />
+                  </section>
+                )}
+
                 {links.length > 0 && (
                   <section className="readme-section deployment-url-box">
                     <h3 className="readme-section-title">링크</h3>
