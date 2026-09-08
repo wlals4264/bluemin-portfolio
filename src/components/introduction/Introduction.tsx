@@ -14,18 +14,17 @@ const sentences = [
   </span>,
   <span className="korean" key={1}>
     기능을 만드는 데서 그치지 않고
-    <br />
-    앱 전반의 운영까지 경험했습니다.
+    <br />앱 전반의 운영까지 경험했습니다.
   </span>,
   <span className="korean" key={2}>
-    문제가 생기면 증상만 가리지 않고
+    문제가 생기면 증상만 가지고 판단하지 않고
     <br />
     원인부터 잡아 구조로 풉니다.
   </span>,
   <span className="korean" key={3}>
     빠르게 만들더라도
     <br />
-    같은 기준으로 품질을 검증합니다.
+    품질을 검증하는 과정을 거칩니다.
   </span>,
 ];
 
