@@ -20,7 +20,13 @@
     .projects-peek-carousel {
       width: 100%;
       overflow: visible;
-      padding: 8px 0 20px;
+      /* 카드는 idle 둥둥 애니메이션(y: 0→-6px)에 hover 시 y:-10px·scale:1.02까지
+         더해져 위로 최대 ~16px 움직인다. 바로 아래 mask-image는 overflow:visible과
+         무관하게 이 엘리먼트의 박스 기준으로 무조건 클리핑하기 때문에(overflow-x:clip
+         트릭이 안 통하는 축 독립적이지 않은 속성), 그 움직임이 다 들어갈 만큼
+         위쪽 패딩을 넉넉히 잡아둔다 — 안 그러면 위로 뜰 때마다 카드 상단 둥근
+         모서리가 일자로 잘려 보인다 */
+      padding: 24px 0 20px;
 
       /* 가장자리 카드가 색 patch 없이 투명하게 사라지도록 — 배경색을 덧칠하는
          대신 알파(mask)로만 페이드해서 그 안쪽의 실제 배경(물결 텍스처)이
@@ -153,7 +159,9 @@
       }
 
       .projects-peek-carousel {
-        padding: 4px 0 12px;
+        /* 모바일은 hover가 없어 idle 둥둥(y: 0→-6px)만 신경 쓰면 되지만,
+           4px로는 그마저도 못 가려서 위쪽이 살짝씩 계속 잘렸다 */
+        padding: 14px 0 12px;
 
         .swiper-slide {
           width: min(100%, 92%);
