@@ -6,7 +6,7 @@ import { RefObject } from 'react';
 import Nav from '@/components/nav/Nav';
 import ThemeToggle from '@/components/theme/ThemeToggle';
 
-type SectionName = 'about' | 'career' | 'highlights' | 'skills' | 'projects' | 'experiences';
+type SectionName = 'about' | 'career' | 'skills' | 'projects' | 'experiences';
 
 type HeaderProps = {
   sectionRefs: {
@@ -17,7 +17,6 @@ export default function Header({ sectionRefs }: HeaderProps) {
   const titles = [
     { label: 'About me', key: 'about' },
     { label: 'Career', key: 'career' },
-    { label: 'Highlights', key: 'highlights' },
     { label: 'Skills', key: 'skills' },
     { label: 'Projects', key: 'projects' },
     { label: 'Experiences', key: 'experiences' },
