@@ -4,7 +4,9 @@
  */
 
 .hl-diagram-box {
-  margin-top: 16px;
+  /* 위아래 여백을 동일하게 둬야 DiagramZoom 래퍼와 마진 상쇄가 일어나도
+     테두리 위쪽에만 여백이 생기는 비대칭이 안 생긴다 */
+  margin: 16px 0;
   padding: 14px 16px 16px;
   border: 1px solid var(--border);
   border-radius: 12px;
