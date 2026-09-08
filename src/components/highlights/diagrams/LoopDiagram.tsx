@@ -2,7 +2,7 @@
  * 5개 스텝을 상단 3개(왼→오) · 하단 2개(오→왼)로 배치하고,
  * 마지막 스텝에서 첫 스텝으로 되돌아가는 화살표로 순환 구조를 표현한다.
  */
-export default function LoopDiagram({ steps }: { steps: string[] }) {
+export default function LoopDiagram({ steps, label = '회귀 피드백 루프' }: { steps: string[]; label?: string }) {
   const boxW = 138;
   const boxH = 34;
   const hGap = 24;
@@ -31,8 +31,8 @@ export default function LoopDiagram({ steps }: { steps: string[] }) {
   ];
 
   return (
-    <div className="hl-diagram-box">
-      <p className="hl-diagram-title">회귀 피드백 루프</p>
+    <div>
+      <p className="hl-process-row-label">{label}</p>
       <svg
         viewBox={`0 0 ${width} ${height}`}
         className="hl-svg-diagram hl-loop-diagram"

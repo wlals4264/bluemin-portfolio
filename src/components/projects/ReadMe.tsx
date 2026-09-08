@@ -11,6 +11,7 @@ import { IoIosClose } from 'react-icons/io';
 
 import ProjectHighlights from '@/components/highlights/ProjectHighlights';
 import ProjectScreens from '@/components/projects/ProjectScreens';
+import BlogPostCard from '@/components/projects/BlogPostCard';
 
 interface ReadMeProps {
   setIsProjectCardClicked: (value: boolean) => void;
@@ -152,19 +153,29 @@ const ReadMe = ({ setIsProjectCardClicked, project }: ReadMeProps) => {
                   </section>
                 )}
 
-                <section className="readme-section summary-box">
-                  <h3 className="readme-section-title">요약</h3>
-                  {project.projectFeatures && project.projectFeatures.length > 0 && (
-                    <ul className="project-card-features">
-                      {project.projectFeatures.map((feature) => (
-                        <li key={feature}>{feature}</li>
-                      ))}
-                    </ul>
-                  )}
-                  {project.mainFeatures && (
-                    <p className="project-card-main-features">{project.mainFeatures}</p>
-                  )}
-                </section>
+                {(project.projectFeatures.length > 0 || project.mainFeatures || project.blogPost) && (
+                  <section className="readme-section summary-box">
+                    <h3 className="readme-section-title">요약</h3>
+                    {project.projectFeatures.length > 0 && (
+                      <ul className="project-card-features">
+                        {project.projectFeatures.map((feature) => (
+                          <li key={feature}>{feature}</li>
+                        ))}
+                      </ul>
+                    )}
+                    {project.mainFeatures && (
+                      <p className="project-card-main-features">{project.mainFeatures}</p>
+                    )}
+                    {project.blogPost && (
+                      <BlogPostCard
+                        title={project.blogPost.title}
+                        excerpt={project.blogPost.excerpt}
+                        date={project.blogPost.date}
+                        url={project.blogPost.url}
+                      />
+                    )}
+                  </section>
+                )}
 
                 {project.background && project.background.length > 0 && (
                   <section className="readme-section background-box">

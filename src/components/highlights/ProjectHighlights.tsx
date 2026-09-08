@@ -15,14 +15,10 @@ export default function ProjectHighlights({ projectId }: ProjectHighlightsProps)
 
   return (
     <section className="readme-section highlights-box">
-      <h3 className="readme-section-title">핵심 결정</h3>
-      <p className="readme-highlights-lead">
-        이 프로젝트에서 임팩트 있는 기술·제품 결정입니다. 더보기로 배경·이슈·성과와 실제 화면 기반
-        예시 시각화를 펼칠 수 있습니다.
-      </p>
+      <h3 className="readme-section-title">Work &amp; Impact</h3>
       <div className="readme-highlights-list">
         {items.map((item, index) => (
-          <HighlightCaseCard key={item.id} item={item} index={index} compact />
+          <HighlightCaseCard key={item.id} item={item} index={index} />
         ))}
       </div>
     </section>

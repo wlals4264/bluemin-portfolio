@@ -360,6 +360,23 @@
   opacity: 0.5;
 }
 
+/* 프로세스 행 (칩 체인 · 회귀 루프) — 박스 없이 나열 */
+.hl-process-rows {
+  margin-top: 14px;
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+.hl-process-row-label {
+  margin: 0 0 4px;
+  font-size: 11px;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+  color: var(--text-muted);
+}
+
 /* SVG 다이어그램(라인·영역차트, 시퀀스, 루프) */
 .hl-svg-diagram {
   width: 100%;

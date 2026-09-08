@@ -1,552 +1,205 @@
-export type HighlightIssue = {
-  problem: string;
-  action: string;
-  result: string;
+export type ProjectHighlightId = 'kkuljam';
+
+export type ProcessRow = {
+  label: string;
+  steps: string[];
+  /** 화살표 체인에서 강조할 스텝 */
+  highlightStep?: string;
+  /** 순환 구조(회귀 루프)로 그릴지 여부 */
+  loopBack?: boolean;
+  /** 화살표 없이 칩만 나열 */
+  plain?: boolean;
 };
 
-export type ProjectHighlightId =
-  | 'kkuljam-v3'
-  | 'kkuljam-admin'
-  | 'kkuljam-v2'
-  | 'ai-e2e';
-
-/** 포트폴리오(공개)용 — 면접관이 읽는 요약. 코드·티켓·내부 기밀 제외 */
+/** 포트폴리오 PDF의 Work & Impact 케이스 — 문제 → 해결 → 결과 (배경·이슈 세분화 없이 PDF와 동일한 구조) */
 export type HighlightCase = {
   id: string;
   projectId: ProjectHighlightId;
   title: string;
-  subtitle: string;
-  period: string;
-  tags: string[];
-  context: string[];
-  decision: string[];
-  issues: HighlightIssue[];
-  outcomes: string[];
+  problem: string;
+  solution: string;
+  result: string;
+  process?: { rows: ProcessRow[] };
 };
 
 export const highlightsData: HighlightCase[] = [
   {
-    id: 'rn-to-flutter',
-    projectId: 'kkuljam-v3',
-    title: 'RN → Flutter 앱 셸 마이그레이션',
-    subtitle: '수면 케어 앱 V3 — 네이티브 확장에 맞춘 앱 셸 재구축',
-    period: '2025.12 ~ 2026.03',
-    tags: ['Flutter', 'React Native', 'WebView', 'Alarm', 'Mobile'],
-    context: [
-      '초기에는 속도를 위해 React Native 셸과 웹뷰 기반 구조를 사용했습니다.',
-      '알람·수면 측정·백그라운드 오디오·기기 연동 등 네이티브 비중이 커지며 기존 셸의 일정·안정성 리스크가 커졌습니다.',
-    ],
-    decision: [
-      '앱 셸을 Flutter로 재구축하고, 기록·리포트 등 서비스 UI는 웹뷰로 역할을 분리했습니다.',
-      '로그인·알람처럼 안정성이 중요한 진입점은 앱 쪽으로 옮겼습니다.',
-    ],
-    issues: [
-      {
-        problem: '외부 푸시 의존 알람은 기기·네트워크에 따라 불안정했습니다.',
-        action: '앱 자체 알람으로 전환하고 잠금·백그라운드 등 OS별 시나리오를 검증했습니다.',
-        result: '기상·루틴 핵심 알람을 OS 제약 안에서 안정화했습니다.',
-      },
-      {
-        problem: '루틴 영상 백그라운드 연속 재생과 안정성을 동시에 맞추기 어려웠습니다.',
-        action: '취침 전 루틴은 앱 오디오, 낮 루틴은 웹 비디오로 재생 책임을 분리했습니다.',
-        result: '취침 전 루틴의 백그라운드 재생 안정성을 확보했습니다.',
-      },
-    ],
-    outcomes: [
-      'RN WebView 셸을 Flutter로 재구축해 알람·수면 측정·오디오 네이티브 경로의 일정·운영 예측성 확보',
-      '웹 화면 자산은 WebView로 유지하면서 앱 셸 안정성 향상',
-    ],
+    id: 'kkuljam-design-system',
+    projectId: 'kkuljam',
+    title: '꿀잠닥터 신규 개발 참여 — 디자인 시스템·테스트 체계 구축',
+    problem:
+      '신규 프로젝트를 기획 단계부터 새로 만드는 과정이라, 반복되는 Figma 퍼블리싱 작업과 컴포넌트 재사용 기준·검증 체계 없이는 개발 속도 저하와 UI 불일치가 누적될 위험이 컸음',
+    solution:
+      '기획 단계부터 참여해 Figma 디자인을 AI로 퍼블리싱 자동화하고, 재사용성을 기준으로 컴포넌트를 설계해 디자인 시스템을 구축, Storybook으로 전체 컴포넌트를 문서화하고 Vitest 기반 유닛 테스트를 붙여 검증 체계를 함께 마련',
+    result:
+      '디자인 변경 시 반복되는 퍼블리싱 공수를 줄이고, Storybook을 디자이너·개발자 간 공통 참조점으로 활용해 협업 효율을 높였으며, 유닛 테스트로 컴포넌트 회귀 안정성을 확보',
   },
   {
-    id: 'design-system-storybook',
-    projectId: 'kkuljam-v3',
-    title: '디자인 시스템 · Storybook·Vitest 검증 체계 구축',
-    subtitle: 'Figma AI 퍼블리싱 자동화부터 컴포넌트 문서화·유닛 테스트까지',
-    period: '2025.08 ~',
-    tags: ['Figma', 'Storybook', 'Vitest', 'Design System'],
-    context: [
-      '신규 프로젝트를 기획 단계부터 새로 만드는 과정이라, 반복되는 Figma 퍼블리싱 작업과 컴포넌트 재사용 기준·검증 체계가 없었습니다.',
-      '체계 없이 쌓이면 개발 속도 저하와 UI 불일치가 누적될 위험이 컸습니다.',
-    ],
-    decision: [
-      '기획 단계부터 참여해 Figma 디자인을 AI로 퍼블리싱 자동화했습니다.',
-      '재사용성을 기준으로 컴포넌트를 설계해 디자인 시스템을 구축하고, Storybook으로 전체 컴포넌트를 문서화했습니다.',
-      'Vitest 기반 유닛 테스트를 붙여 컴포넌트 검증 체계를 함께 마련했습니다.',
-    ],
-    issues: [
-      {
-        problem: '디자인이 바뀔 때마다 반복되는 퍼블리싱 공수가 개발 속도를 깎았습니다.',
-        action: 'Figma 디자인을 AI로 퍼블리싱 자동화해 반복 작업을 줄였습니다.',
-        result: '디자인 변경 대응 공수를 줄이고 반영 속도를 높였습니다.',
-      },
-      {
-        problem: '디자이너·개발자가 컴포넌트 상태를 각자 다르게 참조해 UI가 어긋났습니다.',
-        action: 'Storybook으로 전체 컴포넌트를 문서화해 공통 참조점으로 삼았습니다.',
-        result: '디자이너·개발자 간 협업 효율이 올라갔습니다.',
-      },
-      {
-        problem: '컴포넌트가 늘어날수록 회귀 여부를 눈으로만 확인하기 어려웠습니다.',
-        action: 'Vitest 기반 유닛 테스트를 붙여 검증 체계를 마련했습니다.',
-        result: '컴포넌트 회귀 안정성을 확보했습니다.',
-      },
-    ],
-    outcomes: [
-      'Figma→코드 퍼블리싱을 AI로 자동화해 반복 공수 절감',
-      'Storybook을 디자이너·개발자 공통 참조점으로 활용',
-      'Vitest 유닛 테스트로 컴포넌트 회귀 안정성 확보',
-    ],
+    id: 'flutter-migration-decision',
+    projectId: 'kkuljam',
+    title: 'RN → Flutter 마이그레이션 의사결정 참여 및 기술 검증',
+    problem:
+      '조명 연동 등 Native 기능이 늘어나며 RN 앱이 무거워지고 성능·메모리 관리 이슈와 3rd party 의존성 리스크가 커져, 신뢰도 있는 전환 방향에 대한 결정이 필요했음',
+    solution:
+      "제품팀 회의에서 RN 유지 대비 Flutter/Native 전환의 이점(경량화, 3rd party 의존성 제거)과 리스크(코드 푸시 불가, 로그인·퍼블리싱 등 핵심 기능 전면 재개발)를 비교해 'Flutter로 우선 검증하고 학습 곡선이 지나치게 가파르면 Native로 전환'하는 조건부 전략 수립에 참여하고, iOS 구현을 담당해 로그인·알람·백그라운드 재생·센서·블루투스·걸음수 등 핵심 기능별로 라이브러리 기술 검증을 진행",
+    result:
+      "재생 라이브러리의 유지보수 중단과 handleLifecycle 제약(백그라운드 재생·연속 재생 동시 지원 불가)을 검증 단계에서 발견해 대체 라이브러리 전환 및 '저녁 루틴은 오디오 전용 제공'으로 스코프를 조정했고, Android Health Connect의 raw 데이터 제약을 확인해 걸음수 로그는 Native 코드 연동이 필요하다는 결론을 실제 구현 전에 도출",
+    process: {
+      rows: [
+        {
+          label: '기술 검증 항목',
+          plain: true,
+          steps: [
+            'SNS 로그인',
+            '알람 (iOS)',
+            '백그라운드 재생',
+            '센서 데이터',
+            '블루투스 연동',
+            '걸음수 (HealthKit)',
+          ],
+        },
+      ],
+    },
   },
   {
-    id: 'webview-native-race',
-    projectId: 'kkuljam-v3',
-    title: 'WebView ↔ Native navigation race 해소',
-    subtitle: '측정 종료 신호가 리스너보다 먼저 와도 화면 전환이 유실되지 않게',
-    period: '2026.01 ~',
-    tags: ['Next.js', 'WebView', 'Bridge', 'Navigation'],
-    context: [
-      '수면 측정이 끝나면 Native가 WebView로 결과를 보내고, 웹이 리포트 화면으로 넘어가는 흐름이었습니다.',
-      'React 리스너가 붙기 전에 신호가 오면 이벤트가 사라져, 측정은 끝났는데 화면이 멈추는 경우가 있었습니다.',
-    ],
-    decision: [
-      '화면 mount 여부와 상관없이 이벤트를 받아 두는 early listener와 pending queue를 앞단에 두었습니다.',
-      '실제 화면 리스너가 준비되면 큐를 flush하고, 페이지 새로고침 대신 App Router의 router.replace로 SPA 전환했습니다.',
-    ],
-    issues: [
-      {
-        problem: 'useEffect에서 리스너를 등록하면, 그보다 먼저 도착한 Native 이벤트는 복구할 수 없었습니다.',
-        action: '앱 실행 직후 등록되는 early listener가 이벤트를 큐에 쌓고, 화면 리스너가 붙으면 한 번에 처리하게 했습니다.',
-        result: '리스너 준비 전 도착 신호도 리포트 전환으로 이어지게 됐습니다.',
-      },
-      {
-        problem: '전환이 페이지 전체를 다시 불러오는 방식에 가까워 상태 유지와 속도가 불안정했습니다.',
-        action: 'router.replace로 새로고침 없이 리포트 화면으로 바꾸었습니다.',
-        result: 'full reload 없이 SPA navigation으로 화면 이동 유실이 재발하지 않았습니다.',
-      },
-    ],
-    outcomes: [
-      'Native → Web 이벤트 유실 없이 측정 종료 후 리포트로 안정 전환',
-      'WebView 경계 이벤트는 pending queue를 기본 패턴으로 재사용',
-    ],
+    id: 'sentry-monitoring',
+    projectId: 'kkuljam',
+    title: 'Sentry 기반 프로덕션 에러 모니터링 체계 도입',
+    problem:
+      '로컬에서 재현되지 않는 프로덕션 오류는 발생 경로와 원인 파악이 어려워, 사용자 리포트에 의존해 사후 대응하는 데 그침',
+    solution:
+      'React Native·Next.js 프로젝트에 Sentry를 연동해 프로젝트별 대시보드로 Crash Free Sessions·Apdex·오류 발생 추이를 파악하고, 개별 이슈는 Breadcrumbs(발생 과정)·Tags(Device/OS/Browser/URL)·HTTP 요청(Cookie/Header) 정보로 발생 경로를 재구성할 수 있도록 구축',
+    result: '재현 없이도 오류 발생 시점의 정확한 경로와 컨텍스트를 파악할 수 있는 모니터링 기반을 마련',
+    process: {
+      rows: [
+        {
+          label: '오류 추적 체계',
+          steps: [
+            'Breadcrumbs (발생 과정)',
+            'Tags & Context (Device/OS/Browser/URL)',
+            'HTTP Request (Cookie/Header)',
+          ],
+        },
+      ],
+    },
   },
   {
-    id: 'health-steps-sync',
-    projectId: 'kkuljam-v3',
-    title: '걸음 수 동기화 정합성 · 표시/저장 분리',
-    subtitle: '15분 버킷 누락을 막고, 기기 총합과 서버 raw의 책임을 나눔',
-    period: '2026.01 ~',
-    tags: ['Flutter', 'HealthKit', 'Health Connect', 'Sync'],
-    context: [
-      'RN에서 Flutter로 옮기며 Native Health 걸음 수 연동을 다시 맞춰야 했습니다.',
-      'Android에 있던 15분 구간 저장을 iOS에도 동일하게 적용하는 과정에서 누락·권한·합계 불일치가 이어졌습니다.',
-    ],
-    decision: [
-      'Android 버킷 라벨 규칙을 iOS에도 같은 알고리즘으로 옮겨 자투리 구간이 빠지지 않게 했습니다.',
-      '표시(오늘/어제 총 걸음)는 기기 집계, 서버 저장은 15분 구간 raw로 책임을 나누고 임시 보정 로직은 제거했습니다.',
-    ],
-    issues: [
-      {
-        problem: '끝 시각이 15분 격자에 안 맞으면 마지막 자투리 구간 라벨이 없어 걸음이 빠졌습니다.',
-        action: '격자 시각 외에 실제 끝 시각을 라벨로 한 번 더 넣고, 이전 라벨~현재 라벨 범위를 빠짐없이 조회했습니다.',
-        result: '부분 구간이 별도 버킷으로 잡혀 iOS·Android 모두 누락 없이 동기화됩니다.',
-      },
-      {
-        problem: 'HealthKit은 걸음 READ 허용 여부를 앱에 공개하지 않아, 거부인지 데이터 없음인지 구분할 수 없었습니다.',
-        action: '최근 7일 중 걸음이 하루라도 있으면 허용으로 보고, 7일 모두 0이면서 요청 이력이 있을 때만 거부로 추론했습니다.',
-        result: '권한 모달이 과도하게 뜨지 않으면서도 거부 상태를 나눠 처리할 수 있게 됐습니다.',
-      },
-      {
-        problem: '기기 하루 총합과 서버 15분 합이 달라, 차이를 마지막 구간에 더 넣는 보정을 넣었다가 책임이 섞였습니다.',
-        action: '같은 날 보정과 전용 테스트를 걷어내고, 불일치는 버그가 아니라 의도된 분리라고 팀 계약으로 명시했습니다.',
-        result: '기상 알람 시 최대 13일 백필이 안정적으로 돌고, 정합성을 숫자 맞추기가 아니라 구조로 풀게 됐습니다.',
-      },
-    ],
-    outcomes: [
-      'iOS·Android 걸음 수가 버킷 누락 없이 동기화',
-      '표시는 기기 총합, 저장은 15분 raw라는 계약을 운영 기준으로 고정',
-    ],
+    id: 'ai-workflow',
+    projectId: 'kkuljam',
+    title: 'AI Agent 개발 workflow 구조화',
+    problem: 'AI Agent가 프로젝트 컨벤션과 검증 절차 없이 작업해 결과물의 일관성과 추적성이 낮음',
+    solution:
+      'Cursor Rules/Skills와 AGENTS.md에 프로젝트 컨벤션, Jira 티켓 구현, E2E 시나리오, MR 생성, 작업 종료 DoD를 문서화하고, PRD → Plan → 구현 → E2E → Closeout 전 과정을 표준화',
+    result:
+      'Cursor 기반 AI 워크플로우를 성공적으로 구축·정착시켜 MR 처리 속도(주간)가 1.2건 → 9~15건대로 오르며 생산성이 크게 증대되고, 스킬을 단계적으로 설계해 붙인 뒤로는 코드 품질도 함께 좋아지며 커밋 티켓 추적률 9% → 78%·AI 커밋 완결률 0% → 88%로 누락 사례가 뚜렷이 감소',
   },
   {
-    id: 'ios-audio-session',
-    projectId: 'kkuljam-v3',
-    title: 'iOS 오디오 세션 통합 · 외부 세션 충돌 대응',
-    subtitle: '루틴 재생·수면 녹음·웹(유튜브) 세션이 서로 덮지 않도록 ownership 정리',
-    period: '2026.01 ~',
-    tags: ['Flutter', 'iOS', 'Audio Session', 'YouTube', 'Sleep Tracking'],
-    context: [
-      '취침 플로우는 루틴 오디오(just_audio)와 수면 녹음이 연달아, 때로는 겹쳐 동작합니다.',
-      'iOS에서 모듈이 각자 AVAudioSession을 바꾸면 끊김·무음·녹음 실패가 납니다.',
-      '웹뷰 유튜브·낮 루틴 비디오 등 외부 세션이 잡히면 Flutter 재설정과 충돌이 발생합니다.',
-    ],
-    decision: [
-      '앱 실행 시 통합 오디오 세션으로 playAndRecord를 한 곳에서만 구성하고, 플레이어는 세션을 덮지 않게 했습니다.',
-      '루틴에서 측정으로 넘어갈 때는 화면만 정리하고, 오디오 세션은 재생·녹음이 가능한 상태로 유지했습니다. 세션을 내리는 정리는 플로우를 완전히 나갈 때만 하도록 나눴습니다.',
-      '취침 전 수면 음악·녹음은 앱에서 처리하고, 낮 루틴 영상은 웹뷰 유튜브에서 재생하도록 나눴습니다. 웹이 세션을 쓰는 동안 앱은 세션을 다시 잡지 않고, 취침 플로우로 돌아올 때 앱이 세션을 되찾도록 역할을 나눴습니다.',
-      '자러가기 경로는 오디오 권한 → 수면 음악 → 수면 분석 순서로 고정했습니다.',
-    ],
-    issues: [
-      {
-        problem: '재생·녹음이 각자 세션을 활성화해 충돌했습니다.',
-        action: '통합 세션을 앱에서만 구성·활성화하고 플레이어 임의 재설정을 막았습니다.',
-        result: '루틴 재생과 수면 녹음이 같은 취침 플로우에서 안정적으로 이어졌습니다.',
-      },
-      {
-        problem: '웹 유튜브·외부 SDK가 세션을 잡으면 Flutter audio_session 재설정이 충돌했습니다.',
-        action: 'ownership 플래그와 handoff/release로 경계를 두고, 취침 전/낮 루틴 재생 책임을 분리했습니다.',
-        result: '외부 미디어와 앱 측정 경로가 서로 세션을 뺏지 않도록 정리했습니다.',
-      },
-      {
-        problem: '녹음 중 카메라·다른 오디오가 끼어들면 측정이 끊겼습니다.',
-        action: '중단 UX·재개 경로를 구현하고, 안내 문구를 디자인과 합의해 측정 화면에 반영했습니다.',
-        result: '예외 상황에서도 사용자에게 상태를 알리고 측정을 이어갈 수 있게 됐습니다.',
-      },
-    ],
-    outcomes: [
-      'playAndRecord 통합과 ownership 경계로 재생·녹음·외부(유튜브) 세션 충돌을 완화',
-      'TestFlight 내부 테스트 기준으로 재현·수정.',
-    ],
+    id: 'e2e',
+    projectId: 'kkuljam',
+    title: 'Playwright 기반 주요 사용자 플로우 E2E 체계 구축',
+    problem: 'AI로 생성한 E2E 스펙만으로는 실제 사용자 플로우·API 스펙과의 정합성을 보장할 수 없음',
+    solution:
+      '온보딩·홈·리포트·MY·HFF·루틴·NPS 등 주요 플로우를 19개 spec·약 303개 케이스로 구성하고, 실패 케이스를 사용자 플로우·Swagger 스펙과 대조 검증, Notion에 시나리오 상태·수정 이력을 Jira와 연동해 관리',
+    result:
+      '남은 오류는 백엔드와 협업해 해결하고, 로컬 및 Mobile Chrome/Safari 환경에서 반복 실행 가능한 회귀 검증 체계로 운영',
+    process: {
+      rows: [
+        {
+          label: 'E2E 시나리오 구현',
+          steps: [
+            'AI 스펙 초안 생성',
+            '사용자 플로우·Swagger 대조 검증',
+            'Playwright 코드 작성',
+            '테스트 실행',
+            'Notion 상태 갱신 (Jira 연동)',
+          ],
+        },
+        {
+          label: '개발 워크플로우',
+          steps: ['PRD', 'Plan', '검토', 'Build', 'E2E 자체검증', 'MR'],
+          highlightStep: 'E2E 자체검증',
+        },
+        {
+          label: '회귀 피드백 루프',
+          steps: ['Test', 'Flaky 발생', 'AI 재검수', '지속 실패 시 원인 후보 파악 (AI)', '회귀 원인 수정'],
+          loopBack: true,
+        },
+      ],
+    },
   },
   {
-    id: 'sleep-routine-automation',
-    projectId: 'kkuljam-v3',
-    title: '취침 루틴 → 수면 측정 → 일기 자동화',
-    subtitle: '알람부터 일기까지 끊김 없는 취침 플로우',
-    period: '2026.01 ~',
-    tags: ['Flutter', 'Alarm', 'Sleep Tracking', 'UX Flow'],
-    context: [
-      '취침 경험은 알람·루틴·음악·측정·일기로 나뉘어 단계마다 이탈하기 쉬웠습니다.',
-    ],
-    decision: [
-      '알람 확인 → 루틴 → 수면 음악 → 측정 → 일기 자동 작성의 단일 플로우를 설계했습니다.',
-      '네이티브 구간은 앱, 기록·리포트 UI는 웹이 이어받도록 역할을 나눴습니다.',
-    ],
-    issues: [
-      {
-        problem: '단계가 끊기면 사용자가 다음 행동을 스스로 찾아야 했습니다.',
-        action: '알람·루틴 종료 시 다음 단계로 자동 진입하도록 연결했습니다.',
-        result: '취침부터 일기까지 한 흐름으로 이어지게 했습니다.',
-      },
-    ],
-    outcomes: [
-      '알람→루틴→음악→측정→일기를 자동화해 취침 이탈 구간 축소',
-      '앱·웹 경계를 넘나들면서도 사용자 관점의 연속 경험 확보',
-    ],
+    id: 'ga4',
+    projectId: 'kkuljam',
+    title: 'GA4 기반 사용자 행동 수집과 운영 지표 연결',
+    problem: 'WebView SPA 특성상 GA4 자동 pageview만으로는 실제 라우팅 이동을 정확히 추적하기 어려움',
+    solution:
+      '자동 pageview를 끄고 route 변경 기반 page_view와 sign_up·banner_click·share·error_log 등 이벤트를 직접 설계해 수집하고, error_log는 front·report·api·rn 발생 소스별로 dimension 타입을 구조화(예: front는 error/unauthorized/middleware/not-found, api는 commFetch 단위)해 소스를 특정할 수 있도록 설계',
+    result:
+      'Admin에서 GA Data API의 stream/event/custom dimension 필터로 DAU·이벤트·오류 로그 등 운영 리포트로 연결해 시각화. ECharts 표출을 위한 응답 DTO를 직접 설계해 백엔드와 공유하고 API 설계 논의에 참여',
+    process: {
+      rows: [
+        {
+          label: 'Route 변경 추적',
+          steps: ["pathname·searchParams 감지", "pageview(url, prevPage)", "gtag('page_view')"],
+        },
+        {
+          label: '커스텀 이벤트',
+          steps: ['sign_up / banner_click / share / error_log', "gtag('event', action, params)"],
+        },
+        {
+          label: 'Admin 조회',
+          steps: ['runReport 조회', 'stream 필터', 'DAU·오류 대시보드'],
+          highlightStep: 'DAU·오류 대시보드',
+        },
+      ],
+    },
   },
   {
-    id: 'onboarding-sns-terms',
-    projectId: 'kkuljam-v3',
-    title: '소셜 로그인 · 약관 · 온보딩 간소화와 엣지 대응',
-    subtitle: '동의 중복 제거 · 프리필 · 권한/UI 엣지를 제품·디자인과 맞춰 정리',
-    period: '2026.03 ~',
-    tags: ['Onboarding', 'OAuth', 'UX', 'Edge Case'],
-    context: [
-      'SNS로 이미 동의한 사용자가 앱에서 약관을 다시 보면 온보딩 마찰이 커집니다.',
-      '권한·타임피커·캐릭터 이미지 등 작은 엣지가 첫인상을 좌우했습니다.',
-    ],
-    decision: [
-      '앱에 마케팅 동의 상태를 저장하고 웹 온보딩에 전달해 중복 약관 바텀시트를 제거했습니다.',
-      'SNS 기본 정보 허용 사용자는 온보딩 데이터를 프리필해 입력 단계를 줄였습니다.',
-      '권한 요청 순서를 조정하고, OS별 권한 안내·거부 스낵바를 디자인 스펙과 맞춰 요구·반영했습니다.',
-      'Play 심사에서 사진 읽기 권한이 거부된 뒤에는 Android는 MediaStore 저장으로 권한을 없애고, iOS는 추가 전용(Add Only)으로 범위를 좁혔습니다.',
-    ],
-    issues: [
-      {
-        problem: '네이버·카카오에서 동의한 뒤에도 앱 내부 약관 팝업이 다시 떴습니다.',
-        action: '앱·웹 동의 데이터 흐름을 맞춰 불필요한 바텀시트를 제거했습니다.',
-        result: '소셜 가입 온보딩 진입 마찰을 줄였습니다.',
-      },
-      {
-        problem: 'Android 14 부분 미디어 권한이 DENIED로 오인되어 공유 권한 시트가 반복됐고, 이후 Play 심사에서 사진 읽기 권한 자체가 거부됐습니다.',
-        action: '처음엔 OS 정책으로 재분류해 안내 문구를 나눴고, 심사 거부 후에는 Android 권한 요청을 제거하고 MediaStore로 저장하도록 재설계했습니다. iOS는 Add Only로 범위를 좁혔습니다.',
-        result: 'Android는 권한 요청 없이 저장하고, iOS만 추가 전용 바텀시트가 남은 구조로 운영 중입니다.',
-      },
-      {
-        problem: '오디오 권한 거부 사용자가 루틴·측정으로 들어가면 실패만 겪었습니다.',
-        action: '거부 시 스낵바 안내를 Figma 스펙에 맞춰 루틴 재생 경로에 반영하도록 협의했습니다.',
-        result: '권한 실패를 사용자에게 즉시 설명하는 경로를 만들었습니다.',
-      },
-    ],
-    outcomes: [
-      '소셜 약관 중복 제거·프리필로 온보딩 단계를 간소화',
-      '사진 권한을 OS 정책·스토어 심사에 맞춰 MediaStore / Add Only로 재설계',
-    ],
+    id: 'admin-query',
+    projectId: 'kkuljam',
+    title: 'Admin 재구축 및 API·서버 상태 관리 구조 표준화',
+    problem:
+      '레거시 Admin은 기존 임시로 구축되어 있던 구조로 문서화가 없어 유지보수·재사용이 어려웠고, 도메인마다 fetch·인증·에러 처리와 query key 관리 방식도 제각각이라 확장이 힘들었음. 별도 디자인 리소스도 없어 화면 UI까지 직접 구성해야 하는 상황이었음',
+    solution:
+      '입사 후 Admin 재구축을 맡아 폴더 구조와 API 통신 규약을 새로 정의하고, commFetch + TanStack Query + query-key-factory 구조를 단계적으로 도입해 10개 Query 도메인에 공통 적용, access token 갱신 시 refreshPromise를 공유. 디자이너 리소스 없이 AI를 활용해 화면 UI 디자인까지 직접 적용',
+    result: '병렬 요청의 중복 refresh를 방지해 인증 처리를 안정화하고, 문서화되지 않았던 구조를 표준 패턴으로 재정립',
   },
   {
-    id: 'v3-native-ops',
-    projectId: 'kkuljam-v3',
-    title: '딥링크 · 공유 OG · 디자인 토큰 · Sentry',
-    subtitle: 'AppsFlyer OneLink, 서버 공유 이미지, FE 토큰 이식, Flutter 모니터링',
-    period: '2026.01 ~',
-    tags: ['AppsFlyer', 'OG Image', 'Design Tokens', 'Sentry'],
-    context: [
-      '웹↔앱 진입·공유·UI 일관성·장애 감지가 V3 운영 품질을 좌우했습니다.',
-      '앱에는 디자인 시스템이 없어 웹 FE와 톤이 어긋날 위험이 있었습니다.',
-    ],
-    decision: [
-      'AppsFlyer OneLink로 딥링크·어트리뷰션 진입 경로를 초기화하고 웹↔앱 경계를 안정화했습니다.',
-      'SNS 공유는 클라이언트 base64 한계를 넘어 서버에서 OG/공유 이미지를 생성·제공하도록 바꿨습니다.',
-      '웹과 동일한 디자인 토큰을 Flutter에 이식해 UI 일관성을 맞췄습니다.',
-      'Flutter에 Sentry를 도입해 네이티브 경로 오류를 조기에 추적했습니다.',
-    ],
-    issues: [
-      {
-        problem: '공유 이미지를 클라이언트에서 다루면 용량·품질·캐시 한계가 컸습니다.',
-        action: '서버 컴포넌트 경로로 OG/공유 이미지를 생성해 전달했습니다.',
-        result: '공유 미리보기 품질과 생성 경로를 서버 책임으로 정리했습니다.',
-      },
-      {
-        problem: '앱 UI가 웹 디자인 시스템과 따로 놀면 제품 톤이 깨집니다.',
-        action: 'FE 토큰/스타일을 Flutter에 맞춰 이식했습니다.',
-        result: '웹·앱 시각 언어를 같은 토큰 기준으로 맞췄습니다.',
-      },
-    ],
-    outcomes: [
-      '딥링크·공유·토큰·모니터링으로 V3 운영·브랜드·장애 대응 기반을 보강',
-    ],
+    id: 'admin-reporting-dashboard',
+    projectId: 'kkuljam',
+    title: 'Jira 스프린트 연동 대시보드로 팀 보고 체계 자동화',
+    problem: '전체 회의마다 프로젝트 진행 상황을 매번 별도로 정리해 보고해야 해서, 반복되는 보고 준비가 팀의 회의 부담으로 누적됨',
+    solution:
+      'Admin 재구축 과정에서 GA4 이벤트 대시보드와 함께 Jira Sprint API를 연동해, 개발팀 스프린트 티켓 진행 현황을 Admin에서 바로 조회할 수 있도록 구성',
+    result: '전체 회의 시 별도 보고 자료 없이 대시보드 화면을 함께 보며 논의할 수 있는 체계를 만들어, 반복되는 보고 준비 부담을 줄임',
   },
   {
-    id: 'admin-funnel-ga',
-    projectId: 'kkuljam-admin',
-    title: '운영 어드민 · AARRR 퍼널 · GA4·카카오 픽셀',
-    subtitle: '기획부터 대시보드·광고 전환 추적·가이드까지',
-    period: '2025.09 ~',
-    tags: ['Admin', 'GA4', 'Kakao Pixel', 'AARRR', 'ECharts'],
-    context: [
-      '가입·온보딩·활성을 숫자로 보지 못하면 운영·마케팅 의사결정이 느려졌습니다.',
-      '광고 전환과 제품 퍼널이 어긋나면 성과를 같은 언어로 말하기 어려웠습니다.',
-    ],
-    decision: [
-      'React·Vite·ECharts 어드민을 기획부터 구축해 퍼널·DAU·유저/오류 로그를 한곳에서 보게 했습니다.',
-      'GA4 이벤트·user_properties(성별·나이대·login_type·목표 수면/기상·키워드)와 app_open 등 행동을 정의했습니다.',
-      '카카오 픽셀 PageView·Complete Registration으로 광고↔서비스 전환을 맞췄습니다.',
-      'AARRR(Acquisition·Activation·Retention 등)을 가입→온보딩→활성→일기/루틴 사용 구간에 맞게 잘라 대시보드화했습니다.',
-    ],
-    issues: [
-      {
-        problem: 'GA4 UI만으로는 가입일 코호트·리텐션 커스텀에 한계가 있었습니다.',
-        action: 'BigQuery export·코호트 설계를 정리하고 어드민에 보여줄 지표 우선순위를 문서화했습니다.',
-        result: '제품·광고·리텐션을 같은 분석 언어로 확장할 기반을 만들었습니다.',
-      },
-      {
-        problem: '이벤트 정의가 흩어지면 지표 신뢰도가 떨어집니다.',
-        action: '커스텀 이벤트·유저 속성·픽셀 수집 범위를 가이드로 통일했습니다.',
-        result: '추적·대시보드·가이드가 같은 기준으로 연결됐습니다.',
-      },
-    ],
-    outcomes: [
-      '비개발 직군이 퍼널·DAU를 직접 보는 어드민 기반 마련',
-      'GA4 + 카카오 픽셀로 제품·광고 전환 기준 통일',
-      'AARRR 관점 가입→활성 퍼널을 차트·문서로 정량화',
-    ],
+    id: 'audio-session',
+    projectId: 'kkuljam',
+    title: 'iOS 통합 오디오 세션 관리',
+    problem: 'RN 대비 오디오 재생 방식을 전환하는 과정에서 WebView 내 유튜브 등 웹 콘텐츠 오디오와 세션이 충돌해 제대로 정리되지 않는 문제 발생',
+    solution:
+      '재생·녹음 상황별 우선순위를 정리해 오디오 세션을 전환·공유하는 로직을 설계하고, 웹 콘텐츠 재생 시작·종료 시 세션을 명시적으로 비활성화·재활성화하도록 처리',
+    result:
+      'TestFlight 내부 테스터 리포트를 바탕으로 재현·수정해 오디오 충돌 없이 안정적으로 동작 (현재 내부 테스트 단계, 정식 배포 전)',
   },
   {
-    id: 'admin-query-standard',
-    projectId: 'kkuljam-admin',
-    title: 'Admin API · 서버 상태 관리 표준화',
-    subtitle: '10개 Query 도메인에 공통 fetch·키·인증 갱신을 적용',
-    period: '2025.09 ~',
-    tags: ['TanStack Query', 'Vite', 'Auth', 'Admin'],
-    context: [
-      '도메인마다 fetch·인증·에러 처리와 query key 규칙이 달라 화면을 추가할 때마다 같은 실수를 반복했습니다.',
-      '토큰 만료 시 여러 요청이 동시에 refresh를 치면 인증이 더 불안정해졌습니다.',
-    ],
-    decision: [
-      '공통 fetch 레이어와 TanStack Query, query-key factory로 서버 상태 패턴을 한 구조로 모았습니다.',
-      'access token 갱신은 refreshPromise를 공유해, 동시에 실패한 요청이 갱신을 한 번만 타게 했습니다.',
-    ],
-    issues: [
-      {
-        problem: '화면마다 에러·로딩·키 네이밍이 제각각이라 캐시 무효화와 재사용이 어려웠습니다.',
-        action: '10개 Query 도메인에 같은 fetch·query key 규칙을 적용하고 목록·상세·뮤테이션 패턴을 맞췄습니다.',
-        result: '새 관리 화면을 같은 골격으로 붙일 수 있게 됐습니다.',
-      },
-      {
-        problem: '만료된 access token으로 병렬 요청이 나가면 refresh가 중복 호출됐습니다.',
-        action: '진행 중인 refresh Promise를 공유해 첫 갱신이 끝나기를 나머지 요청이 기다리게 했습니다.',
-        result: '중복 갱신 없이 인증 처리가 안정화됐습니다.',
-      },
-    ],
-    outcomes: [
-      'Admin 10개 Query 도메인을 공통 서버 상태 구조로 표준화',
-      '병렬 요청의 중복 refresh를 막아 인증 실패 재발을 줄임',
-    ],
+    id: 'healthkit',
+    projectId: 'kkuljam',
+    title: 'iOS·Android 걸음 수 동기화 정합성 개선',
+    problem:
+      'iOS HealthKit 구간 조회 시 15분 격자 밖 마지막 구간이 버킷에서 누락되고, HealthKit이 권한 허용 여부를 앱에 공개하지 않아 상태 판별이 어려움',
+    solution:
+      'Android의 버킷 라벨링 로직을 iOS(Flutter)에도 동일하게 구현해 partial 구간 누락을 방지하고, 최근 7일 걸음 수 유무로 권한 상태를 추론. 표시(기기 총합)와 서버 저장(버킷 raw)의 책임을 분리해 초기 도입했던 diff 보정 로직을 제거',
+    result: 'iOS·Android 걸음 수가 버킷 누락 없이 동기화되고, 기상 알람 시 최대 13일 백필까지 안정적으로 처리되는 동기화 체계로 운영',
   },
   {
-    id: 'jira-sprint-dashboard',
-    projectId: 'kkuljam-admin',
-    title: 'Jira 스프린트 대시보드로 팀 보고 자동화',
-    subtitle: '전체 회의마다 반복되던 진행 상황 정리를 Admin 대시보드로 대체',
-    period: '2025.09 ~',
-    tags: ['Jira', 'Admin', 'Reporting'],
-    context: [
-      '전체 회의마다 프로젝트 진행 상황을 매번 별도로 정리해 보고해야 해서, 반복되는 보고 준비가 팀 회의 부담으로 누적됐습니다.',
-    ],
-    decision: [
-      'Admin 재구축 과정에서 GA4 이벤트 대시보드와 함께 Jira Sprint API를 연동했습니다.',
-      '개발팀 스프린트 티켓 진행 현황을 Admin에서 바로 조회할 수 있도록 구성했습니다.',
-    ],
-    issues: [
-      {
-        problem: '회의 때마다 진행 상황 보고 자료를 별도로 만들어야 해 준비 부담이 컸습니다.',
-        action: 'Jira Sprint API를 연동해 티켓 진행 현황을 Admin 화면에서 바로 보여주도록 구성했습니다.',
-        result: '별도 보고 자료 없이 대시보드 화면을 함께 보며 논의할 수 있게 됐습니다.',
-      },
-    ],
-    outcomes: [
-      '전체 회의 시 별도 보고 자료 준비 없이 대시보드로 진행 상황 공유',
-      '반복되는 보고 준비 부담을 줄여 회의 효율을 높임',
-    ],
-  },
-  {
-    id: 'ai-e2e-automation',
-    projectId: 'ai-e2e',
-    title: 'Cursor 워크플로 · Playwright E2E · Closeout 자동화',
-    subtitle: 'PRD→구현→시나리오 검수→E2E→이슈 등록·MR까지 품질 게이트',
-    period: '2026.02 ~',
-    tags: ['Cursor', 'Playwright', 'MCP', 'E2E', 'DoD'],
-    context: [
-      '2026.02.04 팀 전체가 Cursor를 도입한 뒤, FE·Flutter 레포에서 Agent 작업량이 늘었습니다.',
-      '화면·플로우가 늘수록 수동 회귀만으로는 품질을 지키기 어려웠습니다.',
-      'AI로 구현만 빨라지면 검증·티켓화가 따라가지 못하는 문제가 있었습니다.',
-    ],
-    decision: [
-      'Cursor + Figma·Jira·Notion MCP로 PRD→Plan→구현 워크플로를 자동화했습니다.',
-      '프로덕트·디자이너 시나리오를 검수하고 Notion 테스트 시트를 개선한 뒤, e2e-scenario 스킬로 코드·상태 갱신까지 연결했습니다.',
-      'Playwright 19개 spec · 303개 케이스(온보딩/홈/MY/리포트/일기/챗/루틴/HFF 등)를 구축했습니다.',
-      'MCP 교차 검증으로 누락 페이지를 발견하면 출시 백로그에 이슈가 자동 등록되게 했습니다.',
-      '기능 완료에 E2E를 포함하고 typecheck/lint/test→커밋→MR까지 Closeout으로 묶었습니다.',
-    ],
-    issues: [
-      {
-        problem: '시나리오가 문서·티켓·코드에 흩어지면 자동화 범위가 불명확합니다.',
-        action: '시나리오 ID를 Jira·Notion·스펙 제목과 맞추고 스킬이 범위→작성→상태까지 반복하게 했습니다.',
-        result: '19개 spec · 303개 케이스를 시나리오 ID 기준으로 쌓을 수 있었습니다.',
-      },
-      {
-        problem: '스펙·화면 누락이 출시 직전에야 발견됐습니다.',
-        action: 'Figma·Notion·Jira MCP로 시나리오를 교차 검증하고 갭을 출시 백로그 이슈로 자동 등록했습니다.',
-        result: '누락을 구현·검증 루프 안에서 조기에 드러냈습니다.',
-      },
-      {
-        problem: '완료 정의가 사람마다 다르면 품질 편차가 큽니다.',
-        action: 'E2E 포함 DoD와 Closeout(커밋·일지·MR)을 습관화했습니다.',
-        result: '검증·티켓화·완료까지 닫히는 품질 게이트를 만들었습니다.',
-      },
-    ],
-    outcomes: [
-      'Playwright 19개 spec · 303개 케이스로 핵심 플로우 회귀 기반 마련',
-      '팀 Cursor 도입(2026.02.04) 후 MR/주(FE·Flutter·Admin) 1.2건 → 14건대, 이후 12~18건대 유지',
-      'GitLab MR 국면(2026.07.23–08.20) 4레포 합산 티켓키 71%·AI 완결률 87%. FE 80%/91%, Flutter 75%/85% (도입 전 티켓키 9%)',
-    ],
-  },
-  {
-    id: 'v2-ux-onboarding',
-    projectId: 'kkuljam-v2',
-    title: 'V2 유지보수 · 기록·리포트·온보딩 UX',
-    subtitle: '서비스 중 제품의 버그픽스·응대와 사용성 고도화',
-    period: '2025.08 ~',
-    tags: ['Next.js', 'Bugfix', 'UX', 'Onboarding'],
-    context: [
-      '이미 서비스 중인 V2의 유지보수와 이슈 응대가 우선이었습니다.',
-      '낮잠 기록·리포트·회원가입처럼 매일 쓰는 경로에 마찰과 버그가 있었습니다.',
-    ],
-    decision: [
-      '운영 버그픽스와 병행해 낮잠 기록/수정 UI를 단순화했습니다.',
-      '리포트·통계를 무한 스크롤·그래프로 탐색하기 쉽게 만들었습니다.',
-      '회원가입을 마법사(스텝) 플로우로 나눠 온보딩 이탈을 줄였습니다.',
-    ],
-    issues: [
-      {
-        problem: '기록·리포트·온보딩 경로의 버그가 사용자 이탈로 이어졌습니다.',
-        action: '반복 제보·재현 이슈를 우선 수정하고 UX 병목을 같이 정리했습니다.',
-        result: '서비스 중 제품의 안정성과 사용성을 함께 끌어올렸습니다.',
-      },
-      {
-        problem: '회원가입 한 화면에 정보가 몰리면 이탈하기 쉽습니다.',
-        action: '단계형 마법사로 입력 부담을 나눴습니다.',
-        result: '온보딩 진입 경험을 단순화했습니다.',
-      },
-    ],
-    outcomes: [
-      '유지보수·버그픽스와 UX 개선을 병행해 서비스 중 제품 품질 향상',
-      '낮잠 기록·통계·회원가입 마법사로 핵심 경로 마찰 축소',
-    ],
-  },
-  {
-    id: 'healthkit-wearable',
-    projectId: 'kkuljam-v2',
-    title: '스마트워치 수면 데이터로 일기 자동 채움',
-    subtitle: 'HealthKit/Health Connect 연동 UX',
-    period: '2025.08 ~',
-    tags: ['HealthKit', 'Health Connect', 'UX', 'Diary'],
-    context: [
-      '앱 자체 측정 전에 일기는 매번 수동 기입이라 워치 유저까지 중복 입력이 생겼습니다.',
-    ],
-    decision: [
-      '워치 수면 데이터가 있으면 일기 초안을 자동 채우고 스낵바로 안내했습니다.',
-      '데이터가 없으면 수동 기입을 유지해 진입 장벽을 올리지 않았습니다.',
-    ],
-    issues: [
-      {
-        problem: 'OS·권한마다 읽을 수 있는 수면 데이터가 달랐습니다.',
-        action: '플랫폼별 권한을 구분해 공통 지표로 정규화한 뒤 일기에 반영했습니다.',
-        result: '자동 채움과 수동 기입이 같은 일기 UX에서 공존했습니다.',
-      },
-    ],
-    outcomes: [
-      '워치 유저 기록 마찰을 줄이는 UX 결정을 실행하고 이후 앱 측정 자동화의 기반으로 삼음',
-    ],
-  },
-  {
-    id: 'auth-react-cache',
-    projectId: 'kkuljam-v3',
-    title: '홈 세션 조회 중복 제거 · 진입 안정화',
-    subtitle: 'V2에서 불안정했던 홈 세션을 동일 요청 내 1회 해석으로 정리',
-    period: '2026.04',
-    tags: ['Next.js', 'Auth.js', 'RSC', 'Performance'],
-    context: [
-      'V2 홈 진입에서 layout·page가 각각 세션을 조회하며 비용·불안정 요인이 됐습니다.',
-      'V3에서도 홈은 세션이 필요한 데이터가 많아 동일 요청 내 중복 해석을 막을 필요가 있었습니다.',
-    ],
-    decision: [
-      '세션 조회를 React 요청 단위 캐시로 감싸 호출처는 유지한 채 1회만 실행되게 했습니다.',
-      '범위를 서버 컴포넌트 요청 내 중복 제거로 한정해 변경 영향을 최소화했습니다.',
-    ],
-    issues: [
-      {
-        problem: '같은 서버 렌더 요청에서 세션 해석이 여러 번 돌았습니다.',
-        action: '인증 모듈의 세션 함수를 cache로 메모이제이션했습니다.',
-        result: '홈 진입 경로의 불필요한 세션 비용을 줄이고 안정화했습니다.',
-      },
-    ],
-    outcomes: [
-      'V2 홈 세션 이슈를 V3에서 요청당 1회 해석으로 정리',
-      '호출 패턴은 유지한 채 인증 모듈만 바꿔 영향 범위를 최소화',
-    ],
-  },
-  {
-    id: 'error-monitoring',
-    projectId: 'kkuljam-v2',
-    title: '클라이언트 오류 모니터링(Sentry) 도입',
-    subtitle: '앱·웹 재현 어려운 오류의 조기 감지',
-    period: '2025.08 ~',
-    tags: ['Sentry', 'React Native', 'Next.js', 'Reliability'],
-    context: [
-      '로컬 미재현 오류를 사용자 신고에만 의존하면 대응이 늦어집니다.',
-    ],
-    decision: [
-      'RN·Next.js에 Sentry를 연동하고 디바이스·OS·URL 컨텍스트를 남겼습니다.',
-      '대시보드 보는 법·대응 방향을 가이드로 공유했습니다.',
-    ],
-    issues: [
-      {
-        problem: '스택만으로는 화면·환경을 알기 어렵습니다.',
-        action: '컨텍스트·이벤트 흐름을 함께 보도록 구성했습니다.',
-        result: '재현 경로를 좁혀 수정 속도를 높였습니다.',
-      },
-    ],
-    outcomes: [
-      '운영 중 장애를 선제적으로 다루는 모니터링 기반 구축',
-    ],
+    id: 'navigation',
+    projectId: 'kkuljam',
+    title: 'WebView ↔ Native navigation race condition 해결',
+    problem: '수면 측정 종료 후 Native의 postMessage가 React listener 등록 전에 도착해 화면 이동이 유실',
+    solution: 'pending event queue와 early listener를 적용하고 Next.js App Router의 router.replace와 연결',
+    result: 'full reload 없이 SPA navigation을 구현해 화면 이동 유실 없이 안정적으로 동작',
   },
 ];
 
@@ -554,16 +207,8 @@ export function getHighlightsByProjectId(projectId: ProjectHighlightId): Highlig
   return highlightsData.filter((h) => h.projectId === projectId);
 }
 
-export const highlightProjectOrder: ProjectHighlightId[] = [
-  'kkuljam-v3',
-  'kkuljam-admin',
-  'ai-e2e',
-  'kkuljam-v2',
-];
+export const highlightProjectOrder: ProjectHighlightId[] = ['kkuljam'];
 
 export const highlightProjectLabel: Record<ProjectHighlightId, string> = {
-  'kkuljam-v3': '꿀잠닥터 V3',
-  'kkuljam-admin': '꿀잠닥터 Admin',
-  'ai-e2e': 'AI · E2E',
-  'kkuljam-v2': '꿀잠닥터 V2',
+  kkuljam: '꿀잠닥터',
 };
