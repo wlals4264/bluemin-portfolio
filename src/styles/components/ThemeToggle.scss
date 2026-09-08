@@ -16,4 +16,10 @@
     border-color: var(--accent);
     color: var(--accent);
   }
+
+  .icon-moon {
+    /* 초승달 아이콘은 채워진 영역의 무게중심이 좌하단으로 쏠려 있어
+       박스는 중앙이어도 눈에는 왼쪽 아래로 치우쳐 보인다. 우상단으로 살짝 보정. */
+    transform: translate(1px, -1px);
+  }
 }
