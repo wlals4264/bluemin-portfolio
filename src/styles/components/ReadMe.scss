@@ -162,6 +162,24 @@
           color: var(--accent);
         }
 
+        .readme-video-frame {
+          position: relative;
+          width: 100%;
+          aspect-ratio: 16 / 9;
+          border-radius: 14px;
+          overflow: hidden;
+          border: 1px solid var(--border);
+          background: #000;
+
+          iframe {
+            position: absolute;
+            inset: 0;
+            width: 100%;
+            height: 100%;
+            border: 0;
+          }
+        }
+
         .readme-link-list {
           display: flex;
           flex-wrap: wrap;

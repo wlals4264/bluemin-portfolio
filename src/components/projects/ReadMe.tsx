@@ -12,6 +12,7 @@ import { IoIosClose } from 'react-icons/io';
 import ProjectHighlights from '@/components/highlights/ProjectHighlights';
 import ProjectScreens from '@/components/projects/ProjectScreens';
 import BlogPostCard from '@/components/projects/BlogPostCard';
+import { getYoutubeEmbedUrl } from '@/utils/youtube';
 
 interface ReadMeProps {
   setIsProjectCardClicked: (value: boolean) => void;
@@ -78,6 +79,8 @@ const ReadMe = ({ setIsProjectCardClicked, project }: ReadMeProps) => {
   }, [isOpen]);
 
   const links = getProjectLinks(project);
+  // 데모 영상은 유튜브로 튕기지 않고 모달 안에서 바로 재생되도록 embed
+  const videoEmbedUrl = project.projectVideoLink ? getYoutubeEmbedUrl(project.projectVideoLink) : null;
 
   // 스크롤 리빌 애니메이션이 조상 요소에 transform을 남기면 position:fixed의 기준점이
   // 뷰포트가 아닌 그 조상으로 바뀌어 버리므로(딤 처리가 컴포넌트 영역에만 걸리는 원인),
@@ -128,15 +131,28 @@ const ReadMe = ({ setIsProjectCardClicked, project }: ReadMeProps) => {
               </div>
 
               <div className="read-me-content-box">
-                {project.screenshots && (
+                {(videoEmbedUrl || project.screenshots) && (
                   <section className="readme-section screens-box">
                     <h3 className="readme-section-title">화면</h3>
-                    <ProjectScreens
-                      basePath={project.screenshots.basePath}
-                      files={project.screenshots.files}
-                      alt={project.screenshots.alt}
-                      orientation={project.screenshots.orientation}
-                    />
+                    {videoEmbedUrl && (
+                      <div className="readme-video-frame">
+                        <iframe
+                          src={videoEmbedUrl}
+                          title={`${project.title} 데모 영상`}
+                          allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+                          allowFullScreen
+                          loading="lazy"
+                        />
+                      </div>
+                    )}
+                    {project.screenshots && (
+                      <ProjectScreens
+                        basePath={project.screenshots.basePath}
+                        files={project.screenshots.files}
+                        alt={project.screenshots.alt}
+                        orientation={project.screenshots.orientation}
+                      />
+                    )}
                   </section>
                 )}
 
