@@ -2,6 +2,10 @@
   position: relative;
   cursor: zoom-in;
   border-radius: 12px;
+  /* hover·focus 때 생기는 강조 링(box-shadow)은 레이아웃 공간을 차지하지
+     않아서, 다이어그램끼리 바짝 붙어있으면 그 링이 위·아래 다이어그램을
+     살짝 덮어버린다 — margin으로 링이 들어갈 여백을 항상 확보해둔다 */
+  margin: 6px 0;
   transition: box-shadow 0.15s ease;
 
   &::after {
