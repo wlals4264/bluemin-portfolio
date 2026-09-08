@@ -68,8 +68,9 @@
       opacity: 1;
     }
 
-    img {
-      /* next/image(fill)와 gif용 순수 <img> 모두 같은 방식으로 채운다 */
+    img,
+    video {
+      /* next/image(fill)·gif용 <img>·mp4용 <video> 모두 같은 방식으로 채운다 */
       position: absolute;
       inset: 0;
       width: 100%;
@@ -127,7 +128,8 @@
   justify-content: center;
 }
 
-.project-screens-lightbox-media {
+img.project-screens-lightbox-media,
+video.project-screens-lightbox-media {
   width: 100%;
   height: 100%;
   object-fit: contain;

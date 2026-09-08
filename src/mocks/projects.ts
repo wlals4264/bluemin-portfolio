@@ -161,7 +161,7 @@ const olaola: ProjectCardData = {
     'https://velog.io/@wlals4264/개인-프로젝트-OlaOla-IndexedDB로-브라우저-환경에서-로컬-데이터베이스-구축하기',
   screenshots: {
     basePath: '/images/portfolio/olaola',
-    files: ['screen-1.gif', 'screen-2.gif', 'screen-3.gif'],
+    files: ['screen-1.mp4', 'screen-2.mp4', 'screen-3.mp4'],
     alt: 'OlaOla 화면',
     orientation: 'landscape',
   },
