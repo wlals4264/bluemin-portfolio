@@ -6,12 +6,16 @@
   .projects-carousel-wrapper {
     position: relative;
     margin-bottom: 40px;
-    /* overflow:hidden은 좌우로 peek되는 카드를 가리기 위한 것뿐인데, 위아래도
-       같이 잘려서 hover 시 카드가 떠오르는 것도, 커지는 box-shadow(0 24px 48px)도
-       잘려 보였다 — 그 여백만큼 위·아래 패딩을 넉넉히 잡아 안 잘리게 한다.
-       위쪽은 필터 버튼 줄과도 겹치지 않도록 더 여유 있게 잡는다 */
-    padding: 48px 0 110px;
-    overflow: hidden;
+    padding: 12px 0 20px;
+    /* overflow:hidden은 가로(좌우로 peek되는 카드)만 가리려던 건데, hidden은
+       세로까지 같이 잘라버려서 hover로 카드가 떠오르거나 box-shadow가 커지는
+       것까지 잘렸다 — 그래서 위아래로 패딩을 크게 줘 피해가는 식으로
+       땜질했었는데, 그보다 overflow-x만 clip하고 overflow-y는 visible로
+       두는 게 근본적인 해결책이다. (clip은 auto로 강제 승격되는 예외라
+       overflow-y:visible이 그대로 유지된다 — hidden과 짝지으면 overflow-y가
+       auto로 바뀌어버려서 이 트릭이 안 먹힌다) 이제 패딩은 최소한만 필요하다 */
+    overflow-x: clip;
+    overflow-y: visible;
 
     .projects-peek-carousel {
       width: 100%;
