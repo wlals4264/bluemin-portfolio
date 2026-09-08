@@ -2,7 +2,12 @@
   display: flex;
   gap: 12px;
   margin-top: 16px;
-  padding-bottom: 6px;
+  /* overflow-x:auto가 필요해서(진짜 가로 스크롤) overflow-x:clip 트릭을 못 쓴다
+     — overflow-x가 visible이 아니면 overflow-y도 자동으로 auto가 돼버려서
+     item hover의 translateY(-3px)+box-shadow가 위아래로 잘렸다. 스크롤 영역
+     안에 그 여백을 미리 패딩으로 확보해두는 방식으로 우회한다 (아래 hover
+     그림자도 이 여백에 맞춰 함께 줄여서 스크롤바와 너무 안 떨어지게 했다) */
+  padding: 8px 0 16px;
   overflow-x: auto;
   scroll-snap-type: x proximity;
   -webkit-overflow-scrolling: touch;
@@ -40,7 +45,7 @@
     &:hover,
     &:focus-visible {
       transform: translateY(-3px);
-      box-shadow: 0 10px 22px var(--shadow);
+      box-shadow: 0 6px 14px var(--shadow);
     }
 
     &::after {

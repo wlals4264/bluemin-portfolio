@@ -59,7 +59,9 @@
     flex-wrap: nowrap;
     gap: 8px;
     margin-bottom: 28px;
-    padding: 2px 4px 10px;
+    /* overflow-x:auto라 세로는 자동으로 hidden 취급된다 — hover 시
+       translateY(-2px)+box-shadow가 위아래로 잘리지 않도록 여백을 둔다 */
+    padding: 10px 4px 20px;
     overflow-x: auto;
     overflow-y: hidden;
     -webkit-overflow-scrolling: touch;
