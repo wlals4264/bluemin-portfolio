@@ -72,7 +72,11 @@ const kkuljam: ProjectCardData = {
   highlightProjectId: 'kkuljam',
   projectTitle:
     '슬립포레스트 · 수면 헬스케어 B2C 앱 신규 개발·고도화\n· Web(Next.js) / Hybrid App(Flutter) / Admin(React)',
-  projectFeatures: [],
+  projectFeatures: [
+    'Next.js 15 App Router 기반 웹뷰 서비스의 수면 분석 리포트·일기 작성·온보딩 등 핵심 기능을 기획 단계부터 참여해 개발',
+    'RN 대비 Flutter 전환 전략 수립에 참여하고, 로그인·백그라운드 재생 등 핵심 Native 기능의 iOS 구현을 주도',
+    'Cursor 기반 AI 개발 워크플로우와 Playwright E2E(19개 spec·약 303개 케이스)로 품질 검증 체계를 구축',
+  ],
   projectLinks: [
     { label: 'App Store', url: 'https://apps.apple.com/kr/app/꿀잠닥터/id6748598105' },
     {
