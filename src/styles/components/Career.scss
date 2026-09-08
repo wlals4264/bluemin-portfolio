@@ -68,6 +68,28 @@
         color: var(--text);
       }
     }
+
+    .career-sections {
+      display: flex;
+      flex-direction: column;
+      gap: 14px;
+    }
+
+    .career-section {
+      .career-section-title {
+        margin: 0 0 4px;
+        font-size: 13px;
+        font-weight: 700;
+        color: var(--accent);
+      }
+
+      .career-section-text {
+        margin: 0;
+        font-size: 14px;
+        line-height: 165%;
+        color: var(--text-soft);
+      }
+    }
   }
 }
 
@@ -88,7 +110,8 @@
       }
 
       .career-summary,
-      .career-highlights li {
+      .career-highlights li,
+      .career-section-text {
         word-break: keep-all;
         overflow-wrap: break-word;
       }
@@ -105,7 +128,8 @@
 
       .career-role,
       .career-summary,
-      .career-highlights li {
+      .career-highlights li,
+      .career-section-text {
         font-size: 13px;
       }
     }

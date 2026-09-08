@@ -22,11 +22,24 @@ const Career = forwardRef<HTMLDivElement>((_, ref) => {
             </div>
             <p className="career-role">{item.role}</p>
             <p className="career-summary">{item.summary}</p>
-            <ul className="career-highlights">
-              {item.highlights.map((line, i) => (
-                <li key={i}>{line}</li>
-              ))}
-            </ul>
+            {item.sections ? (
+              <div className="career-sections">
+                {item.sections.map((section) => (
+                  <div className="career-section" key={section.title}>
+                    <h4 className="career-section-title">{section.title}</h4>
+                    <p className="career-section-text">{section.text}</p>
+                  </div>
+                ))}
+              </div>
+            ) : (
+              item.highlights && (
+                <ul className="career-highlights">
+                  {item.highlights.map((line, i) => (
+                    <li key={i}>{line}</li>
+                  ))}
+                </ul>
+              )
+            )}
           </RevealItem>
         ))}
       </RevealGroup>
