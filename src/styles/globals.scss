@@ -55,25 +55,35 @@
   box-sizing: border-box;
 }
 
+html {
+  background-color: var(--bg);
+  transition: background-color 0.25s ease;
+}
+
 html,
 body {
   margin: 0;
   padding: 0;
   width: 100%;
   overflow-x: hidden;
-  background-color: var(--bg);
   color: var(--text);
   font-family: var(--font-body), 'Apple SD Gothic Neo', 'Noto Sans KR', sans-serif;
   font-size: 16px;
   line-height: 1.6;
   letter-spacing: -0.01em;
   -webkit-font-smoothing: antialiased;
-  transition: background-color 0.25s ease, color 0.25s ease;
+  transition: color 0.25s ease;
 
   a {
     text-decoration: none;
     color: inherit;
   }
+}
+
+body {
+  /* 배경은 html이 담당한다. body에 불투명 배경색을 두면 그 뒤(z-index:-1)의
+     물결 배경 레이어가 body 배경에 완전히 가려져 안 보이게 된다. */
+  background-color: transparent;
 }
 
 h1,

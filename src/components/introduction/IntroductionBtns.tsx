@@ -1,5 +1,5 @@
 import { FiDownload } from 'react-icons/fi';
-import { FaGithub } from 'react-icons/fa';
+import { FaGithub, FaAddressCard } from 'react-icons/fa';
 import { SiVelog } from 'react-icons/si';
 import { LuNotebookPen } from 'react-icons/lu';
 
@@ -30,6 +30,14 @@ const IntroductionBtns = () => {
           rel="noopener noreferrer"
           aria-label="Velog">
           <SiVelog />
+        </a>
+        <a
+          href="https://resume-ashen-mu.vercel.app"
+          target="_blank"
+          rel="noopener noreferrer"
+          aria-label="이력서·포트폴리오 사이트"
+          title="이력서·포트폴리오 사이트">
+          <FaAddressCard />
         </a>
         <a
           href="https://work-log-calendar.vercel.app/"

@@ -25,6 +25,8 @@ interface ProjectCardProps {
   projectGithubUrl?: string;
   projectVelogUrl?: string;
   troubleShootingNotionUrl?: string;
+  /** 카드마다 살짝 다른 타이밍으로 둥둥 뜨는 유휴 애니메이션을 주기 위한 순번 */
+  index?: number;
   onClick: () => void;
 }
 
@@ -42,6 +44,7 @@ const ProjectCard: React.FC<ProjectCardProps> = ({
   projectGithubUrl,
   projectVelogUrl,
   troubleShootingNotionUrl,
+  index = 0,
   onClick,
 }) => {
   const features = projectFeatures ?? [];
@@ -55,8 +58,25 @@ const ProjectCard: React.FC<ProjectCardProps> = ({
   return (
     <motion.article
       className="project-card-item-container"
+      // 화면이 평면적으로 보이지 않도록 카드가 아주 살짝 둥둥 떠 있는 유휴 애니메이션을 준다.
+      // whileHover/whileTap에 각각 transition을 직접 실어서 idle 루프와 서로 간섭하지 않게 한다.
+      animate={
+        shouldReduceMotion
+          ? undefined
+          : {
+              y: [0, -6, 0],
+              transition: {
+                duration: 6 + (index % 3),
+                repeat: Infinity,
+                ease: 'easeInOut',
+                delay: (index % 4) * 0.4,
+              },
+            }
+      }
       whileHover={
-        shouldReduceMotion ? undefined : { y: -10, scale: 1.02 }
+        shouldReduceMotion
+          ? undefined
+          : { y: -10, scale: 1.02, transition: { type: 'spring', stiffness: 300, damping: 20, mass: 0.6 } }
       }
       whileTap={shouldReduceMotion ? undefined : { scale: 0.99 }}
       transition={{ type: 'spring', stiffness: 300, damping: 20, mass: 0.6 }}>

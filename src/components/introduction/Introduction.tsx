@@ -64,9 +64,9 @@ const Introduction = () => {
         <IntroductionBtns />
       </div>
       <div className="introduction-image-box">
-        <svg className="rotating-border" viewBox="0 0 340 340">
-          <circle cx="170" cy="170" r="160" />
-        </svg>
+        {/* 아이폰 유리 느낌: 은은한 빛 번짐 + 반투명 유리판 + 사진 위를 스치는 하이라이트 */}
+        <span className="glass-glow" aria-hidden="true" />
+        <span className="glass-plate" aria-hidden="true" />
         <Image
           src="/profile.webp"
           quality={100}
@@ -76,6 +76,10 @@ const Introduction = () => {
           height={300}
           priority
         />
+        <svg className="rotating-border" viewBox="0 0 340 340">
+          <circle cx="170" cy="170" r="160" />
+        </svg>
+        <span className="glass-shine" aria-hidden="true" />
       </div>
     </div>
   );

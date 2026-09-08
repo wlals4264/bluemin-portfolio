@@ -14,6 +14,7 @@ import Experiences from '@/components/experience/Experiences';
 // import Navigator from '@/components/nav/Navigator';
 import Header from '@/components/header/Header';
 import TopBtn from '@/components/common/buttons/TopBtn';
+import AmbientBackground from '@/components/common/AmbientBackground';
 
 export default function Home() {
   const aboutMeRef = useRef<HTMLDivElement>(null);
@@ -32,6 +33,7 @@ export default function Home() {
 
   return (
     <>
+      <AmbientBackground />
       <div className="home-wrapper">
         <Header sectionRefs={sectionRefs} />
         <Introduction />

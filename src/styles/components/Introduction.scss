@@ -64,9 +64,53 @@
     justify-content: center;
     align-items: center;
 
+    /* 사진 뒤에서 은은하게 번지는 빛 — 유리판에 비치는 앰비언트 라이트 느낌 */
+    .glass-glow {
+      position: absolute;
+      inset: -24px;
+      z-index: 0;
+      border-radius: 50%;
+      background: radial-gradient(
+        circle,
+        color-mix(in srgb, var(--accent) 26%, transparent) 0%,
+        transparent 70%
+      );
+      filter: blur(22px);
+      pointer-events: none;
+    }
+
+    /* 사진과 테두리 사이를 채우는 반투명 유리판 (아이폰 유리 느낌의 핵심) */
+    .glass-plate {
+      position: absolute;
+      inset: 14px;
+      z-index: 1;
+      border-radius: 50%;
+      pointer-events: none;
+      background: linear-gradient(
+        135deg,
+        color-mix(in srgb, #fff 55%, transparent) 0%,
+        color-mix(in srgb, #fff 14%, transparent) 45%,
+        color-mix(in srgb, var(--accent) 14%, transparent) 100%
+      );
+      backdrop-filter: blur(8px);
+      -webkit-backdrop-filter: blur(8px);
+      border: 1px solid color-mix(in srgb, #fff 45%, var(--border));
+      box-shadow:
+        inset 0 1px 2px color-mix(in srgb, #fff 70%, transparent),
+        inset 0 -8px 16px rgba(0, 0, 0, 0.06),
+        0 12px 28px color-mix(in srgb, var(--accent) 16%, transparent);
+    }
+
+    .profile-image {
+      position: relative;
+      z-index: 2;
+      border-radius: 50%;
+      object-fit: cover;
+    }
+
     .rotating-border {
       position: absolute;
-      transition: (-50%, -50%);
+      z-index: 3;
       width: 340px;
       height: 340px;
       transform: rotate(0deg);
@@ -81,9 +125,38 @@
       }
     }
 
-    .profile-image {
+    /* 유리판 위를 아주 천천히 스치는 하이라이트 — read-me-shimmer와 같은 결의 sweep */
+    .glass-shine {
+      position: absolute;
+      inset: 6px;
+      z-index: 4;
       border-radius: 50%;
-      object-fit: cover;
+      overflow: hidden;
+      pointer-events: none;
+
+      &::after {
+        content: '';
+        position: absolute;
+        /* 컨테이너가 정사각형(328x328)이라 left%·top%를 같은 값으로 같이
+           움직이면 픽셀 단위로도 정확히 45도 대각선 이동이 된다 — 왼쪽 위
+           밖에서 시작해 오른쪽 아래 밖까지, 멈추지 않고 끝까지 지나간다 */
+        width: 26%;
+        height: 130%;
+        left: -40%;
+        top: -40%;
+        transform: translate(-50%, -50%) rotate(45deg);
+        background: linear-gradient(
+          to right,
+          transparent 0%,
+          rgba(255, 255, 255, 0.2) 38%,
+          rgba(255, 255, 255, 0.35) 50%,
+          rgba(255, 255, 255, 0.2) 62%,
+          transparent 100%
+        );
+        /* 중간에 멈추지 않고 계속 지나가도록 linear로 — 시작·끝 지점 모두
+           원 밖이라 한 바퀴 끝나고 처음으로 되돌아가도 티가 안 난다 */
+        animation: glass-shine-sweep 6s linear infinite;
+      }
     }
   }
 }
@@ -94,6 +167,26 @@
   }
   100% {
     transform: rotate(360deg);
+  }
+}
+
+@keyframes glass-shine-sweep {
+  0% {
+    left: -40%;
+    top: -40%;
+  }
+  100% {
+    left: 140%;
+    top: 140%;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .introduction-image-box .glass-shine::after {
+    animation: none;
+    opacity: 0.4;
+    left: 50%;
+    top: 50%;
   }
 }
 

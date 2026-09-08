@@ -1,0 +1,22 @@
+/**
+ * 사이트 전체에 거의 티가 안 날 만큼 옅게 깔리는 하늘색 워시.
+ * jquery.ripples(WebGL)가 이 위에 캔버스를 얹어 실제 수면처럼 물결치게
+ * 만든다 — 여기 배경은 그 텍스처가 못 뜰 때(리듀스 모션·WebGL 미지원)를
+ * 위한 정적 폴백이자, 텍스처의 background-size/position 기준이 된다.
+ */
+.ambient-background {
+  position: fixed;
+  inset: 0;
+  z-index: -1;
+  overflow: hidden;
+
+  /* 실제 콘텐츠가 거의 항상 이 레이어(z-index:-1) 위를 덮고 있어서, 여기에
+     직접 mousemove를 걸어도 대부분 콘텐츠가 이벤트를 먼저 채가 버린다.
+     그래서 상호작용은 AmbientBackground.tsx가 window에서 직접 받아
+     dropAtPointer로 넘겨준다 — 이 레이어 자체는 클릭을 가로챌 필요가 없다 */
+  pointer-events: none;
+
+  background-image: linear-gradient(to bottom, var(--bg), var(--accent-soft));
+  background-size: cover;
+  background-position: center;
+}

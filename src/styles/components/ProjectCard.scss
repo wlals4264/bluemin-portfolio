@@ -22,12 +22,12 @@
     border-color: var(--accent);
     color: var(--accent-contrast);
     cursor: pointer;
-    transform: translateY(-2px) scale(1.05);
+    transform: perspective(500px) translateY(-2px) scale(1.05) rotateX(8deg);
     box-shadow: 0 8px 16px color-mix(in srgb, var(--accent) 30%, transparent);
   }
 
   &:active {
-    transform: translateY(0) scale(0.96);
+    transform: perspective(500px) translateY(0) scale(0.96) rotateX(-3deg);
     transition-duration: 0.1s;
   }
 }
