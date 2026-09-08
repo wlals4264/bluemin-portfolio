@@ -60,7 +60,10 @@
 
   &:hover {
     border-color: color-mix(in srgb, var(--accent) 45%, var(--border));
-    box-shadow: 0 24px 48px color-mix(in srgb, var(--accent) 20%, var(--shadow));
+    /* offset+blur가 카드 바깥 아래로 번지는 만큼 부모 .projects-peek-carousel의
+       mask-image에 잘리지 않게 패딩을 맞춰뒀다 (Projects.scss 참고) — 그 패딩을
+       과하게 키우지 않으려고 여기 그림자도 0 24px 48px에서 이 정도로 줄였다 */
+    box-shadow: 0 10px 22px color-mix(in srgb, var(--accent) 22%, var(--shadow));
   }
 
   .project-card-top {
