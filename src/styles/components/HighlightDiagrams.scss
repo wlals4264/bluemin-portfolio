@@ -362,9 +362,11 @@
   opacity: 0.5;
 }
 
-/* 프로세스 행 (칩 체인 · 회귀 루프) — 박스 없이 나열 */
+/* 프로세스 행 (칩 체인 · 회귀 루프) — 박스 없이 나열.
+   DiagramZoom으로 감싸이므로 hl-diagram-box와 같은 이유로 상하 마진을
+   대칭으로 둔다 (안 그러면 호버 링/테두리가 위쪽에만 여백을 두고 나온다) */
 .hl-process-rows {
-  margin-top: 14px;
+  margin: 14px 0;
   display: flex;
   flex-direction: column;
   gap: 16px;
