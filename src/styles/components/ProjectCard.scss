@@ -134,6 +134,8 @@
     font-weight: 600;
     line-height: 1.55;
     color: var(--text-soft);
+    /* projectTitle에 수동 줄바꿈(\n)이 있으면 그대로 반영 */
+    white-space: pre-line;
   }
 
   .project-card-features {
