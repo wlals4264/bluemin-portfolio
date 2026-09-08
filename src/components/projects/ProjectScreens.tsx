@@ -7,6 +7,7 @@ import { createPortal } from 'react-dom';
 import Image from 'next/image';
 import { IoIosClose } from 'react-icons/io';
 import { IoChevronBack, IoChevronForward } from 'react-icons/io5';
+import { LuExpand } from 'react-icons/lu';
 
 interface ProjectScreensProps {
   /** public/ 기준 경로 (예: /images/portfolio/kkuljam) */
@@ -70,6 +71,9 @@ const ProjectScreens = ({ basePath, files, alt, orientation = 'portrait' }: Proj
                   sizes="(max-width: 768px) 130px, 160px"
                 />
               )}
+              <span className="project-screens-badge" aria-hidden="true">
+                <LuExpand />
+              </span>
             </button>
           );
         })}
