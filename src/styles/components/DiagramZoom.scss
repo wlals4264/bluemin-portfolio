@@ -4,28 +4,30 @@
   border-radius: 12px;
   margin: 6px 0;
 
-  &::after {
-    /* 클릭해서 크게 볼 수 있음을 알려주는 확대 배지 — 호버 상태의 유일한 표시 */
-    content: '⤢';
+  .hl-diagram-zoom-badge {
+    /* 클릭해서 크게 볼 수 있음을 알려주는 확대 배지 — 호버 상태의 유일한 표시.
+       텍스트 글리프(⤢) 대신 실제 아이콘을 써서 원 안에 완벽하게 가운데
+       정렬되고, 유리판 위 다크서클보다 부드러운 accent 톤으로 더 친근하게 */
     position: absolute;
     right: 8px;
     bottom: 8px;
-    width: 24px;
-    height: 24px;
+    width: 26px;
+    height: 26px;
     border-radius: 50%;
-    background: rgba(0, 0, 0, 0.55);
-    color: #fff;
-    font-size: 12px;
+    background: var(--accent);
+    color: var(--accent-contrast);
     display: flex;
     align-items: center;
     justify-content: center;
+    font-size: 14px;
     opacity: 0;
     transition: opacity 0.15s ease;
     pointer-events: none;
+    box-shadow: 0 2px 6px color-mix(in srgb, var(--accent) 40%, transparent);
   }
 
-  &:hover::after,
-  &:focus-visible::after {
+  &:hover .hl-diagram-zoom-badge,
+  &:focus-visible .hl-diagram-zoom-badge {
     opacity: 1;
   }
 
