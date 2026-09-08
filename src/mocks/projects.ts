@@ -69,7 +69,7 @@ const kkuljam: ProjectCardData = {
   projectType: 'company',
   highlightProjectId: 'kkuljam',
   projectTitle:
-    '슬립포레스트 · 수면 헬스케어 B2C 앱 신규 개발·고도화 · Web(Next.js) / Hybrid App(Flutter) / Admin(React)',
+    '슬립포레스트 · 수면 헬스케어 B2C 앱 신규 개발·고도화\n· Web(Next.js) / Hybrid App(Flutter) / Admin(React)',
   projectFeatures: [],
   projectLinks: [
     { label: 'App Store', url: 'https://apps.apple.com/kr/app/꿀잠닥터/id6748598105' },

@@ -61,14 +61,19 @@ const ReadMe = ({ setIsProjectCardClicked, project }: ReadMeProps) => {
   };
 
   useEffect(() => {
+    // body에만 걸면 실제 스크롤 컨테이너인 html(documentElement)이 그대로 스크롤돼
+    // 모달 뒤 배경이 함께 움직인다. 둘 다 잠가야 배경 스크롤이 확실히 막힌다.
     if (isOpen) {
+      document.documentElement.style.overflow = 'hidden';
       document.body.style.overflow = 'hidden';
     } else {
-      document.body.style.overflow = 'auto';
+      document.documentElement.style.overflow = '';
+      document.body.style.overflow = '';
     }
 
     return () => {
-      document.body.style.overflow = 'auto';
+      document.documentElement.style.overflow = '';
+      document.body.style.overflow = '';
     };
   }, [isOpen]);
 
