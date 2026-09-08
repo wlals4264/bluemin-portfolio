@@ -141,7 +141,7 @@ const momo: ProjectCardData = {
     'STOMP 기반 실시간 양방향 채팅을 구현하고, Recoil로 클라이언트 상태를, Tailwind CSS로 UI 스타일링을 구성',
   ],
   projectSkills: ['React', 'TypeScript', 'TanStack Query', 'Stomp', 'Recoil', 'Tailwind'],
-  projectVideoLink: 'https://youtu.be/gnk4T6RWXUs',
+  projectVideoLink: 'https://youtu.be/d-O7LfYi7po',
   githubUrl: 'https://github.com/Team-momo-front/momo-front',
 };
 
