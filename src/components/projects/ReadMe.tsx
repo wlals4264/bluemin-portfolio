@@ -133,9 +133,9 @@ const ReadMe = ({ setIsProjectCardClicked, project }: ReadMeProps) => {
                     <h3 className="readme-section-title">화면</h3>
                     <ProjectScreens
                       basePath={project.screenshots.basePath}
-                      count={project.screenshots.count}
-                      ext={project.screenshots.ext}
+                      files={project.screenshots.files}
                       alt={project.screenshots.alt}
+                      orientation={project.screenshots.orientation}
                     />
                   </section>
                 )}

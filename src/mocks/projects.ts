@@ -8,9 +8,11 @@ export type ProjectLink = {
 export type ProjectScreenshots = {
   /** public/ 기준 경로 (예: /images/portfolio/kkuljam) */
   basePath: string;
-  count: number;
-  ext?: string;
+  /** 확장자 포함 파일명 목록 (예: ['screen-1.jpg', ..., 'demo.gif']) */
+  files: string[];
   alt: string;
+  /** 세로 폰 스크린샷(기본) 대신 가로형 웹 화면일 때 */
+  orientation?: 'portrait' | 'landscape';
 };
 
 export type ProjectBlogPost = {
@@ -98,8 +100,7 @@ const kkuljam: ProjectCardData = {
   ],
   screenshots: {
     basePath: '/images/portfolio/kkuljam',
-    count: 5,
-    ext: 'jpg',
+    files: ['screen-1.jpg', 'screen-2.jpg', 'screen-3.jpg', 'screen-4.jpg', 'screen-5.jpg'],
     alt: '꿀잠닥터 앱 화면',
   },
 };
@@ -125,8 +126,7 @@ const ooottt: ProjectCardData = {
   githubUrl: 'https://github.com/OOOTTT-dev/app',
   screenshots: {
     basePath: '/images/portfolio/ooottt',
-    count: 5,
-    ext: 'png',
+    files: ['screen-1.png', 'screen-2.png', 'screen-3.png', 'screen-4.png', 'screen-5.png'],
     alt: 'OOOTTT 앱 화면',
   },
 };
@@ -159,6 +159,12 @@ const olaola: ProjectCardData = {
   githubUrl: 'https://github.com/wlals4264/olaola',
   velogUrl:
     'https://velog.io/@wlals4264/개인-프로젝트-OlaOla-IndexedDB로-브라우저-환경에서-로컬-데이터베이스-구축하기',
+  screenshots: {
+    basePath: '/images/portfolio/olaola',
+    files: ['screen-1.jpg', 'screen-2.jpg', 'screen-3.jpg', 'screen-4.jpg', 'screen-5.gif'],
+    alt: 'OlaOla 화면',
+    orientation: 'landscape',
+  },
   blogPost: {
     title: '[개인 프로젝트 - OlaOla] IndexedDB로 브라우저 환경에서 로컬 데이터베이스 구축하기',
     excerpt:
