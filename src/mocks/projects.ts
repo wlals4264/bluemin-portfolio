@@ -78,12 +78,6 @@ const kkuljamV3: ProjectCardData = {
   ],
   mainFeatures:
     'race queue · 걸음수 정합 · Flutter 마이그레이션 · 오디오 세션 · 온보딩/딥링크',
-  screenshots: {
-    basePath: '/images/portfolio/kkuljam',
-    count: 5,
-    ext: 'jpg',
-    alt: '꿀잠닥터 앱 화면',
-  },
   background: [
     '제품 고도화로 알람·측정·백그라운드 오디오 등 네이티브 비중이 커지며 RN 셸의 일정·안정성 리스크가 커졌습니다.',
     'V2에서 불안정했던 홈 세션·서비스 중 이슈 응대 경험을 바탕으로, V3에서는 앱 셸과 취침 플로우를 한 번에 안정화하는 것이 목표였습니다.',
@@ -158,6 +152,12 @@ const kkuljamV2: ProjectCardData = {
     'Kakao Channel',
   ],
   mainFeatures: '유지보수·버그픽스 + 기록/리포트 UX + Health 자동 일기 + 마법사 가입',
+  screenshots: {
+    basePath: '/images/portfolio/kkuljam',
+    count: 5,
+    ext: 'jpg',
+    alt: '꿀잠닥터 앱 화면',
+  },
   background: [
     '입사 이후 이미 서비스 중인 V2(Next.js + Expo/RN)의 유지보수와 사용자 이슈 응대가 최우선이었습니다.',
     '매일 쓰는 기록·리포트·온보딩이 불편하거나 깨지면 바로 이탈로 이어지므로, 안정성과 사용성을 같이 올리는 것이 목표였습니다.',
