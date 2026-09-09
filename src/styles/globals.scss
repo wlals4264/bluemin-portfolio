@@ -25,6 +25,14 @@
   --modal-overlay: rgba(15, 23, 42, 0.45);
   --success: #16a34a;
   --company: #0f766e;
+
+  /* liquid glass (아이폰 유리 스타일) tokens */
+  --glass-bg: rgba(255, 255, 255, 0.55);
+  --glass-bg-strong: rgba(255, 255, 255, 0.75);
+  --glass-border: rgba(255, 255, 255, 0.65);
+  --glass-highlight: rgba(255, 255, 255, 0.85);
+  --glass-specular: rgba(255, 255, 255, 0.95);
+  --glass-shadow: rgba(15, 23, 42, 0.14);
 }
 
 [data-theme='dark'] {
@@ -47,6 +55,14 @@
   --modal-overlay: rgba(0, 0, 0, 0.65);
   --success: #4ade80;
   --company: #2dd4bf;
+
+  /* liquid glass (아이폰 유리 스타일) tokens — 어두운 배경에서는 흰빛을 옅게 섞는다 */
+  --glass-bg: rgba(255, 255, 255, 0.08);
+  --glass-bg-strong: rgba(255, 255, 255, 0.16);
+  --glass-border: rgba(255, 255, 255, 0.16);
+  --glass-highlight: rgba(255, 255, 255, 0.22);
+  --glass-specular: rgba(255, 255, 255, 0.3);
+  --glass-shadow: rgba(0, 0, 0, 0.5);
 }
 
 *,

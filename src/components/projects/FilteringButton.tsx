@@ -2,6 +2,7 @@
 
 import '@/styles/components/FilteringButton.scss';
 
+import GlassButton from '@/components/common/buttons/GlassButton';
 import { ProjectCardData } from '@/mocks/projects';
 
 import { useState } from 'react';
@@ -40,30 +41,27 @@ const FilteringButton = ({ projects, setFilteredProjects }: FilteringButtonProps
 
   return (
     <div className="filtered-buttons-container">
-      <button
-        className={`all-button ${activeButton === 'all' ? 'active' : ''}`}
-        type="button"
-        onClick={showAll}>
+      <GlassButton className="all-button" active={activeButton === 'all'} onClick={showAll}>
         최신순
-      </button>
-      <button
-        className={`company-button ${activeButton === 'company' ? 'active' : ''}`}
-        type="button"
+      </GlassButton>
+      <GlassButton
+        className="company-button"
+        active={activeButton === 'company'}
         onClick={() => filterByType('company')}>
         회사 프로젝트
-      </button>
-      <button
-        className={`team-button ${activeButton === 'team' ? 'active' : ''}`}
-        type="button"
+      </GlassButton>
+      <GlassButton
+        className="team-button"
+        active={activeButton === 'team'}
         onClick={() => filterByType('team')}>
         팀 프로젝트
-      </button>
-      <button
-        className={`personal-button ${activeButton === 'personal' ? 'active' : ''}`}
-        type="button"
+      </GlassButton>
+      <GlassButton
+        className="personal-button"
+        active={activeButton === 'personal'}
         onClick={() => filterByType('personal')}>
         개인 프로젝트
-      </button>
+      </GlassButton>
     </div>
   );
 };

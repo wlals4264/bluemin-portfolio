@@ -5,6 +5,8 @@ import '@/styles/components/TopBtn.scss';
 import { useEffect, useState } from 'react';
 import { FaArrowUp } from 'react-icons/fa6';
 
+import GlassButton from '@/components/common/buttons/GlassButton';
+
 const TopBtn = () => {
   const [showBtn, setShowBtn] = useState(false);
 
@@ -28,9 +30,9 @@ const TopBtn = () => {
 
   return (
     <div className={`top-btn-container ${showBtn ? 'show' : ''}`}>
-      <div className="top-btn" onClick={scrollToTop}>
+      <GlassButton shape="circle" className="top-btn" aria-label="맨 위로" onClick={scrollToTop}>
         <FaArrowUp />
-      </div>
+      </GlassButton>
     </div>
   );
 };
