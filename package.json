@@ -6,7 +6,14 @@
     "dev": "next dev --turbopack",
     "build": "next build",
     "start": "next start",
-    "lint": "next lint"
+    "lint": "next lint",
+    "astra:test": "node --env-file=.env.local --import tsx scripts/astra-test.ts",
+    "astra:review": "node --env-file=.env.local --import tsx scripts/astra-review.ts",
+    "astra:image-test": "node --env-file=.env.local --import tsx scripts/astra-image-test.ts",
+    "astra:3d-family": "node --env-file=.env.local --import tsx scripts/astra-3d-family.ts",
+    "astra:component-review": "node --env-file=.env.local --import tsx scripts/astra-component-review.ts",
+    "astra:component-architect": "node --env-file=.env.local --import tsx scripts/astra-component-architect.ts",
+    "assets:promote-3d": "tsx scripts/promote-3d-assets.ts"
   },
   "dependencies": {
     "@svgr/webpack": "^8.1.0",
@@ -15,6 +22,7 @@
     "jquery": "^4.0.0",
     "jquery.ripples": "^0.6.3",
     "next": "^15.5.18",
+    "openai": "^7.12.1",
     "react": "^19.0.0",
     "react-dom": "^19.0.0",
     "react-icons": "^5.5.0",
@@ -30,6 +38,8 @@
     "@types/react-dom": "^19",
     "eslint": "^9",
     "eslint-config-next": "^15.5.18",
+    "sharp": "^0.34.3",
+    "tsx": "^4.23.13",
     "typescript": "^5"
   }
 }
