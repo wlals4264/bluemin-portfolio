@@ -59,12 +59,19 @@
     top: 90%;
     right: 0;
     left: 0;
-    background-color: var(--bg);
     flex-direction: column;
     align-items: flex-start;
-    box-shadow: 0 1px 2px var(--shadow);
+    /* 헤더와 이어지는 하나의 유리 시트처럼 보이도록 동일한 톤을 사용한다 */
+    background-color: var(--header-bg);
+    backdrop-filter: blur(24px) saturate(180%);
+    -webkit-backdrop-filter: blur(24px) saturate(180%);
+    border-bottom: 1px solid var(--header-hairline);
+    box-shadow: 0 16px 30px var(--shadow);
     opacity: 0;
     visibility: hidden;
+    transition:
+      opacity 0.25s ease,
+      visibility 0.25s ease;
     z-index: 1000;
     gap: 20px;
     padding: 15px 35px;

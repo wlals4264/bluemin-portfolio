@@ -5,14 +5,21 @@
   top: 0;
   left: 0;
   right: 0;
-  background-color: var(--header-bg);
-  backdrop-filter: blur(10px);
   z-index: 1000;
 
   font-family: var(--font-display), var(--font-body), sans-serif;
   color: var(--text);
 
-  box-shadow: 0px 4px 8px 0px var(--shadow);
+  /* 아이폰 내비게이션 바처럼: 뒤 콘텐츠가 흐릿하게 비치는 유리 + 아주 얇은 하단 경계선 */
+  background-color: var(--header-bg);
+  backdrop-filter: blur(24px) saturate(180%);
+  -webkit-backdrop-filter: blur(24px) saturate(180%);
+  border-bottom: 1px solid var(--header-hairline);
+  box-shadow: 0 8px 30px var(--shadow);
+  transition:
+    background-color 0.25s ease,
+    border-color 0.25s ease,
+    box-shadow 0.25s ease;
 
   .header-container {
     width: 70%;

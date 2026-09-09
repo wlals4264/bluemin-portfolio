@@ -21,7 +21,9 @@
   --accent-contrast: #ffffff;
   --card: #ffffff;
   --shadow: rgba(15, 23, 42, 0.08);
-  --header-bg: rgba(255, 255, 255, 0.92);
+  /* 아이폰 상단바처럼 배경이 비치는 반투명 유리 헤더 */
+  --header-bg: rgba(255, 255, 255, 0.6);
+  --header-hairline: rgba(15, 23, 42, 0.08);
   --modal-overlay: rgba(15, 23, 42, 0.45);
   --success: #16a34a;
   --company: #0f766e;
@@ -51,7 +53,9 @@
   --accent-contrast: #0b1220;
   --card: #111827;
   --shadow: rgba(0, 0, 0, 0.45);
-  --header-bg: rgba(11, 18, 32, 0.92);
+  /* 아이폰 상단바처럼 배경이 비치는 반투명 유리 헤더 */
+  --header-bg: rgba(11, 18, 32, 0.5);
+  --header-hairline: rgba(255, 255, 255, 0.1);
   --modal-overlay: rgba(0, 0, 0, 0.65);
   --success: #4ade80;
   --company: #2dd4bf;
