@@ -3,6 +3,7 @@
 import '@/styles/components/Career.scss';
 
 import { careerData } from '@/mocks/careerData';
+import { withOngoingDuration } from '@/lib/formatCareerDuration';
 
 import { forwardRef } from 'react';
 
@@ -18,7 +19,7 @@ const Career = forwardRef<HTMLDivElement>((_, ref) => {
           <RevealItem className="career-item" key={idx}>
             <div className="career-item-meta">
               <h3 className="career-company">{item.company}</h3>
-              <span className="career-date">{item.date}</span>
+              <span className="career-date">{withOngoingDuration(item.date)}</span>
             </div>
             <p className="career-role">{item.role}</p>
             <p className="career-summary">{item.summary}</p>

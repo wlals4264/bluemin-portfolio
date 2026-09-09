@@ -1,16 +1,24 @@
+/**
+ * Career — Soft Spatial Portfolio production migration.
+ * Content = Solid(review-decision.md Decision 1): 이 섹션에는 Glass를 쓰지 않는다.
+ * 긴 서술형 텍스트가 핵심 콘텐츠라 가독성이 최우선이다(current-ui-audit.md §18-5,
+ * visual-direction.md — Career 서술은 "가독성이 최우선 콘텐츠"로 분류됨) — 그래서
+ * About Me/Experiences와 달리 Icon3D를 추가하지 않았다. hairline(border-bottom)만
+ * 유지하는 기존 구조 그대로, font-size·spacing만 foundation 토큰으로 옮긴다.
+ */
 .career-container {
-  margin: 72px 0;
-  scroll-margin-top: 72px;
+  margin: var(--section-gap) 0;
+  scroll-margin-top: var(--header-offset);
 
   .career-list {
     display: flex;
     flex-direction: column;
-    gap: 24px;
+    gap: var(--space-6);
   }
 
   .career-item {
     font-family: var(--font-body), sans-serif;
-    padding: 8px 0 24px;
+    padding: var(--space-2) 0 var(--space-6);
     border-bottom: 1px solid var(--border);
 
     &:last-child {
@@ -22,49 +30,49 @@
       display: flex;
       align-items: baseline;
       justify-content: space-between;
-      gap: 16px;
-      margin-bottom: 6px;
+      gap: var(--space-4);
+      margin-bottom: var(--space-2);
     }
 
     .career-company {
       margin: 0;
-      font-size: 22px;
-      font-weight: 700;
+      font-size: var(--text-heading-md);
+      font-weight: var(--font-weight-bold);
       font-family: var(--font-display), sans-serif;
-      line-height: 140%;
+      line-height: var(--leading-snug);
       color: var(--text);
     }
 
     .career-date {
       flex-shrink: 0;
-      font-size: 14px;
+      font-size: var(--text-body-sm);
       color: var(--text-muted);
     }
 
     .career-role {
-      margin: 0 0 8px;
-      font-size: 15px;
-      font-weight: 600;
+      margin: 0 0 var(--space-2);
+      font-size: var(--text-body);
+      font-weight: var(--font-weight-semibold);
       color: var(--company);
     }
 
     .career-summary {
-      margin: 0 0 12px;
-      font-size: 15px;
-      line-height: 160%;
+      margin: 0 0 var(--space-3);
+      font-size: var(--text-body);
+      line-height: var(--leading-relaxed);
       color: var(--text-soft);
     }
 
     .career-highlights {
       margin: 0;
-      padding-left: 18px;
+      padding-left: var(--space-4);
       display: flex;
       flex-direction: column;
-      gap: 8px;
+      gap: var(--space-2);
 
       li {
-        font-size: 14px;
-        line-height: 160%;
+        font-size: var(--text-body-sm);
+        line-height: var(--leading-normal);
         color: var(--text);
       }
     }
@@ -72,21 +80,21 @@
     .career-sections {
       display: flex;
       flex-direction: column;
-      gap: 14px;
+      gap: var(--space-3);
     }
 
     .career-section {
       .career-section-title {
-        margin: 0 0 4px;
-        font-size: 13px;
-        font-weight: 700;
+        margin: 0 0 var(--space-1);
+        font-size: var(--text-body-sm);
+        font-weight: var(--font-weight-bold);
         color: var(--accent);
       }
 
       .career-section-text {
         margin: 0;
-        font-size: 14px;
-        line-height: 165%;
+        font-size: var(--text-body-sm);
+        line-height: var(--leading-relaxed);
         color: var(--text-soft);
       }
     }
@@ -95,17 +103,17 @@
 
 @media (max-width: 768px) {
   .career-container {
-    padding: 10px 0;
+    padding: var(--space-3) 0;
 
     .career-item {
       .career-item-meta {
         flex-direction: column;
         align-items: flex-start;
-        gap: 4px;
+        gap: var(--space-1);
       }
 
       .career-company {
-        font-size: 18px;
+        font-size: var(--text-heading-sm);
         word-break: keep-all;
       }
 
@@ -123,14 +131,12 @@
   .career-container {
     .career-item {
       .career-company {
-        font-size: 16px;
+        font-size: var(--text-body);
       }
 
       .career-role,
-      .career-summary,
-      .career-highlights li,
-      .career-section-text {
-        font-size: 13px;
+      .career-summary {
+        font-size: var(--text-body-sm);
       }
     }
   }
