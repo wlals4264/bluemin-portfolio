@@ -30,6 +30,14 @@ export default function Header({ sectionRefs }: HeaderProps) {
         </Link>
         <div className="header-actions">
           <Nav titles={titles} sectionRefs={sectionRefs} />
+          <Link href="/design-system" className="header-ds-link" aria-label="Design System 페이지로 이동">
+            <span className="header-ds-link__full" aria-hidden="true">
+              Design System
+            </span>
+            <span className="header-ds-link__compact" aria-hidden="true">
+              DS
+            </span>
+          </Link>
           <ThemeToggle />
         </div>
       </div>

@@ -1,0 +1,143 @@
+/**
+ * Documentation 전용 스타일 — Level 0~4 Depth 비교.
+ * Level 0~3은 실제 Foundation 토큰(--bg/--bg-elevated/--card/--glass-*)을 그대로 사용한다.
+ */
+.depth-showcase {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: flex;
+  flex-direction: column;
+}
+
+.depth-level {
+  display: grid;
+  grid-template-columns: minmax(220px, 300px) 1fr;
+  align-items: center;
+  gap: var(--space-6);
+  padding: var(--space-6) 0;
+  border-bottom: 1px solid var(--border);
+
+  &:last-child {
+    border-bottom: none;
+  }
+
+  &__meta {
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-1);
+  }
+
+  &__index {
+    font-size: var(--text-caption);
+    font-weight: var(--font-weight-bold);
+    letter-spacing: var(--tracking-wide);
+    text-transform: uppercase;
+    color: var(--accent);
+  }
+
+  &__name {
+    margin: 0;
+    font-size: var(--text-heading-sm);
+    font-weight: var(--font-weight-bold);
+    color: var(--text);
+  }
+
+  &__role {
+    margin: 0;
+    font-size: var(--text-body-sm);
+    color: var(--text-soft);
+  }
+
+  &__tokens {
+    display: flex;
+    flex-wrap: wrap;
+    gap: var(--space-1);
+    margin-top: var(--space-1);
+  }
+
+  &__token {
+    font-family: 'SFMono-Regular', Consolas, monospace;
+    font-size: var(--text-caption);
+    padding: 2px 6px;
+    border-radius: var(--radius-sm);
+    background: var(--bg-muted);
+    color: var(--text-muted);
+  }
+
+  &__swatch {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    min-height: 120px;
+    padding: var(--space-6);
+    border-radius: var(--radius-md);
+    box-sizing: border-box;
+
+    &--0 {
+      background: var(--bg);
+      border: 1px dashed var(--border);
+    }
+
+    &--1 {
+      background: var(--bg-elevated);
+      border: 1px solid var(--border);
+    }
+
+    &--2 {
+      background: var(--card);
+      border: 1px solid var(--border);
+      box-shadow: var(--shadow-xs);
+    }
+
+    &--3 {
+      background: linear-gradient(135deg, var(--bg-muted), var(--bg-elevated));
+      border: 1px solid var(--border);
+      /* 칩 3개(Button/Navigation/Floating UI)가 박스 가장자리에 바짝 붙어 보인다는
+         피드백 — 이 레벨만 안쪽 여백을 더 크게 줘서 "패딩이 있는 박스"로 보이게 한다. */
+      padding: var(--space-8);
+    }
+
+    &--4 {
+      background: var(--bg-muted);
+      border: 1px dashed var(--border);
+    }
+  }
+
+  &__swatch-label {
+    font-size: var(--text-label);
+    font-weight: var(--font-weight-semibold);
+    color: var(--text-muted);
+  }
+
+  &__glass-row {
+    display: flex;
+    flex-wrap: wrap;
+    /* width:100%가 없으면 이 row는 내용물 크기만큼만 좁게 잡히고, 부모(swatch)의
+       justify-content:center가 그 좁은 덩어리를 가운데로 몰아버려 양옆에 죽은 여백만
+       커진다 — row 자체를 박스 폭 전체로 늘린다. space-between + swatch padding으로
+       "안쪽 여백이 있는 박스" 느낌을 낸다(space-evenly는 여백과 칩 사이 간격이 똑같아져
+       오히려 여백이 있는지 없는지 구분이 안 됐다). */
+    width: 100%;
+    justify-content: space-between;
+    gap: var(--space-5);
+  }
+
+  /* &.glass-surface로 명시해 GlassSurface.scss의 `button.glass-surface { padding: 0; }`
+     리셋(element+class, 0-1-1)보다 명시도를 높인다(class+class, 0-2-0) — 지금까지 패딩을
+     아무리 키워도 안 먹혔던 진짜 원인이 이 명시도 차이였다: 뒤에 오는 리셋 규칙이
+     항상 이겨서 padding:0으로 되돌리고 있었다. */
+  &__glass-chip.glass-surface {
+    height: 44px;
+    padding: 0 var(--space-6);
+    font-size: var(--text-body-sm);
+    font-weight: var(--font-weight-semibold);
+  }
+}
+
+@media (max-width: 768px) {
+  .depth-level {
+    grid-template-columns: 1fr;
+    gap: var(--space-4);
+  }
+}

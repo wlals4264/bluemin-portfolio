@@ -1,5 +1,9 @@
 .home-wrapper {
   width: 70vw;
+  /* 초대형 화면에서 70vw가 계속 넓어지면 한 줄 길이가 너무 길어져 가독성이 떨어진다 —
+     기존 breakpoint 스케일의 최상단 값(1439px, foundation.md $bp-xl)에서 폭 확장을 멈추고
+     margin:auto로 남는 공간을 양옆 여백으로 돌린다. */
+  max-width: 1439px;
   margin: auto;
   min-height: 100vh;
   padding-bottom: 64px;

@@ -1,0 +1,131 @@
+/**
+ * Documentation 전용 스타일 — /design-system 페이지 상단 Intro.
+ * 기존 포트폴리오의 typography(--font-display/--font-body)와 색 토큰을 그대로 쓴다.
+ */
+.ds-intro {
+  padding: var(--space-10) 0 var(--space-9);
+  animation: ds-intro-fade-in var(--duration-slow) var(--ease-standard) both;
+
+  &__eyebrow {
+    margin: 0 0 var(--space-3);
+    font-size: var(--text-label);
+    font-weight: var(--font-weight-semibold);
+    letter-spacing: var(--tracking-wide);
+    text-transform: uppercase;
+    color: var(--accent);
+  }
+
+  &__title {
+    margin: 0 0 var(--space-5);
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-2);
+  }
+
+  &__title-display {
+    font-family: var(--font-display), var(--font-body), sans-serif;
+    font-size: clamp(2.25rem, 4.5vw, var(--text-display));
+    font-weight: var(--font-weight-regular);
+    line-height: var(--leading-tight);
+    letter-spacing: var(--tracking-tight);
+    color: var(--text);
+    word-break: keep-all;
+  }
+
+  &__title-sub {
+    font-family: var(--font-body), sans-serif;
+    font-size: var(--text-heading-md);
+    font-weight: var(--font-weight-medium);
+    color: var(--text-muted);
+  }
+
+  &__lede {
+    max-width: 640px;
+    margin: 0 0 var(--space-8);
+    font-size: var(--text-body);
+    line-height: var(--leading-relaxed);
+    color: var(--text-soft);
+    word-break: keep-all;
+    overflow-wrap: break-word;
+  }
+
+  &__principle {
+    display: grid;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: var(--space-5);
+    max-width: 640px;
+  }
+
+  &__rule {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: var(--space-3);
+    text-align: center;
+  }
+
+  &__rule-demo {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+    height: 56px;
+    font-size: var(--text-label);
+    font-weight: var(--font-weight-semibold);
+    color: var(--text-muted);
+
+    &--solid {
+      background: var(--card);
+      border: 1px solid var(--border);
+      border-radius: var(--radius-md);
+      box-shadow: var(--shadow-xs);
+      color: var(--text);
+    }
+
+    &--concept {
+      /* 이제 실제 3D asset이 채워지므로 "아직 준비 중"을 뜻하는 dashed border는 쓰지 않는다
+         (dashed는 Icon3D의 pending fallback·Depth Level 4 placeholder 전용 신호로 남긴다). */
+      border: 1px solid var(--border);
+      border-radius: var(--radius-md);
+      background: var(--bg-muted);
+      color: var(--text-muted);
+    }
+  }
+
+  &__rule-label {
+    margin: 0;
+    font-size: var(--text-body-sm);
+    font-weight: var(--font-weight-medium);
+    color: var(--text-soft);
+  }
+}
+
+@keyframes ds-intro-fade-in {
+  from {
+    opacity: 0;
+    transform: translateY(8px);
+  }
+
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@media (max-width: 768px) {
+  .ds-intro {
+    &__principle {
+      grid-template-columns: 1fr;
+      max-width: 320px;
+      margin: 0 auto;
+    }
+  }
+}
+
+/* Reduced Motion: 진입 애니메이션의 공간 이동을 제거하고 즉시 최종 상태로 표시한다
+   (docs/design-system/review-decision.md Decision 6). */
+@media (prefers-reduced-motion: reduce) {
+  .ds-intro {
+    animation: none;
+  }
+}

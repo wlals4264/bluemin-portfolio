@@ -1,0 +1,101 @@
+/**
+ * Documentation 전용 스타일 — Glass Material Preview.
+ * 순수 흰 배경이 아니라 기존 디자인 시스템과 어울리는 subtle ambient wash 위에
+ * Glass 타일을 올려 backdrop-filter 차이가 실제로 드러나게 한다.
+ * (움직이는 배경/WebGL/새 dependency 없음 — 정적 CSS gradient만 사용,
+ *  src/styles/components/AmbientBackground.scss와 같은 2-stop 그라디언트 공식을 재사용)
+ */
+.glass-preview {
+  position: relative;
+  isolation: isolate;
+  overflow: hidden;
+  border-radius: var(--radius-lg);
+  padding: var(--space-9) var(--space-6);
+  background: linear-gradient(to bottom, var(--bg-elevated), var(--accent-soft));
+
+  /* 은은한 radial glow 2개 — Introduction.scss의 프로필 유리판 배경과 같은 계열의
+     패턴(radial glow + gradient)이라 새로운 시각 언어를 추가하지 않는다. 정적이며
+     애니메이션 없음. */
+  &::before,
+  &::after {
+    content: '';
+    position: absolute;
+    z-index: 0;
+    border-radius: 50%;
+    filter: blur(40px);
+    pointer-events: none;
+  }
+
+  &::before {
+    width: 260px;
+    height: 260px;
+    top: -70px;
+    left: -60px;
+    background: color-mix(in srgb, var(--accent) 30%, transparent);
+  }
+
+  &::after {
+    width: 220px;
+    height: 220px;
+    bottom: -60px;
+    right: -40px;
+    background: color-mix(in srgb, var(--accent) 22%, transparent);
+  }
+
+  &__grid {
+    position: relative;
+    z-index: 1;
+    display: grid;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: var(--space-6);
+  }
+
+  &__tile-wrap {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: var(--space-3);
+  }
+
+  &__tile {
+    width: 100%;
+    justify-content: center;
+    padding: var(--space-6) var(--space-4);
+  }
+
+  &__tile-label {
+    font-size: var(--text-body);
+    font-weight: var(--font-weight-semibold);
+    text-align: center;
+  }
+
+  &__tile-caption {
+    margin: 0;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 2px;
+    text-align: center;
+  }
+
+  &__tile-usage {
+    font-size: var(--text-body-sm);
+    color: var(--text-soft);
+  }
+
+  &__tile-token {
+    font-family: 'SFMono-Regular', Consolas, monospace;
+    font-size: var(--text-caption);
+    color: var(--text-muted);
+  }
+}
+
+@media (max-width: 768px) {
+  .glass-preview {
+    padding: var(--space-7) var(--space-4);
+
+    &__grid {
+      grid-template-columns: 1fr;
+    }
+  }
+}

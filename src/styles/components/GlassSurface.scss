@@ -1,0 +1,157 @@
+/**
+ * GlassSurface — Level 3(Glass Control) production primitive.
+ * 근거: docs/design-system/review-decision.md Decision 1 · Decision 3
+ *
+ * Content(카드/본문)의 대체재가 아니다 — Navigation/Header controls/CTA/Project action/
+ * Carousel control/Floating button/Modal control 같은 "떠 있는 Control"에만 쓴다.
+ *
+ * 재질의 일관성은 blur 값이 아니라 다음 다섯 요소로 유지한다:
+ * glass background · glass border · highlight · specular · saturation(고정 180%).
+ * blur는 표면의 역할에 따라 --blur-sm/-md/-lg 중 하나를 고른다(§7 semantic usage).
+ */
+.glass-surface {
+  position: relative;
+  isolation: isolate;
+  display: inline-flex;
+  align-items: center;
+  gap: var(--space-2);
+  border: 1px solid var(--glass-border);
+  background: var(--glass-bg);
+  color: var(--text);
+  font: inherit;
+  text-decoration: none;
+  -webkit-tap-highlight-color: transparent;
+  overflow: hidden;
+
+  /* 뒤 배경을 흐리고 채도를 높여 유리 너머로 색이 은은히 비치게 한다.
+     saturate(180%)는 모든 Level 3 표면에서 고정 — 재질 일관성의 핵심. */
+  backdrop-filter: blur(var(--blur-md)) saturate(180%);
+  -webkit-backdrop-filter: blur(var(--blur-md)) saturate(180%);
+
+  box-shadow:
+    var(--shadow-glass-outer),
+    var(--shadow-glass-highlight),
+    var(--shadow-glass-inner);
+
+  transition:
+    background-color var(--duration-base) var(--ease-standard),
+    border-color var(--duration-base) var(--ease-standard),
+    box-shadow var(--duration-base) var(--ease-standard),
+    transform var(--duration-base) var(--ease-bounce);
+
+  /* 유리 표면 상단의 스페큘러 하이라이트 (GlassButton과 동일 레시피) */
+  &::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    z-index: 0;
+    border-radius: inherit;
+    background: linear-gradient(180deg, var(--glass-specular) 0%, rgba(255, 255, 255, 0) 55%);
+    opacity: 0.55;
+    pointer-events: none;
+  }
+
+  &__content {
+    position: relative;
+    z-index: 1;
+    min-width: 0;
+  }
+
+  /* --- Blur: semantic usage (foundation.md §7) --- */
+  &--blur-sm {
+    backdrop-filter: blur(var(--blur-sm)) saturate(180%);
+    -webkit-backdrop-filter: blur(var(--blur-sm)) saturate(180%);
+  }
+
+  &--blur-md {
+    backdrop-filter: blur(var(--blur-md)) saturate(180%);
+    -webkit-backdrop-filter: blur(var(--blur-md)) saturate(180%);
+  }
+
+  &--blur-lg {
+    backdrop-filter: blur(var(--blur-lg)) saturate(180%);
+    -webkit-backdrop-filter: blur(var(--blur-lg)) saturate(180%);
+  }
+
+  /* --- Radius --- */
+  &--radius-sm {
+    border-radius: var(--radius-sm);
+  }
+
+  &--radius-md {
+    border-radius: var(--radius-md);
+  }
+
+  &--radius-lg {
+    border-radius: var(--radius-lg);
+  }
+
+  &--radius-pill {
+    border-radius: var(--radius-pill);
+  }
+
+  /* --- Tone: accent = 브랜드 컬러가 유리에 배어든 상태 (CTA, 선택 상태) --- */
+  &--accent {
+    color: var(--accent-contrast);
+    border-color: color-mix(in srgb, var(--accent) 55%, var(--glass-border));
+    background: color-mix(in srgb, var(--accent) 78%, transparent);
+    box-shadow:
+      0 10px 22px color-mix(in srgb, var(--accent) 35%, transparent),
+      var(--shadow-glass-highlight),
+      var(--shadow-glass-inner);
+  }
+
+  /* --- Interactive affordance --- */
+  &--interactive {
+    cursor: pointer;
+
+    &:hover {
+      background: var(--glass-bg-strong);
+      transform: translateY(-2px);
+      box-shadow:
+        0 14px 28px var(--glass-shadow),
+        var(--shadow-glass-highlight),
+        var(--shadow-glass-inner);
+    }
+
+    &:active {
+      transform: translateY(0) scale(0.98);
+      transition-duration: var(--duration-fast);
+    }
+
+    /* 키보드 포커스만 강조 — 마우스 클릭으로 얻은 포커스에는 링을 두르지 않는다 */
+    &:focus-visible {
+      outline: 2px solid var(--accent);
+      outline-offset: 2px;
+    }
+  }
+
+  &--accent.glass-surface--interactive:hover {
+    background: color-mix(in srgb, var(--accent) 88%, transparent);
+    box-shadow:
+      0 16px 30px color-mix(in srgb, var(--accent) 45%, transparent),
+      var(--shadow-glass-highlight),
+      var(--shadow-glass-inner);
+  }
+}
+
+button.glass-surface {
+  appearance: none;
+  padding: 0;
+}
+
+/* Reduced Motion: 공간 이동(translate/scale)을 제거하고 opacity/color 중심으로만
+   상태 변화를 전달한다(docs/design-system/review-decision.md Decision 6). */
+@media (prefers-reduced-motion: reduce) {
+  .glass-surface {
+    transition:
+      background-color var(--duration-fast) var(--ease-standard),
+      border-color var(--duration-fast) var(--ease-standard),
+      box-shadow var(--duration-fast) var(--ease-standard);
+
+    &--interactive:hover,
+    &--interactive:active {
+      transform: none;
+    }
+  }
+}
