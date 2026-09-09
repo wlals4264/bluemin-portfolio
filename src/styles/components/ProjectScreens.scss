@@ -48,17 +48,18 @@
       box-shadow: 0 6px 14px var(--shadow);
     }
 
-    &::after {
-      /* 클릭해서 크게 볼 수 있음을 알려주는 돋보기 배지 */
-      content: '⤢';
+    .project-screens-badge {
+      /* 클릭해서 크게 볼 수 있음을 알려주는 확대 배지 — DiagramZoom과 같은
+         이유로 텍스트 글리프 대신 실제 아이콘을 써서 원 안에 정확히 가운데
+         정렬하고, 어두운 원 대신 accent 톤으로 더 친근하게 */
       position: absolute;
       right: 6px;
       bottom: 6px;
       width: 22px;
       height: 22px;
       border-radius: 50%;
-      background: rgba(0, 0, 0, 0.55);
-      color: #fff;
+      background: var(--accent);
+      color: var(--accent-contrast);
       font-size: 12px;
       display: flex;
       align-items: center;
@@ -66,10 +67,11 @@
       opacity: 0;
       transition: opacity 0.15s ease;
       pointer-events: none;
+      box-shadow: 0 2px 6px color-mix(in srgb, var(--accent) 40%, transparent);
     }
 
-    &:hover::after,
-    &:focus-visible::after {
+    &:hover .project-screens-badge,
+    &:focus-visible .project-screens-badge {
       opacity: 1;
     }
 
