@@ -76,9 +76,6 @@ const Introduction = () => {
           height={300}
           priority
         />
-        <svg className="rotating-border" viewBox="0 0 340 340">
-          <circle cx="170" cy="170" r="160" />
-        </svg>
         <span className="glass-shine" aria-hidden="true" />
       </div>
     </div>
