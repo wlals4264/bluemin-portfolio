@@ -23,6 +23,8 @@
 
   .header-container {
     width: 70%;
+    /* .home-wrapper(Home.scss)와 같은 상한선 — 헤더 폭이 본문 폭과 어긋나지 않게 맞춘다. */
+    max-width: 1439px;
     display: flex;
     justify-content: space-between;
     align-items: center;
@@ -47,6 +49,47 @@
       align-items: center;
       gap: 12px;
     }
+
+    /* Design System 진입점 — Footer/Floating 버튼만으로는 눈에 잘 안 띈다는 피드백으로
+       항상 보이는 헤더에 추가했다. Nav 항목(텍스트만)과 구분되도록 accent 톤 pill로
+       강조하되, ThemeToggle보다 커지지 않게 작게 유지한다.
+       좁은 화면(모바일 내비 모드)에서는 텍스트 pill 대신 ThemeToggle과 같은 크기의
+       원형 아이콘 버튼으로 바뀐다 — 글자 폭 때문에 햄버거·토글과 세로 정렬이 어긋나던
+       문제를 크기 자체를 맞춰서 해결한다. */
+    .header-ds-link {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      flex-shrink: 0;
+      padding: 6px 14px;
+      border-radius: var(--radius-pill);
+      background: var(--accent-soft);
+      color: var(--accent);
+      font-family: var(--font-body), sans-serif;
+      font-size: 14px;
+      font-weight: 700;
+      white-space: nowrap;
+      transition:
+        background-color 0.25s ease,
+        color 0.25s ease,
+        transform 0.25s ease;
+
+      &:hover {
+        background: var(--accent);
+        color: var(--accent-contrast);
+        transform: translateY(-1px);
+      }
+
+      &__compact {
+        display: none;
+      }
+    }
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .header-ds-link:hover {
+    transform: none;
   }
 }
 
@@ -73,6 +116,25 @@
       padding: 10px 35px;
       margin: 0;
       box-sizing: border-box;
+
+      /* 햄버거 · ThemeToggle과 나란히 놓이는 좁은 화면에서는 텍스트 pill 대신
+         ThemeToggle(40px 원형)과 동일한 크기의 아이콘 버튼으로 바꿔 세로 정렬을 맞춘다. */
+      .header-ds-link {
+        width: 40px;
+        height: 40px;
+        padding: 0;
+        border-radius: 50%;
+
+        &__full {
+          display: none;
+        }
+
+        &__compact {
+          display: inline-flex;
+          font-size: 13px;
+          font-weight: 700;
+        }
+      }
     }
   }
 }

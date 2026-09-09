@@ -1,0 +1,23 @@
+/**
+ * Documentation 전용 스타일 — Icon3D Size QA.
+ */
+.icon3d-size-preview {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: flex-end;
+  gap: var(--space-8);
+
+  &__item {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: var(--space-3);
+  }
+
+  &__caption {
+    margin: 0;
+    font-family: 'SFMono-Regular', Consolas, monospace;
+    font-size: var(--text-caption);
+    color: var(--text-muted);
+  }
+}

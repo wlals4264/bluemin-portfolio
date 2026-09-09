@@ -1,0 +1,65 @@
+/**
+ * Documentation 전용 레이아웃 — /design-system 페이지 셸.
+ * 콘텐츠 폭/반응형은 기존 .home-wrapper(src/styles/Home.scss)를 그대로 재사용해
+ * 포트폴리오 본문과 동일한 typography 리듬을 유지한다.
+ */
+.ds-page {
+  min-height: 100vh;
+
+  &__topbar.glass-surface {
+    position: sticky;
+    top: 0;
+    z-index: var(--z-header);
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    width: 100%;
+    padding: var(--space-3) var(--space-6);
+    box-sizing: border-box;
+    /* 뷰포트 전체 폭을 덮는 바라, Header와 동일하게 모서리를 둥글리지 않는다 */
+    border-radius: 0;
+    border-left: none;
+    border-right: none;
+
+    /* GlassSurface는 children을 .glass-surface__content span 하나로 감싸기 때문에,
+       바깥 div의 justify-content:space-between은 자식이 1개뿐이라 실제로는 적용되지 않는다.
+       Back 링크/ThemeToggle을 좌우로 벌리고 서로 세로 중앙을 맞추려면 이 span 자체를
+       flex row로 만들어야 한다. */
+    .glass-surface__content {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      width: 100%;
+    }
+  }
+
+  &__back {
+    display: inline-flex;
+    align-items: center;
+    gap: var(--space-2);
+    font-size: var(--text-body-sm);
+    font-weight: var(--font-weight-semibold);
+    color: var(--text);
+    transition: color var(--duration-base) var(--ease-standard);
+
+    &:hover {
+      color: var(--accent);
+    }
+  }
+
+  /* .home-wrapper는 폭 반응형만 재사용한다 — 그 클래스의 min-height:100vh/padding-bottom은
+     페이지 최상위 wrapper 전용 값이라 여기서는 무효화한다(.ds-page가 이미 min-height:100vh). */
+  &__content.home-wrapper {
+    padding-top: var(--space-2);
+    min-height: 0;
+    padding-bottom: 0;
+  }
+}
+
+@media (max-width: 480px) {
+  .ds-page {
+    &__topbar {
+      padding: var(--space-3) var(--space-4);
+    }
+  }
+}

@@ -32,9 +32,13 @@ yarn-error.log*
 
 # env files (can opt-in for committing if needed)
 .env*
+.env.local
 
 # vercel
 .vercel
+
+# local scratch output (e.g. scripts/astra-image-test.ts PoC images) — never committed
+/tmp/
 
 # typescript
 *.tsbuildinfo

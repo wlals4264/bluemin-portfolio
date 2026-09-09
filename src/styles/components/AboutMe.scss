@@ -1,49 +1,44 @@
+/**
+ * About Me — Soft Spatial Portfolio 최초 production migration.
+ * Content = Solid(review-decision.md Decision 1): 이 섹션에는 Glass를 쓰지 않는다.
+ * 3D(Level 4)는 Icon3D 아이콘에만 한정하고, 이름/위치/이메일/학력 텍스트는 항상 그대로 남는다.
+ */
 .about-me-container {
-  margin: 72px 0;
-  scroll-margin-top: 72px;
+  margin: var(--section-gap) 0;
+  scroll-margin-top: var(--header-offset);
 
   .about-me-info {
     display: grid;
     grid-template-columns: repeat(2, minmax(0, 1fr));
     grid-template-rows: repeat(2, auto);
-    column-gap: clamp(32px, 6vw, 80px);
-    row-gap: 28px;
+    column-gap: clamp(var(--space-7), 6vw, var(--space-11));
+    row-gap: var(--space-6);
     width: 100%;
     margin: 0;
 
     .about-me-info-item {
       display: flex;
       align-items: flex-start;
-      gap: 16px;
+      gap: var(--space-4);
       min-width: 0;
-
-      .about-me-info-icon {
-        flex-shrink: 0;
-        font-size: 28px;
-        display: flex;
-        justify-content: center;
-        align-items: center;
-        color: var(--accent);
-        margin-top: 2px;
-      }
 
       .about-me-info-text-container {
         display: flex;
         flex-direction: column;
-        gap: 6px;
+        gap: var(--space-1);
         min-width: 0;
         font-family: var(--font-body), sans-serif;
 
         .about-me-info-title {
-          font-size: 14px;
-          font-weight: 600;
+          font-size: var(--text-body-sm);
+          font-weight: var(--font-weight-semibold);
           color: var(--text-muted);
         }
 
         .about-me-info-content {
-          font-size: 15px;
-          font-weight: 500;
-          line-height: 150%;
+          font-size: var(--text-body);
+          font-weight: var(--font-weight-medium);
+          line-height: var(--leading-normal);
           color: var(--text);
           word-break: keep-all;
           overflow-wrap: break-word;
@@ -56,8 +51,8 @@
 @media (max-width: 768px) {
   .about-me-container {
     .about-me-info {
-      column-gap: 24px;
-      row-gap: 22px;
+      column-gap: var(--space-6);
+      row-gap: var(--space-5);
     }
   }
 }
@@ -67,25 +62,7 @@
     .about-me-info {
       grid-template-columns: 1fr;
       grid-template-rows: none;
-      row-gap: 18px;
-
-      .about-me-info-item {
-        .about-me-info-icon {
-          font-size: 22px;
-        }
-
-        .about-me-info-text-container {
-          gap: 4px;
-
-          .about-me-info-title {
-            font-size: 13px;
-          }
-
-          .about-me-info-content {
-            font-size: 14px;
-          }
-        }
-      }
+      row-gap: var(--space-4);
     }
   }
 }

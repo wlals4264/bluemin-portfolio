@@ -1,51 +1,72 @@
+/**
+ * Experiences — Soft Spatial Portfolio production migration (About Me와 동일 패턴).
+ * Content = Solid(review-decision.md Decision 1): Glass를 쓰지 않는다.
+ */
 .experiences-container {
-  margin: 72px 0;
-  scroll-margin-top: 72px;
+  margin: var(--section-gap) 0;
+  scroll-margin-top: var(--header-offset);
 
   .experiences-info {
     display: grid;
     grid-template-columns: repeat(2, minmax(0, 1fr));
-    column-gap: clamp(32px, 6vw, 80px);
-    row-gap: 28px;
+    column-gap: clamp(var(--space-7), 6vw, var(--space-11));
+    row-gap: var(--space-6);
     width: 100%;
     margin: 0;
 
     .experiences-info-item {
       display: flex;
       align-items: flex-start;
-      gap: 16px;
+      gap: var(--space-4);
       min-width: 0;
-
-      .experiences-info-icon {
-        flex-shrink: 0;
-        font-size: 28px;
-        display: flex;
-        justify-content: center;
-        align-items: center;
-        color: var(--accent);
-        margin-top: 2px;
-      }
 
       .experiences-info-text-container {
         display: flex;
         flex-direction: column;
-        gap: 6px;
+        gap: var(--space-1);
         min-width: 0;
         font-family: var(--font-body), sans-serif;
 
         .experiences-info-title {
-          font-size: 14px;
-          font-weight: 600;
+          font-size: var(--text-body-sm);
+          font-weight: var(--font-weight-semibold);
           color: var(--text-muted);
         }
 
         .experiences-info-content {
-          font-size: 15px;
-          font-weight: 500;
-          line-height: 150%;
+          font-size: var(--text-body);
+          font-weight: var(--font-weight-medium);
+          line-height: var(--leading-normal);
           color: var(--text);
           word-break: keep-all;
           overflow-wrap: break-word;
+
+          .experiences-info-row {
+            display: flex;
+            flex-wrap: wrap;
+            align-items: baseline;
+            justify-content: space-between;
+            gap: var(--space-1) var(--space-3);
+          }
+
+          .experiences-info-program {
+            font-weight: var(--font-weight-semibold);
+            color: var(--text);
+          }
+
+          .experiences-info-period {
+            flex-shrink: 0;
+            font-size: var(--text-label);
+            font-weight: var(--font-weight-medium);
+            color: var(--text-muted);
+          }
+
+          .experiences-info-desc {
+            display: block;
+            margin-top: var(--space-1);
+            font-weight: var(--font-weight-regular);
+            color: var(--text-soft);
+          }
         }
       }
     }
@@ -55,8 +76,8 @@
 @media (max-width: 768px) {
   .experiences-container {
     .experiences-info {
-      column-gap: 24px;
-      row-gap: 22px;
+      column-gap: var(--space-6);
+      row-gap: var(--space-5);
     }
   }
 }
@@ -65,25 +86,7 @@
   .experiences-container {
     .experiences-info {
       grid-template-columns: 1fr;
-      row-gap: 18px;
-
-      .experiences-info-item {
-        .experiences-info-icon {
-          font-size: 22px;
-        }
-
-        .experiences-info-text-container {
-          gap: 4px;
-
-          .experiences-info-title {
-            font-size: 13px;
-          }
-
-          .experiences-info-content {
-            font-size: 14px;
-          }
-        }
-      }
+      row-gap: var(--space-4);
     }
   }
 }

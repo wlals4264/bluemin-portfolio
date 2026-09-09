@@ -7,9 +7,18 @@ import { FaBook, FaYoutube, FaGithub } from 'react-icons/fa';
 import { RxNotionLogo } from 'react-icons/rx';
 import { SiVelog } from 'react-icons/si';
 import { GoLink } from 'react-icons/go';
-import Link from 'next/link';
+
+import GlassSurface from '@/components/common/surfaces/GlassSurface';
+import Badge, { type BadgeTone } from '@/components/common/badges/Badge';
 
 const MAX_VISIBLE_FEATURES = 3;
+
+// 프로젝트 타입 → Badge tone. astra-component-architecture.md §1의 확정 매핑.
+const PROJECT_TYPE_TONE: Record<string, BadgeTone> = {
+  company: 'company',
+  team: 'success',
+  personal: 'accent',
+};
 
 interface ProjectCardProps {
   title: string;
@@ -85,9 +94,7 @@ const ProjectCard: React.FC<ProjectCardProps> = ({
           <h2 className="project-card-title">{title}</h2>
           <div className="project-card-info">
             <span className="project-card-info-date">{date}</span>
-            <span className={`project-card-info-project-type ${projectType}`}>
-              {projectTypeLabel(projectType)}
-            </span>
+            <Badge tone={PROJECT_TYPE_TONE[projectType] ?? 'neutral'}>{projectTypeLabel(projectType)}</Badge>
           </div>
         </div>
 
@@ -102,9 +109,9 @@ const ProjectCard: React.FC<ProjectCardProps> = ({
         )}
 
         {hiddenFeatureCount > 0 && (
-          <button type="button" className="project-card-more" onClick={onClick}>
+          <GlassSurface as="button" blur="sm" radius="pill" className="project-card-more" onClick={onClick}>
             +{hiddenFeatureCount}개 더보기
-          </button>
+          </GlassSurface>
         )}
 
         {links.length > 0 && (
@@ -138,42 +145,80 @@ const ProjectCard: React.FC<ProjectCardProps> = ({
         {(visibleSkills.length > 0 || hiddenSkillCount > 0) && (
           <div className="project-card-skills-container">
             {visibleSkills.map((skill) => (
-              <span key={skill}>{skill}</span>
+              <Badge key={skill} variant="chip" tone="accent">
+                {skill}
+              </Badge>
             ))}
             {hiddenSkillCount > 0 && (
-              <span className="project-card-skill-more">+{hiddenSkillCount}</span>
+              <Badge variant="chip" tone="neutral">
+                +{hiddenSkillCount}
+              </Badge>
             )}
           </div>
         )}
 
         <div className="project-card-btn-container">
-          <button type="button" className="read-me-btn" onClick={onClick}>
+          <GlassSurface
+            as="button"
+            blur="md"
+            tone="accent"
+            radius="pill"
+            className="project-card-action"
+            onClick={onClick}>
             <FaBook aria-hidden />
             README
-          </button>
+          </GlassSurface>
           {projectVideoLink && (
-            <Link className="video-btn" href={projectVideoLink} target="_blank" rel="noreferrer">
+            <GlassSurface
+              as="a"
+              blur="md"
+              radius="pill"
+              className="project-card-action"
+              href={projectVideoLink}
+              target="_blank"
+              rel="noreferrer">
               <FaYoutube aria-hidden />
               Video
-            </Link>
+            </GlassSurface>
           )}
           {projectNotionUrl && (
-            <Link className="notion-btn" href={projectNotionUrl} target="_blank" rel="noreferrer">
+            <GlassSurface
+              as="a"
+              blur="md"
+              radius="pill"
+              className="project-card-action"
+              href={projectNotionUrl}
+              target="_blank"
+              rel="noreferrer">
               <RxNotionLogo aria-hidden />
               Notion
-            </Link>
+            </GlassSurface>
           )}
           {projectGithubUrl && (
-            <Link className="github-btn" href={projectGithubUrl} target="_blank" rel="noreferrer">
+            <GlassSurface
+              as="a"
+              blur="md"
+              radius="pill"
+              className="project-card-action"
+              href={projectGithubUrl}
+              target="_blank"
+              rel="noreferrer">
               <FaGithub aria-hidden />
               Github
-            </Link>
+            </GlassSurface>
           )}
           {projectVelogUrl && (
-            <Link className="velog-btn" href={projectVelogUrl} target="_blank" rel="noreferrer">
+            <GlassSurface
+              as="a"
+              blur="md"
+              radius="pill"
+              className="project-card-action"
+              href={projectVelogUrl}
+              target="_blank"
+              rel="noreferrer">
               <SiVelog aria-hidden />
               Velog
-            </Link>
+            </GlassSurface>
           )}
         </div>
       </div>

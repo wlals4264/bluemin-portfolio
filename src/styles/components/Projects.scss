@@ -1,12 +1,12 @@
 .projects-container {
-  margin: 72px 0;
+  margin: var(--section-gap) 0;
   width: 100%;
-  scroll-margin-top: 72px;
+  scroll-margin-top: var(--header-offset);
 
   .projects-carousel-wrapper {
     position: relative;
-    margin-bottom: 40px;
-    padding: 12px 0 20px;
+    margin-bottom: var(--space-8);
+    padding: var(--space-3) 0 var(--space-5);
     /* overflow:hidden은 가로(좌우로 peek되는 카드)만 가리려던 건데, hidden은
        세로까지 같이 잘라버려서 hover로 카드가 떠오르거나 box-shadow가 커지는
        것까지 잘렸다 — 그래서 위아래로 패딩을 크게 줘 피해가는 식으로
@@ -32,7 +32,7 @@
          중심이 카드 중심에서 눈에 띄게 밀려난다 — 그래서 패딩을 적당히만
          늘리고, ProjectCard.scss의 hover box-shadow 자체도 그 안에 들어올
          만큼 같이 줄였다 (자세한 이유는 그쪽 주석 참고) */
-      padding: 24px 0 36px;
+      padding: var(--space-6) 0 var(--space-7);
 
       /* 가장자리 카드가 색 patch 없이 투명하게 사라지도록 — 배경색을 덧칠하는
          대신 알파(mask)로만 페이드해서 그 안쪽의 실제 배경(물결 텍스처)이
@@ -41,15 +41,15 @@
       -webkit-mask-image: linear-gradient(
         to right,
         transparent 0,
-        black min(36px, 5vw),
-        black calc(100% - min(36px, 5vw)),
+        black min(var(--space-7), 5vw),
+        black calc(100% - min(var(--space-7), 5vw)),
         transparent 100%
       );
       mask-image: linear-gradient(
         to right,
         transparent 0,
-        black min(36px, 5vw),
-        black calc(100% - min(36px, 5vw)),
+        black min(var(--space-7), 5vw),
+        black calc(100% - min(var(--space-7), 5vw)),
         transparent 100%
       );
 
@@ -67,7 +67,15 @@
           width: 100%;
           min-height: 100%;
           opacity: 0.45;
-          transition: opacity 0.28s ease;
+          /* 이 선택자가 ProjectCard.scss의 .project-card-item-container보다 더
+             구체적이라(specificity가 높음), transition을 opacity만 다시 선언하면
+             shorthand 특성상 border-color/box-shadow 전환이 통째로 사라진다
+             (Astra 리뷰에서 발견) — 그래서 카드의 기본 전환 목록 전체를 여기서도
+             반복하고 opacity만 추가한다. */
+          transition:
+            opacity var(--duration-base) var(--ease-standard),
+            border-color var(--duration-base) var(--ease-standard),
+            box-shadow var(--duration-base) var(--ease-standard);
           /* GPU 레이어만 고정 — scale/rotate 없이 텍스트 선명도 유지 */
           backface-visibility: hidden;
           -webkit-font-smoothing: antialiased;
@@ -90,63 +98,38 @@
       }
     }
 
-    .nav-button {
+    /* 캐러셀 이전/다음 버튼 — 재질(배경·보더·blur·그림자·hover/active/focus)은
+       GlassSurface가 담당한다(Level 3 Glass Control, astra-component-architecture.md §2-4).
+       위치 지정용 translateY(-50%)와 GlassSurface 자체의 hover translateY(-2px)가
+       같은 transform 속성을 다퉈 서로 지워버리지 않도록, 위치는 별도 wrapper
+       (.projects-carousel-nav-slot)가 담당하고 GlassSurface에는 크기·아이콘 정렬만 준다. */
+    .projects-carousel-nav-slot {
       position: absolute;
       top: 50%;
       transform: translateY(-50%);
       z-index: 6;
+
+      &--prev {
+        left: var(--space-3);
+      }
+
+      &--next {
+        right: var(--space-3);
+      }
+    }
+
+    .nav-button {
       display: inline-flex;
       align-items: center;
       justify-content: center;
       width: 44px;
       height: 44px;
       padding: 0;
-      border: 1px solid color-mix(in srgb, var(--accent) 28%, var(--border));
-      border-radius: 50%;
-      background: color-mix(in srgb, var(--card) 88%, transparent);
-      color: var(--accent);
-      cursor: pointer;
-      backdrop-filter: blur(10px);
-      -webkit-backdrop-filter: blur(10px);
-      box-shadow:
-        0 1px 2px color-mix(in srgb, var(--shadow) 35%, transparent),
-        0 8px 24px color-mix(in srgb, var(--accent) 12%, transparent);
-      transition:
-        transform 0.2s ease,
-        border-color 0.2s ease,
-        background-color 0.2s ease,
-        color 0.2s ease,
-        box-shadow 0.2s ease;
 
       svg {
         width: 22px;
         height: 22px;
         stroke-width: 1.5;
-      }
-
-      &:hover {
-        transform: translateY(-50%) scale(1.06);
-        border-color: var(--accent);
-        background: var(--accent);
-        color: var(--accent-contrast);
-        box-shadow: 0 10px 28px color-mix(in srgb, var(--accent) 28%, transparent);
-      }
-
-      &:active {
-        transform: translateY(-50%) scale(0.98);
-      }
-
-      &:focus-visible {
-        outline: 2px solid var(--accent);
-        outline-offset: 3px;
-      }
-
-      &.prev-button {
-        left: 10px;
-      }
-
-      &.next-button {
-        right: 10px;
       }
     }
   }
@@ -154,20 +137,15 @@
 
 @media (max-width: 768px) {
   .projects-container {
-    margin: 48px 0;
+    margin: var(--space-9) 0;
 
     .projects-carousel-wrapper {
-      padding: 8px 0 20px;
-
-      &::before,
-      &::after {
-        width: 16px;
-      }
+      padding: var(--space-2) 0 var(--space-5);
 
       .projects-peek-carousel {
         /* 모바일은 hover가 없어 idle 둥둥(y: 0→-6px)만 신경 쓰면 되지만,
            4px로는 그마저도 못 가려서 위쪽이 살짝씩 계속 잘렸다 */
-        padding: 14px 0 12px;
+        padding: var(--space-3) 0;
 
         .swiper-slide {
           width: min(100%, 92%);
@@ -175,7 +153,7 @@
       }
 
       /* 모바일은 스와이프로 충분 — 가장자리 잘리는 화살표 숨김 */
-      .nav-button {
+      .projects-carousel-nav-slot {
         display: none;
       }
     }

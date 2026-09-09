@@ -1,48 +1,28 @@
-@mixin project-card-btn {
-  display: inline-flex;
-  align-items: center;
-  gap: 6px;
-  padding: 8px 12px;
-  border-radius: 999px;
-  border: 1px solid color-mix(in srgb, var(--accent) 35%, var(--border));
-  background: var(--card);
-  font-size: 12px;
-  font-weight: 700;
-  color: var(--accent);
-  text-decoration: none;
-  transition:
-    background-color 0.15s ease,
-    border-color 0.15s ease,
-    color 0.15s ease,
-    transform 0.25s cubic-bezier(0.34, 1.56, 0.64, 1),
-    box-shadow 0.25s cubic-bezier(0.34, 1.56, 0.64, 1);
-
-  &:hover {
-    background-color: var(--accent);
-    border-color: var(--accent);
-    color: var(--accent-contrast);
-    cursor: pointer;
-    transform: perspective(500px) translateY(-2px) scale(1.05) rotateX(8deg);
-    box-shadow: 0 8px 16px color-mix(in srgb, var(--accent) 30%, transparent);
-  }
-
-  &:active {
-    transform: perspective(500px) translateY(0) scale(0.96) rotateX(-3deg);
-    transition-duration: 0.1s;
-  }
-}
-
+/**
+ * ProjectCard — Soft Spatial Portfolio production migration.
+ * 근거: docs/design-system/astra-component-architecture.md
+ *
+ * Content = Solid(review-decision.md Decision 1·2): 카드 셸·헤더(제목·타입 배지)·
+ * 본문·피처 리스트·스킬 칩은 항상 불투명하다 — Glass를 쓰지 않는다.
+ * Control = Glass: 실제 액션(README/Video/Notion/Github/Velog, 피처 더보기)만
+ * GlassSurface(Level 3)를 쓴다. 이 파일은 그 액션들의 배치(패딩·간격·아이콘 정렬)만
+ * 책임지고, 재질(배경·보더·blur·그림자)은 GlassSurface가 담당한다 — 이중으로
+ * 정의하지 않는다.
+ *
+ * 배지(프로젝트 타입/스킬 칩)는 Badge.tsx/Badge.scss로 이관했다 — 이 파일에는
+ * 관련 색상·패딩 규칙이 없다.
+ */
 .project-card-item-container {
   display: flex;
   flex-direction: column;
   justify-content: space-between;
-  gap: 20px;
+  gap: var(--space-5);
   height: 100%;
   min-height: 0;
-  margin: 4px;
-  padding: 22px 22px 24px;
+  margin: var(--space-1);
+  padding: var(--space-5) var(--space-5) var(--space-6);
   border: 1px solid var(--border);
-  border-radius: 18px;
+  border-radius: var(--radius-lg);
   background:
     linear-gradient(
       165deg,
@@ -50,16 +30,18 @@
       var(--card) 42%,
       var(--bg-elevated) 100%
     );
-  box-shadow: 0 1px 2px var(--shadow);
+  box-shadow: var(--shadow-xs);
   color: var(--text);
   font-family: var(--font-body), sans-serif;
+  /* foundation.md §8: Level이 바뀌는 hover 전환(Level 2 카드 → hover 시 그림자 강조)은
+     --duration-base + --ease-standard를 쓴다 */
   transition:
-    border-color 0.3s ease,
-    box-shadow 0.3s ease;
+    border-color var(--duration-base) var(--ease-standard),
+    box-shadow var(--duration-base) var(--ease-standard);
   will-change: transform;
 
   &:hover {
-    border-color: color-mix(in srgb, var(--accent) 45%, var(--border));
+    border-color: var(--border-accent-strong);
     /* offset+blur가 카드 바깥 아래로 번지는 만큼 부모 .projects-peek-carousel의
        mask-image에 잘리지 않게 패딩을 맞춰뒀다 (Projects.scss 참고) — 그 패딩을
        과하게 키우지 않으려고 여기 그림자도 0 24px 48px에서 이 정도로 줄였다 */
@@ -69,73 +51,43 @@
   .project-card-top {
     display: flex;
     flex-direction: column;
-    gap: 12px;
+    gap: var(--space-3);
     min-width: 0;
   }
 
   .project-card-header {
     display: flex;
     flex-direction: column;
-    gap: 10px;
-    padding-bottom: 14px;
+    gap: var(--space-3);
+    padding-bottom: var(--space-3);
     border-bottom: 1px solid var(--border);
   }
 
   .project-card-title {
     margin: 0;
     font-family: var(--font-display), sans-serif;
-    font-size: clamp(22px, 2.4vw, 26px);
-    line-height: 1.2;
-    letter-spacing: -0.02em;
+    font-size: clamp(var(--text-heading-md), 2.4vw, 1.625rem);
+    line-height: var(--leading-tight);
+    letter-spacing: var(--tracking-tight);
   }
 
   .project-card-info {
     display: flex;
     flex-wrap: wrap;
     align-items: center;
-    gap: 8px;
+    gap: var(--space-2);
   }
 
   .project-card-info-date {
-    font-size: 12px;
+    font-size: var(--text-label);
     color: var(--text-muted);
-  }
-
-  .project-card-info-project-type {
-    display: inline-flex;
-    align-items: center;
-    padding: 4px 10px;
-    border-radius: 999px;
-    border: 1px solid var(--border);
-    background: var(--bg-muted);
-    font-size: 11px;
-    font-weight: 700;
-    color: var(--text-soft);
-
-    &.company {
-      border-color: color-mix(in srgb, var(--company) 35%, var(--border));
-      background: color-mix(in srgb, var(--company) 12%, var(--card));
-      color: var(--company);
-    }
-
-    &.team {
-      border-color: color-mix(in srgb, var(--success) 35%, var(--border));
-      background: color-mix(in srgb, var(--success) 12%, var(--card));
-      color: var(--success);
-    }
-
-    &.personal {
-      border-color: color-mix(in srgb, var(--accent) 28%, var(--border));
-      background: var(--accent-soft);
-      color: var(--accent);
-    }
   }
 
   .project-card-info-project-title {
     margin: 0;
-    font-size: 14px;
-    font-weight: 600;
-    line-height: 1.55;
+    font-size: var(--text-body-sm);
+    font-weight: var(--font-weight-semibold);
+    line-height: var(--leading-normal);
     color: var(--text-soft);
     /* projectTitle에 수동 줄바꿈(\n)이 있으면 그대로 반영 */
     white-space: pre-line;
@@ -147,18 +99,18 @@
     padding: 0;
     display: flex;
     flex-direction: column;
-    gap: 8px;
+    gap: var(--space-2);
 
     li {
       display: flex;
       align-items: flex-start;
-      gap: 8px;
-      padding: 10px 12px;
-      border-radius: 12px;
+      gap: var(--space-2);
+      padding: var(--space-3);
+      border-radius: var(--radius-md);
       border: 1px solid var(--border);
-      background: color-mix(in srgb, var(--card) 82%, transparent);
-      font-size: 13px;
-      line-height: 1.55;
+      background: var(--card);
+      font-size: var(--text-body-sm);
+      line-height: var(--leading-normal);
       color: var(--text-soft);
 
       &::before {
@@ -167,42 +119,34 @@
         margin-top: 0.58em;
         width: 5px;
         height: 5px;
-        border-radius: 50%;
+        border-radius: var(--radius-full);
         background: var(--accent);
       }
     }
   }
 
+  /* 재질은 GlassSurface가 담당 — 여기선 크기·타이포만 */
   .project-card-more {
     align-self: flex-start;
-    margin: 0;
-    padding: 0;
-    border: 0;
-    background: transparent;
-    color: var(--accent);
-    font-size: 12px;
-    font-weight: 700;
-    cursor: pointer;
-
-    &:hover {
-      text-decoration: underline;
-    }
+    padding: var(--space-1) var(--space-3);
+    font-size: var(--text-label);
+    font-weight: var(--font-weight-bold);
   }
 
   .project-card-links {
     display: flex;
     flex-wrap: wrap;
-    gap: 10px 14px;
+    gap: var(--space-3);
   }
 
   .project-card-link,
   .project-card-trouble {
     display: inline-flex;
     align-items: center;
-    gap: 6px;
+    gap: var(--space-2);
     max-width: 100%;
-    font-size: 12px;
-    font-weight: 600;
+    font-size: var(--text-label);
+    font-weight: var(--font-weight-semibold);
     color: var(--accent);
     text-decoration: none;
 
@@ -218,126 +162,81 @@
   }
 
   .project-card-trouble {
-    color: #dc2626;
+    color: var(--danger);
   }
 
   .project-card-bottom {
     display: flex;
     flex-direction: column;
-    gap: 16px;
+    gap: var(--space-4);
     margin-top: auto;
-    padding-top: 8px;
+    padding-top: var(--space-2);
   }
 
   .project-card-skills-container {
     display: flex;
     flex-wrap: wrap;
-    gap: 6px;
-
-    span {
-      padding: 5px 10px;
-      border-radius: 999px;
-      border: 1px solid color-mix(in srgb, var(--accent) 18%, var(--border));
-      background: color-mix(in srgb, var(--accent-soft) 45%, var(--card));
-      color: var(--accent);
-      font-size: 11px;
-      font-weight: 700;
-      white-space: nowrap;
-    }
-
-    .project-card-skill-more {
-      background: var(--bg-muted);
-      border-color: var(--border);
-      color: var(--text-muted);
-    }
+    gap: var(--space-2);
   }
 
   .project-card-btn-container {
     display: flex;
     flex-wrap: wrap;
-    gap: 8px;
+    gap: var(--space-2);
 
-    .read-me-btn,
-    .video-btn,
-    .notion-btn,
-    .github-btn,
-    .velog-btn {
-      @include project-card-btn;
+    /* 재질(배경·보더·blur·그림자·hover/active/focus)은 GlassSurface가 담당한다.
+       여기서는 패딩·글자 크기만 — GlassSurface는 자식을 .glass-surface__content
+       span 하나로 감싸므로, 아이콘·텍스트 정렬/간격은 그 자식에 한정해 적용한다. */
+    .project-card-action {
+      padding: var(--space-2) var(--space-3);
+      font-size: var(--text-label);
+      font-weight: var(--font-weight-bold);
+
+      > .glass-surface__content {
+        display: inline-flex;
+        align-items: center;
+        gap: var(--space-2);
+      }
     }
 
-    .read-me-btn {
-      position: relative;
-      overflow: hidden;
-      background: var(--accent);
-      border-color: var(--accent);
-      color: var(--accent-contrast);
-      animation: read-me-pulse 1.8s ease-in-out infinite;
+    /* README(accent tone)만 — 카드마다 5개까지 있는 액션 중 가장 먼저 눌러야 할
+       것이라는 걸 알려주는 은은한 숨쉬기 glow. 과거의 shimmer+rotateX보다 훨씬
+       절제된 형태로 복원했다 — 이동(transform)은 전혀 없고 그림자 강도만
+       오간다. hover/active 중에는 멈춰서 GlassSurface 자체의 hover 반응과
+       겹치지 않는다. */
+    .project-card-action.glass-surface--accent {
+      animation: project-card-action-breathe 2.6s ease-in-out infinite;
 
-      &::after {
-        content: '';
-        position: absolute;
-        inset: 0;
-        background: linear-gradient(
-          100deg,
-          transparent 35%,
-          rgba(255, 255, 255, 0.4) 46%,
-          rgba(255, 255, 255, 0.95) 50%,
-          rgba(255, 255, 255, 0.4) 54%,
-          transparent 65%
-        );
-        transform: translateX(-170%);
-        animation: read-me-shimmer 1.8s ease-in-out infinite;
-        pointer-events: none;
-      }
-
-      &:hover {
-        background: var(--accent-hover);
-        border-color: var(--accent-hover);
+      &:hover,
+      &:active {
         animation-play-state: paused;
-
-        &::after {
-          animation-play-state: paused;
-          opacity: 0;
-        }
       }
     }
   }
 }
 
-@keyframes read-me-pulse {
+@keyframes project-card-action-breathe {
   0%,
   100% {
     box-shadow:
-      0 0 0 0 color-mix(in srgb, var(--accent) 70%, transparent),
-      0 0 0 0 color-mix(in srgb, var(--accent) 0%, transparent);
+      0 10px 22px color-mix(in srgb, var(--accent) 35%, transparent),
+      var(--shadow-glass-highlight),
+      var(--shadow-glass-inner);
   }
+
   50% {
     box-shadow:
-      0 0 0 10px color-mix(in srgb, var(--accent) 0%, transparent),
-      0 0 22px 6px color-mix(in srgb, var(--accent) 65%, transparent);
+      0 12px 28px color-mix(in srgb, var(--accent) 55%, transparent),
+      var(--shadow-glass-highlight),
+      var(--shadow-glass-inner);
   }
 }
 
-@keyframes read-me-shimmer {
-  0%,
-  40% {
-    transform: translateX(-170%);
-  }
-  70%,
-  100% {
-    transform: translateX(170%);
-  }
-}
-
+/* Reduced Motion: 카드 idle/hover와 같은 원칙 — 장식적 반복 애니메이션은 끄고
+   README의 accent 톤(정적 상태)만으로 우선순위를 전달한다. */
 @media (prefers-reduced-motion: reduce) {
-  .project-card-btn-container .read-me-btn {
+  .project-card-action.glass-surface--accent {
     animation: none;
-
-    &::before,
-    &::after {
-      animation: none;
-      content: none;
-    }
   }
 }
 
@@ -356,55 +255,41 @@
 @media (max-width: 768px) {
   .project-card-item-container {
     min-height: 0;
-    margin: 2px;
-    padding: 18px 16px 20px;
-    gap: 16px;
-    border-radius: 16px;
+    margin: var(--space-1);
+    padding: var(--space-4) var(--space-4) var(--space-5);
+    gap: var(--space-4);
 
     .project-card-title {
-      font-size: 22px;
+      font-size: var(--text-heading-md);
       word-break: keep-all;
       overflow-wrap: break-word;
     }
 
     .project-card-info-project-title {
-      font-size: 13px;
-      line-height: 1.5;
+      font-size: var(--text-body-sm);
+      line-height: var(--leading-normal);
       word-break: keep-all;
       overflow-wrap: break-word;
     }
 
-    .project-card-info-project-type {
-      white-space: nowrap;
-    }
-
     .project-card-features li {
-      padding: 9px 10px;
-      font-size: 12.5px;
-      line-height: 1.55;
+      padding: var(--space-2) var(--space-3);
+      font-size: var(--text-label);
+      line-height: var(--leading-normal);
       word-break: keep-all;
       overflow-wrap: break-word;
     }
 
     .project-card-skills-container {
-      gap: 5px;
-
-      span {
-        padding: 4px 8px;
-        font-size: 10.5px;
-      }
+      gap: var(--space-1);
     }
 
     .project-card-btn-container {
-      gap: 6px;
+      gap: var(--space-2);
 
-      .read-me-btn,
-      .video-btn,
-      .notion-btn,
-      .github-btn,
-      .velog-btn {
-        padding: 7px 10px;
-        font-size: 11px;
+      .project-card-action {
+        padding: var(--space-2) var(--space-3);
+        font-size: var(--text-caption);
       }
     }
   }
@@ -412,10 +297,10 @@
 
 @media (max-width: 480px) {
   .project-card-item-container {
-    padding: 16px 14px 18px;
+    padding: var(--space-4) var(--space-3) var(--space-4);
 
     .project-card-title {
-      font-size: 20px;
+      font-size: var(--text-heading-md);
     }
   }
 }

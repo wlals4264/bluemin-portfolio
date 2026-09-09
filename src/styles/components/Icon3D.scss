@@ -1,0 +1,39 @@
+/**
+ * Icon3D — Level 4(3D Object) production primitive.
+ * 근거: docs/design-system/review-decision.md Decision 1, docs/design-system/3d-assets.md
+ *
+ * 강한 CSS shadow를 기본 적용하지 않는다 — 3D asset 자체에 이미 ambient shadow가
+ * 포함될 수 있기 때문이다(3d-assets.md Art Direction 참고).
+ */
+.icon-3d {
+  display: inline-block;
+  flex-shrink: 0;
+  vertical-align: middle;
+}
+
+img.icon-3d {
+  /* asset이 정사각형이 아니어도 잘리지 않고 실루엣 전체가 보이게 한다 */
+  object-fit: contain;
+}
+
+/* asset이 없거나(경로 미생성) 로드에 실패했을 때의 조용한 placeholder.
+   Depth Level 4(--4)와 같은 톤(muted 배경 + dashed border)을 써서 "아직 준비 중인
+   자리"라는 신호를 시스템 전체에서 일관되게 준다. */
+.icon-3d--pending {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: 4px;
+  box-sizing: border-box;
+  border: 1px dashed var(--border);
+  border-radius: var(--radius-md);
+  background: var(--bg-muted);
+  color: var(--text-muted);
+  text-align: center;
+
+  .icon-3d__pending-label {
+    font-size: var(--text-caption);
+    font-weight: var(--font-weight-medium);
+    line-height: 1.3;
+  }
+}
