@@ -1,0 +1,68 @@
+/**
+ * Badge — Level 2 Content 보조 표시 Atom. Glass를 쓰지 않는다(Content = Solid).
+ * 근거: docs/design-system/astra-component-architecture.md §1.
+ *
+ * badge/chip 두 variant는 기존 프로젝트 타입 배지(4px 10px)와 스킬 칩(5px 10px)의
+ * 패딩 차이를 그대로 옮기면 토큰 스냅 결과가 동일해져(둘 다 --space-1/--space-3로
+ * 수렴) 사실상 같은 값이 된다 — 억지로 다른 패딩을 발명하지 않고 그대로 공유한다.
+ * tone 조합만 variant마다 실제 배경 농도를 보존한다.
+ */
+.badge {
+  display: inline-flex;
+  align-items: center;
+  padding: var(--space-1) var(--space-3);
+  border-radius: var(--radius-pill);
+  border: 1px solid transparent;
+  font-size: var(--text-caption);
+  font-weight: var(--font-weight-bold);
+  white-space: nowrap;
+  line-height: var(--leading-snug);
+
+  /* --- neutral --- */
+  &.badge--neutral {
+    background: var(--bg-muted);
+    border-color: var(--border);
+  }
+
+  &.badge--badge.badge--neutral {
+    color: var(--text-soft);
+  }
+
+  &.badge--chip.badge--neutral {
+    color: var(--text-muted);
+  }
+
+  /* --- accent (personal 프로젝트 타입 / 스킬 칩) --- */
+  &.badge--badge.badge--accent {
+    /* foundation.md §1-4: 28% 클러스터는 35%(--border-accent-subtle)로 흡수 */
+    border-color: var(--border-accent-subtle);
+    background: var(--accent-soft);
+    color: var(--accent);
+  }
+
+  &.badge--chip.badge--accent {
+    border-color: color-mix(in srgb, var(--accent) 18%, var(--border));
+    background: color-mix(in srgb, var(--accent-soft) 45%, var(--card));
+    color: var(--accent);
+  }
+
+  /* --- success (team 프로젝트 타입) --- */
+  &.badge--success {
+    border-color: color-mix(in srgb, var(--success) 35%, var(--border));
+    background: color-mix(in srgb, var(--success) 12%, var(--card));
+    color: var(--success);
+  }
+
+  /* --- company (company 프로젝트 타입) --- */
+  &.badge--company {
+    border-color: color-mix(in srgb, var(--company) 35%, var(--border));
+    background: color-mix(in srgb, var(--company) 12%, var(--card));
+    color: var(--company);
+  }
+}
+
+@media (max-width: 768px) {
+  .badge--chip {
+    padding: var(--space-1) var(--space-2);
+  }
+}
