@@ -3,7 +3,7 @@
 > 근거 문서: [[review-decision]](./review-decision.md) Decision 1 · [[visual-direction]](./visual-direction.md) §2-4 · [[foundation]](./foundation.md) §11
 
 **Family**: Soft Spatial 3D — v1
-**Status**: Production — 8종 production WebP 전부 생성·검사 완료. About Me·Experiences는 실제로 통합됐다(각각 profile/email/location/education, laptop). 나머지 메인 포트폴리오 영역(Hero/Career/Skills/Projects/ProjectCard/Header/Footer)에는 아직 통합하지 않았다 — 섹션 단위로 순차 진행한다.
+**Status**: Production — 11종 production WebP 전부 생성·검사 완료. About Me·Experiences는 실제로 통합됐다(각각 profile/email/location/education, laptop). ProjectCard의 프로젝트 타입 배지도 통합됐다(company/team/personal, astra-review.md PoC 검증 과정에서 추가). 나머지 메인 포트폴리오 영역(Hero/Career/Skills/Header/Footer)에는 아직 통합하지 않았다 — 섹션 단위로 순차 진행한다.
 
 ---
 
@@ -65,13 +65,24 @@ Concept = 3D
 - `mobile` — Mobile app
 - `analytics` — Data analytics
 - `laptop` — Coding / development education (Experiences의 "교육" 항목 전용, About Me의 `education`과는 다른 의미)
+- `company` — Company project (ProjectCard 타입 배지 전용). 작은 오피스 빌딩(유리 재질 창문
+  2~3개 + 문).
+- `team` — Team project (ProjectCard 타입 배지 전용). person-token 3개가 뭉친 클러스터 —
+  `profile`(단일 인물 카드)과 실루엣이 확실히 구분되도록 인물 개수 자체를 차이로 삼았다.
+- `personal` — Personal project (ProjectCard 타입 배지 전용). 소형 로켓 — `profile`/`team`과
+  달리 인물 형태를 전혀 쓰지 않는다.
+
+company/team/personal 세 asset은 항상 나란히 놓이는 세트가 아니라 **같은 자리(타입 배지 옆)에
+프로젝트마다 하나씩만** 나타나지만, 배지 pill이 매우 작아(ProjectCard.scss 기준 22px) 세
+실루엣이 그 크기에서도 서로 확실히 구분되는 것을 우선순위로 뒀다(건물 vs 인물 클러스터 vs
+로켓 — geometry 자체가 다른 카테고리).
 
 ### 향후 추가 후보 (아직 slot 없음)
 
 [[visual-direction]] §2-4에서 이미 식별된 개념 후보 — 실제 콘텐츠에 정보 공백이 있는 지점부터 우선순위를 정해 추가한다.
 
 ```
-sleep · health · ai · project · company · team · personal
+sleep · health · ai
 ```
 
 ---
@@ -86,7 +97,7 @@ sleep · health · ai · project · company · team · personal
 - "화면상 검게 보인다"는 이유만으로 opaque black background로 판단하지 않는다 — 이미지 뷰어는 흔히 투명 영역을 검게 렌더링한다. 판단은 항상 PNG의 raw alpha 채널 값(모서리 픽셀, 전체 투명 픽셀 비율)으로 한다.
 - 배경이 실제로 baked-in 되어 있는 경우라도 **단순 black-threshold 삭제로 제거하지 않는다** — 이 asset들은 translucent glass material이라, 그런 방식은 유리 가장자리의 반투명 셰이딩까지 함께 지워 품질을 손상시킨다.
 - alpha 채널이 정상으로 확인된 asset만 변환한다. 확인되지 않으면 **변환을 중단하고 보고한다** — 억지로 손상시켜 production에 올리지 않는다.
-- 2026-09-09 실행 기준: 8개 전부 PASS(모서리 alpha=0, 투명 픽셀 53~72%, 완전 불투명 픽셀 0%) — 실제 raw pixel 검사 결과이며, 미리보기에서 검게 보이는 것은 뷰어의 렌더링 방식일 뿐 production 품질에는 영향이 없다.
+- 2026-09-10 실행 기준: 11개 전부 PASS(모서리 alpha=0, 투명 픽셀 53~72%, 완전 불투명 픽셀 0% — company/team/personal 포함) — 실제 raw pixel 검사 결과이며, 미리보기에서 검게 보이는 것은 뷰어의 렌더링 방식일 뿐 production 품질에는 영향이 없다.
 
 ## File Format
 

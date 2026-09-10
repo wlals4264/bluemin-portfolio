@@ -2,7 +2,7 @@
 
 import '@/styles/components/ReadMe.scss';
 
-import { ProjectCardData, projectTypeLabel, getProjectLinks } from '@/mocks/projects';
+import { ProjectCardData, projectTypeLabel, projectTypeTone, getProjectLinks } from '@/mocks/projects';
 
 import { useEffect, useState } from 'react';
 import { createPortal } from 'react-dom';
@@ -12,6 +12,8 @@ import { IoIosClose } from 'react-icons/io';
 import ProjectHighlights from '@/components/highlights/ProjectHighlights';
 import ProjectScreens from '@/components/projects/ProjectScreens';
 import BlogPostCard from '@/components/projects/BlogPostCard';
+import FeatureList from '@/components/common/lists/FeatureList';
+import Badge from '@/components/common/badges/Badge';
 import { getYoutubeEmbedUrl } from '@/utils/youtube';
 
 interface ReadMeProps {
@@ -78,6 +80,21 @@ const ReadMe = ({ setIsProjectCardClicked, project }: ReadMeProps) => {
     };
   }, [isOpen]);
 
+  // ProjectCard PoC 브라우저 검증 중 발견: role="dialog"/aria-modal은 있었지만
+  // Esc로 닫는 키보드 경로가 없었다 — 마우스로 닫기 버튼을 눌러야만 닫혔다.
+  useEffect(() => {
+    if (!isOpen) return;
+
+    const handleKeyDown = (event: KeyboardEvent) => {
+      if (event.key === 'Escape') {
+        handleCloseModal();
+      }
+    };
+
+    document.addEventListener('keydown', handleKeyDown);
+    return () => document.removeEventListener('keydown', handleKeyDown);
+  }, [isOpen]);
+
   const links = getProjectLinks(project);
   // 데모 영상은 유튜브로 튕기지 않고 모달 안에서 바로 재생되도록 embed
   const videoEmbedUrl = project.projectVideoLink ? getYoutubeEmbedUrl(project.projectVideoLink) : null;
@@ -121,9 +138,9 @@ const ReadMe = ({ setIsProjectCardClicked, project }: ReadMeProps) => {
                 </h2>
                 <div className="read-me-title-info-data">
                   <span className="read-me-date">{project.date}</span>
-                  <span className={`read-me-project-type ${project.projectType}`}>
+                  <Badge tone={projectTypeTone(project.projectType)}>
                     {projectTypeLabel(project.projectType)}
-                  </span>
+                  </Badge>
                 </div>
                 {project.projectTitle && (
                   <p className="read-me-subtitle">{project.projectTitle}</p>
@@ -177,13 +194,7 @@ const ReadMe = ({ setIsProjectCardClicked, project }: ReadMeProps) => {
                 {(project.projectFeatures.length > 0 || project.mainFeatures || project.blogPost) && (
                   <section className="readme-section summary-box">
                     <h3 className="readme-section-title">요약</h3>
-                    {project.projectFeatures.length > 0 && (
-                      <ul className="project-card-features">
-                        {project.projectFeatures.map((feature) => (
-                          <li key={feature}>{feature}</li>
-                        ))}
-                      </ul>
-                    )}
+                    <FeatureList features={project.projectFeatures} />
                     {project.mainFeatures && (
                       <p className="project-card-main-features">{project.mainFeatures}</p>
                     )}

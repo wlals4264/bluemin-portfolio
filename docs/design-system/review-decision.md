@@ -38,18 +38,28 @@ Astra의 지적과 관계없이 다음은 현재 Foundation을 그대로 유지�
 
 이 문서에서 결정하지 않고, ProjectCard PoC 및 이후 컴포넌트 구현 단계에서 실제 브라우저로 확인한다. Astra Review의 "Must Validate in Browser" / "ProjectCard PoC Checklist"에서 이번 8개 결정으로 해소되지 않은 항목을 그대로 승계한다.
 
-- Level 1과 Level 2가 다크 테마에서 실제로 구분되는지 — 특히 `--bg-elevated`와 `--card`가 같은 값(`#111827`)인 조합.
-- Level 2 → Level 3 전환 시, 균일한 배경 위에서도 유리 재질감이 실제로 인지되는지(블러로 흐릴 디테일이 없는 경우).
-- Light/Dark Glass가 알파값 차이에도 불구하고 "같은 재질"로 인지되는지.
-- `data-theme` 속성이 실제로 부착되는 요소와, `--shadow-*`/`--border-accent-*` 같은 합성 토큰의 computed value가 의도대로 반영되는지.
-- 텍스트 대비 4.5:1 실측 — 특히 `--text-muted` on `--bg-muted` 조합(계산상 약 4.46:1로 경계선), Glass 표면 위 텍스트.
+**2026-09-10 ProjectCard PoC(astra-review.md 기반)에서 실제로 확인·해결된 항목:**
+
+- ~~Level 1과 Level 2가 다크 테마에서 실제로 구분되는지~~ — **해결**. 다크 `--card`가 `--bg-elevated`와 동일값(`#111827`)이던 문제를 `#1a2338`로 분리해 수정, 브라우저에서 카드 그라데이션이 실제로 보이는 것을 확인(`globals.scss`).
+- ~~Level 2 → Level 3 전환 시 유리 재질감이 실제로 인지되는지~~ — **해결(전제 조건 버그 발견)**. `backdrop-filter`가 표준 속성/`-webkit-` 프리픽스 선언 순서 때문에 빌드 단계에서 통째로 제거되어 **사이트 전체에서 Glass 블러가 전혀 렌더링되지 않고 있었다.** 순서를 뒤집어 수정(`GlassSurface.scss` 등), 헤더 뒤 스크롤 콘텐츠가 실제로 블러 처리되는 것을 시각적으로 확인.
+- ~~`data-theme` 속성이 실제로 부착되는 요소~~ — **해결**. `ThemeProvider.tsx`/`layout.tsx`가 항상 `document.documentElement`(=`:root`)에 설정함을 코드로 확인 — 하위 요소 부분 적용 경로 없음.
+- ~~Hover/Motion 중첩(카드+내부 버튼)과 기존 `rotateX`/pulse/shimmer가 신규 효과와 중복되지 않는지~~ — **ProjectCard 기준 해결**. 현재 코드에는 `rotateX` 틸트가 없고, README 액션의 breathe 애니메이션은 hover/active 중 정지하도록 구현돼 있음을 확인.
+- ~~키보드/터치에서 hover 액션 트레이의 발견 가능성과 포커스 표시~~ — **해당 없음으로 해결**. ProjectCard는 hover 전용 플로팅 트레이를 도입하지 않고 액션을 항상 보이는 실제 `<button>`/`<a>`로 구현했다 — 이 문제 자체가 발생하지 않는 설계.
+- ~~ProjectCard 액션 영역 Glass의 캐러셀 반복 배치 성능~~ — **구조적 위험은 배제**. 실제 페이지에서 동시 노출 Glass 표면 15개, 중첩 `backdrop-filter` 0건 확인(자동화로 확인 가능한 선에서). 실기기 프레임타임 실측은 여전히 아래 "남은 항목" 참고.
+- (부수 발견) FeatureList 중복 스타일, 프로젝트 타입 배지 카드/모달 색상 불일치(team·personal), README 모달 Esc 미동작, ThemeToggle 하이드레이션 mismatch — 전부 발견 즉시 수정·커밋함.
+
+**여전히 열려 있는 항목(다음 세션으로 이월):**
+
+- Light/Dark Glass가 알파값 차이에도 불구하고 "같은 재질"로 인지되는지 — 육안으로 이상 없어 보였으나 체계적 비교는 안 함.
+- 텍스트 대비 4.5:1 실측 — 특히 `--text-muted` on `--bg-muted` 조합(계산상 약 4.46:1로 경계선), Glass 표면 위 텍스트. **아직 미실측.**
+- `backdrop-filter` 미지원 환경 폴백(`@supports`) — 현재 없음. 미지원 브라우저에서 반투명 배경 위 텍스트 대비 저하 가능성.
 - 3D 에셋의 조명 방향(좌상단)과 Glass 스페큘러 하이라이트가 "같은 광원"으로 실제 인지되는지.
-- 정적 3D 에셋(포맷 자체는 Decision 4로 확정)의 실제 표시 크기/DPR별 선명도, 파일 크기, 테마별 대응 방식.
-- Hover/Motion 중첩 시 배율 누적(카드+내부 버튼 등)과 기존 `rotateX`/pulse/shimmer가 신규 효과와 의도치 않게 중복되지 않는지.
-- Swiper mask/clip 내부에서 그림자·hover 변형·포커스 표시가 잘리지 않는지.
-- ProjectCard 액션 영역에 Glass를 적용했을 때 캐러셀에 반복 배치된 다수 카드의 backdrop-filter 성능.
-- Spacing/Typography 스냅 값 변경(예: 56→48px, 26→22px 등)이 실제 콘텐츠·좁은 화면에서 미치는 영향.
-- 키보드/터치에서 hover 액션 트레이의 발견 가능성과 포커스 표시.
+- 정적 3D 에셋의 실제 표시 크기/DPR별 선명도 — 파일 크기(14~27KB)와 22px 표시는 확인, DPR별 선명도는 미확인.
+- Swiper mask/clip 내부에서 포커스 표시가 잘리지 않는지 — hover 그림자는 안 잘리는 것을 화면으로 확인했으나, 키보드 포커스 링 기준으로는 재확인 안 함.
+- 실기기(모바일)에서의 캐러셀 스크롤/스와이프 프레임타임 실측 — 브라우저 자동화로 시도했으나 측정 실패, 실기기 확인 필요.
+- 긴 프로젝트명·많은 스킬 칩 등 스트레스 콘텐츠에서의 레이아웃.
+- Spacing/Typography 스냅 값 변경(예: 56→48px, 26→22px 등)이 실제 콘텐츠·좁은 화면에서 미치는 영향 — 이건 ProjectCard 범위를 넘는 전역 마이그레이션 작업(foundation.md §18 우선순위 1~13번)이라 아직 착수 전.
+- 키보드만으로 전체 액션 접근 가능 여부, 터치 전용 환경, 200% 확대, 스크린리더에서 3D 아이콘 중복 낭독 여부 — 종합 접근성 감사 미실시.
 
 ---
 

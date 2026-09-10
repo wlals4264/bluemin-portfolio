@@ -1,0 +1,90 @@
+.floating-icon-btn {
+  position: relative;
+  display: inline-flex;
+
+  .floating-icon-btn__control {
+    /* Icon3D(lg=96px)가 원 안에서 살짝 여백을 두고 앉도록 — 버튼 자체 크기와
+       똑같이 꽉 채우면 유리 테두리와 아이콘 실루엣이 맞닿아 답답해 보인다 */
+    .icon-3d {
+      width: 80%;
+      height: 80%;
+    }
+  }
+
+  /* 물 위에 둥둥 뜬 배처럼 아주 느리게 위아래로 까딱인다.
+     prefers-reduced-motion에서는 아예 흔들지 않는다. */
+  animation: floating-icon-btn-bob 3.4s ease-in-out infinite;
+
+  @media (prefers-reduced-motion: reduce) {
+    animation: none;
+  }
+
+  .floating-icon-btn__tooltip {
+    position: absolute;
+    bottom: calc(100% + 14px);
+    right: 0;
+    max-width: 220px;
+    padding: 10px 14px;
+    border-radius: var(--radius-md);
+    border: 1px solid var(--border);
+    background: var(--card);
+    color: var(--text);
+    font-family: var(--font-body), sans-serif;
+    font-size: var(--text-body-sm);
+    font-weight: var(--font-weight-semibold);
+    line-height: var(--leading-snug);
+    text-align: right;
+    white-space: nowrap;
+    box-shadow: var(--shadow-md);
+    pointer-events: none;
+    opacity: 0;
+    transform: translateY(6px) scale(0.96);
+    transform-origin: bottom right;
+    transition:
+      opacity var(--duration-base) var(--ease-pop),
+      transform var(--duration-base) var(--ease-pop);
+
+    &::after {
+      content: '';
+      position: absolute;
+      top: 100%;
+      right: 28px;
+      width: 10px;
+      height: 10px;
+      background: var(--card);
+      border-right: 1px solid var(--border);
+      border-bottom: 1px solid var(--border);
+      transform: translateY(-50%) rotate(45deg);
+    }
+  }
+
+  &:hover .floating-icon-btn__tooltip,
+  &:focus-within .floating-icon-btn__tooltip {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+  }
+
+  &:hover,
+  &:focus-within {
+    /* 말풍선이 뜨는 동안은 배가 까딱이는 게 아니라 가만히 멈춰서 카피를 읽기 쉽게 */
+    animation-play-state: paused;
+  }
+}
+
+@keyframes floating-icon-btn-bob {
+  0%,
+  100% {
+    transform: translateY(0);
+  }
+  50% {
+    transform: translateY(-8px);
+  }
+}
+
+@media (max-width: 480px) {
+  .floating-icon-btn .floating-icon-btn__tooltip {
+    max-width: 160px;
+    white-space: normal;
+    font-size: var(--text-caption);
+  }
+}

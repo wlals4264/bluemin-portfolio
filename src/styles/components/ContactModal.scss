@@ -1,0 +1,287 @@
+.contact-modal-wrapper {
+  position: fixed;
+  inset: 0;
+  z-index: var(--z-modal);
+  display: flex;
+  align-items: flex-start;
+  justify-content: center;
+  padding: 48px 16px 64px;
+  box-sizing: border-box;
+  background-color: var(--modal-overlay);
+  overflow-y: auto;
+  backdrop-filter: blur(var(--blur-overlay));
+  -webkit-backdrop-filter: blur(var(--blur-overlay));
+
+  .contact-modal {
+    position: relative;
+    width: min(480px, 100%);
+    margin: auto 0;
+    padding: 40px 32px 32px;
+    box-sizing: border-box;
+    background-color: var(--card);
+    border: 1px solid var(--border);
+    border-radius: var(--radius-lg);
+    box-shadow: var(--shadow-lg);
+    color: var(--text);
+    font-family: var(--font-body), sans-serif;
+
+    .contact-modal__close {
+      position: absolute;
+      top: 12px;
+      right: 12px;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      width: 36px;
+      height: 36px;
+      padding: 0;
+      border: 1px solid transparent;
+      border-radius: var(--radius-sm);
+      background: transparent;
+      color: var(--text-muted);
+      cursor: pointer;
+      transition:
+        background-color var(--duration-fast) var(--ease-standard),
+        border-color var(--duration-fast) var(--ease-standard),
+        color var(--duration-fast) var(--ease-standard);
+
+      svg {
+        width: 26px;
+        height: 26px;
+      }
+
+      &:hover {
+        background: var(--bg-muted);
+        border-color: var(--border);
+        color: var(--text);
+      }
+    }
+
+    /* 사이트 전역의 영문 섹션 타이틀 관례(About Me/Career 등, InfoHeader.module.scss)를
+       그대로 가져온다 — font-display + border-bottom. 모달은 카드 하나짜리라 가운데
+       정렬 대신 좌측 정렬로, 크기는 InfoHeader(28px)보다 조금 크게 ReadMe 타이틀과
+       맞췄다(read-me-title과 동일한 clamp). */
+    .contact-modal__title {
+      margin: 0 0 12px;
+      padding-bottom: 14px;
+      border-bottom: 1px solid var(--border);
+      font-family: var(--font-display), sans-serif;
+      font-size: clamp(26px, 4vw, 32px);
+      font-weight: 400;
+      line-height: var(--leading-tight);
+      letter-spacing: var(--tracking-normal);
+      color: var(--text);
+    }
+
+    .contact-modal__subtitle {
+      margin: 0 0 14px;
+      font-size: var(--text-body);
+      font-weight: var(--font-weight-semibold);
+      line-height: var(--leading-snug);
+      color: var(--text-soft);
+    }
+
+    .contact-modal__lead {
+      margin: 0 0 24px;
+      font-size: var(--text-body-sm);
+      line-height: var(--leading-relaxed);
+      color: var(--text-muted);
+    }
+
+    .contact-modal__chips {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+      margin-bottom: 20px;
+    }
+
+    .contact-modal__chip {
+      padding: 8px 16px;
+      border: 1px solid var(--border);
+      border-radius: var(--radius-pill);
+      background: var(--bg-elevated);
+      color: var(--text-soft);
+      font-family: inherit;
+      font-size: var(--text-body-sm);
+      font-weight: var(--font-weight-semibold);
+      cursor: pointer;
+      transition:
+        border-color var(--duration-fast) var(--ease-standard),
+        background-color var(--duration-fast) var(--ease-standard),
+        color var(--duration-fast) var(--ease-standard);
+
+      &:hover {
+        border-color: var(--border-accent-subtle);
+      }
+
+      &.is-selected {
+        border-color: var(--accent);
+        background: var(--accent-soft);
+        color: var(--accent);
+      }
+    }
+
+    .contact-modal__form {
+      display: flex;
+      flex-direction: column;
+      gap: 16px;
+    }
+
+    /* 사람 눈엔 안 보이지만 display:none이면 일부 스팸 봇이 건너뛰므로
+       레이아웃 밖으로 밀어내는 방식으로 숨긴다 */
+    .contact-modal__honeypot {
+      position: absolute;
+      width: 1px;
+      height: 1px;
+      overflow: hidden;
+      clip: rect(0, 0, 0, 0);
+      white-space: nowrap;
+    }
+
+    .contact-modal__row {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 12px;
+    }
+
+    .contact-modal__field {
+      display: flex;
+      flex-direction: column;
+      gap: 6px;
+      min-width: 0;
+
+      span {
+        font-size: var(--text-caption);
+        font-weight: var(--font-weight-semibold);
+        color: var(--text-muted);
+      }
+
+      input,
+      textarea {
+        width: 100%;
+        padding: 10px 14px;
+        box-sizing: border-box;
+        border: 1px solid var(--border);
+        border-radius: var(--radius-sm);
+        background: var(--bg-elevated);
+        color: var(--text);
+        font-family: inherit;
+        font-size: var(--text-body-sm);
+        line-height: var(--leading-normal);
+        transition:
+          border-color var(--duration-fast) var(--ease-standard),
+          box-shadow var(--duration-fast) var(--ease-standard);
+
+        &::placeholder {
+          color: var(--text-muted);
+        }
+
+        &:focus {
+          outline: none;
+          border-color: var(--accent);
+          box-shadow: 0 0 0 3px var(--accent-soft);
+        }
+      }
+
+      textarea {
+        resize: vertical;
+        min-height: 110px;
+      }
+    }
+
+    .contact-modal__status {
+      margin: 0;
+      font-size: var(--text-body-sm);
+      line-height: var(--leading-normal);
+
+      &--error {
+        color: var(--danger);
+      }
+    }
+
+    .contact-modal__actions {
+      display: flex;
+      flex-wrap: wrap;
+      align-items: center;
+      gap: 10px;
+      margin-top: 4px;
+
+      .contact-modal__submit {
+        flex: 1;
+      }
+    }
+
+    .contact-modal__footer {
+      margin-top: 20px;
+      padding-top: 16px;
+      border-top: 1px solid var(--border);
+      text-align: center;
+
+      a {
+        font-size: var(--text-caption);
+        color: var(--text-muted);
+        text-decoration: none;
+
+        &:hover {
+          color: var(--accent);
+          text-decoration: underline;
+        }
+      }
+    }
+
+    .contact-modal__success {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      text-align: center;
+      padding: 12px 0 4px;
+
+      .contact-modal__success-icon {
+        margin-bottom: 8px;
+      }
+
+      /* 성공 화면은 카드 안에 카드가 하나 더 있는 느낌이 아니라 중앙에 짧은 메시지만
+         떠 있는 화면이라, 폼 화면의 구분선(border-bottom)은 여기선 빼고 여백만 남긴다 */
+      .contact-modal__title--success {
+        margin-bottom: 8px;
+        padding-bottom: 0;
+        border-bottom: none;
+      }
+
+      .contact-modal__subtitle {
+        color: var(--accent);
+      }
+
+      .contact-modal__lead {
+        margin-bottom: 24px;
+
+        strong {
+          color: var(--text);
+        }
+      }
+    }
+  }
+}
+
+@media (max-width: 480px) {
+  .contact-modal-wrapper {
+    padding: 24px 12px 40px;
+
+    .contact-modal {
+      padding: 32px 20px 24px;
+
+      .contact-modal__row {
+        grid-template-columns: 1fr;
+      }
+
+      .contact-modal__actions {
+        flex-direction: column;
+        align-items: stretch;
+
+        .contact-modal__submit {
+          flex: none;
+        }
+      }
+    }
+  }
+}

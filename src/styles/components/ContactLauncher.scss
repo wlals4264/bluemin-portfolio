@@ -1,0 +1,20 @@
+.contact-launcher-container {
+  position: fixed;
+  bottom: 30px;
+  right: 30px;
+  z-index: 5000;
+}
+
+@media (max-width: 768px) {
+  .contact-launcher-container {
+    right: 20px;
+    bottom: 20px;
+  }
+}
+
+@media (max-width: 480px) {
+  .contact-launcher-container {
+    right: 16px;
+    bottom: 16px;
+  }
+}

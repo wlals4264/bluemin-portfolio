@@ -1,6 +1,6 @@
 import '@/styles/components/ProjectCard.scss';
 
-import { projectTypeLabel, getProjectLinks } from '@/mocks/projects';
+import { projectTypeLabel, projectTypeTone, projectTypeIcon, getProjectLinks } from '@/mocks/projects';
 
 import { motion, useReducedMotion } from 'framer-motion';
 import { FaBook, FaYoutube, FaGithub } from 'react-icons/fa';
@@ -9,16 +9,12 @@ import { SiVelog } from 'react-icons/si';
 import { GoLink } from 'react-icons/go';
 
 import GlassSurface from '@/components/common/surfaces/GlassSurface';
-import Badge, { type BadgeTone } from '@/components/common/badges/Badge';
+import Badge from '@/components/common/badges/Badge';
+import FeatureList from '@/components/common/lists/FeatureList';
+import Icon3D from '@/components/common/media/Icon3D';
+import { icon3dAssetsByKey } from '@/mocks/icon3dAssets';
 
 const MAX_VISIBLE_FEATURES = 3;
-
-// 프로젝트 타입 → Badge tone. astra-component-architecture.md §1의 확정 매핑.
-const PROJECT_TYPE_TONE: Record<string, BadgeTone> = {
-  company: 'company',
-  team: 'success',
-  personal: 'accent',
-};
 
 interface ProjectCardProps {
   title: string;
@@ -91,22 +87,24 @@ const ProjectCard: React.FC<ProjectCardProps> = ({
       transition={{ type: 'spring', stiffness: 300, damping: 20, mass: 0.6 }}>
       <div className="project-card-top">
         <div className="project-card-header">
-          <h2 className="project-card-title">{title}</h2>
+          <div className="project-card-title-row">
+            <Icon3D
+              src={icon3dAssetsByKey[projectTypeIcon(projectType)].src}
+              alt=""
+              size="sm"
+              className="project-card-type-icon"
+            />
+            <h2 className="project-card-title">{title}</h2>
+          </div>
           <div className="project-card-info">
             <span className="project-card-info-date">{date}</span>
-            <Badge tone={PROJECT_TYPE_TONE[projectType] ?? 'neutral'}>{projectTypeLabel(projectType)}</Badge>
+            <Badge tone={projectTypeTone(projectType)}>{projectTypeLabel(projectType)}</Badge>
           </div>
         </div>
 
         <p className="project-card-info-project-title">{projectTitle}</p>
 
-        {visibleFeatures.length > 0 && (
-          <ul className="project-card-features">
-            {visibleFeatures.map((feature) => (
-              <li key={feature}>{feature}</li>
-            ))}
-          </ul>
-        )}
+        <FeatureList features={visibleFeatures} />
 
         {hiddenFeatureCount > 0 && (
           <GlassSurface as="button" blur="sm" radius="pill" className="project-card-more" onClick={onClick}>

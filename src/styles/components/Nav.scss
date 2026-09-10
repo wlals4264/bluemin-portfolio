@@ -61,10 +61,12 @@
     left: 0;
     flex-direction: column;
     align-items: flex-start;
-    /* 헤더와 이어지는 하나의 유리 시트처럼 보이도록 동일한 톤을 사용한다 */
+    /* 헤더와 이어지는 하나의 유리 시트처럼 보이도록 동일한 톤을 사용한다.
+       -webkit- 먼저, 표준 나중 — 순서가 반대면 빌드가 표준 속성을 지운다
+       (GlassSurface.scss 참고). */
     background-color: var(--header-bg);
-    backdrop-filter: blur(24px) saturate(180%);
     -webkit-backdrop-filter: blur(24px) saturate(180%);
+    backdrop-filter: blur(24px) saturate(180%);
     border-bottom: 1px solid var(--header-hairline);
     box-shadow: 0 16px 30px var(--shadow);
     opacity: 0;

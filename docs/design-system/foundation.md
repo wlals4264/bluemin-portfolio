@@ -126,7 +126,7 @@ Audit §3에서 확인된 실측 spacing 값(4/6/8/10/12/14/16/18/20/22/24/28/30
 | `--space-10` | 64px | 64 |
 | `--space-11` | 72px | 72 |
 
-11단계가 많아 보일 수 있지만, 실측 19종을 그대로 두는 것보다는 뚜렷한 개선이며, 각 단계가 최소 1곳 이상의 실제 값에 대응한다(추측성 단계 없음). `56px`(라이트박스 padding)과 `30px`(TopBtn 우측 여백)처럼 스케일에서 조금 벗어나는 값은 인접 단계로 스냅한다 — 각각 4px(56→48), 2px(30→32) 차이라 시각적 영향은 미미하다.
+11단계가 많아 보일 수 있지만, 실측 19종을 그대로 두는 것보다는 뚜렷한 개선이며, 각 단계가 최소 1곳 이상의 실제 값에 대응한다(추측성 단계 없음). `56px`(라이트박스 padding)과 `30px`(TopBtn 우측 여백)처럼 스케일에서 조금 벗어나는 값은 인접 단계로 스냅한다 — 각각 8px(56→48), 2px(30→32) 차이이며(astra-review.md §5에서 56→48을 4px로 잘못 기재한 부분 수정), 8px 쪽은 "무변화 리팩터"가 아니라 실제 값이 바뀌는 작업이므로 §18 migration 9번(box-shadow)·13번(Typography)과 마찬가지로 적용 후 육안 확인이 필요하다.
 
 ### 2-2. Semantic Layout Token — `--section-gap`, `--header-offset`
 
@@ -238,7 +238,7 @@ Light/Dark 값은 기존 `--shadow`(중립 그림자 색, light `rgba(15,23,42,.
 | `--shadow-lg` | `0 16px 48px var(--shadow)` | 모달(README) |
 | `--shadow-xl` | `0 24px 64px rgba(0,0,0,.5)` | 라이트박스 프레임(항상 어두운 오버레이 위이므로 다크값 고정, 테마 무관) |
 
-### 5-2. Accent Glow (hover 강조, Level 2→3 전이에 사용)
+### 5-2. Accent Glow (hover 강조 — Level 2에 머무는 강도 변화, Level 3 승격 아님)
 
 accent 틴트 그림자는 컴포넌트마다 `color-mix` 퍼센트가 제각각이었다(audit §6-2번 계열). 실측 분포에서 accent 틴트 그림자에 가장 많이 쓰인 퍼센트대(22~35%)를 기준으로 2단계만 정의한다.
 
@@ -335,7 +335,7 @@ audit §13-1에서 실측된 커브가 정확히 3종이라 **그대로 이름�
 
 ### 8-3. 적용 규칙 ([[visual-direction]] §2-5 연동)
 
-- Level이 바뀌는 hover 전환(예: Level 2 카드 → hover 시 그림자 강조)에는 `--duration-base` + `--ease-standard` 또는 `--ease-bounce`를 사용한다.
+- 그림자/보더 강도가 바뀌는 hover 전환(예: Level 2 카드 → hover 시 `--shadow-xs`에서 `--shadow-sm`~`--shadow-glow-sm`으로 강조 — Level은 2에 그대로 머무르고 Level 3으로 승격하지 않는다. [[review-decision]] Decision 4)에는 `--duration-base` + `--ease-standard` 또는 `--ease-bounce`를 사용한다.
 - 등장 애니메이션(모달 fade, 버블 pop)에는 `--duration-fast`~`--duration-base` + `--ease-pop`을 사용한다.
 - **continuous(infinite) 애니메이션에는 이 duration 토큰을 적용하지 않는다** — `glass-shine-sweep`(6s), `read-me-pulse`/`shimmer`(1.8s), `keyword-float`(5.5~6.2s)는 [[visual-direction]] §2-5에서 이미 "재검토 대상"으로 표시했고, 이 값들은 fast/base/slow 3단계 스케일이 애초에 상정하는 "상호작용 반응 속도"와 성격이 다른 "주변부 장식 리듬"이므로 별도 스케일(`--duration-ambient` 류)이 필요한지는 해당 애니메이션의 존치 여부가 결정된 **이후에** 판단한다(지금 토큰화하면 존치를 기정사실화하는 셈이라 보류).
 
@@ -440,7 +440,9 @@ audit §12에서 확인된 계층(`z-index` 리터럴 6종)을 semantic 토큰�
 
 가장 중요한 섹션. 이후 컴포넌트별 migration 작업은 이 표를 참조해 "이 요소가 어떤 Level인지" 먼저 판정하고, 해당 Level의 토큰 조합을 그대로 적용하는 방식으로 진행한다.
 
-**Level은 shadow 크기의 단계가 아니라 UI 요소의 역할(role)을 나타낸다**([[review-decision]] Decision 4). Level 0~2는 [[visual-direction]] §0의 Content, Level 3은 Control, Level 4는 Concept에 대응한다. 다만 두 Level이 토큰 조합만으로 실제 화면에서 항상 시각적으로 구분되는지는 별개 문제이며(특히 다크 모드에서 Level 1/2가 같은 값을 참조하는 경우), 이는 [[review-decision]]의 Deferred to PoC 항목에서 브라우저로 검증한다.
+**Level은 shadow 크기의 단계가 아니라 UI 요소의 역할(role)을 나타낸다**([[review-decision]] Decision 4). Level 0~2는 [[visual-direction]] §0의 Content, Level 3은 Control, Level 4는 Concept에 대응한다.
+
+다크 테마에서 `--bg-elevated`와 `--card`가 동일값(`#111827`)이라 Level 1/2가 배경만으로는 구분되지 않는 문제가 있었다(astra-review.md §1에서 지적). **수정**: 다크 `--card`를 `#1a2338`로 분리해 `--bg-elevated`보다 밝게 조정했다(§14) — 라이트 테마에서 `--card`(`#ffffff`)가 `--bg-elevated`(`#f8fafc`)보다 밝은 것과 같은 방향. Level 1의 Border/Shadow가 "없음 또는 `--border`/`--shadow-xs`"로 선택 사항인 점은 남아 있으므로, Level 1 요소가 Border+Shadow를 모두 켠 상태에서도 배경색만으로 Level 2와 구분되는지는 여전히 [[review-decision]]의 Deferred to PoC 항목에서 브라우저로 검증한다.
 
 | Level | 이름 | Surface | Border | Shadow | Blur | Z-index 관례 |
 |---|---|---|---|---|---|---|
@@ -631,7 +633,7 @@ audit §12에서 확인된 계층(`z-index` 리터럴 6종)을 semantic 토큰�
   --accent-hover: #93c5fd;
   --accent-soft: #1e3a5f;
   --accent-contrast: #0b1220;
-  --card: #111827;
+  --card: #1a2338; /* #111827(--bg-elevated와 동일값)에서 분리 — Level 1/2 구분, §11 참고 */
   --shadow: rgba(0, 0, 0, 0.45);
   --header-bg: rgba(11, 18, 32, 0.5);
   --header-hairline: rgba(255, 255, 255, 0.1);
@@ -659,6 +661,8 @@ audit §12에서 확인된 계층(`z-index` 리터럴 6종)을 semantic 토큰�
 ```
 
 **관찰**: 신규 토큰 대부분이 `var(--shadow)`, `var(--glass-shadow)`, `var(--accent)` 등 **이미 테마별로 정의된 토큰을 참조하는 합성 토큰**이라, 다크 테마에서 명시적으로 재정의해야 하는 신규 값은 `--danger`와 `--shadow-glass-inner` 단 2개뿐이다 — 이는 원칙 1(기존 토큰 재사용)이 실제로 작동한다는 증거로 볼 수 있다.
+
+**적용 조건(astra-review.md §3에서 지적된 부분 확인 완료)**: 이 자동 반영은 `:root`와 `[data-theme='dark']`가 **같은 요소**에 적용될 때 성립한다. 이 코드베이스는 `ThemeProvider.tsx`와 `layout.tsx`에서 `document.documentElement.setAttribute('data-theme', …)`로 `data-theme`를 항상 `<html>`(= `:root`가 가리키는 요소)에 설정하므로 조건이 항상 성립한다 — `data-theme`가 하위 컨테이너에 부분 적용되는 경로는 코드베이스에 없다.
 
 ---
 
@@ -698,7 +702,7 @@ Color 전부(§12-1 중 ✨ 표시 없는 항목) + `--font-body` + `--font-disp
 
 ## 17. 신규 토큰
 
-§12에서 ✨ 표시된 전체 목록(Color 3종, Spacing/Layout 2종, Typography 17종, Radius 5종, Shadow 10종, Blur 4종, Motion 6종, Z-index 6종 — 총 53종). 이 중 **필수 근거가 가장 뚜렷한 것부터 우선순위를 매기면**:
+§12에서 ✨ 표시된 전체 목록(Color 3종, Spacing/Layout 13종, Typography 20종, Radius 5종, Shadow 10종, Blur 4종, Motion 6종, Z-index 6종 — 총 67종). 이전 버전은 Spacing/Layout을 `--section-gap`/`--header-offset` 2개로만, Typography를 크기 8개만 반영한 17개로 집계했으나, `--space-1`~`--space-11`(11개)과 weight 5개·leading/tracking 7개가 누락돼 있었다(astra-review.md §4에서 지적). 이 중 **필수 근거가 가장 뚜렷한 것부터 우선순위를 매기면**:
 
 1. **확실한 반복값 정규화**(위험 없음): Spacing, Radius, Duration, Easing, Z-index — 전부 기존 코드에 이미 존재하던 값을 이름만 붙인 것.
 2. **명확한 공백 해소**: `--danger`(하드코딩 1건 대체), `--border-accent-subtle/-strong`(가장 빈번한 color-mix 패턴 고정).

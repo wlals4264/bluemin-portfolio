@@ -38,7 +38,18 @@ const WEBP_QUALITY = 92;
 // 유리 가장자리 반투명 디테일이 손상되면 안 되므로 alpha는 최고 정밀도로 유지한다.
 const WEBP_ALPHA_QUALITY = 100;
 
-type AssetKey = 'profile' | 'location' | 'email' | 'education' | 'web' | 'mobile' | 'analytics' | 'laptop';
+type AssetKey =
+  | 'profile'
+  | 'location'
+  | 'email'
+  | 'education'
+  | 'web'
+  | 'mobile'
+  | 'analytics'
+  | 'laptop'
+  | 'company'
+  | 'team'
+  | 'personal';
 type Category = 'info' | 'concepts';
 
 // 기존 icon3dAssets.ts 구조와 동일한 key→category 매핑을 여기서도 그대로 쓴다
@@ -53,6 +64,9 @@ const ASSETS: Array<{ key: AssetKey; category: Category }> = [
   { key: 'mobile', category: 'concepts' },
   { key: 'analytics', category: 'concepts' },
   { key: 'laptop', category: 'concepts' },
+  { key: 'company', category: 'concepts' },
+  { key: 'team', category: 'concepts' },
+  { key: 'personal', category: 'concepts' },
 ];
 
 type Inspection = {
