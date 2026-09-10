@@ -201,7 +201,7 @@ const ContactModal = ({ isOpen, onClose }: ContactModalProps) => {
                   <h2 id="contact-modal-title" className="contact-modal__title">
                     CONTACT
                   </h2>
-                  <p className="contact-modal__subtitle">너, 내 동료가 돼라!!</p>
+                  <p className="contact-modal__subtitle">너, 내 동료가 되어라!</p>
                   <p className="contact-modal__lead">
                     포트폴리오를 봐주셔서 감사해요. 궁금한 점이나 함께하고 싶은 이야기가 있다면, 아래로 바로 보내주세요.
                   </p>
