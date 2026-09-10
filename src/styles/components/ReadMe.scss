@@ -104,28 +104,12 @@
           color: var(--text-muted);
         }
 
-        .read-me-project-type {
-          display: inline-flex;
-          align-items: center;
-          padding: 4px 10px;
-          border-radius: 999px;
-          border: 1px solid var(--border);
-          background: var(--bg-muted);
-          font-size: 12px;
-          font-weight: 600;
-          color: var(--text-soft);
-
-          &.company {
-            border-color: color-mix(in srgb, var(--company) 35%, var(--border));
-            background: color-mix(in srgb, var(--company) 12%, var(--card));
-            color: var(--company);
-          }
-
-          &.team {
-            border-color: color-mix(in srgb, var(--accent) 30%, var(--border));
-            background: var(--accent-soft);
-            color: var(--accent);
-          }
+        /* 타입 배지 재질/톤은 Badge.scss가 담당한다(ProjectCard.tsx와 동일한
+           projectTypeTone() 매핑을 공유 — company/team이 카드와 모달에서 서로 다른
+           색으로 보이고 personal은 색이 아예 빠져 있던 불일치를 없앴다). */
+        .read-me-project-type-icon {
+          width: 22px;
+          height: 22px;
         }
 
         .read-me-subtitle {

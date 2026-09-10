@@ -1,4 +1,5 @@
 import type { ProjectHighlightId } from '@/mocks/highlightsData';
+import type { Icon3DKey } from '@/mocks/icon3dAssets';
 
 export type ProjectLink = {
   label: string;
@@ -52,6 +53,27 @@ export const projectTypeLabel = (projectType: string) => {
   if (projectType === 'company') return '회사 프로젝트';
   if (projectType === 'team') return '팀 프로젝트';
   return '개인 프로젝트';
+};
+
+/**
+ * 프로젝트 타입 → Badge tone (카드·모달 공통).
+ * 근거: astra-component-architecture.md §1. ProjectCard.tsx와 ReadMe.tsx가 각자 다른
+ * 색 매핑을 하드코딩해 team이 카드에서는 초록, 모달에서는 파랑으로 보이고 personal은
+ * 모달에서 색이 아예 빠져 있던 불일치를 여기 하나로 통합해 없앤다.
+ */
+export type ProjectTypeTone = 'accent' | 'success' | 'company';
+
+export const projectTypeTone = (projectType: string): ProjectTypeTone => {
+  if (projectType === 'company') return 'company';
+  if (projectType === 'team') return 'success';
+  return 'accent';
+};
+
+/** 프로젝트 타입 → 3D concept icon(카드·모달 공통). 근거: docs/design-system/3d-assets.md. */
+export const projectTypeIcon = (projectType: string): Icon3DKey => {
+  if (projectType === 'company') return 'company';
+  if (projectType === 'team') return 'team';
+  return 'personal';
 };
 
 export const getProjectLinks = (project: Pick<ProjectCardData, 'projectUrl' | 'projectLinks'>): ProjectLink[] => {
