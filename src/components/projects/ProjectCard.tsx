@@ -10,6 +10,7 @@ import { GoLink } from 'react-icons/go';
 
 import GlassSurface from '@/components/common/surfaces/GlassSurface';
 import Badge, { type BadgeTone } from '@/components/common/badges/Badge';
+import FeatureList from '@/components/common/lists/FeatureList';
 
 const MAX_VISIBLE_FEATURES = 3;
 
@@ -100,13 +101,7 @@ const ProjectCard: React.FC<ProjectCardProps> = ({
 
         <p className="project-card-info-project-title">{projectTitle}</p>
 
-        {visibleFeatures.length > 0 && (
-          <ul className="project-card-features">
-            {visibleFeatures.map((feature) => (
-              <li key={feature}>{feature}</li>
-            ))}
-          </ul>
-        )}
+        <FeatureList features={visibleFeatures} />
 
         {hiddenFeatureCount > 0 && (
           <GlassSurface as="button" blur="sm" radius="pill" className="project-card-more" onClick={onClick}>

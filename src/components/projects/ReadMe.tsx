@@ -12,6 +12,7 @@ import { IoIosClose } from 'react-icons/io';
 import ProjectHighlights from '@/components/highlights/ProjectHighlights';
 import ProjectScreens from '@/components/projects/ProjectScreens';
 import BlogPostCard from '@/components/projects/BlogPostCard';
+import FeatureList from '@/components/common/lists/FeatureList';
 import { getYoutubeEmbedUrl } from '@/utils/youtube';
 
 interface ReadMeProps {
@@ -192,13 +193,7 @@ const ReadMe = ({ setIsProjectCardClicked, project }: ReadMeProps) => {
                 {(project.projectFeatures.length > 0 || project.mainFeatures || project.blogPost) && (
                   <section className="readme-section summary-box">
                     <h3 className="readme-section-title">요약</h3>
-                    {project.projectFeatures.length > 0 && (
-                      <ul className="project-card-features">
-                        {project.projectFeatures.map((feature) => (
-                          <li key={feature}>{feature}</li>
-                        ))}
-                      </ul>
-                    )}
+                    <FeatureList features={project.projectFeatures} />
                     {project.mainFeatures && (
                       <p className="project-card-main-features">{project.mainFeatures}</p>
                     )}

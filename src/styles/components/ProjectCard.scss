@@ -93,37 +93,7 @@
     white-space: pre-line;
   }
 
-  .project-card-features {
-    list-style: none;
-    margin: 0;
-    padding: 0;
-    display: flex;
-    flex-direction: column;
-    gap: var(--space-2);
-
-    li {
-      display: flex;
-      align-items: flex-start;
-      gap: var(--space-2);
-      padding: var(--space-3);
-      border-radius: var(--radius-md);
-      border: 1px solid var(--border);
-      background: var(--card);
-      font-size: var(--text-body-sm);
-      line-height: var(--leading-normal);
-      color: var(--text-soft);
-
-      &::before {
-        content: '';
-        flex: 0 0 auto;
-        margin-top: 0.58em;
-        width: 5px;
-        height: 5px;
-        border-radius: var(--radius-full);
-        background: var(--accent);
-      }
-    }
-  }
+  /* .feature-list 재질/타이포는 FeatureList.scss가 담당 — 여기선 카드 레이아웃만 */
 
   /* 재질은 GlassSurface가 담당 — 여기선 크기·타이포만 */
   .project-card-more {
@@ -272,7 +242,7 @@
       overflow-wrap: break-word;
     }
 
-    .project-card-features li {
+    .feature-list li {
       padding: var(--space-2) var(--space-3);
       font-size: var(--text-label);
       line-height: var(--leading-normal);

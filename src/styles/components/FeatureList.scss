@@ -1,0 +1,38 @@
+/**
+ * FeatureList — Level 2(Content) 불릿 리스트. Glass 아님, 항상 불투명.
+ * 근거: docs/design-system/foundation.md §11 Depth Mapping.
+ *
+ * ProjectCard.scss·ReadMe.scss가 각자 `.project-card-features`를 하드코딩값으로
+ * 따로 정의하던 것을 통합한 표준 레시피 — Foundation 토큰만 사용한다.
+ */
+.feature-list {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-2);
+
+  li {
+    display: flex;
+    align-items: flex-start;
+    gap: var(--space-2);
+    padding: var(--space-3);
+    border-radius: var(--radius-md);
+    border: 1px solid var(--border);
+    background: var(--card);
+    font-size: var(--text-body-sm);
+    line-height: var(--leading-normal);
+    color: var(--text-soft);
+
+    &::before {
+      content: '';
+      flex: 0 0 auto;
+      margin-top: 0.58em;
+      width: 5px;
+      height: 5px;
+      border-radius: var(--radius-full);
+      background: var(--accent);
+    }
+  }
+}
