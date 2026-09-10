@@ -11,6 +11,8 @@ import { GoLink } from 'react-icons/go';
 import GlassSurface from '@/components/common/surfaces/GlassSurface';
 import Badge, { type BadgeTone } from '@/components/common/badges/Badge';
 import FeatureList from '@/components/common/lists/FeatureList';
+import Icon3D from '@/components/common/media/Icon3D';
+import { icon3dAssetsByKey, type Icon3DKey } from '@/mocks/icon3dAssets';
 
 const MAX_VISIBLE_FEATURES = 3;
 
@@ -19,6 +21,14 @@ const PROJECT_TYPE_TONE: Record<string, BadgeTone> = {
   company: 'company',
   team: 'success',
   personal: 'accent',
+};
+
+// 프로젝트 타입 → 3D concept icon. Concept = 3D 원칙(foundation.md §11) — 텍스트 배지를
+// 대체하지 않는 장식용 보조 표현이라 alt=""로 렌더링한다(icon3dAssets.ts 참고).
+const PROJECT_TYPE_ICON: Record<string, Icon3DKey> = {
+  company: 'company',
+  team: 'team',
+  personal: 'personal',
 };
 
 interface ProjectCardProps {
@@ -95,6 +105,14 @@ const ProjectCard: React.FC<ProjectCardProps> = ({
           <h2 className="project-card-title">{title}</h2>
           <div className="project-card-info">
             <span className="project-card-info-date">{date}</span>
+            {PROJECT_TYPE_ICON[projectType] && (
+              <Icon3D
+                src={icon3dAssetsByKey[PROJECT_TYPE_ICON[projectType]].src}
+                alt=""
+                size="sm"
+                className="project-card-type-icon"
+              />
+            )}
             <Badge tone={PROJECT_TYPE_TONE[projectType] ?? 'neutral'}>{projectTypeLabel(projectType)}</Badge>
           </div>
         </div>

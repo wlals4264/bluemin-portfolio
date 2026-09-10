@@ -83,6 +83,14 @@
     color: var(--text-muted);
   }
 
+  /* 타입 배지 옆 3D concept icon — 배지 pill 높이에 맞춰 Icon3D의 기본 sm(32px)보다
+     한 단계 더 줄인다. 정보는 여전히 Badge 텍스트가 전담하므로(alt="") 장식 크기만
+     조정하는 것 — foundation.md §11 Concept = 3D 원칙. */
+  .project-card-type-icon {
+    width: 22px;
+    height: 22px;
+  }
+
   .project-card-info-project-title {
     margin: 0;
     font-size: var(--text-body-sm);
