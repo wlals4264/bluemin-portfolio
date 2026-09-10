@@ -66,7 +66,7 @@ const Projects = forwardRef<HTMLDivElement>((_, ref) => {
           <div className="projects-carousel-nav-slot projects-carousel-nav-slot--prev">
             <GlassSurface
               as="button"
-              blur="sm"
+              blur="md"
               radius="pill"
               className="nav-button"
               aria-label="이전 프로젝트"
@@ -125,7 +125,7 @@ const Projects = forwardRef<HTMLDivElement>((_, ref) => {
           <div className="projects-carousel-nav-slot projects-carousel-nav-slot--next">
             <GlassSurface
               as="button"
-              blur="sm"
+              blur="md"
               radius="pill"
               className="nav-button"
               aria-label="다음 프로젝트"

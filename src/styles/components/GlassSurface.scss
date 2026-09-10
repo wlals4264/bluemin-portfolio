@@ -55,6 +55,15 @@
     position: relative;
     z-index: 1;
     min-width: 0;
+    /* span은 inline이라 안의 아이콘(svg)이 baseline에 맞춰지면서 line-height가
+       만드는 여백(디센더 공간)만큼 위로 쏠려 보였다(예: 캐러셀 nav-button 화살표가
+       원 중심보다 위쪽에 치우침) — content를 직접 flex로 만들어 기하학적으로
+       정중앙 정렬한다. gap은 아이콘+라벨을 함께 쓰는 버튼(README 등)을 위한 것으로,
+       children이 하나뿐이면 아무 영향이 없다. */
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: var(--space-2);
   }
 
   /* --- Blur: semantic usage (foundation.md §7) ---

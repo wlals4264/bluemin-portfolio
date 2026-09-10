@@ -30,6 +30,14 @@
   --glass-specular: rgba(255, 255, 255, 0.95);
   --glass-shadow: rgba(15, 23, 42, 0.14);
 
+  /* 라이트박스 오버레이(항상 고정된 어두운 스크림) 위의 닫기/네비 버튼 전용 —
+     스크림 자체가 사이트 테마와 무관하게 항상 어둡게 고정이라(ProjectScreens.scss,
+     DiagramZoom.scss 공통) --glass-* 처럼 테마별로 값이 바뀌면 오히려 어색해진다.
+     그래서 라이트/다크에서 재정의하지 않고 이 한 벌만 고정해 쓴다. */
+  --overlay-control-bg: rgba(255, 255, 255, 0.12);
+  --overlay-control-bg-hover: rgba(255, 255, 255, 0.24);
+  --overlay-control-fg: #ffffff;
+
   /* ============================================================
    * Foundation Tokens — Soft Spatial Portfolio 디자인 시스템
    * 근거: docs/design-system/foundation.md
