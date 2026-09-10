@@ -150,7 +150,10 @@
   --accent-hover: #93c5fd;
   --accent-soft: #1e3a5f;
   --accent-contrast: #0b1220;
-  --card: #111827;
+  /* Level 2(Content)는 Level 1(Surface, --bg-elevated: #111827)보다 밝아야 두 Depth가
+   * 구분된다 — astra-review.md §1에서 두 값이 동일해 식별 불가 위험이 지적됨.
+   * 라이트 테마의 --card(#ffffff)가 --bg-elevated(#f8fafc)보다 밝은 것과 같은 방향으로 맞춘다. */
+  --card: #1a2338;
   --shadow: rgba(0, 0, 0, 0.45);
   /* 아이폰 상단바처럼 배경이 비치는 반투명 유리 헤더 */
   --header-bg: rgba(11, 18, 32, 0.5);
