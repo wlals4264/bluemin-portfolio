@@ -16,6 +16,7 @@ import Header from '@/components/header/Header';
 import TopBtn from '@/components/common/buttons/TopBtn';
 import AmbientBackground from '@/components/common/AmbientBackground';
 import Footer from '@/components/footer/Footer';
+import ContactLauncher from '@/components/contact/ContactLauncher';
 
 export default function Home() {
   const aboutMeRef = useRef<HTMLDivElement>(null);
@@ -45,6 +46,7 @@ export default function Home() {
         <Projects ref={projectsRef} />
         <Experiences ref={experiencesRef} />
         <TopBtn />
+        <ContactLauncher />
       </div>
       {/* home-wrapper 밖에 둬야 Footer가 뷰포트 전체 폭으로 깔리고, 배경 없이
           AmbientBackground 물결이 그대로 비친다 — 내부 정렬만 home-wrapper로 맞춘다. */}
