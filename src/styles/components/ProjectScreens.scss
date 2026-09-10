@@ -152,13 +152,13 @@ video.project-screens-lightbox-media {
   justify-content: center;
   border: none;
   border-radius: 50%;
-  background: rgba(255, 255, 255, 0.12);
-  color: #fff;
+  background: var(--overlay-control-bg);
+  color: var(--overlay-control-fg);
   cursor: pointer;
-  transition: background-color 0.15s ease;
+  transition: background-color var(--duration-fast) var(--ease-standard);
 
   &:hover {
-    background: rgba(255, 255, 255, 0.24);
+    background: var(--overlay-control-bg-hover);
   }
 }
 

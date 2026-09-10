@@ -172,19 +172,13 @@
     flex-wrap: wrap;
     gap: var(--space-2);
 
-    /* 재질(배경·보더·blur·그림자·hover/active/focus)은 GlassSurface가 담당한다.
-       여기서는 패딩·글자 크기만 — GlassSurface는 자식을 .glass-surface__content
-       span 하나로 감싸므로, 아이콘·텍스트 정렬/간격은 그 자식에 한정해 적용한다. */
+    /* 재질(배경·보더·blur·그림자·hover/active/focus)과 아이콘·텍스트 정렬은
+       GlassSurface(.glass-surface__content)가 공통으로 담당한다 — 여기서는
+       패딩·글자 크기만 오버라이드한다. */
     .project-card-action {
       padding: var(--space-2) var(--space-3);
       font-size: var(--text-label);
       font-weight: var(--font-weight-bold);
-
-      > .glass-surface__content {
-        display: inline-flex;
-        align-items: center;
-        gap: var(--space-2);
-      }
     }
 
     /* README(accent tone)만 — 카드마다 5개까지 있는 액션 중 가장 먼저 눌러야 할

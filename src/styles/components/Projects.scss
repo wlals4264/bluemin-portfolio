@@ -125,6 +125,33 @@
       width: 44px;
       height: 44px;
       padding: 0;
+      position: relative;
+      /* 테두리는 GlassButton(필터 버튼)과 같은 기본 --glass-border(흰색 반투명)
+         그대로 둔다 — accent 톤을 섞으면 이 버튼만 다른 재질처럼 튄다. 대신 아래
+         그림자·스펙큘러로 경계와 곡면감을 표현한다. */
+      /* GlassSurface 기본 3겹 그림자(하이라이트/이너쉐도우가 1px)는 Header 같은
+         넓은 패널 기준으로 잡힌 값이라, 지름 44px 원형 버튼에서는 볼록한 유리구슬
+         느낌이 거의 안 느껴진다. 같은 토큰(--glass-highlight/--glass-shadow)을
+         이 버튼 스케일에 맞게 더 큰 offset·blur로 다시 조합해 곡면감을 준다
+         — 새 색은 추가하지 않고 크기만 조정했다. */
+      box-shadow:
+        var(--shadow-glass-outer),
+        inset 0 2px 2px var(--glass-highlight),
+        inset 0 -4px 6px var(--glass-shadow);
+
+      /* 왼쪽 위에서 빛이 비치는 듯한 스팟 하이라이트 — 볼록한 유리 표면의 핵심 신호.
+         GlassSurface의 ::before(상단 선형 하이라이트)는 그대로 두고, 이 버튼에만
+         ::after로 원형 스펙큘러를 하나 더 얹는다. */
+      &::after {
+        content: '';
+        position: absolute;
+        inset: 0;
+        z-index: 0;
+        border-radius: inherit;
+        background: radial-gradient(circle at 32% 26%, var(--glass-specular) 0%, transparent 60%);
+        opacity: 0.8;
+        pointer-events: none;
+      }
 
       svg {
         width: 22px;

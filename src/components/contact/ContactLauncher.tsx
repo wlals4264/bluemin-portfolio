@@ -28,6 +28,10 @@ const ContactLauncher = () => {
           icon={<Icon3D src={icon3dAssetsByKey.ship.src} alt="" size="lg" />}
           tooltip="너, 내 동료가 되어라!"
           label="커피챗·연락 제안하기"
+          /* ship 아이콘이 v1.1부터 파란 컬러 글래스가 주 재질이라, accent 톤(브랜드 블루
+             유리)과 색이 겹쳐 버튼 배경 위에서 아이콘 실루엣이 묻혔다 — neutral(뒤 배경이
+             비치는 맑은 유리)로 바꿔 아이콘 자체의 블루가 대비의 주체가 되게 한다. */
+          tone="neutral"
           onClick={() => setIsOpen(true)}
         />
       </div>

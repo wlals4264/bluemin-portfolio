@@ -49,7 +49,8 @@ type AssetKey =
   | 'laptop'
   | 'company'
   | 'team'
-  | 'personal';
+  | 'personal'
+  | 'ship';
 type Category = 'info' | 'concepts';
 
 // 기존 icon3dAssets.ts 구조와 동일한 key→category 매핑을 여기서도 그대로 쓴다
@@ -67,6 +68,7 @@ const ASSETS: Array<{ key: AssetKey; category: Category }> = [
   { key: 'company', category: 'concepts' },
   { key: 'team', category: 'concepts' },
   { key: 'personal', category: 'concepts' },
+  { key: 'ship', category: 'concepts' },
 ];
 
 type Inspection = {

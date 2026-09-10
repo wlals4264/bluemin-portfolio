@@ -20,7 +20,7 @@ const INQUIRY_TYPES: InquiryType[] = ['면접 제안', '커피챗'];
 // About Me(myInfoData.tsx)에 이미 공개돼 있는 것과 같은 이메일 — 여기서 새로 노출하는
 // 정보가 아니다.
 const CONTACT_EMAIL = 'jimin2eezz@gmail.com';
-const GITHUB_URL = 'https://github.com/wlals4264';
+const LINKEDIN_URL = 'https://www.linkedin.com/in/%EC%A7%80%EB%AF%BC-%EA%B9%80-9107b3408/';
 
 const overlayVariants: Variants = {
   hidden: { opacity: 0 },
@@ -282,8 +282,8 @@ const ContactModal = ({ isOpen, onClose }: ContactModalProps) => {
                         {status === 'submitting' ? '보내는 중…' : '메일 보내기'}
                         <IoArrowForward />
                       </GlassButton>
-                      <GlassButton as="a" href={GITHUB_URL} target="_blank" rel="noopener noreferrer">
-                        GitHub
+                      <GlassButton as="a" href={LINKEDIN_URL} target="_blank" rel="noopener noreferrer">
+                        LinkedIn
                         <IoArrowForward />
                       </GlassButton>
                     </div>
