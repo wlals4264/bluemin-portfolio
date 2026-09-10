@@ -87,15 +87,17 @@ const ProjectCard: React.FC<ProjectCardProps> = ({
       transition={{ type: 'spring', stiffness: 300, damping: 20, mass: 0.6 }}>
       <div className="project-card-top">
         <div className="project-card-header">
-          <h2 className="project-card-title">{title}</h2>
-          <div className="project-card-info">
-            <span className="project-card-info-date">{date}</span>
+          <div className="project-card-title-row">
             <Icon3D
               src={icon3dAssetsByKey[projectTypeIcon(projectType)].src}
               alt=""
               size="sm"
               className="project-card-type-icon"
             />
+            <h2 className="project-card-title">{title}</h2>
+          </div>
+          <div className="project-card-info">
+            <span className="project-card-info-date">{date}</span>
             <Badge tone={projectTypeTone(projectType)}>{projectTypeLabel(projectType)}</Badge>
           </div>
         </div>

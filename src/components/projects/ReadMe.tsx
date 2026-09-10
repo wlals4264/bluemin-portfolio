@@ -135,17 +135,19 @@ const ReadMe = ({ setIsProjectCardClicked, project }: ReadMeProps) => {
 
             <main className="info-box">
               <div className="read-me-title-box">
-                <h2 id="readme-project-title" className="read-me-title">
-                  {project.title}
-                </h2>
-                <div className="read-me-title-info-data">
-                  <span className="read-me-date">{project.date}</span>
+                <div className="read-me-title-row">
                   <Icon3D
                     src={icon3dAssetsByKey[projectTypeIcon(project.projectType)].src}
                     alt=""
                     size="sm"
                     className="read-me-project-type-icon"
                   />
+                  <h2 id="readme-project-title" className="read-me-title">
+                    {project.title}
+                  </h2>
+                </div>
+                <div className="read-me-title-info-data">
+                  <span className="read-me-date">{project.date}</span>
                   <Badge tone={projectTypeTone(project.projectType)}>
                     {projectTypeLabel(project.projectType)}
                   </Badge>
