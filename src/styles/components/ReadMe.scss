@@ -82,15 +82,6 @@
         margin-bottom: 8px;
         border-bottom: 1px solid var(--border);
 
-        /* 타입 아이콘 + 제목을 한 줄로 — ProjectCard.scss의 .project-card-title-row와
-           같은 이유: 아이콘을 배지 옆이 아니라 제목 옆에 둬서 "타입 정보"가 아이콘·
-           배지 두 자리에 동떨어져 중복 표시되는 것처럼 보이지 않게 한다. */
-        .read-me-title-row {
-          display: flex;
-          align-items: center;
-          gap: 8px;
-        }
-
         .read-me-title {
           margin: 0;
           font-family: var(--font-display), sans-serif;
@@ -116,10 +107,6 @@
         /* 타입 배지 재질/톤은 Badge.scss가 담당한다(ProjectCard.tsx와 동일한
            projectTypeTone() 매핑을 공유 — company/team이 카드와 모달에서 서로 다른
            색으로 보이고 personal은 색이 아예 빠져 있던 불일치를 없앴다). */
-        .read-me-project-type-icon {
-          width: 22px;
-          height: 22px;
-        }
 
         .read-me-subtitle {
           margin: 4px 0 0;

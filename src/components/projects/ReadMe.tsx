@@ -2,7 +2,7 @@
 
 import '@/styles/components/ReadMe.scss';
 
-import { ProjectCardData, projectTypeLabel, projectTypeTone, projectTypeIcon, getProjectLinks } from '@/mocks/projects';
+import { ProjectCardData, projectTypeLabel, projectTypeTone, getProjectLinks } from '@/mocks/projects';
 
 import { useEffect, useState } from 'react';
 import { createPortal } from 'react-dom';
@@ -14,8 +14,6 @@ import ProjectScreens from '@/components/projects/ProjectScreens';
 import BlogPostCard from '@/components/projects/BlogPostCard';
 import FeatureList from '@/components/common/lists/FeatureList';
 import Badge from '@/components/common/badges/Badge';
-import Icon3D from '@/components/common/media/Icon3D';
-import { icon3dAssetsByKey } from '@/mocks/icon3dAssets';
 import { getYoutubeEmbedUrl } from '@/utils/youtube';
 
 interface ReadMeProps {
@@ -135,17 +133,9 @@ const ReadMe = ({ setIsProjectCardClicked, project }: ReadMeProps) => {
 
             <main className="info-box">
               <div className="read-me-title-box">
-                <div className="read-me-title-row">
-                  <Icon3D
-                    src={icon3dAssetsByKey[projectTypeIcon(project.projectType)].src}
-                    alt=""
-                    size="sm"
-                    className="read-me-project-type-icon"
-                  />
-                  <h2 id="readme-project-title" className="read-me-title">
-                    {project.title}
-                  </h2>
-                </div>
+                <h2 id="readme-project-title" className="read-me-title">
+                  {project.title}
+                </h2>
                 <div className="read-me-title-info-data">
                   <span className="read-me-date">{project.date}</span>
                   <Badge tone={projectTypeTone(project.projectType)}>
