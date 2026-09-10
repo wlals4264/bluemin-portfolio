@@ -78,6 +78,21 @@ const ReadMe = ({ setIsProjectCardClicked, project }: ReadMeProps) => {
     };
   }, [isOpen]);
 
+  // ProjectCard PoC 브라우저 검증 중 발견: role="dialog"/aria-modal은 있었지만
+  // Esc로 닫는 키보드 경로가 없었다 — 마우스로 닫기 버튼을 눌러야만 닫혔다.
+  useEffect(() => {
+    if (!isOpen) return;
+
+    const handleKeyDown = (event: KeyboardEvent) => {
+      if (event.key === 'Escape') {
+        handleCloseModal();
+      }
+    };
+
+    document.addEventListener('keydown', handleKeyDown);
+    return () => document.removeEventListener('keydown', handleKeyDown);
+  }, [isOpen]);
+
   const links = getProjectLinks(project);
   // 데모 영상은 유튜브로 튕기지 않고 모달 안에서 바로 재생되도록 embed
   const videoEmbedUrl = project.projectVideoLink ? getYoutubeEmbedUrl(project.projectVideoLink) : null;
