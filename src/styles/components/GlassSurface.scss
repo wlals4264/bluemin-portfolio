@@ -25,8 +25,8 @@
 
   /* 뒤 배경을 흐리고 채도를 높여 유리 너머로 색이 은은히 비치게 한다.
      saturate(180%)는 모든 Level 3 표면에서 고정 — 재질 일관성의 핵심. */
-  backdrop-filter: blur(var(--blur-md)) saturate(180%);
   -webkit-backdrop-filter: blur(var(--blur-md)) saturate(180%);
+  backdrop-filter: blur(var(--blur-md)) saturate(180%);
 
   box-shadow:
     var(--shadow-glass-outer),
@@ -57,20 +57,25 @@
     min-width: 0;
   }
 
-  /* --- Blur: semantic usage (foundation.md §7) --- */
+  /* --- Blur: semantic usage (foundation.md §7) ---
+     -webkit- 프리픽스를 먼저, 표준 속성을 나중에 쓴다 — 순서를 반대로 하면
+     Next.js/Turbopack의 CSS 압축 단계가 두 선언을 "중복"으로 보고 표준
+     backdrop-filter를 통째로 지워버려(-webkit-만 남음) 실제로는 아무 블러도
+     렌더링되지 않는 버그가 있었다(ProjectCard PoC 브라우저 QA에서 발견 —
+     getComputedStyle이 계속 "none"을 반환해 찾음). */
   &--blur-sm {
-    backdrop-filter: blur(var(--blur-sm)) saturate(180%);
     -webkit-backdrop-filter: blur(var(--blur-sm)) saturate(180%);
+    backdrop-filter: blur(var(--blur-sm)) saturate(180%);
   }
 
   &--blur-md {
-    backdrop-filter: blur(var(--blur-md)) saturate(180%);
     -webkit-backdrop-filter: blur(var(--blur-md)) saturate(180%);
+    backdrop-filter: blur(var(--blur-md)) saturate(180%);
   }
 
   &--blur-lg {
-    backdrop-filter: blur(var(--blur-lg)) saturate(180%);
     -webkit-backdrop-filter: blur(var(--blur-lg)) saturate(180%);
+    backdrop-filter: blur(var(--blur-lg)) saturate(180%);
   }
 
   /* --- Radius --- */

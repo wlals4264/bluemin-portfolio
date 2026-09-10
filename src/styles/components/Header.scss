@@ -10,10 +10,13 @@
   font-family: var(--font-display), var(--font-body), sans-serif;
   color: var(--text);
 
-  /* 아이폰 내비게이션 바처럼: 뒤 콘텐츠가 흐릿하게 비치는 유리 + 아주 얇은 하단 경계선 */
+  /* 아이폰 내비게이션 바처럼: 뒤 콘텐츠가 흐릿하게 비치는 유리 + 아주 얇은 하단 경계선.
+     -webkit- 프리픽스를 먼저, 표준 속성을 나중에 쓴다 — 반대 순서면 Next.js/Turbopack
+     빌드가 표준 backdrop-filter를 중복으로 보고 지워버려 블러가 아예 렌더링되지
+     않는다(ProjectCard PoC 브라우저 QA에서 발견, GlassSurface.scss 참고). */
   background-color: var(--header-bg);
-  backdrop-filter: blur(24px) saturate(180%);
   -webkit-backdrop-filter: blur(24px) saturate(180%);
+  backdrop-filter: blur(24px) saturate(180%);
   border-bottom: 1px solid var(--header-hairline);
   box-shadow: 0 8px 30px var(--shadow);
   transition:
