@@ -24,8 +24,8 @@ export type Icon3DAssetDef = {
 };
 
 /**
- * Soft Spatial 3D Family v1 — production 확정 11개 slot(review-decision.md Decision 1 근거,
- * docs/design-system/3d-assets.md 참고) + ship(Contact launcher 전용, 아래 참고).
+ * Soft Spatial 3D Family v1.1 — production 확정 12개 slot(review-decision.md Decision 1 근거,
+ * docs/design-system/3d-assets.md 참고, ship(Contact launcher 전용) 포함).
  * public/assets/3d/**의 실제 webp 파일과 1:1 대응한다.
  *
  * email은 About Me의 실제 4번째 정보 필드(이름/위치/이메일/학력, mocks/myInfoData.tsx)와
@@ -36,11 +36,13 @@ export type Icon3DAssetDef = {
  * 기존 education(졸업모자, About Me의 학력 필드용)과는 의미가 달라서 재사용하지 않고
  * 새로 만들었다(코딩 교육이라는 것을 보여주고 싶다는 요청).
  *
- * ship은 나머지와 달리 Astra Style Master 파이프라인으로 생성되지 않은 임시 asset이다 —
+ * ship은 처음에는 Astra Style Master 파이프라인으로 생성되지 않은 임시 asset이었다 —
  * 사용자가 구해온 레퍼런스 PNG(흰 배경, 갈색/빨강 톤)의 배경만 sharp로 제거해 급하게
- * webp로 만들었다. 파란 유리 + 아이보리 팔레트(review-decision.md Decision 3)와 색감이
- * 맞지 않으니, 나중에 `npm run astra:3d-family`에 ship subject를 추가해 같은 style
- * master로 재생성해서 교체해야 한다.
+ * webp로 만든 것이라 파란 유리 + 아이보리 팔레트와 색감이 맞지 않았다. v1.1에서
+ * `astra-3d-family.ts`의 SUBJECT_KEYS에 정식 편입하고, 그 레퍼런스 PNG를 형태(실루엣)
+ * 기준 이미지로 함께 첨부해(`scripts/prompts/subjects/ship-reference.webp`) 같은
+ * 트윈세일 구도를 유지한 채 재질만 패밀리 표준(컬러 글래스 + 아이보리 소형 디테일)으로
+ * 재생성해 교체했다.
  *
  * company/team/personal은 ProjectCard의 프로젝트 타입 배지(회사/팀/개인 프로젝트) 옆에
  * 붙는 concept으로 추가됐다(astra-review.md PoC 가정 검증 중 결정) — 텍스트 배지가

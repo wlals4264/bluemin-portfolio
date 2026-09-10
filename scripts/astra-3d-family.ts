@@ -56,11 +56,35 @@ const SUBJECT_KEYS = [
   'company',
   'team',
   'personal',
+  'ship',
 ] as const;
 type SubjectKey = (typeof SUBJECT_KEYS)[number];
 
 function subjectBriefPath(subject: SubjectKey): string {
   return path.join(PROMPTS_DIR, 'subjects', `${subject}.md`);
+}
+
+const REFERENCE_IMAGE_EXTENSIONS = ['webp', 'png', 'jpg', 'jpeg'] as const;
+const MIME_BY_EXTENSION: Record<(typeof REFERENCE_IMAGE_EXTENSIONS)[number], string> = {
+  webp: 'image/webp',
+  png: 'image/png',
+  jpg: 'image/jpeg',
+  jpeg: 'image/jpeg',
+};
+
+/**
+ * subject별 "형태 레퍼런스" 이미지(선택) — `scripts/prompts/subjects/<key>-reference.<ext>`에
+ * 파일이 있으면 Style Master와 별개로 두 번째 image input으로 함께 첨부한다. Style Master는
+ * "재질·조명·카메라" 기준이고, 이 레퍼런스는 "이 subject만의 실루엣/형태" 기준이다 — 예를
+ * 들어 사용자가 구해온 참고 이미지의 형태(구도)는 그대로 따르되 재질만 패밀리 것으로
+ * 바꾸고 싶을 때 쓴다. 없으면 그냥 건너뛴다(모든 subject에 필수가 아니다).
+ */
+function findSubjectReferenceImagePath(subject: SubjectKey): string | undefined {
+  for (const ext of REFERENCE_IMAGE_EXTENSIONS) {
+    const candidate = path.join(PROMPTS_DIR, 'subjects', `${subject}-reference.${ext}`);
+    if (existsSync(candidate)) return candidate;
+  }
+  return undefined;
 }
 
 function outputImagePath(subject: SubjectKey): string {
@@ -111,18 +135,42 @@ export async function buildSubjectInput(subject: SubjectKey): Promise<OpenAI.Res
     '',
   ].join('\n');
 
+  const content: OpenAI.Responses.ResponseInputContent[] = [
+    { type: 'input_text', text: sharedText },
+    {
+      type: 'input_image',
+      image_url: `data:image/png;base64,${styleMasterImage.toString('base64')}`,
+      detail: 'high',
+    },
+    { type: 'input_text', text: subjectBrief.trim() },
+  ];
+
+  const referenceImagePath = findSubjectReferenceImagePath(subject);
+  if (referenceImagePath) {
+    const ext = path.extname(referenceImagePath).slice(1) as keyof typeof MIME_BY_EXTENSION;
+    const referenceImage = await readFile(referenceImagePath);
+    content.push(
+      {
+        type: 'input_text',
+        text:
+          '아래 이미지는 이번 subject의 "형태(실루엣·구도) 레퍼런스"다 — 위 Style Master 이미지와는 역할이 다르다. ' +
+          'Style Master는 재질·조명·카메라 기준이고, 이 두 번째 이미지는 이번 subject 고유의 형태 기준이다. ' +
+          '이 레퍼런스의 실루엣·구도(예: 파츠 배치, 대칭성, 비율)는 최대한 그대로 따르되, 재질·색·조명은 ' +
+          'Style Master와 3d-assets.md v1.1 기준(컬러 글래스 주 재질 + 아이보리 소형 디테일)으로 바꿔라. ' +
+          '레퍼런스의 원래 색(예: 갈색 나무, 진한 빨강 등 family와 안 맞는 색)은 따르지 마라 — 형태만 참고한다.',
+      },
+      {
+        type: 'input_image',
+        image_url: `data:${MIME_BY_EXTENSION[ext]};base64,${referenceImage.toString('base64')}`,
+        detail: 'high',
+      },
+    );
+  }
+
   return [
     {
       role: 'user',
-      content: [
-        { type: 'input_text', text: sharedText },
-        {
-          type: 'input_image',
-          image_url: `data:image/png;base64,${styleMasterImage.toString('base64')}`,
-          detail: 'high',
-        },
-        { type: 'input_text', text: subjectBrief.trim() },
-      ],
+      content,
     },
   ];
 }

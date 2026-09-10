@@ -2,8 +2,10 @@
 
 > 근거 문서: [[review-decision]](./review-decision.md) Decision 1 · [[visual-direction]](./visual-direction.md) §2-4 · [[foundation]](./foundation.md) §11
 
-**Family**: Soft Spatial 3D — v1
-**Status**: Production — 11종 production WebP 전부 생성·검사 완료. About Me·Experiences는 실제로 통합됐다(각각 profile/email/location/education, laptop). ProjectCard의 프로젝트 타입 배지도 통합됐다(company/team/personal, astra-review.md PoC 검증 과정에서 추가). 나머지 메인 포트폴리오 영역(Hero/Career/Skills/Header/Footer)에는 아직 통합하지 않았다 — 섹션 단위로 순차 진행한다.
+**Family**: Soft Spatial 3D — v1.1 (테마 대비·컬러 글래스 재질 개편, 2026-09-10)
+**Status**: Production — 12종(기존 11종 + `ship`) production WebP 전부 v1.1 기준으로 재생성·검사·교체 완료. About Me·Experiences는 실제로 통합됐다(각각 profile/email/location/education, laptop). ProjectCard의 프로젝트 타입 배지도 통합됐다(company/team/personal). `ship`(Contact launcher 전용)이 12번째 slot으로 정식 편입됐다. 나머지 메인 포트폴리오 영역(Hero/Career/Skills/Header/Footer)에는 아직 통합하지 않았다 — 섹션 단위로 순차 진행한다.
+
+**알려진 잔여 이슈**: `team`(3인 클러스터)은 ProjectCard 타입 배지처럼 아주 작은 크기(22px)·라이트 모드 조합에서 다른 asset보다 상대적으로 흐리게 보인다 — 인물 헤드(아이보리)가 차지하는 비중에 비해 몸통(블루 글래스)의 연속된 면적이 작기 때문. 텍스트 배지가 여전히 유일한 정보 근거라 기능상 문제는 없지만, 필요하면 `team`만 추가로 손볼 수 있다.
 
 ---
 
@@ -21,13 +23,13 @@ Concept = 3D
 
 ## Material
 
-- translucent pale-blue glass
-- warm white / ivory soft plastic
+- translucent color glass(파란 계열) — **v1.1부터 오브젝트의 가장 넓은 표면적을 차지하는 주 재질**이다.
+- warm white / ivory soft plastic — v1.1부터는 내부 디테일·소형 파츠에만 쓰는 보조 재질이다. 오브젝트 실루엣 대부분을 덮는 주된 외곽 표면으로는 쓰지 않는다.
 - polished but not metallic
 - soft rounded surfaces
 - subtle subsurface-like softness
 
-색은 white / warm ivory / very pale blue / transparent-translucent blue를 기본으로 하고, 포트폴리오의 primary accent blue는 강조 요소로만 소량 사용한다 — 강한 blue 오브젝트가 화면 대부분을 차지하지 않게 한다.
+**v1.1 재질 배분 변경(2026-09-10)**: v1에서는 "ivory 다수 + pale-blue 소량 강조"였으나, 실제 라이트 모드(흰색에 가까운 페이지 배경)에서 순수 아이보리/화이트 대면적이 배경과 거의 구분되지 않는 문제가 실사용 화면(education 카드 등)에서 확인됐다. 그래서 배분을 뒤집는다 — **컬러(파란) 유리를 오브젝트 표면 대부분을 차지하는 주 재질로, 아이보리는 소형 디테일에만** 쓴다. 색은 white / warm ivory / pale-to-mid blue / transparent-translucent blue를 기본으로 하되, 포트폴리오의 진한 primary accent blue(`#2563eb` 계열)를 평면으로 칠하듯 그대로 쓰지는 않는다 — glass 특유의 반투명함·하이라이트·부드러운 톤은 유지한 채로 채도·면적만 늘린다. 목표는 "쨍한 블루 오브젝트"가 아니라 "라이트/다크 배경 모두에서 실루엣이 살아있는, 여전히 부드러운 색유리"다.
 
 ## Camera
 
@@ -43,6 +45,7 @@ Concept = 3D
 - subtle ambient illumination
 - soft grounding shadow(오브젝트 자체에 내장 — 별도 CSS shadow를 필요로 하지 않는다)
 - dramatic studio lighting 금지
+- **테마 대비(v1.1, 2026-09-10 추가)**: `Icon3D`에는 CSS shadow나 배경판을 추가하지 않으므로(CSS Shadow Policy), 이 asset은 흰색에 가까운 라이트 모드 배경과 짙은 남색 다크 모드 배경 위에 아무 보조 장치 없이 그대로 놓인다. 위 Material §의 v1.1 재질 배분 변경(컬러 글래스가 주 재질)이 이 문제의 1차 해법이다 — 순수 화이트/아이보리 면이 오브젝트 외곽 대부분을 덮지 않게 하고, 컬러 글래스 표면에도 오브젝트 가장자리 전체에 옅은 쿨그레이 앰비언트 오클루전 윤곽과 하이라이트→미드톤→코어섀도 대비를 뚜렷하게 준다. 다크 모드 가독성을 해치지 않는 선에서, 라이트 모드에서도 실루엣 경계가 즉시 보이는 것을 필수 조건으로 삼는다.
 
 ## Geometry
 
@@ -71,6 +74,10 @@ Concept = 3D
   `profile`(단일 인물 카드)과 실루엣이 확실히 구분되도록 인물 개수 자체를 차이로 삼았다.
 - `personal` — Personal project (ProjectCard 타입 배지 전용). 소형 로켓 — `profile`/`team`과
   달리 인물 형태를 전혀 쓰지 않는다.
+- `ship` — Contact / "join my crew" invitation (floating Contact launcher 전용, One Piece
+  루피 대사 이스터에그와 짝을 이루는 작은 범선). 나머지 11종과 달리 처음에는 사용자가 구해온
+  갈색/빨강 톤 레퍼런스 PNG를 급하게 편집해 만든 임시 asset이었으나, v1.1에서 같은 Style
+  Master 파이프라인으로 재생성해 패밀리에 정식 편입했다.
 
 company/team/personal 세 asset은 항상 나란히 놓이는 세트가 아니라 **같은 자리(타입 배지 옆)에
 프로젝트마다 하나씩만** 나타나지만, 배지 pill이 매우 작아(ProjectCard.scss 기준 22px) 세
@@ -118,6 +125,10 @@ web.webp
 mobile.webp
 analytics.webp
 laptop.webp
+company.webp
+team.webp
+personal.webp
+ship.webp
 ```
 
 ## Directory
@@ -134,6 +145,10 @@ public/assets/3d/
     mobile.webp
     analytics.webp
     laptop.webp
+    company.webp
+    team.webp
+    personal.webp
+    ship.webp
 ```
 
 `public/images/`(프로젝트 스크린샷 등 콘텐츠 이미지)와는 다른 네임스페이스다 — `assets/3d/`는 디자인 시스템의 아이콘그래피 전용이라 분리했다.

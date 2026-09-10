@@ -16,6 +16,12 @@ type FloatingIconButtonProps = {
   tooltip?: string;
   /** 버튼의 실제 동작을 설명하는 접근성 레이블(예: "커피챗 제안하기") */
   label: string;
+  /**
+   * GlassButton 재질 톤(기본 accent). 담는 아이콘이 accent와 같은 계열 색이면(예: 파란
+   * 유리 Icon3D) 버튼 배경과 아이콘이 뒤섞여 실루엣이 안 보일 수 있다 — 그런 경우
+   * neutral(뒤 배경이 비치는 맑은 유리)을 넘겨서 아이콘 자체 색이 대비의 주체가 되게 한다.
+   */
+  tone?: 'neutral' | 'accent';
   onClick?: () => void;
   className?: string;
 };
@@ -25,17 +31,18 @@ type FloatingIconButtonProps = {
  *
  * TopBtn처럼 화면에 항상 떠 있는 원형 진입점이지만, 일반 glyph 아이콘보다 훨씬 큰
  * Icon3D 콘텐츠를 담기 위해 `GlassButton`의 `size="lg"` 배리언트 위에 hover 툴팁을
- * 얹었다. 재질(유리)과 배치(fixed 위치)는 이 컴포넌트가 책임지지 않는다 — 호출부가
- * wrapper에 `className`으로 위치를 잡는다(GlassSurface와 동일한 원칙).
+ * 얹었다. 유리 재질의 실제 레시피(배경·블러·그림자)와 배치(fixed 위치)는 이 컴포넌트가
+ * 책임지지 않는다 — `tone`은 GlassButton의 두 톤 중 고르는 선택지일 뿐이고, 위치는
+ * 호출부가 wrapper에 `className`으로 잡는다(GlassSurface와 동일한 원칙).
  */
-const FloatingIconButton = ({ icon, tooltip, label, onClick, className = '' }: FloatingIconButtonProps) => {
+const FloatingIconButton = ({ icon, tooltip, label, tone = 'accent', onClick, className = '' }: FloatingIconButtonProps) => {
   const classes = ['floating-icon-btn', className].filter(Boolean).join(' ');
 
   return (
     <div className={classes}>
       <GlassButton
         shape="circle"
-        tone="accent"
+        tone={tone}
         size="lg"
         className="floating-icon-btn__control"
         aria-label={label}
