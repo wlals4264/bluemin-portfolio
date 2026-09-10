@@ -45,7 +45,18 @@ const STYLE_MASTER_IMAGE = path.join(OUTPUT_DIR, 'profile-poc.png');
 const ASSET_DOC = path.join(DOCS_DIR, '3d-assets.md');
 const FAMILY_DIRECTOR_PROMPT = path.join(PROMPTS_DIR, 'astra-3d-family-director.md');
 
-const SUBJECT_KEYS = ['location', 'email', 'education', 'web', 'mobile', 'analytics', 'laptop'] as const;
+const SUBJECT_KEYS = [
+  'location',
+  'email',
+  'education',
+  'web',
+  'mobile',
+  'analytics',
+  'laptop',
+  'company',
+  'team',
+  'personal',
+] as const;
 type SubjectKey = (typeof SUBJECT_KEYS)[number];
 
 function subjectBriefPath(subject: SubjectKey): string {
