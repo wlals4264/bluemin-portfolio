@@ -1,3 +1,5 @@
+import { IoDownloadOutline } from 'react-icons/io5';
+
 import Icon3D from '@/components/common/media/Icon3D';
 import DesignSystemSection from '@/components/design-system/DesignSystemSection';
 import { icon3dAssets, type Icon3DCategory } from '@/mocks/icon3dAssets';
@@ -47,10 +49,12 @@ const AssetCatalog = () => {
                     <p className="asset-catalog__card-label">{asset.label}</p>
                     <p className="asset-catalog__card-meaning">{asset.meaning}</p>
                   </div>
-                  {/* 카드 전체가 다운로드 링크라 이 라벨은 순수 hover 힌트 — 링크 자체의
-                      접근성 이름은 위 aria-label이 이미 담당하므로 장식으로 숨긴다. */}
-                  <span className="asset-catalog__download-overlay" aria-hidden="true">
-                    <span className="asset-catalog__download-label">Download</span>
+                  {/* 카드 전체가 다운로드 링크라 이 힌트는 순수 hover 표시 — 링크 자체의
+                      접근성 이름은 위 aria-label이 이미 담당하므로 장식으로 숨긴다.
+                      카드 전체를 덮는 대신 하단 여백 자리에만 아이콘+텍스트로 살짝 뜬다. */}
+                  <span className="asset-catalog__download-hint" aria-hidden="true">
+                    <IoDownloadOutline aria-hidden="true" />
+                    Download
                   </span>
                 </a>
               ))}

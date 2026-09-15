@@ -67,31 +67,47 @@
     margin: 0;
     font-size: var(--text-caption);
     color: var(--text-muted);
-  }
-
-  /* Level 3 Glass Control 스크림 — 카드 전체를 덮고 가운데 "Download"만 보여준다.
-     평소엔 완전히 숨겨두고 카드가 hover/focus 됐을 때만 나타난다. */
-  &__download-overlay {
-    position: absolute;
-    inset: 0;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    background: var(--glass-bg);
-    backdrop-filter: blur(var(--blur-sm));
-    -webkit-backdrop-filter: blur(var(--blur-sm));
-    opacity: 0;
     transition: opacity var(--duration-base) var(--ease-standard);
   }
 
-  &__card:hover &__download-overlay,
-  &__card:focus-visible &__download-overlay {
-    opacity: 1;
+  /* meaning이 2~3줄까지 늘어나는 카드(Ship 등)는 하단 여백만으로 힌트 알약을
+     다 못 가려서 마지막 줄과 겹친다 — hover 중엔 meaning을 옅게 죽여 알약이
+     항상 또렷이 읽히게 한다. */
+  &__card:hover &__card-meaning,
+  &__card:focus-visible &__card-meaning {
+    opacity: 0.25;
   }
 
-  &__download-label {
-    font-size: var(--text-body-sm);
+  /* Level 3 Glass Control 힌트 — 카드 전체를 덮지 않고, 카드 하단 여백 자리에
+     아이콘+텍스트 알약 하나만 살짝 떠오른다. 평소엔 숨겨두고 카드가
+     hover/focus 됐을 때만 나타난다. */
+  &__download-hint {
+    position: absolute;
+    left: 50%;
+    bottom: var(--space-4);
+    display: inline-flex;
+    align-items: center;
+    gap: 4px;
+    padding: 4px var(--space-3);
+    border-radius: var(--radius-pill);
+    background: var(--glass-bg);
+    backdrop-filter: blur(var(--blur-sm));
+    -webkit-backdrop-filter: blur(var(--blur-sm));
+    border: 1px solid var(--glass-border);
+    box-shadow: var(--shadow-xs);
+    font-size: var(--text-caption);
     font-weight: var(--font-weight-semibold);
     color: var(--text);
+    opacity: 0;
+    transform: translate(-50%, 4px);
+    transition:
+      opacity var(--duration-base) var(--ease-standard),
+      transform var(--duration-base) var(--ease-standard);
+  }
+
+  &__card:hover &__download-hint,
+  &__card:focus-visible &__download-hint {
+    opacity: 1;
+    transform: translate(-50%, 0);
   }
 }
