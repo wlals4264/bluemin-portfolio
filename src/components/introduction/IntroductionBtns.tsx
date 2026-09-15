@@ -37,14 +37,15 @@ const IntroductionBtns = () => {
           aria-label="Velog">
           <SiVelog />
         </GlassButton>
-        {/* resume-ashen-mu 사이트의 "이력서"/"포트폴리오" 탭 둘 다 같은 /api/pdf 하나로
-            연결된다(그쪽에 별도 포트폴리오 전용 PDF가 없음, 실측 확인) — 위 "Download
-            Resume"와 같은 URL이지만, 아이콘 한 줄에서 바로 찾을 수 있는 보조 진입점으로 둔다.
-            target 없이 그 자리에서 바로 다운로드되는 것도 위 버튼과 동일. */}
+        {/* 이력서(Download Resume)와 달리 이건 resume-ashen-mu API가 아니라
+            public/portfolio_kimjimin.pdf — 프로젝트별 Work & Impact 케이스 스터디까지
+            담은, 사용자가 직접 만든 정적 포트폴리오 PDF다. download 속성으로 실제
+            저장 파일명을 "포트폴리오_김지민.pdf"로 고정한다. */}
         <GlassButton
           as="a"
           shape="circle"
-          href="https://resume-ashen-mu.vercel.app/api/pdf"
+          href="/portfolio_kimjimin.pdf"
+          download="포트폴리오_김지민.pdf"
           aria-label="포트폴리오 PDF 다운로드"
           title="포트폴리오 PDF 다운로드">
           <LuFileDown />
