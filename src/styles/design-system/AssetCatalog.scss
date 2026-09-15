@@ -36,8 +36,9 @@
   }
 
   /* 다운로드는 Card(Content) 위에 떠 있는 Control이므로 Glass 재질을 쓴다
-     (review-decision.md Decision 1 — Control = Glass). 기본은 은은하게, hover/focus에서
-     또렷해진다 — 카드 안에서 시선을 뺏지 않으면서도 발견 가능해야 하기 때문. */
+     (review-decision.md Decision 1 — Control = Glass). 평소엔 완전히 숨겨두고
+     카드에 마우스를 올렸을 때만(또는 버튼 자체가 포커스됐을 때만) 나타난다 —
+     썸네일을 가리지 않으면서도 필요할 때는 바로 발견 가능해야 하기 때문. */
   &__download.glass-surface {
     position: absolute;
     top: var(--space-3);
@@ -50,15 +51,16 @@
     padding: 0;
     color: var(--text-muted);
     font-size: 1rem;
-    opacity: 0.55;
+    opacity: 0;
+    transform: translateY(-2px);
     transition:
       opacity var(--duration-base) var(--ease-standard),
+      transform var(--duration-base) var(--ease-standard),
       color var(--duration-base) var(--ease-standard);
 
     &:hover,
     &:focus-visible {
       color: var(--accent);
-      opacity: 1;
     }
 
     .glass-surface__content {
@@ -66,6 +68,15 @@
       align-items: center;
       justify-content: center;
     }
+  }
+
+  /* 카드 위에 마우스가 있거나 버튼 자체가 키보드 포커스를 받으면 보인다 —
+     :focus-visible을 카드가 아니라 버튼에 걸면 hover 없이 탭 이동만으로도
+     키보드 사용자가 버튼을 놓치지 않는다. */
+  &__card:hover &__download.glass-surface,
+  &__download.glass-surface:focus-visible {
+    opacity: 1;
+    transform: translateY(0);
   }
 
   &__card-text {
