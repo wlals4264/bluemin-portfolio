@@ -97,7 +97,9 @@
 
 ### 1-7. Status Color — `--danger` 1개만 신규 추가
 
-현재 `--success`, `--company` 2개만 있고 `--danger`는 없어 `ProjectCard.scss:221`이 `#dc2626`을 직접 하드코딩하고 있다(audit §1-2). 이 1건이 유일하게 실측된 상태색 공백이므로 **딱 이만큼만** 추가한다.
+이 문서를 작성할 당시엔 `--success`, `--company` 2개만 있고 `--danger`는 없어 `ProjectCard.scss:221`이 `#dc2626`을 직접 하드코딩하고 있었다(audit §1-2). 이 1건이 유일하게 실측된 상태색 공백이었으므로 **딱 이만큼만** 추가했다.
+
+**갱신(마이그레이션 완료)**: `--danger` 토큰은 이후 §18 순서 11에 따라 실제로 적용됐다 — `ProjectCard.scss`의 하드코딩은 제거됐고, 지금은 `ProjectCard.scss` · `ContactModal.scss`가 `var(--danger)`를 참조한다. `--success`/`--company`도 `Badge.scss`(상태·프로젝트 타입 배지) · `Career.scss`에서 실사용 중 — Status Color 3종 모두 스펙이 아니라 실제 코드에 반영된 상태다.
 
 ```
 --danger        (light: #dc2626 / dark: #f87171)
@@ -727,7 +729,7 @@ Color 전부(§12-1 중 ✨ 표시 없는 항목) + `--font-body` + `--font-disp
 | 8 | `transition-duration`/`cubic-bezier` 리터럴 → `--duration-*`/`--ease-*` 치환 | 전체 scss | 낮음 |
 | 9 | `box-shadow` 리터럴 → `--shadow-*`/`--shadow-glow-*` 치환 | `ProjectCard`, `Projects`, `DiagramZoom` 등 | 중간(그림자 픽셀 값이 살짝 스냅되는 곳 존재) |
 | 10 | `color-mix(accent NN%, border)` 반복 → `--border-accent-subtle/-strong` 치환 | `ProjectCard`, `ReadMe`, `Projects` 등 | 중간(28%→35% 스냅 지점 육안 확인) |
-| 11 | `#dc2626` → `--danger` 치환 | `ProjectCard.scss` | 매우 낮음 |
+| 11 | ~~`#dc2626` → `--danger` 치환~~ **완료** | `ProjectCard.scss` | 매우 낮음 |
 | 12 | `margin:72px 0`/`scroll-margin-top:72px` → `--section-gap`/`--header-offset` 치환 | 6개 섹션 컨테이너 | 매우 낮음 |
 | 13 | Typography 8단계 스케일 적용(px→rem 토큰 치환) | 전체 scss | **높음** — 가장 넓은 범위, 가장 많은 시각적 diff. 별도 컴포넌트 명세 문서와 함께 진행 권장 |
 | 14 | Glass 3겹 그림자 레시피(`--shadow-glass-*`) 및 `--blur-*`(semantic usage) 적용 | `GlassButton`, `Header`, `Nav`, `Introduction`, `ProjectCard` Project action/floating control([[visual-direction]] §0 범위 내) | 중간~높음 — 헤더 바는 범위에서 제외됐으므로(Decision 1) 액션 영역의 정확한 UI만 PoC에서 확정 |
