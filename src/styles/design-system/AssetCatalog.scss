@@ -23,6 +23,7 @@
   }
 
   &__card {
+    position: relative;
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -32,6 +33,39 @@
     background: var(--card);
     border: 1px solid var(--border);
     box-shadow: var(--shadow-xs);
+  }
+
+  /* 다운로드는 Card(Content) 위에 떠 있는 Control이므로 Glass 재질을 쓴다
+     (review-decision.md Decision 1 — Control = Glass). 기본은 은은하게, hover/focus에서
+     또렷해진다 — 카드 안에서 시선을 뺏지 않으면서도 발견 가능해야 하기 때문. */
+  &__download.glass-surface {
+    position: absolute;
+    top: var(--space-3);
+    right: var(--space-3);
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 28px;
+    height: 28px;
+    padding: 0;
+    color: var(--text-muted);
+    font-size: 1rem;
+    opacity: 0.55;
+    transition:
+      opacity var(--duration-base) var(--ease-standard),
+      color var(--duration-base) var(--ease-standard);
+
+    &:hover,
+    &:focus-visible {
+      color: var(--accent);
+      opacity: 1;
+    }
+
+    .glass-surface__content {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+    }
   }
 
   &__card-text {

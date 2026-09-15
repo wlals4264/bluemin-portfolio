@@ -6,6 +6,7 @@ import ThemeToggle from '@/components/theme/ThemeToggle';
 import GlassSurface from '@/components/common/surfaces/GlassSurface';
 import DesignSystemIntro from '@/components/design-system/DesignSystemIntro';
 import DepthLevelShowcase from '@/components/design-system/DepthLevelShowcase';
+import FoundationTokens from '@/components/design-system/FoundationTokens';
 import GlassMaterialPreview from '@/components/design-system/GlassMaterialPreview';
 import AssetCatalog from '@/components/design-system/AssetCatalog';
 import Icon3DSizePreview from '@/components/design-system/Icon3DSizePreview';
@@ -25,9 +26,11 @@ export const metadata: Metadata = {
  * 첫 버전이다. 근거: docs/design-system/review-decision.md "향후 구현 방향" 섹션.
  *
  * 이 단계에서 다루는 범위: Intro(핵심 원칙) · Depth Level 0~4 · Glass Material Preview ·
- * 3D Concept Assets 카탈로그(Soft Spatial 3D Family v1, 실제 asset 7종) · Icon3D Size QA.
- * 나머지 역할(Foundation token 전체 시각화, Component 상태, Motion 데모, ProjectCard
- * Playground)은 이후 iteration에서 이 페이지에 이어서 채운다.
+ * Foundation Token 시각화(Color/Spacing/Radius/Typography/Shadow) ·
+ * 3D Concept Assets 카탈로그(Soft Spatial 3D Family v1.1, 실제 asset 12종 + 다운로드) ·
+ * Icon3D Size QA.
+ * 나머지 역할(Component 상태, Motion 데모, ProjectCard Playground)은 이후 iteration에서
+ * 이 페이지에 이어서 채운다.
  *
  * STEP 9 기준: 이 3D asset들은 아직 /design-system에서만 검증 중이다. About Me/Hero/
  * Career/Skills/Projects/ProjectCard/Experiences/Header/Footer 등 메인 포트폴리오
@@ -49,6 +52,7 @@ export default function DesignSystemPage() {
       <div className="ds-page__content home-wrapper">
         <DesignSystemIntro />
         <DepthLevelShowcase />
+        <FoundationTokens />
         <GlassMaterialPreview />
         <AssetCatalog />
         <Icon3DSizePreview />
