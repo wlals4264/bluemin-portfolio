@@ -1,6 +1,8 @@
 /**
  * Documentation 전용 스타일 — 3D Concept Assets 카탈로그.
- * 카드 자체는 Content(Level 2)이므로 Solid Surface를 쓴다(review-decision.md Decision 1).
+ * 카드 자체는 Content(Level 2)이므로 기본 재질은 Solid Surface를 쓴다
+ * (review-decision.md Decision 1). 다만 카드 전체가 다운로드 링크이기도 해서,
+ * hover했을 때만 나타나는 Glass 오버레이로 "여기가 액션"이라는 걸 알려준다.
  */
 .asset-catalog {
   &__group + &__group {
@@ -22,8 +24,11 @@
     gap: var(--space-5);
   }
 
+  /* 카드 자체가 <a download>다 — 구석의 작은 아이콘 버튼을 정확히 조준해 눌러야 하는
+     대신, 카드 어디에 마우스를 올려도 포인터 커서와 "Download" 라벨로 바로 알 수 있다. */
   &__card {
     position: relative;
+    overflow: hidden;
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -33,50 +38,14 @@
     background: var(--card);
     border: 1px solid var(--border);
     box-shadow: var(--shadow-xs);
-  }
+    text-decoration: none;
+    color: inherit;
+    cursor: pointer;
 
-  /* 다운로드는 Card(Content) 위에 떠 있는 Control이므로 Glass 재질을 쓴다
-     (review-decision.md Decision 1 — Control = Glass). 평소엔 완전히 숨겨두고
-     카드에 마우스를 올렸을 때만(또는 버튼 자체가 포커스됐을 때만) 나타난다 —
-     썸네일을 가리지 않으면서도 필요할 때는 바로 발견 가능해야 하기 때문. */
-  &__download.glass-surface {
-    position: absolute;
-    top: var(--space-3);
-    right: var(--space-3);
-    display: inline-flex;
-    align-items: center;
-    justify-content: center;
-    width: 28px;
-    height: 28px;
-    padding: 0;
-    color: var(--text-muted);
-    font-size: 1rem;
-    opacity: 0;
-    transform: translateY(-2px);
-    transition:
-      opacity var(--duration-base) var(--ease-standard),
-      transform var(--duration-base) var(--ease-standard),
-      color var(--duration-base) var(--ease-standard);
-
-    &:hover,
     &:focus-visible {
-      color: var(--accent);
+      outline: 2px solid var(--accent);
+      outline-offset: 2px;
     }
-
-    .glass-surface__content {
-      display: inline-flex;
-      align-items: center;
-      justify-content: center;
-    }
-  }
-
-  /* 카드 위에 마우스가 있거나 버튼 자체가 키보드 포커스를 받으면 보인다 —
-     :focus-visible을 카드가 아니라 버튼에 걸면 hover 없이 탭 이동만으로도
-     키보드 사용자가 버튼을 놓치지 않는다. */
-  &__card:hover &__download.glass-surface,
-  &__download.glass-surface:focus-visible {
-    opacity: 1;
-    transform: translateY(0);
   }
 
   &__card-text {
@@ -98,5 +67,31 @@
     margin: 0;
     font-size: var(--text-caption);
     color: var(--text-muted);
+  }
+
+  /* Level 3 Glass Control 스크림 — 카드 전체를 덮고 가운데 "Download"만 보여준다.
+     평소엔 완전히 숨겨두고 카드가 hover/focus 됐을 때만 나타난다. */
+  &__download-overlay {
+    position: absolute;
+    inset: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: var(--glass-bg);
+    backdrop-filter: blur(var(--blur-sm));
+    -webkit-backdrop-filter: blur(var(--blur-sm));
+    opacity: 0;
+    transition: opacity var(--duration-base) var(--ease-standard);
+  }
+
+  &__card:hover &__download-overlay,
+  &__card:focus-visible &__download-overlay {
+    opacity: 1;
+  }
+
+  &__download-label {
+    font-size: var(--text-body-sm);
+    font-weight: var(--font-weight-semibold);
+    color: var(--text);
   }
 }
