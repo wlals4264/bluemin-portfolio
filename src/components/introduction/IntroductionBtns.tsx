@@ -7,16 +7,6 @@ import GlassButton from '@/components/common/buttons/GlassButton';
 
 import '@/styles/components/IntroductionBtns.scss';
 
-/**
- * 포트폴리오 PDF 다운로드 — 별도 서버 렌더링(Puppeteer 등) 없이 브라우저 인쇄 기능을
- * 그대로 쓴다. `globals.scss`의 `@media print` 규칙이 이 사이트를 인쇄용 레이아웃으로
- * 바꿔주므로, 사용자가 인쇄 대화상자에서 "PDF로 저장"만 고르면 된다 — 항상 지금 보이는
- * 최신 콘텐츠 그대로라 "실시간 연결"이라는 요구사항을 서버 없이 만족한다.
- */
-const handleDownloadPortfolioPdf = () => {
-  window.print();
-};
-
 const IntroductionBtns = () => {
   return (
     <div className="introduction-btns-container">
@@ -49,10 +39,15 @@ const IntroductionBtns = () => {
           aria-label="Velog">
           <SiVelog />
         </GlassButton>
+        {/* resume-ashen-mu 사이트의 "이력서"/"포트폴리오" 탭 둘 다 같은 /api/pdf 하나로
+            연결된다(그쪽에 별도 포트폴리오 전용 PDF가 없음, 실측 확인) — 위 "Download
+            Resume"와 같은 URL이지만, 아이콘 한 줄에서 바로 찾을 수 있는 보조 진입점으로 둔다. */}
         <GlassButton
-          as="button"
+          as="a"
           shape="circle"
-          onClick={handleDownloadPortfolioPdf}
+          href="https://resume-ashen-mu.vercel.app/api/pdf"
+          target="_blank"
+          rel="noopener noreferrer"
           aria-label="포트폴리오 PDF 다운로드"
           title="포트폴리오 PDF 다운로드">
           <LuFileDown />
