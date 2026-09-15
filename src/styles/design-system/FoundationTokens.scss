@@ -1,0 +1,198 @@
+/**
+ * Documentation 전용 스타일 — Foundation Tokens 시각화.
+ * 값은 전부 var(--token)으로 globals.scss를 그대로 참조한다(하드코딩 금지) —
+ * 토큰이 바뀌면 이 페이지도 코드 수정 없이 같이 바뀌어야 하기 때문.
+ */
+.foundation-tokens {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-9);
+
+  &__block-title {
+    margin: 0 0 var(--space-4);
+    font-size: var(--text-label);
+    font-weight: var(--font-weight-semibold);
+    letter-spacing: var(--tracking-wide);
+    text-transform: uppercase;
+    color: var(--text-muted);
+  }
+
+  /* --- Color --- */
+  &__color-groups {
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-6);
+  }
+
+  &__color-group-title {
+    margin: 0 0 var(--space-3);
+    font-size: var(--text-body-sm);
+    font-weight: var(--font-weight-semibold);
+    color: var(--text-soft);
+  }
+
+  &__color-row {
+    display: flex;
+    flex-wrap: wrap;
+    gap: var(--space-5);
+  }
+
+  /* --- Spacing --- */
+  &__space-rows {
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-2);
+  }
+
+  &__space-row {
+    display: grid;
+    grid-template-columns: 96px 1fr 48px;
+    align-items: center;
+    gap: var(--space-4);
+  }
+
+  &__space-token,
+  &__space-px {
+    font-size: var(--text-caption);
+    color: var(--text-muted);
+  }
+
+  &__space-token {
+    font-family: 'SFMono-Regular', Consolas, monospace;
+  }
+
+  &__space-px {
+    text-align: right;
+  }
+
+  &__space-bar {
+    height: 10px;
+    max-width: 100%;
+    border-radius: var(--radius-sm);
+    background: color-mix(in srgb, var(--accent) 55%, var(--accent-soft));
+  }
+
+  /* --- Radius / Shadow row --- */
+  &__radius-row,
+  &__shadow-row {
+    display: flex;
+    flex-wrap: wrap;
+    gap: var(--space-5);
+  }
+
+  /* --- Typography --- */
+  &__type-rows {
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-4);
+  }
+
+  &__type-row {
+    display: flex;
+    align-items: baseline;
+    justify-content: space-between;
+    gap: var(--space-4);
+    padding-bottom: var(--space-4);
+    border-bottom: 1px solid var(--border);
+
+    &:last-child {
+      border-bottom: none;
+      padding-bottom: 0;
+    }
+  }
+
+  &__type-sample {
+    font-weight: var(--font-weight-bold);
+    color: var(--text);
+    word-break: keep-all;
+  }
+
+  &__type-meta {
+    flex-shrink: 0;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-end;
+    gap: 2px;
+    text-align: right;
+  }
+
+  &__type-token {
+    font-family: 'SFMono-Regular', Consolas, monospace;
+    font-size: var(--text-caption);
+    color: var(--text-muted);
+  }
+
+  &__type-role {
+    font-size: var(--text-caption);
+    color: var(--text-muted);
+  }
+}
+
+/* 여러 블록(Color/Radius/Shadow)이 공유하는 "박스 + 라벨 + 토큰명" 카드 하나. */
+.token-swatch {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: var(--space-2);
+  width: 88px;
+  text-align: center;
+
+  &__box {
+    width: 64px;
+    height: 64px;
+    border-radius: var(--radius-md);
+    border: 1px solid var(--border);
+    box-sizing: border-box;
+
+    &--text {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      background: var(--card);
+      font-size: var(--text-body-sm);
+      font-weight: var(--font-weight-semibold);
+    }
+
+    &--border {
+      background: var(--card);
+      border-width: 3px;
+    }
+
+    &--shadow {
+      background: var(--card);
+      border: none;
+    }
+  }
+
+  &__label {
+    margin: 0;
+    font-size: var(--text-caption);
+    color: var(--text-soft);
+  }
+
+  &__code {
+    font-family: 'SFMono-Regular', Consolas, monospace;
+    font-size: 10px;
+    color: var(--text-muted);
+    word-break: break-all;
+  }
+}
+
+@media (max-width: 768px) {
+  .foundation-tokens {
+    &__space-row {
+      grid-template-columns: 80px 1fr 40px;
+      gap: var(--space-2);
+    }
+
+    &__type-row {
+      flex-direction: column;
+      align-items: flex-start;
+    }
+
+    &__type-meta {
+      align-items: flex-start;
+      text-align: left;
+    }
+  }
+}
