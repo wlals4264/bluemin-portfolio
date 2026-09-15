@@ -10,6 +10,57 @@
   }
 }
 
+/* 아이콘 하나짜리 원형 버튼이 뭘 하는지 아이콘만으론 알기 어려워서, hover/focus 시
+   위에 말풍선으로 이름을 보여준다. FloatingIconButton의 툴팁과 같은 재질(Content =
+   Solid — 말풍선은 떠 있는 Control이 아니라 순간적으로 나타나는 정보 텍스트라 유리를
+   쓰지 않는다)이되, 화면 우측 하단 launcher처럼 코너에 고정된 게 아니라 줄 안에서
+   나란히 있는 작은 버튼이라 중앙 정렬로 바꿨다. */
+.social-btn-wrap {
+  position: relative;
+  display: inline-flex;
+
+  .social-btn-tooltip {
+    position: absolute;
+    left: 50%;
+    bottom: calc(100% + 10px);
+    transform: translate(-50%, 4px) scale(0.96);
+    transform-origin: bottom center;
+    padding: 6px 10px;
+    border-radius: var(--radius-sm);
+    border: 1px solid var(--border);
+    background: var(--card);
+    color: var(--text);
+    font-size: var(--text-caption);
+    font-weight: var(--font-weight-semibold);
+    white-space: nowrap;
+    box-shadow: var(--shadow-md);
+    pointer-events: none;
+    opacity: 0;
+    transition:
+      opacity var(--duration-base) var(--ease-pop),
+      transform var(--duration-base) var(--ease-pop);
+
+    &::after {
+      content: '';
+      position: absolute;
+      top: 100%;
+      left: 50%;
+      width: 8px;
+      height: 8px;
+      background: var(--card);
+      border-right: 1px solid var(--border);
+      border-bottom: 1px solid var(--border);
+      transform: translate(-50%, -50%) rotate(45deg);
+    }
+  }
+
+  &:hover .social-btn-tooltip,
+  &:focus-within .social-btn-tooltip {
+    opacity: 1;
+    transform: translate(-50%, 0) scale(1);
+  }
+}
+
 @media (max-width: 768px) {
   .introduction-btns-container {
     justify-content: center;

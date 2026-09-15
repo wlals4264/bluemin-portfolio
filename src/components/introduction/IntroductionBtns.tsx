@@ -1,3 +1,5 @@
+import { ReactNode } from 'react';
+
 import { FiDownload } from 'react-icons/fi';
 import { FaGithub } from 'react-icons/fa';
 import { SiVelog } from 'react-icons/si';
@@ -7,56 +9,61 @@ import GlassButton from '@/components/common/buttons/GlassButton';
 
 import '@/styles/components/IntroductionBtns.scss';
 
-/**
- * 포트폴리오 PDF 다운로드 — 별도 서버 렌더링(Puppeteer 등) 없이 브라우저 인쇄 기능을
- * 그대로 쓴다. `globals.scss`의 `@media print` 규칙이 이 사이트를 인쇄용 레이아웃으로
- * 바꿔주므로, 사용자가 인쇄 대화상자에서 "PDF로 저장"만 고르면 된다 — 항상 지금 보이는
- * 최신 콘텐츠 그대로라 "실시간 연결"이라는 요구사항을 서버 없이 만족한다.
- */
-const handleDownloadPortfolioPdf = () => {
-  window.print();
+type SocialLink = {
+  href: string;
+  /** aria-label이자 hover/focus 시 뜨는 말풍선 카피 — 아이콘만으로 뭘 하는 버튼인지
+   * 알기 어려우니 접근성 이름과 화면에 보이는 말풍선을 같은 문구로 통일한다. */
+  label: string;
+  icon: ReactNode;
+  /** 외부 사이트 페이지로 이동하는 링크만 새 탭으로 연다 — 파일 다운로드는
+   * target="_blank"를 걸면 오히려 빈 탭이 잠깐 열렸다 닫히는 것처럼 보여서 뺀다. */
+  external?: boolean;
+  /** 지정하면 그 파일명으로 바로 다운로드된다(다운로드 링크 전용). */
+  download?: string;
 };
+
+const SOCIAL_LINKS: SocialLink[] = [
+  { href: 'https://github.com/wlals4264', label: 'GitHub', icon: <FaGithub />, external: true },
+  { href: 'https://velog.io/@wlals4264/posts', label: 'Velog', icon: <SiVelog />, external: true },
+  {
+    // resume-ashen-mu API(이력서용, 3p)가 아니라 public/portfolio_kimjimin.pdf —
+    // 프로젝트별 Work & Impact 케이스 스터디까지 담은, 사용자가 직접 만든 정적
+    // 포트폴리오 PDF다.
+    href: '/portfolio_kimjimin.pdf',
+    label: '포트폴리오 PDF 다운로드',
+    icon: <LuFileDown />,
+    download: '포트폴리오_김지민.pdf',
+  },
+];
 
 const IntroductionBtns = () => {
   return (
     <div className="introduction-btns-container">
-      <GlassButton
-        as="a"
-        tone="accent"
-        className="download-btn"
-        href="https://resume-ashen-mu.vercel.app/api/pdf"
-        target="_blank"
-        rel="noopener noreferrer">
+      {/* /api/pdf는 Content-Disposition: attachment로 내려와서 브라우저가 새 탭/페이지
+          이동 없이 그 자리에서 바로 파일을 받는다(resume-ashen-mu 사이트 자체의 "PDF
+          저장" 버튼과 동일한 체감) — target="_blank"를 걸면 오히려 불필요한 빈 탭이
+          잠깐 열렸다 닫히는 것처럼 보여서 뺀다. */}
+      <GlassButton as="a" tone="accent" className="download-btn" href="https://resume-ashen-mu.vercel.app/api/pdf">
         Download Resume
         <FiDownload />
       </GlassButton>
       <div className="social-btns">
-        <GlassButton
-          as="a"
-          shape="circle"
-          href="https://github.com/wlals4264"
-          target="_blank"
-          rel="noopener noreferrer"
-          aria-label="GitHub">
-          <FaGithub />
-        </GlassButton>
-        <GlassButton
-          as="a"
-          shape="circle"
-          href="https://velog.io/@wlals4264/posts"
-          target="_blank"
-          rel="noopener noreferrer"
-          aria-label="Velog">
-          <SiVelog />
-        </GlassButton>
-        <GlassButton
-          as="button"
-          shape="circle"
-          onClick={handleDownloadPortfolioPdf}
-          aria-label="포트폴리오 PDF 다운로드"
-          title="포트폴리오 PDF 다운로드">
-          <LuFileDown />
-        </GlassButton>
+        {SOCIAL_LINKS.map((link) => (
+          <div key={link.label} className="social-btn-wrap">
+            <GlassButton
+              as="a"
+              shape="circle"
+              href={link.href}
+              aria-label={link.label}
+              {...(link.external ? { target: '_blank', rel: 'noopener noreferrer' } : {})}
+              {...(link.download ? { download: link.download } : {})}>
+              {link.icon}
+            </GlassButton>
+            <span className="social-btn-tooltip" role="tooltip" aria-hidden="true">
+              {link.label}
+            </span>
+          </div>
+        ))}
       </div>
     </div>
   );
