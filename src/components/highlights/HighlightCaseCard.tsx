@@ -5,6 +5,7 @@ import type { HighlightCase } from '@/mocks/highlightsData';
 
 import AdminDashboardPreview from './diagrams/AdminDashboardPreview';
 import FunnelStatsPreview from './diagrams/FunnelStatsPreview';
+import LoadingPerfCompare from './diagrams/LoadingPerfCompare';
 import SprintDashboardPreview from './diagrams/SprintDashboardPreview';
 import StepSyncCloseup from './diagrams/StepSyncCloseup';
 import { BeforeAfterCompare, PendingQueueDiagram } from './diagrams/NavigationFlowDiagrams';
@@ -74,6 +75,12 @@ function HighlightVisual({ id }: { id: string }) {
       return (
         <DiagramZoom label="Sprint 대시보드 예시 화면">
           <SprintDashboardPreview />
+        </DiagramZoom>
+      );
+    case 'home-loading-perf':
+      return (
+        <DiagramZoom label="Lighthouse LCP Before/After">
+          <LoadingPerfCompare />
         </DiagramZoom>
       );
     default:
