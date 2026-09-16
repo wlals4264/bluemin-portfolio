@@ -196,11 +196,11 @@ export const highlightsData: HighlightCase[] = [
   {
     id: 'home-loading-perf',
     projectId: 'kkuljam',
-    title: '홈 초기 로딩 성능 개선 — 이미지·중복 API 최적화',
+    title: '홈 초기 로딩 성능 개선 — 이미지 최적화',
     problem:
-      '홈 화면 진입 시 LCP가 7.87s(Poor)로 측정됐고, Lighthouse상 LCP 엘리먼트가 자러가기 버튼 아이콘 이미지로 확인됨. 원인을 추적한 결과 628KB에 달하는 무거운 PNG 아이콘, 세션 조회 API 중복 호출, prefetch 미분리 구조가 초기 렌더링을 지연시키고 있었음',
+      '홈 화면 진입 시 LCP가 7.87s(Poor)로 측정됐고, Lighthouse상 LCP 엘리먼트가 자러가기 버튼 아이콘 이미지로 확인됨. 원인을 추적한 결과 628KB에 달하는 무거운 PNG 아이콘과 prefetch 미분리 구조가 초기 렌더링을 지연시키고 있었음',
     solution:
-      '자러가기 버튼 아이콘을 PNG(628KB)에서 WebP(29KB)로 전환해 이미지 용량을 95% 이상 줄이고, 중복 호출되던 세션 조회 로직을 제거했으며, HomeWithPrefetch를 분리해 초기 렌더링 경로를 정리',
+      '자러가기 버튼 아이콘을 PNG(628KB)에서 WebP(29KB)로 전환해 이미지 용량을 95% 이상 줄이고, HomeWithPrefetch를 분리해 초기 렌더링 경로를 정리',
     result: 'Lighthouse 기준 LCP가 7.87s(Poor) → 1.74s(Good)로 77.9%(약 4.5배) 단축, CLS 0 유지',
   },
   {
