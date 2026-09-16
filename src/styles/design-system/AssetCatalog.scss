@@ -5,6 +5,20 @@
  * hover했을 때만 나타나는 Glass 오버레이로 "여기가 액션"이라는 걸 알려준다.
  */
 .asset-catalog {
+  &__toolbar {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: var(--space-3);
+    margin-bottom: var(--space-6);
+  }
+
+  &__toolbar-error {
+    margin: 0;
+    font-size: var(--text-body-sm);
+    color: var(--danger);
+  }
+
   &__group + &__group {
     margin-top: var(--space-7);
   }
