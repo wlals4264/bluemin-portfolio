@@ -227,6 +227,20 @@
   white-space: nowrap;
 }
 
+.hl-perf-shot {
+  width: 100%;
+  overflow: hidden;
+  border: 1px solid var(--border);
+  border-radius: 10px;
+  background: var(--card);
+
+  img {
+    display: block;
+    width: 100%;
+    height: auto;
+  }
+}
+
 .hl-compare-grid {
   display: grid;
   grid-template-columns: 1fr 1fr;
